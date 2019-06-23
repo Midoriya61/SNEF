@@ -85,4 +85,118 @@ public class FlashSaleProductUtilities {
         }
         return result;
     }
+
+    public List<FlashSaleProduct> getAllFSP(){
+        List<FlashSaleProduct> result = new ArrayList<>();
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        String url = ConstainServer.BaseURL + ConstainServer.FlashSaleProductURL + ConstainServer.GetAllFSP;
+        String respone = "";
+
+        try {
+            URL urll = new URL(url);
+            respone = ReadStream.readStream(urll.openStream());
+            JSONArray arr = new JSONArray(respone);
+
+            for (int i = 0; i < arr.length(); i++)
+            {
+                JSONObject jsonObj = arr.getJSONObject(i);
+                FlashSaleProduct flashSaleProduct = new FlashSaleProduct();
+
+                if(jsonObj.has(flashSaleProductId)){
+                    flashSaleProduct.setFlashSaleProductId(jsonObj.getInt(flashSaleProductId));
+                }
+                if(jsonObj.has(quantity)){
+                    flashSaleProduct.setQuantity(jsonObj.getInt(quantity));
+                }
+                if(jsonObj.has(storeProductId)){
+                    flashSaleProduct.setStoreProductId(jsonObj.getInt(storeProductId));
+                }
+                if(jsonObj.has(flashSalesId)){
+                    flashSaleProduct.setFlashSalesId(jsonObj.getInt(flashSalesId));
+                }
+                if(jsonObj.has(productName)){
+                    flashSaleProduct.setProductName(jsonObj.getString(productName));
+                }
+                if(jsonObj.has(spQuantity)){
+                    flashSaleProduct.setSpQuantity(jsonObj.getInt(spQuantity));
+                }
+                if(jsonObj.has(price)){
+                    flashSaleProduct.setPrice(jsonObj.getInt(price));
+                }
+                if(jsonObj.has(storeId)){
+                    flashSaleProduct.setStoreId(jsonObj.getInt(storeId));
+                }
+
+                if(jsonObj.has(endDate)){
+                    flashSaleProduct.setEndDate(Date.valueOf(jsonObj.getString(endDate)));
+                }
+                if(jsonObj.has(discount)){
+                    flashSaleProduct.setDiscount(jsonObj.getInt(discount));
+                }
+                result.add(flashSaleProduct);
+            }
+
+        }catch (Exception e){
+            Log.e("Error AllFS", e.getMessage());
+        }
+        return result;
+    }
+
+    public List<FlashSaleProduct> getFSPByStoreId( int sStoreId ) {
+        List<FlashSaleProduct> result = new ArrayList<>();
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        String url = ConstainServer.BaseURL + ConstainServer.FlashSaleProductURL + ConstainServer.GetFSPByStoreId + sStoreId;
+        String respone = "";
+        try {
+            URL url1 = new URL(url);
+            respone = ReadStream.readStream(url1.openStream());
+            JSONArray arr = new JSONArray(respone);
+
+            for (int i = 0; i < arr.length(); i++)
+            {
+                JSONObject jsonObj = arr.getJSONObject(i);
+                FlashSaleProduct flashSaleProduct = new FlashSaleProduct();
+
+                if(jsonObj.has(flashSaleProductId)){
+                    flashSaleProduct.setFlashSaleProductId(jsonObj.getInt(flashSaleProductId));
+                }
+                if(jsonObj.has(quantity)){
+                    flashSaleProduct.setQuantity(jsonObj.getInt(quantity));
+                }
+                if(jsonObj.has(storeProductId)){
+                    flashSaleProduct.setStoreProductId(jsonObj.getInt(storeProductId));
+                }
+                if(jsonObj.has(flashSalesId)){
+                    flashSaleProduct.setFlashSalesId(jsonObj.getInt(flashSalesId));
+                }
+                if(jsonObj.has(productName)){
+                    flashSaleProduct.setProductName(jsonObj.getString(productName));
+                }
+                if(jsonObj.has(spQuantity)){
+                    flashSaleProduct.setSpQuantity(jsonObj.getInt(spQuantity));
+                }
+                if(jsonObj.has(price)){
+                    flashSaleProduct.setPrice(jsonObj.getInt(price));
+                }
+                if(jsonObj.has(storeId)){
+                    flashSaleProduct.setStoreId(jsonObj.getInt(storeId));
+                }
+
+                if(!jsonObj.getString(endDate).contains("null")){
+                    flashSaleProduct.setEndDate(Date.valueOf(jsonObj.getString(endDate)));
+                }
+                if(jsonObj.has(discount)){
+                    flashSaleProduct.setDiscount(jsonObj.getInt(discount));
+                }
+                result.add(flashSaleProduct);
+            }
+        } catch (Exception e) {
+            Log.e("EFSPSID", e.getMessage());
+        }
+        return result;
+    }
+
 }

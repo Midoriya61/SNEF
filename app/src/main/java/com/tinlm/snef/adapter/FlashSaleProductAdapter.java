@@ -56,9 +56,9 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
                 .resize(200,120).into(flashSaleProductHolder.imgDiscount);
         if(productImage == null) {
             Picasso.get().load("https://res.cloudinary.com/dr4hpc9gi/image/upload/v1559727025/noimage.jpg")
-                    .resize(500,550).into(flashSaleProductHolder.imgFood);
+                    .resize(500,500).into(flashSaleProductHolder.imgFood);
         }else {
-            Picasso.get().load(productImage).resize(500,550).into(flashSaleProductHolder.imgFood);
+            Picasso.get().load(productImage).resize(500,500).into(flashSaleProductHolder.imgFood);
         }
 
         flashSaleProductHolder.txtFoodName.setText(flashSaleProduct.getProductName());

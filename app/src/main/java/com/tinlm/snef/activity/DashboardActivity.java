@@ -1,10 +1,15 @@
 package com.tinlm.snef.activity;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 
 import com.tinlm.snef.R;
 import com.tinlm.snef.adapter.CategoriesAdapter;
@@ -20,20 +25,77 @@ import java.util.List;
 // 6/23/2019 TinLM Create class
 // 6/23/2019 TinLM Create init
 // 6/23/2019 TinLM Create createListCategories
+// 6/23/2019 TinLM Create createListHostProduct
+// 6/23/2019 TinLM Create createListFSP
 public class DashboardActivity extends AppCompatActivity {
 
     RecyclerView rcListCategories;
     RecyclerView rcListHost;
+    RecyclerView rcListFlashSaleProduct;
+
+    BottomNavigationView bottomNavigation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         init();
+        navigateDashboard();
+    }
+
+    private void navigateDashboard() {
+        bottomNavigation = findViewById(R.id.bottomNavigation);
+
+        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Intent intent;
+                switch (menuItem.getItemId()) {
+                    case R.id.action_home:
+                        break;
+                    case R.id.action_category:
+                        intent = new Intent(DashboardActivity.this, CategoryActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+                    case R.id.action_around:
+                        intent = new Intent(DashboardActivity.this, AroundStoreActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+                    case R.id.action_orders:
+                        intent = new Intent(DashboardActivity.this, OrderActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+                    case R.id.action_account:
+                        intent = new Intent(DashboardActivity.this, AccountActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
     private void init() {
         createListCategories();
         createListHostProduct();
+        createListFSP();
+    }
+
+    // Create list flash sale product
+    private void createListFSP() {
+        rcListFlashSaleProduct = findViewById(R.id.rcListFlashSaleProduct);
+        List<FlashSaleProduct>  flashSaleProducts = new ArrayList<>();
+        FlashSaleProductUtilities flashSaleProductUtilities = new FlashSaleProductUtilities();
+        flashSaleProducts = flashSaleProductUtilities.getAllFSP();
+        FlashSaleProductAdapter flashSaleProductAdapter = new FlashSaleProductAdapter(this, flashSaleProducts);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,3);
+        rcListFlashSaleProduct.setItemAnimator(new DefaultItemAnimator());
+        rcListFlashSaleProduct.setLayoutManager(mLayoutManager);
+        rcListFlashSaleProduct.setAdapter(flashSaleProductAdapter);
     }
 
     // Create list categories
@@ -62,8 +124,8 @@ public class DashboardActivity extends AppCompatActivity {
         List<FlashSaleProduct>  flashSaleProducts = new ArrayList<>();
         FlashSaleProductUtilities flashSaleProductUtilities = new FlashSaleProductUtilities();
         flashSaleProducts = flashSaleProductUtilities.getHotFlashSaleProduct();
-        FlashSaleProductAdapter flashSaleProductAdapter = new FlashSaleProductAdapter(DashboardActivity.this, flashSaleProducts);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(DashboardActivity.this,
+        FlashSaleProductAdapter flashSaleProductAdapter = new FlashSaleProductAdapter(this, flashSaleProducts);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL, false);
         rcListHost.setItemAnimator(new DefaultItemAnimator());
         rcListHost.setLayoutManager(mLayoutManager);

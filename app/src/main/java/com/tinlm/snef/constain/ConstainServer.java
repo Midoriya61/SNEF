@@ -9,6 +9,7 @@ public class ConstainServer {
     public static final String FlashSaleProductURL = "flashSaleProduct/";
     public static final String GetHotFlashSaleProductURL = "getHotFlashSaleProduct/";
     public static final String GetFSPByStoreId = "getFSPByStoreId/";
+    public static final String GetAllFSP = "getAllFSP/";
 
     //Store Product Image
     public static final String StoreProductImageURL = "storeProductImage/";
@@ -22,6 +23,12 @@ public class ConstainServer {
     // Order Detail
     public static final String OrderDetail = "orderDetail/";
     public static final String GetQuantityByFSPId = "getQuantityByFSPId/";
+
+    // Location
+    public static final String LocationURL = "location/";
+
+    // Store
+    public static final String StoreURL = "store/";
 
     public static final String BaseURL = "http:/192.168.100.5:8080/";
 

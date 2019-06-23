@@ -14,4 +14,9 @@
     <string name="message_store_around">Cửa hàng gần bạn</string>
     <string name="message_product_category">Bạn muốn tìm sản phẩm gì?</string>
     <string name="message_hot_product">Ưu đãi nỗi bật</string>
+    <string name="suggest_today">Gợi ý hôm nay</string>
+    <string name="title_location_permission">Vị trí</string>
+    <string name="text_location_permission">Cho phép truy cập vị trí của bạn</string>
+    <string name="ok">Cho phép</string>
+
 </resources>
