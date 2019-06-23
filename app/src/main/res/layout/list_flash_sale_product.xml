@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/flashSaleProductLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_weight="1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp"
+
+    >
+    <FrameLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgFood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <ImageView
+            android:id="@+id/imgDiscount"
+            android:src="@drawable/home"
+            android:layout_gravity="top|end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/txtDiscount"
+            android:text="100%"
+            android:textColor="@color/colorMain"
+            android:layout_gravity="top|end"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/txtFoodName"
+            android:text="Clamato, Extra Spicy"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+        >
+        <TextView
+            android:id="@+id/textPriceDiscount"
+            android:text="$00.00"
+            android:layout_toLeftOf="@+id/dashPrice"
+            android:textStyle="bold"
+            android:textSize="14dp"
+            android:textColor="@color/redApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/dashPrice"
+            android:text=" đ"
+            android:textStyle="bold"
+            android:textSize="14dp"
+            android:textColor="@color/redApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dash_line"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/txtPrice"
+            android:text="$00.00"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_toRightOf="@id/txtPrice"
+            android:text=" đ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/barStillSale"
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            android:background="@color/lightOrange"
+            android:gravity="left"
+            ></RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/barSale"
+            android:background="@color/orange"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:gravity="left"></RelativeLayout>
+        <TextView
+            android:id="@+id/statusSale"
+            android:textColor="@color/colorMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"/>
+    </RelativeLayout>
+
+    <!--<TextView-->
+    <!--android:id="@+id/txtDateExpired"-->
+    <!--android:text="Th6 04. 2019"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content" />-->
+</LinearLayout>

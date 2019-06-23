@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">SNEF</string>
+    <string name="ms_Login">Đăng nhập</string>
+    <string name="ms_InputUsername">Nhận tên đăng nhập</string>
+    <string name="ms_InputPassword">Nhập mật khẩu</string>
+    <string name="ms_HintUsername">Tên đăng nhập</string>
+    <string name="ms_HintPassword">Mật khẩu</string>
+    <string name="home_page">Trang chủ</string>
+    <string name="category_page">Danh mục</string>
+    <string name="account_page">Tài khoản</string>
+    <string name="payment_page">Thanh toán</string>
+    <string name="around_page">Gần đây</string>
+    <string name="search_hint">Tìm kiếm</string>
+    <string name="message_store_around">Cửa hàng gần bạn</string>
+    <string name="message_product_category">Bạn muốn tìm sản phẩm gì?</string>
+    <string name="message_hot_product">Ưu đãi nỗi bật</string>
+</resources>
