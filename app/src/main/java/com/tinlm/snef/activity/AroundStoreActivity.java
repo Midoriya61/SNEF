@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 import com.tinlm.snef.R;
 import com.tinlm.snef.adapter.ListStoreAdapter;
 import com.tinlm.snef.algo.GeocodingLocation;
+import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.model.Store;
 import com.tinlm.snef.utilities.LocationUtilities;
 import com.tinlm.snef.utilities.StoreUtilities;
@@ -40,8 +42,10 @@ public class AroundStoreActivity extends AppCompatActivity {
     double longPhone;
     double latPhone;
 
-    double[] locationStore = new double[2];
     protected LocationManager locationManager;
+
+    double[] locationStore = new double[2];
+
 
     BottomNavigationView bottomNavigation;
 
@@ -55,6 +59,7 @@ public class AroundStoreActivity extends AppCompatActivity {
         getCurrentLocation();
         createListStoreAround();
     }
+
 
     // get list store around phone with sort nearest
     private void createListStoreAround() {
@@ -95,7 +100,7 @@ public class AroundStoreActivity extends AppCompatActivity {
                 Intent intent;
                 switch (menuItem.getItemId()) {
                     case R.id.action_home:
-                        intent = new Intent(AroundStoreActivity.this, MainActivity.class);
+                        intent = new Intent(AroundStoreActivity.this, DashboardActivity.class);
                         startActivity(intent);
                         finish();
                         break;
@@ -165,31 +170,51 @@ public class AroundStoreActivity extends AppCompatActivity {
         }
     }
 
+    // get current location
+    private void getLatLong() {
+        if(longPhone != 0 || latPhone != 0) {
+            SharedPreferences sharedPreferences = getSharedPreferences(ConstainApp.locationPhone, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putFloat(ConstainApp.longPhone, (float)longPhone);
+            editor.putFloat(ConstainApp.latPhone, (float)latPhone);
+            editor.apply();
+        }
+    }
+
     // get current location of phone by gps
     private void getCurrentLocation() {
-        ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        SharedPreferences sharedPreferences = getSharedPreferences(ConstainApp.locationPhone, Context.MODE_PRIVATE);
+        longPhone = sharedPreferences.getFloat(ConstainApp.longPhone,0);
+        latPhone = sharedPreferences.getFloat(ConstainApp.latPhone,0);
+        if(longPhone == 0 && latPhone == 0) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            buildAlertMessageNoGps();
-        } else if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            getLocation();
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                buildAlertMessageNoGps();
+                getLocation();
+            } else if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                getLocation();
+
+            }
         }
     }
 
     // Alert turn GPS
     protected void buildAlertMessageNoGps() {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
-        builder.setMessage("Mở GPS")
+        builder.setMessage(R.string.OpenGPS)
                 .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
                         startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
                         dialog.cancel();
+                        buildAlertMessageNoGps();
                     }
                 });
         final android.app.AlertDialog alert = builder.create();
@@ -205,6 +230,7 @@ public class AroundStoreActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(AroundStoreActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 
         } else {
+
             Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             Location location1 = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             Location location2 = locationManager.getLastKnownLocation(LocationManager. PASSIVE_PROVIDER);
@@ -221,7 +247,7 @@ public class AroundStoreActivity extends AppCompatActivity {
             }else{
                 Toast.makeText(this,"Unble to Trace your location",Toast.LENGTH_SHORT).show();
             }
+            getLatLong();
         }
     }
-
 }

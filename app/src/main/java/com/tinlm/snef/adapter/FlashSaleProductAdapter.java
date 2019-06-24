@@ -1,6 +1,7 @@
 package com.tinlm.snef.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -8,11 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.tinlm.snef.R;
+import com.tinlm.snef.activity.FlashSalesProductDetailActivity;
 import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.model.FlashSaleProduct;
 import com.tinlm.snef.utilities.CategoriesUtilities;
@@ -20,6 +23,8 @@ import com.tinlm.snef.utilities.OrderDetailUtilities;
 import com.tinlm.snef.utilities.StoreProductImageUtilities;
 import com.tinlm.snef.utilities.StoreProductUtilities;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProductAdapter.FlashSaleProductHolder> {
@@ -47,10 +52,10 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
     // Load data into layout
     @Override
     public void onBindViewHolder(@NonNull FlashSaleProductHolder flashSaleProductHolder, int i) {
-        FlashSaleProduct flashSaleProduct = flashSaleProductList.get(i);
+        final FlashSaleProduct flashSaleProduct = flashSaleProductList.get(i);
 
         StoreProductImageUtilities imageUltilities = new StoreProductImageUtilities();
-        String productImage = imageUltilities.getImageByStoreProductId(flashSaleProduct.getStoreProductId());
+        String productImage = imageUltilities.getOneImageByStoreProductId(flashSaleProduct.getStoreProductId());
 
         Picasso.get().load("https://res.cloudinary.com/dr4hpc9gi/image/upload/v1558970388/FoodStoreImage/discount.png")
                 .resize(200,120).into(flashSaleProductHolder.imgDiscount);
@@ -74,8 +79,6 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
         OrderDetailUtilities orderDetailUtilities = new OrderDetailUtilities();
         int totalQuantity = orderDetailUtilities.getQuantityByFSPId(flashSaleProduct.getFlashSaleProductId());
 
-
-
         int numberSout = (flashSaleProductHolder.barStillSale.getLayoutParams().width *totalQuantity )/ (flashSaleProduct.getQuantity());
         flashSaleProductHolder.barSale.getLayoutParams().width = numberSout;
         if(totalQuantity == flashSaleProduct.getQuantity()) {
@@ -87,6 +90,27 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
         } else {
             flashSaleProductHolder.statusSale.setText(ConstainApp.StatusJustOpen);
         }
+
+        flashSaleProductHolder.flashSaleProductLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, FlashSalesProductDetailActivity.class);
+                intent.putExtra(ConstainApp.FLASHSALEPRODUCTID,flashSaleProduct.getFlashSaleProductId());
+                intent.putExtra(ConstainApp.PRODUCTNAME,flashSaleProduct.getProductName());
+                intent.putExtra(ConstainApp.DESCRIPTION,flashSaleProduct.getDescription());
+                intent.putExtra(ConstainApp.DISCOUNT,flashSaleProduct.getDiscount());
+                intent.putExtra(ConstainApp.STOREID,flashSaleProduct.getStoreId());
+                intent.putExtra(ConstainApp.PRICE,flashSaleProduct.getPrice());
+                intent.putExtra(ConstainApp.QUANTITY,flashSaleProduct.getQuantity());
+                DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+                String endDate = df.format(flashSaleProduct.getEndDate());
+                intent.putExtra(ConstainApp.ENDDATE,endDate);
+                intent.putExtra(ConstainApp.STOREPRODUCTID, flashSaleProduct.getStoreProductId());
+
+                mContext.startActivity(intent);
+            }
+        });
+
 //        Timestamp timestamp = new Timestamp(flashSaleProduct.getEndDate().getTime() + 86399999);
 //        String countDownStart = countDownStart(timestamp + "");
 //        flashSaleProductHolder.txtDateExpired.setText(countDownStart + "");
@@ -107,6 +131,8 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
 
         RelativeLayout barStillSale,barSale;
 
+        LinearLayout flashSaleProductLayout;
+
         public FlashSaleProductHolder(@NonNull View itemView) {
             super(itemView);
             imgFood = itemView.findViewById(R.id.imgFood);
@@ -118,6 +144,7 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
             statusSale = itemView.findViewById(R.id.statusSale);
             barStillSale = itemView.findViewById(R.id.barStillSale);
             barSale = itemView.findViewById(R.id.barSale);
+            flashSaleProductLayout = itemView.findViewById(R.id.flashSaleProductLayout);
         }
     }
 }

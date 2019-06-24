@@ -162,8 +162,8 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:background="@drawable/border_top"
-            app:itemIconTint="@color/gray50"
-            app:itemTextColor="@color/gray50"
+            app:itemIconTint="@color/colorMain"
+            app:itemTextColor="@color/colorMain"
             app:menu="@menu/bottom_nav_menu"
             android:layout_gravity="bottom"
 

@@ -69,7 +69,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="442dp"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"

@@ -18,5 +18,12 @@
     <string name="title_location_permission">Vị trí</string>
     <string name="text_location_permission">Cho phép truy cập vị trí của bạn</string>
     <string name="ok">Cho phép</string>
+    <string name="no">Không</string>
+    <string name="OpenGPS">Mở GPS</string>
+    <string name="msg_follow">Theo dỏi</string>
+    <string name="msg_update_profile">Theo dỏi</string>
+    <string name="msg_order_history">Lịch sử mua</string>
+    <string name="msg_help">Hổ trợ</string>
+    <string name="msg_logout">Đăng xuất</string>
 
 </resources>

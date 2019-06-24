@@ -64,7 +64,7 @@ public class ListStoreAdapter extends RecyclerView.Adapter<ListStoreAdapter.List
         // lấy hình ảnh cho store
         for (FlashSaleProduct fsp: flashSaleProducts
         ) {
-            String fsImage = imageUltilities.getImageByStoreProductId(fsp.getStoreProductId());
+            String fsImage = imageUltilities.getOneImageByStoreProductId(fsp.getStoreProductId());
             listImageFood.add(fsImage);
         }
         List<ImageView> image = new ArrayList<>();

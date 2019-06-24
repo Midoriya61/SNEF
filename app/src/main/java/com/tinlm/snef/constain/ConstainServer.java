@@ -30,6 +30,10 @@ public class ConstainServer {
     // Store
     public static final String StoreURL = "store/";
 
-    public static final String BaseURL = "http:/192.168.100.5:8080/";
+    // Customer
+    public static final String CustomerURL = "customer/";
+    public static final String LoginURL = "login/";
+
+    public static final String BaseURL = "http://192.168.100.5:8080/";
 
 }

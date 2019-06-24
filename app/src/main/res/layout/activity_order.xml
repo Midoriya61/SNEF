@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,4 +7,25 @@
     tools:context=".activity.OrderActivity">
 
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        >
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottomNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@drawable/border_top"
+            app:itemIconTint="@color/colorMain"
+            app:itemTextColor="@color/colorMain"
+            app:menu="@menu/bottom_nav_menu"
+            android:layout_gravity="bottom"
+            />
+
+
+    </LinearLayout>
+
+</RelativeLayout>
