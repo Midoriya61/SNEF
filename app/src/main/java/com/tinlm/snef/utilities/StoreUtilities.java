@@ -36,12 +36,10 @@ public class StoreUtilities {
         StrictMode.setThreadPolicy(policy);
         String url = ConstainServer.BaseURL + ConstainServer.StoreURL;
         String respone = "";
-
         try {
             URL urll = new URL(url);
             respone = ReadStream.readStream(urll.openStream());
             JSONArray arr = new JSONArray(respone);
-
             for (int i = 0; i < arr.length(); i++)
             {
                 JSONObject jsonObj = arr.getJSONObject(i);
@@ -70,6 +68,42 @@ public class StoreUtilities {
             Log.e("Error Aroud", e.getMessage());
         }
         return result;
+    }
+
+    public Store getStoreById(int storeId) {
+        Store store = new Store();
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        String url = ConstainServer.BaseURL + ConstainServer.StoreURL + ConstainServer.GetStoreById + storeId;
+        String respone = "";
+        try {
+            URL urll = new URL(url);
+            respone = ReadStream.readStream(urll.openStream());
+            JSONObject jsonObj = new JSONObject(respone);
+
+                if(jsonObj.has(storeName)){
+                    store.setStoreName(jsonObj.getString(storeName));
+                }
+                if(jsonObj.has(locationId)){
+                    store.setLocationId(jsonObj.getInt(locationId));
+                }
+                if(jsonObj.has(openHour)){
+                    store.setOpenHour(jsonObj.getString(openHour));
+                }
+                if(jsonObj.has(closeHour)){
+                    store.setClodeHour(jsonObj.getString(closeHour));
+                }if(jsonObj.has(ratingPoint)){
+                    store.setRatingPoint(jsonObj.getDouble(ratingPoint));
+                }
+
+                store.setStoreId(storeId);
+
+
+        }catch (Exception e){
+            Log.e("Error Aroud", e.getMessage());
+        }
+        return store;
     }
 
 }

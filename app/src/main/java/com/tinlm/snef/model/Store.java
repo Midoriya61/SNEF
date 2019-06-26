@@ -7,7 +7,7 @@ public class Store implements Comparable<Store>{
     private String accountName;
     private String storeName;
     private int locationId;
-    private int ratingPoint;
+    private double ratingPoint;
     private String avatar;
     private String openHour;
     private String clodeHour;
@@ -54,14 +54,6 @@ public class Store implements Comparable<Store>{
 
     public void setLocationId(int locationId) {
         this.locationId = locationId;
-    }
-
-    public int getRatingPoint() {
-        return ratingPoint;
-    }
-
-    public void setRatingPoint(int ratingPoint) {
-        this.ratingPoint = ratingPoint;
     }
 
     public String getAvatar() {
@@ -126,6 +118,14 @@ public class Store implements Comparable<Store>{
 
     public void setWard(String ward) {
         this.ward = ward;
+    }
+
+    public double getRatingPoint() {
+        return ratingPoint;
+    }
+
+    public void setRatingPoint(double ratingPoint) {
+        this.ratingPoint = ratingPoint;
     }
 
     public String getCity() {

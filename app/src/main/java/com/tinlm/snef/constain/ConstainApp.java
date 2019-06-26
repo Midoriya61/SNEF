@@ -1,11 +1,7 @@
 package com.tinlm.snef.constain;
 
 public class ConstainApp {
-    public static final String StatusSouldOut = "Bán hết";
-    public static final String StatusNearlySouldOut = "Sắp bán hết";
-    public static final String StatusSould = "Đã bán";
-    public static final String StatusJustOpen = "Vừa mở bán";
-    public static final String Open24 = "Open 24/7";
+
 
 
     // radius of the earth
@@ -41,6 +37,10 @@ public class ConstainApp {
     public static final String  QUANTITY = "QUANTITY";
     public static final String  ENDDATE = "ENDDATE";
     public static final String  STOREPRODUCTID = "STOREPRODUCTID";
+
+
+    // Date time
+    public static final String  DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
 
 }

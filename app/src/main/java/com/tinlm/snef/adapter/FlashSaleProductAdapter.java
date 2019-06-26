@@ -82,13 +82,13 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
         int numberSout = (flashSaleProductHolder.barStillSale.getLayoutParams().width *totalQuantity )/ (flashSaleProduct.getQuantity());
         flashSaleProductHolder.barSale.getLayoutParams().width = numberSout;
         if(totalQuantity == flashSaleProduct.getQuantity()) {
-            flashSaleProductHolder.statusSale.setText(ConstainApp.StatusSouldOut);
+            flashSaleProductHolder.statusSale.setText(R.string.StatusSouldOut);
         } else if (totalQuantity >= flashSaleProduct.getQuantity() * (100/80)) {
-            flashSaleProductHolder.statusSale.setText(ConstainApp.StatusNearlySouldOut);
+            flashSaleProductHolder.statusSale.setText(R.string.StatusNearlySouldOut);
         } else if (totalQuantity > 0) {
-            flashSaleProductHolder.statusSale.setText(ConstainApp.StatusSould + flashSaleProduct.getQuantity());
+            flashSaleProductHolder.statusSale.setText(R.string.StatusSould + flashSaleProduct.getQuantity());
         } else {
-            flashSaleProductHolder.statusSale.setText(ConstainApp.StatusJustOpen);
+            flashSaleProductHolder.statusSale.setText(R.string.StatusJustOpen);
         }
 
         flashSaleProductHolder.flashSaleProductLayout.setOnClickListener(new View.OnClickListener() {

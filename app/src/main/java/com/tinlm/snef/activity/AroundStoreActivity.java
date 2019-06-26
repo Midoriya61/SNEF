@@ -39,12 +39,10 @@ public class AroundStoreActivity extends AppCompatActivity {
 
     RecyclerView rcStoreAround;
 
-    double longPhone;
-    double latPhone;
-
     protected LocationManager locationManager;
 
     double[] locationStore = new double[2];
+    double[] locationStoreCurrent = new double[2];
 
 
     BottomNavigationView bottomNavigation;
@@ -77,7 +75,7 @@ public class AroundStoreActivity extends AppCompatActivity {
             String[] rear = location.split("\n");
             locationStore[0] = Double.parseDouble(rear[0]);
             locationStore[1] = Double.parseDouble(rear[1]);
-            storeList.get(i).distanceBetween2Points(latPhone, longPhone, locationStore[0], locationStore[1]);
+            storeList.get(i).distanceBetween2Points(locationStoreCurrent[0], locationStoreCurrent[1], locationStore[0], locationStore[1]);
         }
         // Sort store by distance from phone to store
         Collections.sort(storeList);
@@ -172,82 +170,32 @@ public class AroundStoreActivity extends AppCompatActivity {
 
     // get current location
     private void getLatLong() {
-        if(longPhone != 0 || latPhone != 0) {
+        if(locationStoreCurrent[1] != 0 || locationStoreCurrent[0] != 0) {
             SharedPreferences sharedPreferences = getSharedPreferences(ConstainApp.locationPhone, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putFloat(ConstainApp.longPhone, (float)longPhone);
-            editor.putFloat(ConstainApp.latPhone, (float)latPhone);
+            editor.putFloat(ConstainApp.longPhone, (float)locationStoreCurrent[1]);
+            editor.putFloat(ConstainApp.latPhone, (float)locationStoreCurrent[0]);
             editor.apply();
         }
     }
 
     // get current location of phone by gps
     private void getCurrentLocation() {
-        SharedPreferences sharedPreferences = getSharedPreferences(ConstainApp.locationPhone, Context.MODE_PRIVATE);
-        longPhone = sharedPreferences.getFloat(ConstainApp.longPhone,0);
-        latPhone = sharedPreferences.getFloat(ConstainApp.latPhone,0);
-        if(longPhone == 0 && latPhone == 0) {
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-
-            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                buildAlertMessageNoGps();
-                getLocation();
-            } else if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                getLocation();
-
-            }
+//        SharedPreferences sharedPreferences = getSharedPreferences(ConstainApp.locationPhone, Context.MODE_PRIVATE);
+//        longPhone = sharedPreferences.getFloat(ConstainApp.longPhone,0);
+//        latPhone = sharedPreferences.getFloat(ConstainApp.latPhone,0);
+//        if(longPhone == 0 && latPhone == 0) {
+//
+//        }
+        ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            GeocodingLocation.buildAlertMessageNoGps(AroundStoreActivity.this);
+            locationStoreCurrent = GeocodingLocation.getLocation(locationManager, AroundStoreActivity.this);
+        } else if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            locationStoreCurrent = GeocodingLocation.getLocation(locationManager, AroundStoreActivity.this);
         }
     }
 
-    // Alert turn GPS
-    protected void buildAlertMessageNoGps() {
-        final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
-        builder.setMessage(R.string.OpenGPS)
-                .setCancelable(false)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(final DialogInterface dialog, final int id) {
-                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
 
-                    }
-                })
-                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(final DialogInterface dialog, final int id) {
-                        dialog.cancel();
-                        buildAlertMessageNoGps();
-                    }
-                });
-        final android.app.AlertDialog alert = builder.create();
-        alert.show();
-    }
-
-    // get location of phone by gps
-    private void getLocation() {
-        if (ActivityCompat.checkSelfPermission(AroundStoreActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
-                (AroundStoreActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(AroundStoreActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-
-        } else {
-
-            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            Location location1 = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            Location location2 = locationManager.getLastKnownLocation(LocationManager. PASSIVE_PROVIDER);
-
-            if (location != null) {
-                latPhone = location.getLatitude();
-                longPhone = location.getLongitude();
-            } else  if (location1 != null) {
-                latPhone = location1.getLatitude();
-                longPhone = location1.getLongitude();
-            } else  if (location2 != null) {
-                latPhone = location2.getLatitude();
-                longPhone = location2.getLongitude();
-            }else{
-                Toast.makeText(this,"Unble to Trace your location",Toast.LENGTH_SHORT).show();
-            }
-            getLatLong();
-        }
-    }
 }

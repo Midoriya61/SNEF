@@ -52,7 +52,7 @@ public class ListStoreAdapter extends RecyclerView.Adapter<ListStoreAdapter.List
         locationUtilities.getAddressOfStoreById(currentStore);
 
         if(currentStore.getOpenHour().equals(currentStore.getClodeHour())) {
-            listStoreViewHolder.storeWorkTime.setText(ConstainApp.Open24);
+            listStoreViewHolder.storeWorkTime.setText(R.string.Open24);
         }else
             listStoreViewHolder.storeWorkTime.setText(currentStore.getOpenHour() + " - " + currentStore.getClodeHour());
 
@@ -79,7 +79,8 @@ public class ListStoreAdapter extends RecyclerView.Adapter<ListStoreAdapter.List
             }
             Picasso.get().load(listFood.get(position)).into(image.get(position));
         }
-        listStoreViewHolder.storeDistance.setText((Math.floor(currentStore.getDistance() * 100) / 100) + "km");
+        listStoreViewHolder.storeDistance.setText((Math.floor(currentStore.getDistance() * 100) / 100) + " km");
+
 
     }
 
@@ -101,7 +102,6 @@ public class ListStoreAdapter extends RecyclerView.Adapter<ListStoreAdapter.List
             storeName = itemView.findViewById(R.id.storeName);
             storeDistance = itemView.findViewById(R.id.storeDistance);
             storeWorkTime = itemView.findViewById(R.id.storeWorkTime);
-
             imageFood1 = itemView.findViewById(R.id.imageFood1);
             imageFood2 = itemView.findViewById(R.id.imageFood2);
             imageFood3 = itemView.findViewById(R.id.imageFood3);
