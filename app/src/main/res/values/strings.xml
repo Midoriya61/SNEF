@@ -25,6 +25,12 @@
     <string name="msg_order_history">Lịch sử mua</string>
     <string name="msg_help">Hổ trợ</string>
     <string name="msg_logout">Đăng xuất</string>
+    <string name="msg_expired_date">Kết thúc trong</string>
+    <string name="msg_add_to_add">Thêm vào giỏ</string>
+    <string name="msg_provided_by_store">Cung cấp bởi </string>
+    <string name="msg_description">Mô tả sản phẩm</string>
+    <string name="msg_product_info_detail">Thông tin chia tiết</string>
+    <string name="msg_see_more">Xem thêm</string>
 
 
     <string name="StatusSouldOut">Bán hết</string>

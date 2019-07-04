@@ -46,13 +46,12 @@ public class LoginActivity extends AppCompatActivity {
         appImage = findViewById(R.id.appImage);
         txtUsername = findViewById(R.id.txtUsername);
         txtPassword = findViewById(R.id.txtPassword);
-    }
 
-    private void initAction() {
         formLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CustomerUtilities customerUtilities = new CustomerUtilities();
+                String adf = txtUsername.getText().toString();
                 Customer customer = customerUtilities.login(txtUsername.getText().toString(), txtPassword.getText().toString());
                 SharedPreferences sharedPreferences = getSharedPreferences(ConstainApp.login_Prefer, MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -71,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
 
     //TinLM load get account is login
     private String getAccountLogin() {

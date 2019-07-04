@@ -33,4 +33,24 @@ public class StoreProductUtilities {
         }
         return result;
     }
+
+    public String getDesById( int storeProductId ) {
+       String result = "";
+
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        String url = ConstainServer.BaseURL + ConstainServer.StoreProductURL + ConstainServer.GetDesById + storeProductId;
+        String respone = "";
+
+        try {
+            URL urll = new URL(url);
+            respone = ReadStream.readStream(urll.openStream());
+            result = respone;
+
+        }catch (Exception e){
+            Log.e("ESPQ", e.getMessage());
+        }
+        return result;
+    }
 }

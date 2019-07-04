@@ -1,8 +1,14 @@
 package com.tinlm.snef.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Categories {
+
+
     private int categoriesId;
+
     private String categoryName;
+
     private String ImageSrc;
 
     public Categories() {

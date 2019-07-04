@@ -1,18 +1,23 @@
 package com.tinlm.snef.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class StoreProductImage {
 
+
     private int fspId;
+
     private String imageSrc;
-    private int flashSaleProductId;
+
+    private int storeProductId;
 
     public StoreProductImage() {
     }
 
-    public StoreProductImage(int fspId, String imageSrc, int flashSaleProductId) {
+    public StoreProductImage(int fspId, String imageSrc, int storeProductId) {
         this.fspId = fspId;
         this.imageSrc = imageSrc;
-        this.flashSaleProductId = flashSaleProductId;
+        this.storeProductId = storeProductId;
     }
 
     public int getFspId() {
@@ -31,11 +36,11 @@ public class StoreProductImage {
         this.imageSrc = imageSrc;
     }
 
-    public int getFlashSaleProductId() {
-        return flashSaleProductId;
+    public int getStoreProductId() {
+        return storeProductId;
     }
 
-    public void setFlashSaleProductId(int flashSaleProductId) {
-        this.flashSaleProductId = flashSaleProductId;
+    public void setStoreProductId(int storeProductId) {
+        this.storeProductId = storeProductId;
     }
 }

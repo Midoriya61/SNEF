@@ -37,10 +37,27 @@ public class ConstainApp {
     public static final String  QUANTITY = "QUANTITY";
     public static final String  ENDDATE = "ENDDATE";
     public static final String  STOREPRODUCTID = "STOREPRODUCTID";
+    public static final String  CATEGORYID = "CATEGORYID";
 
 
     // Date time
     public static final String  DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
+
+    public static final String  LIST_ORDER_DETAIL = "LISTORDERDETAIL";
+
+    // Json
+    public static final String  JS_STORENAME = "STONAME";
+    public static final String  JS_QUANTITY = "QUANTITY";
+    public static final String  JS_PRICE = "PRICE";
+    public static final String  JS_PRODUCTNAME = "PRODUCTNAME";
+    public static final String  JS_IMAGEPRODUCT = "IMAGEPRODUCT";
+    public static final String  JS_FSPID = "FSPID";
+
+    //Array JSON object fsp
+    public static final String  JSARROD = "JSARROD";
+
+
 
 
 }

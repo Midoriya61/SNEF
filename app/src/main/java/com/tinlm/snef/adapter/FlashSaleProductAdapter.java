@@ -26,17 +26,24 @@ import com.tinlm.snef.utilities.StoreProductUtilities;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Map;
 
 public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProductAdapter.FlashSaleProductHolder> {
     Context mContext;
     List<FlashSaleProduct> flashSaleProductList;
+    Map<Integer, String> listImageProduct;
+    Map<Integer, Integer> listTotalQuantity;
+
     private Runnable runnable;
     private Handler handler = new Handler();
     private String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
-    public FlashSaleProductAdapter(Context mContext, List<FlashSaleProduct> flashSaleProductList) {
+    public FlashSaleProductAdapter(Context mContext, List<FlashSaleProduct> flashSaleProductList,
+                                   Map<Integer, String> listImageProduct, Map<Integer, Integer> listTotalQuantity) {
         this.mContext = mContext;
         this.flashSaleProductList = flashSaleProductList;
+        this.listImageProduct = listImageProduct;
+        this.listTotalQuantity = listTotalQuantity;
     }
 
     //6/14/2019 TinLM Create
@@ -44,9 +51,14 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
     @NonNull
     @Override
     public FlashSaleProductHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        FlashSaleProductHolder flashSaleProductHolder;
         View v = LayoutInflater.from(mContext).inflate(R.layout.list_flash_sale_product, viewGroup, false);
-        return new FlashSaleProductHolder(v);
+        flashSaleProductHolder = new FlashSaleProductHolder(v);
+
+
+        return flashSaleProductHolder;
     }
+
 
     ////6/14/2019 TinLM Create
     // Load data into layout
@@ -54,8 +66,8 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
     public void onBindViewHolder(@NonNull FlashSaleProductHolder flashSaleProductHolder, int i) {
         final FlashSaleProduct flashSaleProduct = flashSaleProductList.get(i);
 
-        StoreProductImageUtilities imageUltilities = new StoreProductImageUtilities();
-        String productImage = imageUltilities.getOneImageByStoreProductId(flashSaleProduct.getStoreProductId());
+
+        String productImage = listImageProduct.get(flashSaleProduct.getStoreProductId());
 
         Picasso.get().load("https://res.cloudinary.com/dr4hpc9gi/image/upload/v1558970388/FoodStoreImage/discount.png")
                 .resize(200,120).into(flashSaleProductHolder.imgDiscount);
@@ -76,8 +88,8 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
 
         flashSaleProductHolder.textPriceDiscount.setText(String.format("%,d",(int)((flashSaleProduct.getPrice() * flashSaleProduct.getDiscount())/100)) + "");
 
-        OrderDetailUtilities orderDetailUtilities = new OrderDetailUtilities();
-        int totalQuantity = orderDetailUtilities.getQuantityByFSPId(flashSaleProduct.getFlashSaleProductId());
+
+        int totalQuantity = listTotalQuantity.get(flashSaleProduct.getFlashSaleProductId());
 
         int numberSout = (flashSaleProductHolder.barStillSale.getLayoutParams().width *totalQuantity )/ (flashSaleProduct.getQuantity());
         flashSaleProductHolder.barSale.getLayoutParams().width = numberSout;
@@ -123,6 +135,8 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
     public int getItemCount() {
         return flashSaleProductList.size();
     }
+
+
     public class FlashSaleProductHolder extends RecyclerView.ViewHolder {
 
         ImageView imgFood, imgDiscount;
