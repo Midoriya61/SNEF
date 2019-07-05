@@ -53,6 +53,9 @@ public class ConstainApp {
     public static final String  JS_PRODUCTNAME = "PRODUCTNAME";
     public static final String  JS_IMAGEPRODUCT = "IMAGEPRODUCT";
     public static final String  JS_FSPID = "FSPID";
+    public static final String  JS_PCount = "PCount";
+    public static final String  JS_CART = "CART";
+    public static final String  JS_DB_NAME = "cart_list";
 
     //Array JSON object fsp
     public static final String  JSARROD = "JSARROD";

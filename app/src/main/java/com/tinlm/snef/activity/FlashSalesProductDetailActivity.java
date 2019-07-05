@@ -29,7 +29,9 @@ import com.tinlm.snef.R;
 import com.tinlm.snef.adapter.ViewPagerAdapter;
 import com.tinlm.snef.algo.GeocodingLocation;
 import com.tinlm.snef.constain.ConstainApp;
+import com.tinlm.snef.database.DBManager;
 import com.tinlm.snef.fragment.CustomDialogFragment;
+import com.tinlm.snef.model.Cart;
 import com.tinlm.snef.model.OrderDetail;
 import com.tinlm.snef.model.Store;
 import com.tinlm.snef.model.StoreProduct;
@@ -57,7 +59,8 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
 
     //ElegantNumberButton btnChange;
     //Button addToCart;
-    TextView foodPriceDiscount,totalPrice, foodName, expiredDate,foodPrice;
+    // totalPrice
+    TextView foodPriceDiscount, foodName, expiredDate,foodPrice;
     ViewPager imgProductFS;
     CountdownView cv_countdownViewTest1;
     String imgProduct;
@@ -89,7 +92,7 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
         //btnChange = findViewById(R.id.btnChange);
         //addToCart = findViewById(R.id.addToCart);
         foodPriceDiscount = findViewById(R.id.foodPriceDiscount);
-        totalPrice = findViewById(R.id.totalPrice);
+//        totalPrice = findViewById(R.id.totalPrice);
         foodName = findViewById(R.id.foodName);
         expiredDate = findViewById(R.id.expiredDate);
         foodPrice = findViewById(R.id.foodPrice);
@@ -167,8 +170,8 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        totalPrice = findViewById(R.id.totalPrice);
-        totalPrice.setText(String.format("%,d",intent.getIntExtra(ConstainApp.DISCOUNT,0) * (int)price/100));
+//        totalPrice = findViewById(R.id.totalPrice);
+//        totalPrice.setText(String.format("%,d",intent.getIntExtra(ConstainApp.DISCOUNT,0) * (int)price/100));
         final int quantity = intent.getIntExtra(ConstainApp.QUANTITY, 0);
 //        btnChange.setRange(1,quantity);
 //
@@ -232,15 +235,34 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
 //    }
 
 
-//    public void clickAddToCard(View view) {
+    public void clickAddToCard(View view) {
+        DBManager dbManager = new DBManager(FlashSalesProductDetailActivity.this);
+        Cart cart = dbManager.getProductById(fspId);
+        if(cart == null) {
+            cart = new Cart();
+            cart.setStoreName(storeName.getText().toString());
+            cart.setProductName(foodName.getText().toString());
+            cart.setImageProduct(imgProduct);
+            cart.setFspId(fspId);
+            cart.setPrice(price);
+            dbManager.addCart(cart);
+        } else {
+            dbManager.updateCart(cart);
+        }
+        Toast.makeText(this,R.string.msg_add_to_cart_success, Toast.LENGTH_SHORT).show();
+
+
+
+//        cart.setQuantity(Integer.parseInt(btnChange.getNumber()));
+//        dbManager.addStudent();
 //        JsonObject jo = new JsonObject();
-//        //jo.addProperty(ConstainApp.JS_STORENAME, storeName.getText().toString());
-//        //jo.addProperty(ConstainApp.JS_QUANTITY, Integer.parseInt(btnChange.getNumber()));
+        //jo.addProperty(ConstainApp.JS_STORENAME, storeName.getText().toString());
+        //jo.addProperty(ConstainApp.JS_QUANTITY, Integer.parseInt(btnChange.getNumber()));
 //        jo.addProperty(ConstainApp.JS_PRODUCTNAME, foodName.getText().toString());
 //        jo.addProperty(ConstainApp.JS_IMAGEPRODUCT, imgProduct);
 //        jo.addProperty(ConstainApp.JS_FSPID, fspId);
 //        jo.addProperty(ConstainApp.JS_PRICE, price);
-//
+
 //        SharedPreferences sharedPreferences = getSharedPreferences(ConstainApp.LIST_ORDER_DETAIL, MODE_PRIVATE);
 //        String json_array = sharedPreferences.getString(ConstainApp.JSARROD, null);
 //        try {
@@ -255,7 +277,7 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
 //        } catch (JSONException e) {
 //            e.printStackTrace();
 //        }
-//    }
+    }
 
 
 }

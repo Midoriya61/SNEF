@@ -15,6 +15,8 @@ import android.view.MenuItem;
 import com.tinlm.snef.R;
 import com.tinlm.snef.adapter.ListStoreOrderItemAdapter;
 import com.tinlm.snef.constain.ConstainApp;
+import com.tinlm.snef.database.DBManager;
+import com.tinlm.snef.model.Cart;
 import com.tinlm.snef.model.OrderDetail;
 import com.tinlm.snef.model.StoreOrderItem;
 
@@ -41,68 +43,71 @@ public class OrderActivity extends AppCompatActivity {
     private void init() {
         rcOrderStore = findViewById(R.id.rcOrderStore);
 
-        SharedPreferences sharedPreferences = getSharedPreferences(ConstainApp.LIST_ORDER_DETAIL, MODE_PRIVATE);
-        String json_array = sharedPreferences.getString(ConstainApp.JSARROD, null);
-        json_array = json_array.replace("\\","");
-        json_array = json_array.replace("[\"{","[{");
-        json_array = json_array.replace("}\"]","}]");
-        List<OrderDetail> orderDetailList = new ArrayList<>();
-        List<StoreOrderItem> storeOrderItems = new ArrayList<>();
-        try {
-            JSONArray jsonArray = new JSONArray(json_array);
-            for (int i = 0; i < jsonArray.length(); i++)
-            {
-                JSONObject jsonObj = jsonArray.getJSONObject(i);
-                OrderDetail orderDetail = new OrderDetail();
+        DBManager dbManager = new DBManager(OrderActivity.this);
+        List<StoreOrderItem> storeOrderItems = dbManager.getAllCartGroupStore();
 
-                if(jsonObj.has(ConstainApp.JS_STORENAME)){
-                    orderDetail.setStoreName(jsonObj.getString(ConstainApp.JS_STORENAME));
-                }
-                if(jsonObj.has(ConstainApp.JS_QUANTITY)){
-                    orderDetail.setQuantity(jsonObj.getInt(ConstainApp.JS_QUANTITY));
-                }
-                if(jsonObj.has(ConstainApp.JS_PRODUCTNAME)){
-                    orderDetail.setProductName(jsonObj.getString(ConstainApp.JS_PRODUCTNAME));
-                }
-                if(jsonObj.has(ConstainApp.JS_IMAGEPRODUCT)){
-                    orderDetail.setSetImageProduct(jsonObj.getString(ConstainApp.JS_IMAGEPRODUCT));
-                }
-                if(jsonObj.has(ConstainApp.JS_FSPID)){
-                    orderDetail.setFlashSaleProductId(jsonObj.getInt(ConstainApp.JS_FSPID));
-                }
-                if(jsonObj.has(ConstainApp.JS_PRICE)){
-                    orderDetail.setPrice((float)jsonObj.getDouble(ConstainApp.JS_PRICE));
-                }
-                orderDetailList.add(orderDetail);
-
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        List<OrderDetail> listOrderDetailV2 = orderDetailList;
-
-        for( int i = 0; i < listOrderDetailV2.size() - 1; i++) {
-            if (listOrderDetailV2.get(i).getStoreName() != null) {
-                for (int j = i + 1; j < listOrderDetailV2.size(); j++) {
-                    if (listOrderDetailV2.get(i).getStoreName().equals(listOrderDetailV2.get(j).getStoreName())) {
-                        if (storeOrderItems.size() == 0) {
-                            StoreOrderItem storeOrderItem = new StoreOrderItem();
-                            storeOrderItem.setStoreName(listOrderDetailV2.get(i).getStoreName());
-                            storeOrderItem.setQuantityOrder(1);
-                            storeOrderItems.add(storeOrderItem);
-                        } else {
-                            for (int s = 0; s < storeOrderItems.size(); i++) {
-                                if (storeOrderItems.get(s).getStoreName().equals(listOrderDetailV2.get(i).getStoreName())) {
-                                    storeOrderItems.get(s).setQuantityOrder(storeOrderItems.get(s).getQuantityOrder() + 1);
-                                    listOrderDetailV2.get(j).setProductName(null);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+//        SharedPreferences sharedPreferences = getSharedPreferences(ConstainApp.LIST_ORDER_DETAIL, MODE_PRIVATE);
+//        String json_array = sharedPreferences.getString(ConstainApp.JSARROD, null);
+//        json_array = json_array.replace("\\","");
+//        json_array = json_array.replace("[\"{","[{");
+//        json_array = json_array.replace("}\"]","}]");
+//        List<OrderDetail> orderDetailList = new ArrayList<>();
+//        List<StoreOrderItem> storeOrderItems = new ArrayList<>();
+//        try {
+//            JSONArray jsonArray = new JSONArray(json_array);
+//            for (int i = 0; i < jsonArray.length(); i++)
+//            {
+//                JSONObject jsonObj = jsonArray.getJSONObject(i);
+//                OrderDetail orderDetail = new OrderDetail();
+//
+//                if(jsonObj.has(ConstainApp.JS_STORENAME)){
+//                    orderDetail.setStoreName(jsonObj.getString(ConstainApp.JS_STORENAME));
+//                }
+//                if(jsonObj.has(ConstainApp.JS_QUANTITY)){
+//                    orderDetail.setQuantity(jsonObj.getInt(ConstainApp.JS_QUANTITY));
+//                }
+//                if(jsonObj.has(ConstainApp.JS_PRODUCTNAME)){
+//                    orderDetail.setProductName(jsonObj.getString(ConstainApp.JS_PRODUCTNAME));
+//                }
+//                if(jsonObj.has(ConstainApp.JS_IMAGEPRODUCT)){
+//                    orderDetail.setSetImageProduct(jsonObj.getString(ConstainApp.JS_IMAGEPRODUCT));
+//                }
+//                if(jsonObj.has(ConstainApp.JS_FSPID)){
+//                    orderDetail.setFlashSaleProductId(jsonObj.getInt(ConstainApp.JS_FSPID));
+//                }
+//                if(jsonObj.has(ConstainApp.JS_PRICE)){
+//                    orderDetail.setPrice((float)jsonObj.getDouble(ConstainApp.JS_PRICE));
+//                }
+//                orderDetailList.add(orderDetail);
+//
+//            }
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//
+//        List<OrderDetail> listOrderDetailV2 = orderDetailList;
+//
+//        for( int i = 0; i < listOrderDetailV2.size() - 1; i++) {
+//            if (listOrderDetailV2.get(i).getStoreName() != null) {
+//                for (int j = i + 1; j < listOrderDetailV2.size(); j++) {
+//                    if (listOrderDetailV2.get(i).getStoreName().equals(listOrderDetailV2.get(j).getStoreName())) {
+//                        if (storeOrderItems.size() == 0) {
+//                            StoreOrderItem storeOrderItem = new StoreOrderItem();
+//                            storeOrderItem.setStoreName(listOrderDetailV2.get(i).getStoreName());
+//                            storeOrderItem.setQuantityOrder(1);
+//                            storeOrderItems.add(storeOrderItem);
+//                        } else {
+//                            for (int s = 0; s < storeOrderItems.size(); i++) {
+//                                if (storeOrderItems.get(s).getStoreName().equals(listOrderDetailV2.get(i).getStoreName())) {
+//                                    storeOrderItems.get(s).setQuantityOrder(storeOrderItems.get(s).getQuantityOrder() + 1);
+//                                    listOrderDetailV2.get(j).setProductName(null);
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
 
         ListStoreOrderItemAdapter storeOrderItemAdapter = new ListStoreOrderItemAdapter(OrderActivity.this,storeOrderItems);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(OrderActivity.this,

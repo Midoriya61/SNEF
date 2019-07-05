@@ -304,53 +304,47 @@
     </LinearLayout>
 
 
-
-    <LinearLayout
-        android:id="@+id/bottomNavigationView"
+    <RelativeLayout
+        android:id="@+id/llAddToCard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
-        >
-        <RelativeLayout
-            android:id="@+id/llAddToCard"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/redApp"
-            >
-            <TextView
-                android:text="@string/msg_add_to_add"
-                android:textColor="@color/colorMain"
-                android:layout_centerInParent="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="22sp"/>
+        android:background="@color/redApp"
+        android:orientation="horizontal">
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:padding="10dp">
-                <TextView
-                    android:id="@+id/totalPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="33,000 "
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorMain"/>
-                <TextView
-                    android:text=" đ"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorMain"/>
-            </LinearLayout>
-        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:onClick="clickAddToCard"
+            android:text="@string/msg_add_to_add"
+            android:textColor="@color/colorMain"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <!--<LinearLayout-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:padding="10dp">-->
+        <!--<TextView-->
+        <!--android:id="@+id/totalPrice"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="33,000 "-->
+        <!--android:textSize="22sp"-->
+        <!--android:textStyle="bold"-->
+        <!--android:textColor="@color/colorMain"/>-->
+        <!--<TextView-->
+        <!--android:text=" đ"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textSize="20sp"-->
+        <!--android:textStyle="bold"-->
+        <!--android:textColor="@color/colorMain"/>-->
+        <!--</LinearLayout>-->
+    </RelativeLayout>
         <!--<LinearLayout-->
             <!--android:orientation="horizontal"-->
             <!--android:layout_width="match_parent"-->
@@ -366,8 +360,5 @@
                 <!--android:layout_gravity="bottom"-->
                 <!--/>-->
         <!--</LinearLayout>-->
-
-
-    </LinearLayout>
 
 </RelativeLayout>
