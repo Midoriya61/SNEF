@@ -37,6 +37,7 @@ public class ConstainServer {
     public static final String CustomerURL = "customer/";
     public static final String LoginURL = "login/";
 
-    public static final String BaseURL = "http://192.168.100.5:6432/";
+    //    public static final String BaseURL = "https://snef-api-part2.herokuapp.com/";
+    public static final String BaseURL = "http://192.168.1.3:6432/";
 
 }

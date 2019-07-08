@@ -1,32 +1,30 @@
 package com.tinlm.snef.model;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.sql.Date;
 
 public class FlashSaleProduct {
 
-        @SerializedName("flashSaleProductId")
+//        @SerializedName("flashSaleProductId")
         private int flashSaleProductId;
-    @SerializedName("quantity")
+//    @SerializedName("quantity")
         private int quantity;
-    @SerializedName("discount")
+//    @SerializedName("discount")
         private int discount;
-    @SerializedName("endDate")
+//    @SerializedName("endDate")
         private Date endDate;
-    @SerializedName("productName")
+//    @SerializedName("productName")
         private String productName;
-    @SerializedName("price")
+//    @SerializedName("price")
         private float price;
 
         private String description;
-    @SerializedName("storeProductId")
+//    @SerializedName("storeProductId")
         private int storeProductId;
-    @SerializedName("flashSalesId")
+//    @SerializedName("flashSalesId")
         private int flashSalesId;
-    @SerializedName("storeId")
+//    @SerializedName("storeId")
         private int storeId;
-    @SerializedName("spQuantity")
+//    @SerializedName("spQuantity")
         private int spQuantity;
 
         public FlashSaleProduct() {

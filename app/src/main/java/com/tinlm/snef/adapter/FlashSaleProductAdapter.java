@@ -18,10 +18,6 @@ import com.tinlm.snef.R;
 import com.tinlm.snef.activity.FlashSalesProductDetailActivity;
 import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.model.FlashSaleProduct;
-import com.tinlm.snef.utilities.CategoriesUtilities;
-import com.tinlm.snef.utilities.OrderDetailUtilities;
-import com.tinlm.snef.utilities.StoreProductImageUtilities;
-import com.tinlm.snef.utilities.StoreProductUtilities;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -94,13 +90,13 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
         int numberSout = (flashSaleProductHolder.barStillSale.getLayoutParams().width *totalQuantity )/ (flashSaleProduct.getQuantity());
         flashSaleProductHolder.barSale.getLayoutParams().width = numberSout;
         if(totalQuantity == flashSaleProduct.getQuantity()) {
-            flashSaleProductHolder.statusSale.setText(R.string.StatusSouldOut);
+            flashSaleProductHolder.statusSale.setText(R.string.StatusSouldOut + "" );
         } else if (totalQuantity >= flashSaleProduct.getQuantity() * (100/80)) {
-            flashSaleProductHolder.statusSale.setText(R.string.StatusNearlySouldOut);
+            flashSaleProductHolder.statusSale.setText(R.string.StatusNearlySouldOut + "");
         } else if (totalQuantity > 0) {
-            flashSaleProductHolder.statusSale.setText(R.string.StatusSould + flashSaleProduct.getQuantity());
+            flashSaleProductHolder.statusSale.setText(R.string.StatusSould + " "+ flashSaleProduct.getQuantity());
         } else {
-            flashSaleProductHolder.statusSale.setText(R.string.StatusJustOpen);
+            flashSaleProductHolder.statusSale.setText(R.string.StatusJustOpen + "" );
         }
 
         flashSaleProductHolder.flashSaleProductLayout.setOnClickListener(new View.OnClickListener() {

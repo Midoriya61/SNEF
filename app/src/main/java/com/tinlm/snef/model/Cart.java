@@ -8,7 +8,7 @@ public class Cart {
     private String productName;
     private String imageProduct;
     private int fspId;
-
+    private int discount;
     private int pCount;
 
     public Cart() {
@@ -68,5 +68,14 @@ public class Cart {
 
     public void setFspId(int fspId) {
         this.fspId = fspId;
+    }
+
+
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(int discount) {
+        this.discount = discount;
     }
 }

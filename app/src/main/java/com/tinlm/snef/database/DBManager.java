@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.model.Cart;
-import com.tinlm.snef.model.Store;
+import com.tinlm.snef.model.OrderDetail;
 import com.tinlm.snef.model.StoreOrderItem;
 
 import java.util.ArrayList;
@@ -19,8 +19,9 @@ public class DBManager extends SQLiteOpenHelper {
 
     private Context context;
 
+
     public DBManager(Context context) {
-        super(context, ConstainApp.JS_DB_NAME, null, 1);
+        super(context, ConstainApp.JS_DB_NAME, null, 2);
         this.context = context;
     }
 
@@ -32,6 +33,7 @@ public class DBManager extends SQLiteOpenHelper {
                 ConstainApp.JS_PRODUCTNAME + " TEXT, " +
                 ConstainApp.JS_STORENAME + " TEXT, " +
                 ConstainApp.JS_PRICE + " float, " +
+                ConstainApp.JS_DISCOUNT + " integer, " +
                 ConstainApp.JS_QUANTITY + " integer) ";
         db.execSQL(sqlQuery);
         Toast.makeText(context, "Create successfylly", Toast.LENGTH_SHORT).show();
@@ -44,6 +46,7 @@ public class DBManager extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+
     //Add new a cart
     public void addCart(Cart cart){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -53,6 +56,7 @@ public class DBManager extends SQLiteOpenHelper {
         values.put(ConstainApp.JS_PRODUCTNAME, cart.getProductName());
         values.put(ConstainApp.JS_STORENAME, cart.getStoreName());
         values.put(ConstainApp.JS_PRICE, cart.getPrice());
+        values.put(ConstainApp.JS_DISCOUNT, cart.getDiscount());
         values.put(ConstainApp.JS_QUANTITY, 1);
 
         //Neu de null thi khi value bang null thi loi
@@ -93,8 +97,8 @@ public class DBManager extends SQLiteOpenHelper {
                 cart.setProductName(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_PRODUCTNAME)));
                 cart.setStoreName(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_STORENAME)));
                 cart.setPrice(cursor.getFloat(cursor.getColumnIndex(ConstainApp.JS_PRICE)));
+                cart.setDiscount(cursor.getInt(cursor.getColumnIndex(ConstainApp.JS_DISCOUNT)));
                 cart.setQuantity(cursor.getInt(cursor.getColumnIndex(ConstainApp.JS_QUANTITY)));
-
                 cartList.add(cart);
             } while (cursor.moveToNext());
         }
@@ -160,6 +164,7 @@ public class DBManager extends SQLiteOpenHelper {
             cart.setProductName(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_PRODUCTNAME)));
             cart.setStoreName(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_STORENAME)));
             cart.setPrice(cursor.getFloat(cursor.getColumnIndex(ConstainApp.JS_PRICE)));
+            cart.setDiscount(cursor.getInt(cursor.getColumnIndex(ConstainApp.JS_DISCOUNT)));
             cart.setQuantity(cursor.getInt(cursor.getColumnIndex(ConstainApp.JS_QUANTITY)));
 
         }
@@ -169,4 +174,11 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
 
+
+    //update cart items' quantity and total price
+    public void updateCart(OrderDetail orderDetail) {
+        SQLiteDatabase db = getReadableDatabase();
+        String query = String.format("UPDATE OrderDetail SET JS_QUANTITY = %s WHERE JS_FSPID = %d",
+                                        orderDetail.getQuantityFsp(),orderDetail.getFspId());
+    }
 }

@@ -1,12 +1,12 @@
 package com.tinlm.snef.model;
 
-import android.content.SharedPreferences;
-
-import com.google.gson.Gson;
+//import android.content.SharedPreferences;
+//
+//import com.google.gson.Gson;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
 
 public class OrderDetail {
 
