@@ -65,6 +65,8 @@ public class AroundStoreActivity extends AppCompatActivity {
         StoreUtilities storeUtilities = new StoreUtilities();
         List<Store> storeList = storeUtilities.getListStoreArround();
         LocationUtilities locationUtilities = new LocationUtilities();
+
+        // get address of store
         for (int i = 0; i < storeList.size(); i++) {
             locationUtilities.getAddressOfStoreById(storeList.get(i));
             GeocodingLocation locationAddress = new GeocodingLocation();
@@ -76,6 +78,7 @@ public class AroundStoreActivity extends AppCompatActivity {
             locationStore[0] = Double.parseDouble(rear[0]);
             locationStore[1] = Double.parseDouble(rear[1]);
             storeList.get(i).distanceBetween2Points(locationStoreCurrent[0], locationStoreCurrent[1], locationStore[0], locationStore[1]);
+//            storeList.get(i).setDistance(i);
         }
         // Sort store by distance from phone to store
         Collections.sort(storeList);

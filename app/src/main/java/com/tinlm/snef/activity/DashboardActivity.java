@@ -7,16 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
+
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 
 import com.tinlm.snef.R;
-import com.tinlm.snef.adapter.CategoriesAdapter;
 import com.tinlm.snef.adapter.FlashSaleProductAdapter;
-import com.tinlm.snef.model.Categories;
 import com.tinlm.snef.model.FlashSaleProduct;
-import com.tinlm.snef.utilities.CategoriesUtilities;
 import com.tinlm.snef.utilities.FlashSaleProductUtilities;
 import com.tinlm.snef.utilities.OrderDetailUtilities;
 import com.tinlm.snef.utilities.StoreProductImageUtilities;
@@ -33,8 +30,8 @@ import java.util.Map;
 // 6/23/2019 TinLM Create createListFSP
 public class DashboardActivity extends AppCompatActivity {
 
-    RecyclerView rcListCategories;
-    RecyclerView rcListHost;
+//    RecyclerView rcListCategories;
+//    RecyclerView rcListHost;
     RecyclerView rcListFlashSaleProduct;
 
     BottomNavigationView bottomNavigation;
@@ -43,7 +40,6 @@ public class DashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        init();
         navigateDashboard();
     }
 
@@ -87,86 +83,6 @@ public class DashboardActivity extends AppCompatActivity {
         });
     }
 
-    private void init() {
-        createListCategories();
-        createListHostProduct();
-        createListFSP();
-    }
 
-    // Create list flash sale product
-    private void createListFSP() {
-        rcListFlashSaleProduct = findViewById(R.id.rcListFlashSaleProduct);
-        List<FlashSaleProduct>  flashSaleProducts = new ArrayList<>();
-        Map<Integer, String> listImageProduct = new HashMap<>();
-        Map<Integer, Integer> listTotalPrice = new HashMap<>();
-        FlashSaleProductUtilities flashSaleProductUtilities = new FlashSaleProductUtilities();
-        StoreProductImageUtilities imageUltilities = new StoreProductImageUtilities();
-        OrderDetailUtilities orderDetailUtilities = new OrderDetailUtilities();
-
-        flashSaleProducts = flashSaleProductUtilities.getAllFSP();
-        for (int i = 0; i < flashSaleProducts.size(); i++) {
-
-            String productImage = imageUltilities.getOneImageByStoreProductId(flashSaleProducts.get(i).getStoreProductId());
-            listImageProduct.put(flashSaleProducts.get(i).getStoreProductId(),productImage );
-
-            int totalQuantity = orderDetailUtilities.getQuantityByFSPId(flashSaleProducts.get(i).getFlashSaleProductId());
-            listTotalPrice.put(flashSaleProducts.get(i).getFlashSaleProductId(), totalQuantity);
-
-
-        }
-
-
-        FlashSaleProductAdapter flashSaleProductAdapter = new FlashSaleProductAdapter(this, flashSaleProducts, listImageProduct, listTotalPrice);
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,3);
-        rcListFlashSaleProduct.setItemAnimator(new DefaultItemAnimator());
-        rcListFlashSaleProduct.setLayoutManager(mLayoutManager);
-        rcListFlashSaleProduct.setAdapter(flashSaleProductAdapter);
-    }
-
-    // Create list categories
-    private void createListCategories() {
-        rcListCategories = findViewById(R.id.rcListCategories);
-
-        List<Categories> categoryList = new ArrayList<>();
-        CategoriesUtilities categoriesUtilities = new CategoriesUtilities();
-        categoryList = categoriesUtilities.getAllCategories();
-
-        CategoriesAdapter categoriesAdapter = new CategoriesAdapter(this, categoryList);
-
-        final RecyclerView.LayoutManager mLayoutManager
-                = new LinearLayoutManager(DashboardActivity.this,
-                LinearLayoutManager.HORIZONTAL, false);
-
-        rcListCategories.setItemAnimator(new DefaultItemAnimator());
-        rcListCategories.setLayoutManager(mLayoutManager);
-        rcListCategories.setAdapter(categoriesAdapter);
-    }
-
-
-    // Load list product with biggest discount
-    private void createListHostProduct() {
-        rcListHost = findViewById(R.id.rcListHost);
-        List<FlashSaleProduct>  flashSaleProducts = new ArrayList<>();
-        Map<Integer, String> listImageProduct = new HashMap<>();
-        Map<Integer, Integer> listTotalPrice = new HashMap<>();
-        FlashSaleProductUtilities flashSaleProductUtilities = new FlashSaleProductUtilities();
-        StoreProductImageUtilities imageUltilities = new StoreProductImageUtilities();
-        OrderDetailUtilities orderDetailUtilities = new OrderDetailUtilities();
-
-        flashSaleProducts = flashSaleProductUtilities.getAllFSP();
-        for (int i = 0; i < flashSaleProducts.size(); i++) {
-            String productImage = imageUltilities.getOneImageByStoreProductId(flashSaleProducts.get(i).getStoreProductId());
-            listImageProduct.put(flashSaleProducts.get(i).getStoreProductId(),productImage );
-            int totalQuantity = orderDetailUtilities.getQuantityByFSPId(flashSaleProducts.get(i).getFlashSaleProductId());
-            listTotalPrice.put(flashSaleProducts.get(i).getFlashSaleProductId(), totalQuantity);
-        }
-        FlashSaleProductAdapter flashSaleProductAdapter = new FlashSaleProductAdapter(this, flashSaleProducts, listImageProduct, listTotalPrice);
-
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this,
-                LinearLayoutManager.HORIZONTAL, false);
-        rcListHost.setItemAnimator(new DefaultItemAnimator());
-        rcListHost.setLayoutManager(mLayoutManager);
-        rcListHost.setAdapter(flashSaleProductAdapter);
-    }
 
 }

@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+
 import com.squareup.picasso.Picasso;
 import com.tinlm.snef.activity.ProductByCategoryActivity;
 import com.tinlm.snef.R;
@@ -61,6 +62,9 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     public int getItemCount() {
         return categoryList.size();
     }
+
+
+
     public class CategoriesViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imgCategory;
@@ -70,7 +74,9 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         public CategoriesViewHolder(@NonNull View itemView) {
             super(itemView);
             imgCategory = itemView.findViewById(R.id.imgCategory);
+
             txtCategogy = itemView.findViewById(R.id.txtCategogy);
+
             layoutCategory = itemView.findViewById(R.id.layoutCategory);
 
         }

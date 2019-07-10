@@ -60,6 +60,9 @@ public class StoreUtilities {
                 if(jsonObj.has(closeHour)){
                     store.setClodeHour(jsonObj.getString(closeHour));
                 }
+                if(jsonObj.has(avatar)){
+                    store.setAvatar(jsonObj.getString(avatar));
+                }
 
                 result.add(store);
             }

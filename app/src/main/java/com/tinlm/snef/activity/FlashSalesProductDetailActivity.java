@@ -162,7 +162,7 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
         try {
             Date currentTime = Calendar.getInstance().getTime();
             long currentMillisecond = currentTime.getTime();
-            Date date = new SimpleDateFormat("MM/dd/yyyy").parse(endDate);
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(endDate);
             //expiredDate.setText(endDate);
             long milliseconds = date.getTime();
             cv_countdownViewTest1.start(milliseconds - currentMillisecond);

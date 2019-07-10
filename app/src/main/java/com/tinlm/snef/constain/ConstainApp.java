@@ -25,6 +25,7 @@ public class ConstainApp {
     public static final String EMAIL = "EMAIL";
     public static final String AVATAR = "AVATAR";
     public static final String CUSTOMERID = "CUSTOMERID";
+    public static final String RATINGPOINT = "RATINGPOINT";
 
 
     // Intent
@@ -38,6 +39,8 @@ public class ConstainApp {
     public static final String  ENDDATE = "ENDDATE";
     public static final String  STOREPRODUCTID = "STOREPRODUCTID";
     public static final String  CATEGORYID = "CATEGORYID";
+    public static final String  STOREAVATAR = "STOREAVATAR";
+    public static final String  ADDRESS = "ADDRESS";
 
 
     // Date time
@@ -59,6 +62,12 @@ public class ConstainApp {
 
     //Array JSON object fsp
     public static final String  JSARROD = "JSARROD";
+
+    //Screen
+    public static final String  SCHotProductHomeFragment = "HotProductHomeFragment";
+    public static final String  SCListFSPFragment = "ListFSPFragment";
+    public static final String  SCStoreActivity = "StoreActivity";
+    public static final String  SCProductByCategoryActivity = "ProductByCategoryActivity";
 
 
 

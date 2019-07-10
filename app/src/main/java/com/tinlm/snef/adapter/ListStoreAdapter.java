@@ -1,6 +1,7 @@
 package com.tinlm.snef.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.tinlm.snef.R;
+import com.tinlm.snef.StoreActivity;
 import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.model.FlashSaleProduct;
 import com.tinlm.snef.model.Store;
@@ -80,6 +82,21 @@ public class ListStoreAdapter extends RecyclerView.Adapter<ListStoreAdapter.List
             Picasso.get().load(listFood.get(position)).into(image.get(position));
         }
         listStoreViewHolder.storeDistance.setText((Math.floor(currentStore.getDistance() * 100) / 100) + " km");
+
+        listStoreViewHolder.viewStore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, StoreActivity.class);
+                intent.putExtra(ConstainApp.JS_STORENAME, currentStore.getStoreName());
+                intent.putExtra(ConstainApp.STOREAVATAR, currentStore.getAvatar());
+                String address = currentStore.getAddres() + " " + currentStore.getDistrict() + " " +
+                        currentStore.getWard() + " " + currentStore.getCity() + " " + currentStore.getCountry();
+                intent.putExtra(ConstainApp.ADDRESS, address);
+                intent.putExtra(ConstainApp.RATINGPOINT, currentStore.getRatingPoint());
+                intent.putExtra(ConstainApp.STOREID, currentStore.getStoreId());
+                mContext.startActivity(intent);
+            }
+        });
 
 
     }
