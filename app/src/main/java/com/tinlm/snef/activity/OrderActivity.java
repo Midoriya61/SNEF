@@ -2,6 +2,8 @@ package com.tinlm.snef.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +33,7 @@ public class OrderActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigation;
     RecyclerView rcOrderStore;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +44,13 @@ public class OrderActivity extends AppCompatActivity {
     }
 
     private void init() {
+        intent = getIntent();
+
         rcOrderStore = findViewById(R.id.rcOrderStore);
 
         DBManager dbManager = new DBManager(OrderActivity.this);
         List<StoreOrderItem> storeOrderItems = dbManager.getAllCartGroupStore();
+
 
 //        SharedPreferences sharedPreferences = getSharedPreferences(ConstainApp.LIST_ORDER_DETAIL, MODE_PRIVATE);
 //        String json_array = sharedPreferences.getString(ConstainApp.JSARROD, null);
@@ -118,6 +124,7 @@ public class OrderActivity extends AppCompatActivity {
         rcOrderStore.addItemDecoration(new DividerItemDecoration(this, 0));
 
     }
+
 
     private void navigateDashboard() {
         bottomNavigation = findViewById(R.id.bottomNavigation);

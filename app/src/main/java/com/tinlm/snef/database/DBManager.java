@@ -77,6 +77,13 @@ public class DBManager extends SQLiteOpenHelper {
         return db.update(ConstainApp.JS_CART,values,ConstainApp.JS_FSPID +"=?",new String[] { String.valueOf(cart.getFspId())});
     }
 
+    public int updateCartQuantity(Cart cart){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(ConstainApp.JS_QUANTITY,cart.getQuantity());
+        return db.update(ConstainApp.JS_CART,values,ConstainApp.JS_FSPID +"=?",new String[] { String.valueOf(cart.getFspId())});
+    }
+
     /*
      Getting All cart
       */
@@ -148,6 +155,8 @@ public class DBManager extends SQLiteOpenHelper {
      Getting All cart group by store
       */
 
+
+
     public Cart getProductById(int fspId) {
         Cart cart = null;
         // Select All Query
@@ -173,12 +182,33 @@ public class DBManager extends SQLiteOpenHelper {
         return cart;
     }
 
+    public List<Cart> getProductByStoreName(String storeName) {
+        List<Cart> cartList = new ArrayList<>();
+        // Select All Query
+        String selectQuery = "SELECT * " +
+                " FROM " + ConstainApp.JS_CART + " WHERE " + ConstainApp.JS_STORENAME + "=" + "'"+storeName+"'";
 
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
 
-    //update cart items' quantity and total price
-    public void updateCart(OrderDetail orderDetail) {
-        SQLiteDatabase db = getReadableDatabase();
-        String query = String.format("UPDATE OrderDetail SET JS_QUANTITY = %s WHERE JS_FSPID = %d",
-                                        orderDetail.getQuantityFsp(),orderDetail.getFspId());
+        if (cursor.moveToFirst()) {
+            do {
+                Cart cart = new Cart();
+                cart.setFspId(cursor.getInt(cursor.getColumnIndex(ConstainApp.JS_FSPID)));
+                cart.setImageProduct(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_IMAGEPRODUCT)));
+                cart.setProductName(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_PRODUCTNAME)));
+                cart.setStoreName(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_STORENAME)));
+                cart.setPrice(cursor.getFloat(cursor.getColumnIndex(ConstainApp.JS_PRICE)));
+                cart.setDiscount(cursor.getInt(cursor.getColumnIndex(ConstainApp.JS_DISCOUNT)));
+                cart.setQuantity(cursor.getInt(cursor.getColumnIndex(ConstainApp.JS_QUANTITY)));
+                cartList.add(cart);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return (cartList);
     }
+
+
+
 }

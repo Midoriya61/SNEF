@@ -12,6 +12,9 @@ import android.widget.TextView;
 
 import com.tinlm.snef.R;
 import com.tinlm.snef.activity.CartActivity;
+import com.tinlm.snef.constain.ConstainApp;
+import com.tinlm.snef.model.Cart;
+import com.tinlm.snef.model.FlashSaleProduct;
 import com.tinlm.snef.model.StoreOrderItem;
 
 import java.util.List;
@@ -20,7 +23,9 @@ public class ListStoreOrderItemAdapter extends RecyclerView.Adapter<ListStoreOrd
 
     Context mContext;
     List<StoreOrderItem> storeOrderItems;
-//    List<OrderDetail> orderDetails;
+    //    List<OrderDetail> orderDetails;
+
+
 
     public ListStoreOrderItemAdapter(Context mContext, List<StoreOrderItem> storeOrderItems) {
         this.mContext = mContext;
@@ -30,29 +35,27 @@ public class ListStoreOrderItemAdapter extends RecyclerView.Adapter<ListStoreOrd
     @NonNull
     @Override
     public ListStoreOrderItemHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_store_order_item, viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_store_order_item, viewGroup, false);
         return new ListStoreOrderItemHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull ListStoreOrderItemHolder listStoreOrderItemHolder, int i) {
-        final StoreOrderItem  storeOrderItem = storeOrderItems.get(i);
+        final StoreOrderItem storeOrderItem = storeOrderItems.get(i);
+
 //        final OrderDetail orderDetail = orderDetails.get(i);
         listStoreOrderItemHolder.tvStoreName.setText(storeOrderItem.getStoreName());
         listStoreOrderItemHolder.tvNumberProduct.setText(storeOrderItem.getQuantityOrder() + " > ");
+        listStoreOrderItemHolder.tvStoreName.setText(storeOrderItem.getStoreName());
+
 
         listStoreOrderItemHolder.cardOrderStoreItem.setOnClickListener(new View.OnClickListener() {
 //
-
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(mContext, CartActivity.class);
-//                intent.putExtra(ConstainApp.FLASHSALEPRODUCTID,orderDetail.getFspId());
-//                intent.putExtra(ConstainApp.PRODUCTNAME,orderDetail.getProductName());
-//                intent.putExtra(ConstainApp.DISCOUNT,orderDetail.getDiscount());
-//                intent.putExtra(ConstainApp.PRICE,orderDetail.getPrice());
-//                intent.putExtra(ConstainApp.QUANTITY,orderDetail.getQuantity());
+                intent.putExtra(ConstainApp.JS_STORENAME,storeOrderItem.getStoreName());
                 mContext.startActivity(intent);
             }
         });
@@ -65,7 +68,7 @@ public class ListStoreOrderItemAdapter extends RecyclerView.Adapter<ListStoreOrd
 
     public static class ListStoreOrderItemHolder extends RecyclerView.ViewHolder {
 
-        TextView tvStoreName,tvNumberProduct;
+        TextView tvStoreName, tvNumberProduct;
 
         CardView cardOrderStoreItem;
 

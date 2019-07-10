@@ -67,6 +67,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@color/colorPrimary"
                 android:text="CHECK OUT"
+                android:onClick="clickToPay"
                 android:textColor="@color/colorMain"
                 android:textSize="20dp"
                 android:textStyle="bold"

@@ -3,7 +3,7 @@ package com.tinlm.snef.model;
 public class Cart {
 
     private String storeName;
-    private int quantity;
+    public int quantity;
     private float price;
     private String productName;
     private String imageProduct;

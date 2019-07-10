@@ -1,6 +1,8 @@
 package com.tinlm.snef.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -15,8 +17,12 @@ import android.widget.TextView;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.squareup.picasso.Picasso;
 import com.tinlm.snef.R;
+import com.tinlm.snef.activity.CartActivity;
+import com.tinlm.snef.constain.ConstainApp;
+import com.tinlm.snef.database.DBManager;
 import com.tinlm.snef.model.Cart;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +32,7 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
     Context mContext;
     List<Cart> cartList = new ArrayList<>();
     Map<Integer, String> listImageCartProduct;
+    DecimalFormat df = new DecimalFormat("#,###,###,###");
 
 
     private Runnable runnable;
@@ -63,25 +70,60 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
         String productCartImage = listImageCartProduct.get(cart.getFspId());
 
 
-        Picasso.get().load(productCartImage).resize(500,500).into(listCartHolder.imgCartFood);
+        Picasso.get().load(productCartImage).resize(500, 500).into(listCartHolder.imgCartFood);
 
 
         listCartHolder.txtCartFoodName.setText(cart.getProductName());
 
-
-//        listCartHolder.txtCartPrice.setText("23");
-
-
         listCartHolder.btnCartQuantity.setNumber(String.valueOf(cart.getQuantity()));
-        listCartHolder.txtCartPrice.setText(String.format("%,d",(int)((cart.getPrice() * cart.getDiscount())/100)) + "");
+
+        listCartHolder.txtCartPrice.setText(String.format("%,d", (int) ((cart.getPrice() * cart.getDiscount()) / 100)) + "");
 //
-//        listCartHolder.btnCartQuantity.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
+
+//        btnChange.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
 //            @Override
 //            public void onValueChange(ElegantNumberButton view, int oldValue, int newValue) {
-//                cart.setQuantity(newValue);
-
+//                if(newValue > quantity ) {
+//                    view.setNumber(String.valueOf(oldValue));
+//                    CustomDialogFragment cdf = new CustomDialogFragment();
+//                    cdf.show(getSupportFragmentManager(), intent.getStringExtra(ConstainApp.USERNAME));
+//                } else {
+//                    addToCart.setText("Add " + newValue + " to cart");
+//                    totalPrice.setText(String.format("%,d",(intent.getIntExtra(ConstainApp.DISCOUNT,0) * (int)price/100)* newValue) );
+//                }
 //            }
 //        });
+
+        listCartHolder.btnCartQuantity.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
+            @Override
+            public void onValueChange(ElegantNumberButton view, int oldValue, int newValue) {
+                if (newValue != oldValue) {
+                    cart.setQuantity(newValue);
+                    DBManager dbManager = new DBManager(mContext);
+                    dbManager.updateCartQuantity(cart);
+                    TextView txtTotalCartPrice = ((CartActivity) mContext).findViewById(R.id.txtTotalCartPrice);
+
+                    if (newValue > oldValue) {
+                        txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(",", "")) + (int) ((cart.getPrice() * cart.getDiscount()) / 100))));
+                    } else if (newValue < oldValue) {
+                        txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(",", "")) - (int) ((cart.getPrice() * cart.getDiscount()) / 100))));
+                    }
+
+
+                }
+            }
+        });
+
+        listCartHolder.btnRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DBManager dbManager = new DBManager(mContext);
+                dbManager.deleteCart(cart);
+                ((CartActivity) mContext).finish();
+                ((CartActivity) mContext).startActivity(((CartActivity) mContext).getIntent());
+
+            }
+        });
 
 //        listCartHolder.listCartLayout.setOnClickListener(new View.OnClickListener() {
 //            @Override
