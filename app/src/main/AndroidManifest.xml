@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StoreActivity"></activity>
+        <activity android:name=".activity.SearchProductByNameActivity"></activity>
+        <activity android:name=".activity.SearchActivity" />
+        <activity android:name=".activity.StoreActivity" />
         <activity android:name=".activity.ProductByCategoryActivity" />
         <activity android:name=".activity.FlashSalesProductDetailActivity" />
         <activity android:name=".activity.AccountActivity" />

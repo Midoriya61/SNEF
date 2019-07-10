@@ -172,15 +172,15 @@ public class AroundStoreActivity extends AppCompatActivity {
     }
 
     // get current location
-    private void getLatLong() {
-        if(locationStoreCurrent[1] != 0 || locationStoreCurrent[0] != 0) {
-            SharedPreferences sharedPreferences = getSharedPreferences(ConstainApp.locationPhone, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putFloat(ConstainApp.longPhone, (float)locationStoreCurrent[1]);
-            editor.putFloat(ConstainApp.latPhone, (float)locationStoreCurrent[0]);
-            editor.apply();
-        }
-    }
+//    private void getLatLong() {
+//        if(locationStoreCurrent[1] != 0 || locationStoreCurrent[0] != 0) {
+//            SharedPreferences sharedPreferences = getSharedPreferences(ConstainApp.locationPhone, Context.MODE_PRIVATE);
+//            SharedPreferences.Editor editor = sharedPreferences.edit();
+//            editor.putFloat(ConstainApp.longPhone, (float)locationStoreCurrent[1]);
+//            editor.putFloat(ConstainApp.latPhone, (float)locationStoreCurrent[0]);
+//            editor.apply();
+//        }
+//    }
 
     // get current location of phone by gps
     private void getCurrentLocation() {

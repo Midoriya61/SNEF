@@ -67,7 +67,7 @@ public class ProductByCategoryActivity extends AppCompatActivity {
                 }
                 FlashSaleProductAdapter flashSaleProductAdapter = new FlashSaleProductAdapter(ProductByCategoryActivity.this,
                         flashSaleProducts, listImageProduct, listTotalPrice, ConstainApp.SCProductByCategoryActivity);
-                RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(ProductByCategoryActivity.this,3);
+                RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(ProductByCategoryActivity.this,2);
                 rcListPdCategory.setItemAnimator(new DefaultItemAnimator());
                 rcListPdCategory.setLayoutManager(mLayoutManager);
                 rcListPdCategory.setAdapter(flashSaleProductAdapter);

@@ -1,17 +1,22 @@
-package com.tinlm.snef;
+package com.tinlm.snef.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+import com.tinlm.snef.R;
 import com.tinlm.snef.adapter.FlashSaleProductAdapter;
 import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.fragment.ListFSPFragment;
@@ -31,7 +36,7 @@ import retrofit2.Response;
 
 public class StoreActivity extends AppCompatActivity {
 
-    TextView storeName,txtAddress, txtPRatingPoint;
+    TextView storeName,txtAddress, txtPRatingPoint, txtOpenHour;
     ImageView storeAvatar;
     RecyclerView rcListFlashSaleProduct;
     Intent intent;
@@ -63,17 +68,13 @@ public class StoreActivity extends AppCompatActivity {
 
                     String productImage = imageUltilities.getOneImageByStoreProductId(flashSaleProducts.get(i).getStoreProductId());
                     listImageProduct.put(flashSaleProducts.get(i).getStoreProductId(),productImage );
-
                     // get total quantity of order detail
                     int totalQuantity = orderDetailUtilities.getQuantityByFSPId(flashSaleProducts.get(i).getFlashSaleProductId());
                     listTotalPrice.put(flashSaleProducts.get(i).getFlashSaleProductId(), totalQuantity);
-
                 }
-
-
                 FlashSaleProductAdapter flashSaleProductAdapter = new FlashSaleProductAdapter(getBaseContext(), flashSaleProducts,
                         listImageProduct, listTotalPrice, ConstainApp.SCStoreActivity);
-                RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getBaseContext(),3);
+                RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getBaseContext(),2);
                 rcListFlashSaleProduct.setItemAnimator(new DefaultItemAnimator());
                 rcListFlashSaleProduct.setLayoutManager(mLayoutManager);
                 rcListFlashSaleProduct.setAdapter(flashSaleProductAdapter);
@@ -92,13 +93,20 @@ public class StoreActivity extends AppCompatActivity {
         intent = getIntent();
         storeName.setText(intent.getStringExtra(ConstainApp.JS_STORENAME));
         txtAddress.setText(intent.getStringExtra(ConstainApp.ADDRESS));
+        txtOpenHour.setText(intent.getStringExtra(ConstainApp.OPENHOUR));
         float ratingPoint = intent.getFloatExtra(ConstainApp.RATINGPOINT, 0);
         if (ratingPoint == 0) {
             txtPRatingPoint.setText("Chưa có đánh giá");
         } else {
             txtPRatingPoint.setText(intent.getStringExtra(ConstainApp.RATINGPOINT));
         }
-        Picasso.get().load(intent.getStringExtra(ConstainApp.STOREAVATAR)).into(storeAvatar);
+        WindowManager wm = (WindowManager)this.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+        Picasso.get().load(intent.getStringExtra(ConstainApp.STOREAVATAR)).resize(width, height/3).into(storeAvatar);
 
     }
 
@@ -108,5 +116,6 @@ public class StoreActivity extends AppCompatActivity {
         txtPRatingPoint = findViewById(R.id.txtPRatingPoint);
         storeAvatar = findViewById(R.id.storeAvatar);
         rcListFlashSaleProduct = findViewById(R.id.rcListFlashSaleProduct);
+        txtOpenHour = findViewById(R.id.txtOpenHour);
     }
 }

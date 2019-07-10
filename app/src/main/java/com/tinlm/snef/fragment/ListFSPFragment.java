@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.tinlm.snef.R;
+import com.tinlm.snef.activity.DashboardActivity;
 import com.tinlm.snef.adapter.FlashSaleProductAdapter;
 import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.model.FlashSaleProduct;
@@ -21,6 +22,7 @@ import com.tinlm.snef.utilities.ApiUtils;
 import com.tinlm.snef.utilities.OrderDetailUtilities;
 import com.tinlm.snef.utilities.StoreProductImageUtilities;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +41,7 @@ public class ListFSPFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+//        if(getActivity().equals(DashboardActivity.class))
        View view = inflater.inflate(R.layout.fragment_list_fs, container, false);
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         rcListFlashSaleProduct = view.findViewById(R.id.rcListFlashSaleProduct);
@@ -48,6 +51,7 @@ public class ListFSPFragment extends Fragment {
             @Override
             public void onResponse(Call<List<FlashSaleProduct>> call, Response<List<FlashSaleProduct>> response) {
                 List<FlashSaleProduct> flashSaleProducts = response.body();
+                Collections.sort(flashSaleProducts);
                 Map<Integer, String> listImageProduct = new HashMap<>();
                 Map<Integer, Integer> listTotalPrice = new HashMap<>();
 //                FlashSaleProductUtilities flashSaleProductUtilities = new FlashSaleProductUtilities();

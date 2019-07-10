@@ -41,6 +41,8 @@ public class ConstainApp {
     public static final String  CATEGORYID = "CATEGORYID";
     public static final String  STOREAVATAR = "STOREAVATAR";
     public static final String  ADDRESS = "ADDRESS";
+    public static final String  SEARCHPRODUCTNAME = "SEARCHPRODUCTNAME";
+    public static final String  OPENHOUR = "OPENHOUR";
 
 
     // Date time
@@ -68,6 +70,7 @@ public class ConstainApp {
     public static final String  SCListFSPFragment = "ListFSPFragment";
     public static final String  SCStoreActivity = "StoreActivity";
     public static final String  SCProductByCategoryActivity = "ProductByCategoryActivity";
+    public static final String  SCSearchProductByNameActivity = "SearchProductByNameActivity";
 
 
 

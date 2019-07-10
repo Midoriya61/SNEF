@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.tinlm.snef.R;
-import com.tinlm.snef.StoreActivity;
+import com.tinlm.snef.activity.StoreActivity;
 import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.model.FlashSaleProduct;
 import com.tinlm.snef.model.Store;
@@ -52,12 +52,14 @@ public class ListStoreAdapter extends RecyclerView.Adapter<ListStoreAdapter.List
         listStoreViewHolder.storeName.setText(currentStore.getStoreName());
         LocationUtilities locationUtilities = new LocationUtilities();
         locationUtilities.getAddressOfStoreById(currentStore);
-
+        String openHour = "";
         if(currentStore.getOpenHour().equals(currentStore.getClodeHour())) {
-            listStoreViewHolder.storeWorkTime.setText(R.string.Open24);
-        }else
-            listStoreViewHolder.storeWorkTime.setText(currentStore.getOpenHour() + " - " + currentStore.getClodeHour());
+            openHour = mContext.getResources().getString(R.string.Open24);
 
+        }else
+            openHour = currentStore.getOpenHour() + " - " + currentStore.getClodeHour();
+
+        listStoreViewHolder.storeWorkTime.setText(openHour);
         FlashSaleProductUtilities flashSaleProductUtilities = new FlashSaleProductUtilities();
         List<FlashSaleProduct> flashSaleProducts = flashSaleProductUtilities.getFSPByStoreId(currentStore.getStoreId());
 
@@ -83,17 +85,19 @@ public class ListStoreAdapter extends RecyclerView.Adapter<ListStoreAdapter.List
         }
         listStoreViewHolder.storeDistance.setText((Math.floor(currentStore.getDistance() * 100) / 100) + " km");
 
+        final String finalOpenHour = openHour;
         listStoreViewHolder.viewStore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, StoreActivity.class);
                 intent.putExtra(ConstainApp.JS_STORENAME, currentStore.getStoreName());
                 intent.putExtra(ConstainApp.STOREAVATAR, currentStore.getAvatar());
-                String address = currentStore.getAddres() + " " + currentStore.getDistrict() + " " +
-                        currentStore.getWard() + " " + currentStore.getCity() + " " + currentStore.getCountry();
+                String address = currentStore.getAddres() + ", " + currentStore.getDistrict() + ", " +
+                        currentStore.getWard() + ", " + currentStore.getCity() + ", " + currentStore.getCountry();
                 intent.putExtra(ConstainApp.ADDRESS, address);
                 intent.putExtra(ConstainApp.RATINGPOINT, currentStore.getRatingPoint());
                 intent.putExtra(ConstainApp.STOREID, currentStore.getStoreId());
+                intent.putExtra(ConstainApp.OPENHOUR, finalOpenHour);
                 mContext.startActivity(intent);
             }
         });

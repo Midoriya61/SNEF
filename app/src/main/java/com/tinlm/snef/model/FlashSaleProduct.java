@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.sql.Date;
 
-public class FlashSaleProduct {
+public class FlashSaleProduct implements Comparable<FlashSaleProduct> {
 
     @SerializedName("flashSaleProductId")
     @Expose
@@ -135,4 +135,10 @@ public class FlashSaleProduct {
         public void setDescription(String description) {
             this.description = description;
         }
+
+
+    @Override
+    public int compareTo(FlashSaleProduct o) {
+        return this.endDate.compareTo(o.getEndDate());
     }
+}

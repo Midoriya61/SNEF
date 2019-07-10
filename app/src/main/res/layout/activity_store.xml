@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StoreActivity"
+    tools:context=".activity.StoreActivity"
     android:orientation="vertical">
 
     <android.support.v4.widget.NestedScrollView
@@ -21,7 +21,7 @@
             android:layout_height="fill_parent">
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="320dp"
+                android:layout_height="wrap_content"
                 >
 
                 <ImageView
@@ -46,9 +46,10 @@
                 android:id="@+id/storeName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="35dp"
+                android:textSize="20dp"
                 android:textStyle="bold"
                 android:paddingLeft="10dp"
+
                 android:textColor="@color/redApp"/>
 
             <View
@@ -67,14 +68,44 @@
                     android:paddingLeft="15dp"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:textSize="25dp"
+                    android:textSize="16dp"
+                    android:text="@string/msg_open_hour" />
+                <TextView
+                    android:id="@+id/txtOpenHour"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
+                    />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp">
+
+
+                <TextView
+                    android:paddingLeft="15dp"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+
                     android:text="@string/msg_address" />
                 <TextView
                     android:id="@+id/txtAddress"
-                    android:paddingLeft="15dp"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="25dp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     android:textColor="@color/colorPrimary"
                      />
@@ -93,19 +124,19 @@
                 android:layout_marginBottom="15dp">
                 <TextView
                     android:id="@+id/txtRate"
-                    android:layout_width="wrap_content"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:textSize="25dp"
-                    android:textStyle="bold"
-                    android:drawableLeft="@drawable/ic_star_24dp"
-                    android:text="@string/msg_rating" />
+                    android:textSize="16dp"
+                    android:text="@string/msg_rating"
+                    android:paddingLeft="15dp"
+                    />
 
                 <TextView
                     android:id="@+id/txtPRatingPoint"
-                    android:paddingLeft="15dp"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="25dp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     android:textColor="@color/colorPrimary"
                      />

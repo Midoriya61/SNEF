@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.SearchProductByNameActivity">
+    <!--Top bar-->
+
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:background="@color/redApp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:padding="10dp"
+        >
+        <android.support.v7.widget.CardView
+            android:background="@color/colorMain"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.85"
+            android:onClick="clickToSearchProduct"
+            >
+            <TextView
+                android:id="@+id/txtSearchProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:drawableLeft="@drawable/find"
+                android:drawablePadding="10dp"
+                android:text="@string/msg_find"
+                android:padding="10dp"/>
+        </android.support.v7.widget.CardView>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/filter"
+            android:layout_weight="0.15"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/centerHome"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/topBar"
+        android:background="@color/grayLight"
+        android:orientation="vertical">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rcListProductByName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+
+                    ></android.support.v7.widget.RecyclerView>
+            </LinearLayout></android.support.v4.widget.NestedScrollView>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

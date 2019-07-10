@@ -5,23 +5,12 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.tinlm.snef.R;
-import com.tinlm.snef.adapter.FlashSaleProductAdapter;
-import com.tinlm.snef.model.FlashSaleProduct;
-import com.tinlm.snef.utilities.FlashSaleProductUtilities;
-import com.tinlm.snef.utilities.OrderDetailUtilities;
-import com.tinlm.snef.utilities.StoreProductImageUtilities;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 // 6/23/2019 TinLM Create class
 // 6/23/2019 TinLM Create init
@@ -84,5 +73,9 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
 
+    public void clickToSearchProduct(View view) {
+        Intent intent = new Intent(this, SearchActivity.class);
+        startActivity(intent);
 
+    }
 }

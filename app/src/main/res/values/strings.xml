@@ -13,14 +13,14 @@
     <string name="search_hint" translatable="false">Tìm kiếm</string>
     <string name="message_store_around" translatable="false">Cửa hàng gần bạn</string>
     <string name="message_product_category" translatable="false">Bạn muốn tìm sản phẩm gì?</string>
-    <string name="message_hot_product" translatable="false">Ưu đãi nỗi bật</string>
+    <string name="message_hot_product" translatable="false">Khuyến mãi hot</string>
     <string name="suggest_today" translatable="false">Gợi ý hôm nay</string>
     <string name="title_location_permission" translatable="false">Vị trí</string>
     <string name="text_location_permission" translatable="false">Cho phép truy cập vị trí của bạn</string>
     <string name="ok" translatable="false">Cho phép</string>
     <string name="no" translatable="false">Không</string>
     <string name="OpenGPS" translatable="false">Mở GPS</string>
-    <string name="msg_follow" translatable="false">Theo dỏi</string>
+    <string name="msg_follow" translatable="false">Yêu thích</string>
     <string name="msg_update_profile" translatable="false">Theo dỏi</string>
     <string name="msg_order_history" translatable="false">Lịch sử mua</string>
     <string name="msg_help" translatable="false">Hổ trợ</string>
@@ -34,6 +34,8 @@
     <string name="msg_add_to_cart_success" translatable="false">Sản phẩm đã được thêm vào giỏ hàng</string>
     <string name="msg_address" translatable="false">Địa chỉ</string>
     <string name="msg_rating" translatable="false">Đánh giá</string>
+    <string name="msg_find" translatable="false">Bạn tìm gì hôm nay</string>
+    <string name="msg_open_hour" translatable="false">Giờ mở cửa</string>
 
 
     <string name="StatusSouldOut" translatable="false">Bán hết</string>
