@@ -2,58 +2,40 @@ package com.tinlm.snef.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Paint;
-import android.location.Location;
 import android.location.LocationManager;
-import android.os.Handler;
-import android.support.annotation.NonNull;
+import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
-import com.squareup.picasso.Picasso;
 import com.tinlm.snef.R;
 import com.tinlm.snef.adapter.ViewPagerAdapter;
 import com.tinlm.snef.algo.GeocodingLocation;
 import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.database.DBManager;
-import com.tinlm.snef.fragment.CustomDialogFragment;
 import com.tinlm.snef.model.Cart;
-import com.tinlm.snef.model.OrderDetail;
 import com.tinlm.snef.model.Store;
-import com.tinlm.snef.model.StoreProduct;
 import com.tinlm.snef.utilities.LocationUtilities;
 import com.tinlm.snef.utilities.StoreProductImageUtilities;
 import com.tinlm.snef.utilities.StoreProductUtilities;
 import com.tinlm.snef.utilities.StoreUtilities;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
-import java.lang.reflect.Type;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import cn.iwgang.countdownview.CountdownView;
+
+//import com.google.gson.Gson;
+//import com.google.gson.JsonObject;
+//import com.google.gson.reflect.TypeToken;
 
 public class FlashSalesProductDetailActivity extends AppCompatActivity {
 
@@ -66,6 +48,8 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
     String imgProduct;
     int fspId;
     float price;
+    int discount;
+//    int discount;
 
     TextView storeName, description, textReadMore;
             //, storeLocation, workingTime;
@@ -142,8 +126,8 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
 //        }
 
         price = intent.getFloatExtra(ConstainApp.PRICE, 0);
+        discount = intent.getIntExtra(ConstainApp.DISCOUNT,0);
         foodPrice.setText(String.format("%,d", (int)price) + " đ");
-
         foodPriceDiscount.setText((String.format("%,d",intent.getIntExtra(ConstainApp.DISCOUNT,0) * (int)price/100)));
 
         StoreProductUtilities storeProductUtilities = new StoreProductUtilities();
@@ -189,6 +173,8 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
 //            }
 //        });
     }
+
+
 
     public void clickToReadMore(View view) {
         textReadMore.setVisibility(View.INVISIBLE);
@@ -237,6 +223,8 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
 
     public void clickAddToCard(View view) {
         DBManager dbManager = new DBManager(FlashSalesProductDetailActivity.this);
+
+
         Cart cart = dbManager.getProductById(fspId);
         if(cart == null) {
             cart = new Cart();
@@ -245,6 +233,7 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
             cart.setImageProduct(imgProduct);
             cart.setFspId(fspId);
             cart.setPrice(price);
+            cart.setDiscount(discount);
             dbManager.addCart(cart);
         } else {
             dbManager.updateCart(cart);

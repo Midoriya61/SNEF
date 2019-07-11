@@ -1,11 +1,14 @@
 package com.tinlm.snef.model;
 
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 
 import java.sql.Date;
 
 public class FlashSaleProduct implements Comparable<FlashSaleProduct> {
+
 
     @SerializedName("flashSaleProductId")
     @Expose
@@ -39,6 +42,7 @@ public class FlashSaleProduct implements Comparable<FlashSaleProduct> {
         private int storeId;
     @SerializedName("spQuantity")
     @Expose
+
         private int spQuantity;
 
         public FlashSaleProduct() {

@@ -28,13 +28,13 @@
 
         <TextView
             android:id="@+id/txtDiscount"
-            android:text="100%"
-            android:textColor="@color/colorMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="top|end"
             android:layout_marginTop="6dp"
             android:layout_marginRight="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:text="100%"
+            android:textColor="@color/colorMain" />
 
     </FrameLayout>
 

@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".activity.OrderActivity">
 
-
-
     <LinearLayout
         android:id="@+id/centerHome"
         android:layout_width="match_parent"
@@ -17,36 +15,41 @@
         android:layout_marginBottom="64dp"
         android:background="@color/grayLight"
         android:orientation="vertical">
+
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="300dp"
             android:fillViewport="true">
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rcOrderStore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:overScrollMode="never"
-                ></android.support.v7.widget.RecyclerView>
+                android:overScrollMode="never"></android.support.v7.widget.RecyclerView>
         </android.support.v4.widget.NestedScrollView>
+
+
+
+
+
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        >
+        android:orientation="horizontal">
+
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/bottomNavigation"
             android:layout_width="match_parent"
             android:layout_height="56dp"
+            android:layout_gravity="bottom"
             android:background="@drawable/border_top"
             app:itemIconTint="@color/colorMain"
             app:itemTextColor="@color/colorMain"
-            app:menu="@menu/bottom_nav_menu"
-            android:layout_gravity="bottom"
-            />
+            app:menu="@menu/bottom_nav_menu" />
 
 
     </LinearLayout>

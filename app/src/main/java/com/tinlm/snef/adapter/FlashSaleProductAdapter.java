@@ -122,6 +122,7 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
 
         // set status of product
         if(totalQuantity == flashSaleProduct.getQuantity()) {
+
             flashSaleProductHolder.statusSale.setText( mContext.getResources().getString(R.string.StatusSouldOut));
         } else if (totalQuantity >= flashSaleProduct.getQuantity() * (100/80)) {
             flashSaleProductHolder.statusSale.setText( mContext.getResources().getString(R.string.StatusNearlySouldOut));
@@ -132,6 +133,7 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
         } else {
             flashSaleProductHolder.statusSale.setText( mContext.getResources().getString(R.string.StatusJustOpen));
 //            flashSaleProductHolder.statusSale.setText(R.string.StatusJustOpen);
+
         }
 
         flashSaleProductHolder.flashSaleProductLayout.setOnClickListener(new View.OnClickListener() {
