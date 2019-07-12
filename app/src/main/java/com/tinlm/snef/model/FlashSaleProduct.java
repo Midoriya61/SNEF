@@ -45,12 +45,34 @@ public class FlashSaleProduct implements Comparable<FlashSaleProduct> {
 
         private int spQuantity;
 
+    @SerializedName("totalQuantity")
+    @Expose
+    private int totalQuantity;
+
+    @SerializedName("imageSrc")
+    @Expose
+    private String imageSrc;
+
         public FlashSaleProduct() {
         }
 
+    public int getTotalQuantity() {
+        return totalQuantity;
+    }
 
+    public void setTotalQuantity(int totalQuantity) {
+        this.totalQuantity = totalQuantity;
+    }
 
-        public int getStoreId() {
+    public String getImageSrc() {
+        return imageSrc;
+    }
+
+    public void setImageSrc(String imageSrc) {
+        this.imageSrc = imageSrc;
+    }
+
+    public int getStoreId() {
             return storeId;
         }
 

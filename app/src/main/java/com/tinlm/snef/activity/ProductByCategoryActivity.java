@@ -54,19 +54,19 @@ public class ProductByCategoryActivity extends AppCompatActivity {
                 List<FlashSaleProduct>  flashSaleProducts = response.body();
                 StoreProductImageUtilities imageUltilities = new StoreProductImageUtilities();
                 OrderDetailUtilities orderDetailUtilities = new OrderDetailUtilities();
-                Map<Integer, String> listImageProduct = new HashMap<>();
-                Map<Integer, Integer> listTotalPrice = new HashMap<>();
-                for (int i = 0; i < flashSaleProducts.size(); i++) {
-
-                    String productImage = imageUltilities.getOneImageByStoreProductId(flashSaleProducts.get(i).getStoreProductId());
-                    listImageProduct.put(flashSaleProducts.get(i).getStoreProductId(),productImage );
-
-                    int totalQuantity = orderDetailUtilities.getQuantityByFSPId(flashSaleProducts.get(i).getFlashSaleProductId());
-                    listTotalPrice.put(flashSaleProducts.get(i).getFlashSaleProductId(), totalQuantity);
-
-                }
+//                Map<Integer, String> listImageProduct = new HashMap<>();
+//                Map<Integer, Integer> listTotalPrice = new HashMap<>();
+//                for (int i = 0; i < flashSaleProducts.size(); i++) {
+//
+//                    String productImage = imageUltilities.getOneImageByStoreProductId(flashSaleProducts.get(i).getStoreProductId());
+//                    listImageProduct.put(flashSaleProducts.get(i).getStoreProductId(),productImage );
+//
+//                    int totalQuantity = orderDetailUtilities.getQuantityByFSPId(flashSaleProducts.get(i).getFlashSaleProductId());
+//                    listTotalPrice.put(flashSaleProducts.get(i).getFlashSaleProductId(), totalQuantity);
+//
+//                }
                 FlashSaleProductAdapter flashSaleProductAdapter = new FlashSaleProductAdapter(ProductByCategoryActivity.this,
-                        flashSaleProducts, listImageProduct, listTotalPrice, ConstainApp.SCProductByCategoryActivity);
+                        flashSaleProducts, ConstainApp.SCProductByCategoryActivity);
                 RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(ProductByCategoryActivity.this,2);
                 rcListPdCategory.setItemAnimator(new DefaultItemAnimator());
                 rcListPdCategory.setLayoutManager(mLayoutManager);

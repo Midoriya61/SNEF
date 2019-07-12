@@ -57,18 +57,18 @@ public class SearchProductByNameActivity extends AppCompatActivity {
                 List<FlashSaleProduct> flashSaleProducts = response.body();
                 Map<Integer, String> listImageProduct = new HashMap<>();
                 Map<Integer, Integer> listTotalPrice = new HashMap<>();
-                StoreProductImageUtilities imageUltilities = new StoreProductImageUtilities();
-                OrderDetailUtilities orderDetailUtilities = new OrderDetailUtilities();
-
-                for (int i = 0; i < flashSaleProducts.size(); i++) {
-                    //get image of product
-                    String productImage = imageUltilities.getOneImageByStoreProductId(flashSaleProducts.get(i).getStoreProductId());
-                    listImageProduct.put(flashSaleProducts.get(i).getStoreProductId(), productImage);
-                    int totalQuantity = orderDetailUtilities.getQuantityByFSPId(flashSaleProducts.get(i).getFlashSaleProductId());
-                    listTotalPrice.put(flashSaleProducts.get(i).getFlashSaleProductId(), totalQuantity);
-                }
+//                StoreProductImageUtilities imageUltilities = new StoreProductImageUtilities();
+//                OrderDetailUtilities orderDetailUtilities = new OrderDetailUtilities();
+//
+//                for (int i = 0; i < flashSaleProducts.size(); i++) {
+//                    //get image of product
+//                    String productImage = imageUltilities.getOneImageByStoreProductId(flashSaleProducts.get(i).getStoreProductId());
+//                    listImageProduct.put(flashSaleProducts.get(i).getStoreProductId(), productImage);
+//                    int totalQuantity = orderDetailUtilities.getQuantityByFSPId(flashSaleProducts.get(i).getFlashSaleProductId());
+//                    listTotalPrice.put(flashSaleProducts.get(i).getFlashSaleProductId(), totalQuantity);
+//                }
                 FlashSaleProductAdapter flashSaleProductAdapter = new FlashSaleProductAdapter(SearchProductByNameActivity.this
-                        , flashSaleProducts, listImageProduct, listTotalPrice, ConstainApp.SCSearchProductByNameActivity);
+                        , flashSaleProducts, ConstainApp.SCSearchProductByNameActivity);
 
                 RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(SearchProductByNameActivity.this,2);
                 rcListProductByName.setItemAnimator(new DefaultItemAnimator());

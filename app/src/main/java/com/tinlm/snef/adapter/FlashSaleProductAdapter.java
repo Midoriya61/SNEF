@@ -32,8 +32,6 @@ import java.util.Map;
 public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProductAdapter.FlashSaleProductHolder> {
     Context mContext;
     List<FlashSaleProduct> flashSaleProductList;
-    Map<Integer, String> listImageProduct;
-    Map<Integer, Integer> listTotalQuantity;
     String sreenName;
 
 
@@ -42,11 +40,10 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
     private String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     public FlashSaleProductAdapter(Context mContext, List<FlashSaleProduct> flashSaleProductList,
-                                   Map<Integer, String> listImageProduct, Map<Integer, Integer> listTotalQuantity, String sreenName) {
+                                  String sreenName) {
         this.mContext = mContext;
         this.flashSaleProductList = flashSaleProductList;
-        this.listImageProduct = listImageProduct;
-        this.listTotalQuantity = listTotalQuantity;
+
         this.sreenName = sreenName;
     }
 
@@ -71,7 +68,7 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
         final FlashSaleProduct flashSaleProduct = flashSaleProductList.get(i);
 
 
-        String productImage = listImageProduct.get(flashSaleProduct.getStoreProductId());
+
 
         Picasso.get().load("https://res.cloudinary.com/dr4hpc9gi/image/upload/v1558970388/FoodStoreImage/discount.png")
                 .resize(200,120).into(flashSaleProductHolder.imgDiscount);
@@ -80,11 +77,11 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
 
 
         if(sreenName.equals(ConstainApp.SCHotProductHomeFragment)) {
-            if(productImage == null) {
+            if(flashSaleProduct.getImageSrc() == null) {
                 Picasso.get().load("https://res.cloudinary.com/dr4hpc9gi/image/upload/v1559727025/noimage.jpg")
                         .resize(500,500).into(flashSaleProductHolder.imgFood);
             }else {
-                Picasso.get().load(productImage).resize(500,500).into(flashSaleProductHolder.imgFood);
+                Picasso.get().load(flashSaleProduct.getImageSrc()).resize(500,500).into(flashSaleProductHolder.imgFood);
             }
         } else {
             WindowManager wm = (WindowManager)mContext.getSystemService(Context.WINDOW_SERVICE);
@@ -93,11 +90,11 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
             display.getSize(size);
             int width = size.x;
             int height = size.y;
-            if(productImage == null) {
+            if(flashSaleProduct.getImageSrc() == null) {
                 Picasso.get().load("https://res.cloudinary.com/dr4hpc9gi/image/upload/v1559727025/noimage.jpg")
                         .resize(width / 2,height / 3).into(flashSaleProductHolder.imgFood);
             }else {
-                Picasso.get().load(productImage).resize(width / 2,height / 3).into(flashSaleProductHolder.imgFood);
+                Picasso.get().load(flashSaleProduct.getImageSrc()).resize(width / 2,height / 3).into(flashSaleProductHolder.imgFood);
             }
         }
 
@@ -114,7 +111,7 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
                 * flashSaleProduct.getDiscount())/100))) + "");
 
 
-        int totalQuantity = listTotalQuantity.get(flashSaleProduct.getFlashSaleProductId());
+        int totalQuantity = flashSaleProduct.getTotalQuantity();
 
         //width of bar process sould
         int numberSout = (flashSaleProductHolder.barStillSale.getLayoutParams().width *totalQuantity )/ (flashSaleProduct.getQuantity());

@@ -60,20 +60,20 @@ public class HotProductHomeFragment extends Fragment {
                 Map<Integer, String> listImageProduct = new HashMap<>();
                 Map<Integer, Integer> listTotalPrice = new HashMap<>();
 //                FlashSaleProductUtilities flashSaleProductUtilities = new FlashSaleProductUtilities();
-                StoreProductImageUtilities imageUltilities = new StoreProductImageUtilities();
-                OrderDetailUtilities orderDetailUtilities = new OrderDetailUtilities();
+//                StoreProductImageUtilities imageUltilities = new StoreProductImageUtilities();
+//                OrderDetailUtilities orderDetailUtilities = new OrderDetailUtilities();
 
                 //flashSaleProducts = flashSaleProductUtilities.getAllFSP();
-                for (int i = 0; i < flashSaleProducts.size(); i++) {
-                    //get image of product
-                    String productImage = imageUltilities.getOneImageByStoreProductId(flashSaleProducts.get(i).getStoreProductId());
-
-                    listImageProduct.put(flashSaleProducts.get(i).getStoreProductId(), productImage);
-                    int totalQuantity = orderDetailUtilities.getQuantityByFSPId(flashSaleProducts.get(i).getFlashSaleProductId());
-                    listTotalPrice.put(flashSaleProducts.get(i).getFlashSaleProductId(), totalQuantity);
-                }
+//                for (int i = 0; i < flashSaleProducts.size(); i++) {
+//                    //get image of product
+//                    String productImage = imageUltilities.getOneImageByStoreProductId(flashSaleProducts.get(i).getStoreProductId());
+//
+//                    listImageProduct.put(flashSaleProducts.get(i).getStoreProductId(), productImage);
+//                    int totalQuantity = orderDetailUtilities.getQuantityByFSPId(flashSaleProducts.get(i).getFlashSaleProductId());
+//                    listTotalPrice.put(flashSaleProducts.get(i).getFlashSaleProductId(), totalQuantity);
+//                }
                 FlashSaleProductAdapter flashSaleProductAdapter = new FlashSaleProductAdapter(HotProductHomeFragment.this.getContext()
-                        , flashSaleProducts, listImageProduct, listTotalPrice, ConstainApp.SCHotProductHomeFragment);
+                        , flashSaleProducts, ConstainApp.SCHotProductHomeFragment);
 
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(HotProductHomeFragment.this.getContext(),
                         LinearLayoutManager.HORIZONTAL, false);

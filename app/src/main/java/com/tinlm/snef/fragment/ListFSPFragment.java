@@ -55,21 +55,21 @@ public class ListFSPFragment extends Fragment {
                 Map<Integer, String> listImageProduct = new HashMap<>();
                 Map<Integer, Integer> listTotalPrice = new HashMap<>();
 //                FlashSaleProductUtilities flashSaleProductUtilities = new FlashSaleProductUtilities();
-                StoreProductImageUtilities imageUltilities = new StoreProductImageUtilities();
-                OrderDetailUtilities orderDetailUtilities = new OrderDetailUtilities();
+//                StoreProductImageUtilities imageUltilities = new StoreProductImageUtilities();
+//                OrderDetailUtilities orderDetailUtilities = new OrderDetailUtilities();
 
-                for (int i = 0; i < flashSaleProducts.size(); i++) {
-
-                    String productImage = imageUltilities.getOneImageByStoreProductId(flashSaleProducts.get(i).getStoreProductId());
-                    listImageProduct.put(flashSaleProducts.get(i).getStoreProductId(),productImage );
-
-                    // get total quantity of order detail
-                    int totalQuantity = orderDetailUtilities.getQuantityByFSPId(flashSaleProducts.get(i).getFlashSaleProductId());
-                    listTotalPrice.put(flashSaleProducts.get(i).getFlashSaleProductId(), totalQuantity);
-                }
+//                for (int i = 0; i < flashSaleProducts.size(); i++) {
+//
+//                    String productImage = imageUltilities.getOneImageByStoreProductId(flashSaleProducts.get(i).getStoreProductId());
+//                    listImageProduct.put(flashSaleProducts.get(i).getStoreProductId(),productImage );
+//
+//                    // get total quantity of order detail
+//                    int totalQuantity = orderDetailUtilities.getQuantityByFSPId(flashSaleProducts.get(i).getFlashSaleProductId());
+//                    listTotalPrice.put(flashSaleProducts.get(i).getFlashSaleProductId(), totalQuantity);
+//                }
 
                 FlashSaleProductAdapter flashSaleProductAdapter = new FlashSaleProductAdapter(ListFSPFragment.this.getContext(),
-                        flashSaleProducts, listImageProduct, listTotalPrice, ConstainApp.SCListFSPFragment);
+                        flashSaleProducts, ConstainApp.SCListFSPFragment);
                 RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(ListFSPFragment.this.getContext(),2);
                 rcListFlashSaleProduct.setItemAnimator(new DefaultItemAnimator());
                 rcListFlashSaleProduct.setLayoutManager(mLayoutManager);
