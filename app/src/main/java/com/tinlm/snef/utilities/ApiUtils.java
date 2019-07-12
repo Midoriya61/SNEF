@@ -6,6 +6,7 @@ import com.tinlm.snef.service.CategoriesService;
 import com.tinlm.snef.service.FlashSaleProductService;
 import com.tinlm.snef.service.ProductService;
 import com.tinlm.snef.service.StoreProductImageService;
+import com.tinlm.snef.service.StoreService;
 
 public class ApiUtils {
 
@@ -29,6 +30,11 @@ public class ApiUtils {
     // Product
     public static ProductService getProductService() {
         return RetrofitClient.getClient(ConstainServer.BaseURL).create(ProductService.class);
+    }
+
+    // Store
+    public static StoreService getStoreService() {
+        return RetrofitClient.getClient(ConstainServer.BaseURL).create(StoreService.class);
     }
 
 }

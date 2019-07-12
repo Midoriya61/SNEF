@@ -1,25 +1,65 @@
 package com.tinlm.snef.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.tinlm.snef.constain.ConstainApp;
 
 public class Store implements Comparable<Store>{
+    @SerializedName("storeId")
+    @Expose
     private int storeId;
-    private String accountName;
+    @SerializedName("accountId")
+    @Expose
+    private int accountId;
+    @SerializedName("storeName")
+    @Expose
     private String storeName;
+    @SerializedName("locationId")
+    @Expose
     private int locationId;
+    @SerializedName("ratingPoint")
+    @Expose
     private double ratingPoint;
+    @SerializedName("avatar")
+    @Expose
     private String avatar;
+    @SerializedName("openHour")
+    @Expose
     private String openHour;
-    private String clodeHour;
-    private String addres;
+    @SerializedName("closeHour")
+    @Expose
+    private String closeHour;
+    @SerializedName("address")
+    @Expose
+    private String address;
+    @SerializedName("district")
+    @Expose
+    private String district;
+    @SerializedName("ward")
+    @Expose
+    private String ward;
+    @SerializedName("city")
+    @Expose
+    private String city;
+    @SerializedName("country")
+    @Expose
+    private String country;
+    @SerializedName("latitude")
+    @Expose
+    private double latitude;
+    @SerializedName("longitude")
+    @Expose
+    private double longitude;
+
+    private String accountName;
+
+
+
+
 
     // variable for layout
     private double distance;
-    private int accountId;
-    private String district;
-    private String ward;
-    private String city;
-    private String country;
+
 
     public Store() {
     }
@@ -32,12 +72,12 @@ public class Store implements Comparable<Store>{
         this.storeId = storeId;
     }
 
-    public String getAccountName() {
-        return accountName;
+    public int getAccountId() {
+        return accountId;
     }
 
-    public void setAccountName(String accountName) {
-        this.accountName = accountName;
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
     }
 
     public String getStoreName() {
@@ -56,6 +96,14 @@ public class Store implements Comparable<Store>{
         this.locationId = locationId;
     }
 
+    public double getRatingPoint() {
+        return ratingPoint;
+    }
+
+    public void setRatingPoint(double ratingPoint) {
+        this.ratingPoint = ratingPoint;
+    }
+
     public String getAvatar() {
         return avatar;
     }
@@ -72,36 +120,20 @@ public class Store implements Comparable<Store>{
         this.openHour = openHour;
     }
 
-    public String getClodeHour() {
-        return clodeHour;
+    public String getCloseHour() {
+        return closeHour;
     }
 
-    public void setClodeHour(String clodeHour) {
-        this.clodeHour = clodeHour;
+    public void setCloseHour(String closeHour) {
+        this.closeHour = closeHour;
     }
 
-    public String getAddres() {
-        return addres;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAddres(String addres) {
-        this.addres = addres;
-    }
-
-    public double getDistance() {
-        return distance;
-    }
-
-    public void setDistance(double distance) {
-        this.distance = distance;
-    }
-
-    public int getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(int accountId) {
-        this.accountId = accountId;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getDistrict() {
@@ -120,14 +152,6 @@ public class Store implements Comparable<Store>{
         this.ward = ward;
     }
 
-    public double getRatingPoint() {
-        return ratingPoint;
-    }
-
-    public void setRatingPoint(double ratingPoint) {
-        this.ratingPoint = ratingPoint;
-    }
-
     public String getCity() {
         return city;
     }
@@ -144,15 +168,50 @@ public class Store implements Comparable<Store>{
         this.country = country;
     }
 
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
+
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
     // Calculate distance between 2 store
-    public void distanceBetween2Points(double la1, double lo1,
-                                       double la2, double lo2) {
-        double dLat = (la2 - la1) * (Math.PI / 180);
-        double dLon = (lo2 - lo1) * (Math.PI / 180);
-        double la1ToRad = la1 * (Math.PI / 180);
-        double la2ToRad = la2 * (Math.PI / 180);
-        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(la1ToRad)
-                * Math.cos(la2ToRad) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    public void distanceBetween2Points(double la, double lo
+                                       ) {
+//        double dLat = (this.latitude - la) * (Math.PI / 180);
+//        double dLon = (this.longitude - lo) * (Math.PI / 180);
+//        double la1ToRad = la * (Math.PI / 180);
+//        double la2ToRad = this.latitude * (Math.PI / 180);
+        double a = Math.sin((this.latitude - la) * (Math.PI / 180) / 2) * Math.sin((this.latitude - la) * (Math.PI / 180) / 2)
+                + Math.cos(la * (Math.PI / 180))
+                * Math.cos(this.latitude * (Math.PI / 180)) * Math.sin((this.longitude - lo) * (Math.PI / 180) / 2)
+                * Math.sin((this.longitude - lo) * (Math.PI / 180) / 2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         this.distance = ConstainApp.rEarth * c; }
 

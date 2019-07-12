@@ -47,7 +47,7 @@ public class LocationUtilities {
                 store.setDistrict(jsonObject.getString(district));
             }
             if (jsonObject.has(address)) {
-                store.setAddres(jsonObject.getString(address));
+                store.setAddress(jsonObject.getString(address));
             }
 
         } catch (Exception e) {

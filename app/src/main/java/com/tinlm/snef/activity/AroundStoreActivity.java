@@ -20,6 +20,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -28,11 +29,17 @@ import com.tinlm.snef.adapter.ListStoreAdapter;
 import com.tinlm.snef.algo.GeocodingLocation;
 import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.model.Store;
+import com.tinlm.snef.service.StoreService;
+import com.tinlm.snef.utilities.ApiUtils;
 import com.tinlm.snef.utilities.LocationUtilities;
 import com.tinlm.snef.utilities.StoreUtilities;
 
 import java.util.Collections;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class AroundStoreActivity extends AppCompatActivity {
@@ -44,14 +51,15 @@ public class AroundStoreActivity extends AppCompatActivity {
     double[] locationStore = new double[2];
     double[] locationStoreCurrent = new double[2];
 
-
     BottomNavigationView bottomNavigation;
+    StoreService storeService;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_around_store);
+        storeService = ApiUtils.getStoreService();
         navigateDashboard();
         checkLocationPermission();
         getCurrentLocation();
@@ -62,33 +70,43 @@ public class AroundStoreActivity extends AppCompatActivity {
     // get list store around phone with sort nearest
     private void createListStoreAround() {
         rcStoreAround = findViewById(R.id.rcStoreAround);
-        StoreUtilities storeUtilities = new StoreUtilities();
-        List<Store> storeList = storeUtilities.getListStoreArround();
-        LocationUtilities locationUtilities = new LocationUtilities();
-
-        // get address of store
-        for (int i = 0; i < storeList.size(); i++) {
-            locationUtilities.getAddressOfStoreById(storeList.get(i));
-            GeocodingLocation locationAddress = new GeocodingLocation();
-            String address = storeList.get(i).getAddres() + " " + storeList.get(i).getDistrict()
-                    + " " + storeList.get(i).getWard() + " " + storeList.get(i).getCity() + " " + storeList.get(i).getCountry();
-            String location = locationAddress.getAddressFromLocation(address,
-                    getApplicationContext());
-            String[] rear = location.split("\n");
-            locationStore[0] = Double.parseDouble(rear[0]);
-            locationStore[1] = Double.parseDouble(rear[1]);
-            storeList.get(i).distanceBetween2Points(locationStoreCurrent[0], locationStoreCurrent[1], locationStore[0], locationStore[1]);
+//        StoreUtilities storeUtilities = new StoreUtilities();
+        storeService.getListStoreArround().enqueue(new Callback<List<Store>>() {
+            @Override
+            public void onResponse(Call<List<Store>> call, Response<List<Store>> response) {
+//                LocationUtilities locationUtilities = new LocationUtilities();
+                List<Store> storeList = response.body();
+                // get address of store
+                for (int i = 0; i < storeList.size(); i++) {
+//                    locationUtilities.getAddressOfStoreById(storeList.get(i));
+//                    GeocodingLocation locationAddress = new GeocodingLocation();
+//                    String address = storeList.get(i).getAddres() + " " + storeList.get(i).getDistrict()
+//                            + " " + storeList.get(i).getWard() + " " + storeList.get(i).getCity() + " " + storeList.get(i).getCountry();
+//                    String location = locationAddress.getAddressFromLocation(address,
+//                            getApplicationContext());
+//                    String[] rear = location.split("\n");
+//                    locationStore[0] = Double.parseDouble(rear[0]);
+//                    locationStore[1] = Double.parseDouble(rear[1]);
+                    storeList.get(i).distanceBetween2Points(locationStoreCurrent[0], locationStoreCurrent[1]);
 //            storeList.get(i).setDistance(i);
-        }
-        // Sort store by distance from phone to store
-        Collections.sort(storeList);
-        ListStoreAdapter listStoreAdapter = new ListStoreAdapter(storeList,AroundStoreActivity.this);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(AroundStoreActivity.this,
-                LinearLayoutManager.VERTICAL, false);
-        rcStoreAround.setItemAnimator(new DefaultItemAnimator());
-        rcStoreAround.setLayoutManager(mLayoutManager);
-        rcStoreAround.setAdapter(listStoreAdapter);
-        rcStoreAround.addItemDecoration(new DividerItemDecoration(this, 0));
+                }
+                // Sort store by distance from phone to store
+                Collections.sort(storeList);
+                ListStoreAdapter listStoreAdapter = new ListStoreAdapter(storeList,AroundStoreActivity.this);
+                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(AroundStoreActivity.this,
+                        LinearLayoutManager.VERTICAL, false);
+                rcStoreAround.setItemAnimator(new DefaultItemAnimator());
+                rcStoreAround.setLayoutManager(mLayoutManager);
+                rcStoreAround.setAdapter(listStoreAdapter);
+                rcStoreAround.addItemDecoration(new DividerItemDecoration(AroundStoreActivity.this, 0));
+            }
+
+            @Override
+            public void onFailure(Call<List<Store>> call, Throwable t) {
+                Log.e("Error ASA", t.getMessage());
+            }
+        });
+
     }
 
 

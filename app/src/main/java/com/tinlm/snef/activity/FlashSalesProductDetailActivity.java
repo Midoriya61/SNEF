@@ -53,15 +53,15 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
 
     TextView storeName, description, textReadMore;
             //, storeLocation, workingTime;
-
-    BottomNavigationView bottomNavigation;
-
-    protected LocationManager locationManager;
-    double longPhone;
-    double latPhone;
-
-    double[] locationStore = new double[2];
-    double[] locationStoreCurrent = new double[2];
+//
+//    BottomNavigationView bottomNavigation;
+//
+//    protected LocationManager locationManager;
+//    double longPhone;
+//    double latPhone;
+//
+//    double[] locationStore = new double[2];
+//    double[] locationStoreCurrent = new double[2];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,25 +97,6 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
         storeName.setText( store.getStoreName());
         storeName.setPaintFlags(storeName.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
-        LocationUtilities locationUtilities = new LocationUtilities();
-        locationUtilities.getAddressOfStoreById(store);
-
-        String address = (store.getAddres() + " " + store.getDistrict() + " " + store.getWard() + " " + store.getDistrict() + " " + store.getCity() + " " + store.getCountry());
-
-        ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            GeocodingLocation.buildAlertMessageNoGps(FlashSalesProductDetailActivity.this);
-            locationStoreCurrent = GeocodingLocation.getLocation(locationManager, FlashSalesProductDetailActivity.this);
-        } else if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            locationStoreCurrent = GeocodingLocation.getLocation(locationManager, FlashSalesProductDetailActivity.this);
-        }
-        String location = GeocodingLocation.getAddressFromLocation(address,
-                getApplicationContext());
-        String[] rear = location.split("\n");
-        locationStore[0] = Double.parseDouble(rear[0]);
-        locationStore[1] = Double.parseDouble(rear[1]);
-        store.distanceBetween2Points(locationStoreCurrent[0], locationStoreCurrent[1], locationStore[0], locationStore[1]);
 
         //sstoreLocation.setText((Math.floor(store.getDistance() * 100) / 100) + " km");
 

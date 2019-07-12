@@ -2,11 +2,14 @@ package com.tinlm.snef.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -50,39 +53,26 @@ public class ListStoreAdapter extends RecyclerView.Adapter<ListStoreAdapter.List
     public void onBindViewHolder(@NonNull ListStoreViewHolder listStoreViewHolder, int i) {
         final Store currentStore = listStore.get(i);
         listStoreViewHolder.storeName.setText(currentStore.getStoreName());
-        LocationUtilities locationUtilities = new LocationUtilities();
-        locationUtilities.getAddressOfStoreById(currentStore);
+//        LocationUtilities locationUtilities = new LocationUtilities();
+//        locationUtilities.getAddressOfStoreById(currentStore);
         String openHour = "";
-        if(currentStore.getOpenHour().equals(currentStore.getClodeHour())) {
+        if(currentStore.getOpenHour().equals(currentStore.getCloseHour())) {
             openHour = mContext.getResources().getString(R.string.Open24);
 
         }else
-            openHour = currentStore.getOpenHour() + " - " + currentStore.getClodeHour();
+            openHour = currentStore.getOpenHour() + " - " + currentStore.getCloseHour();
 
+        listStoreViewHolder.storeAddress.setText(currentStore.getAddress() + ", " + currentStore.getDistrict() + ", " +
+                currentStore.getWard()
+                + ", " + currentStore.getCity() + ", " + currentStore.getCountry());
+
+        WindowManager wm = (WindowManager)mContext.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int height = size.y;
+        Picasso.get().load(currentStore.getAvatar()).resize(0,height / 6).into(listStoreViewHolder.storeAvatar);
         listStoreViewHolder.storeWorkTime.setText(openHour);
-        FlashSaleProductUtilities flashSaleProductUtilities = new FlashSaleProductUtilities();
-        List<FlashSaleProduct> flashSaleProducts = flashSaleProductUtilities.getFSPByStoreId(currentStore.getStoreId());
-
-        StoreProductImageUtilities imageUltilities = new StoreProductImageUtilities();
-        List<String> listImageFood = new ArrayList<>();
-        // lấy hình ảnh cho store
-        for (FlashSaleProduct fsp: flashSaleProducts
-        ) {
-            String fsImage = imageUltilities.getOneImageByStoreProductId(fsp.getStoreProductId());
-            listImageFood.add(fsImage);
-        }
-        List<ImageView> image = new ArrayList<>();
-        image.add(listStoreViewHolder.imageFood1);
-        image.add(listStoreViewHolder.imageFood2);
-        image.add(listStoreViewHolder.imageFood3);
-        image.add(listStoreViewHolder.imageFood4);
-        List<String> listFood = listImageFood;
-        for (int position = 0; i < listFood.size(); position++) {
-            if(position == 4) {
-                break;
-            }
-            Picasso.get().load(listFood.get(position)).into(image.get(position));
-        }
         listStoreViewHolder.storeDistance.setText((Math.floor(currentStore.getDistance() * 100) / 100) + " km");
 
         final String finalOpenHour = openHour;
@@ -92,7 +82,7 @@ public class ListStoreAdapter extends RecyclerView.Adapter<ListStoreAdapter.List
                 Intent intent = new Intent(mContext, StoreActivity.class);
                 intent.putExtra(ConstainApp.JS_STORENAME, currentStore.getStoreName());
                 intent.putExtra(ConstainApp.STOREAVATAR, currentStore.getAvatar());
-                String address = currentStore.getAddres() + ", " + currentStore.getDistrict() + ", " +
+                String address = currentStore.getAddress() + ", " + currentStore.getDistrict() + ", " +
                         currentStore.getWard() + ", " + currentStore.getCity() + ", " + currentStore.getCountry();
                 intent.putExtra(ConstainApp.ADDRESS, address);
                 intent.putExtra(ConstainApp.RATINGPOINT, currentStore.getRatingPoint());
@@ -112,22 +102,18 @@ public class ListStoreAdapter extends RecyclerView.Adapter<ListStoreAdapter.List
 
     public class ListStoreViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView storeIcon;
-        private TextView storeName,storeDistance, storeWorkTime;
-        private ImageView imageFood1, imageFood2, imageFood3, imageFood4;
+        private TextView storeName,storeDistance, storeWorkTime, storeAddress;
+        private ImageView storeAvatar;
         private LinearLayout viewStore;
 
         public ListStoreViewHolder(@NonNull View itemView) {
             super(itemView);
-            storeIcon = itemView.findViewById(R.id.storeIcon);
+
             storeName = itemView.findViewById(R.id.storeName);
             storeDistance = itemView.findViewById(R.id.storeDistance);
             storeWorkTime = itemView.findViewById(R.id.storeWorkTime);
-            imageFood1 = itemView.findViewById(R.id.imageFood1);
-            imageFood2 = itemView.findViewById(R.id.imageFood2);
-            imageFood3 = itemView.findViewById(R.id.imageFood3);
-            imageFood4 = itemView.findViewById(R.id.imageFood4);
-
+            storeAddress = itemView.findViewById(R.id.storeAddress);
+            storeAvatar = itemView.findViewById(R.id.storeAvatar);
             viewStore = itemView.findViewById(R.id.viewStore);
         }
     }
