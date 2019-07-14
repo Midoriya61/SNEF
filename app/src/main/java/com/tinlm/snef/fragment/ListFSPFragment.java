@@ -17,6 +17,7 @@ import com.tinlm.snef.activity.DashboardActivity;
 import com.tinlm.snef.adapter.FlashSaleProductAdapter;
 import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.model.FlashSaleProduct;
+import com.tinlm.snef.service.AllService;
 import com.tinlm.snef.service.FlashSaleProductService;
 import com.tinlm.snef.utilities.ApiUtils;
 import com.tinlm.snef.utilities.OrderDetailUtilities;
@@ -45,7 +46,7 @@ public class ListFSPFragment extends Fragment {
        View view = inflater.inflate(R.layout.fragment_list_fs, container, false);
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         rcListFlashSaleProduct = view.findViewById(R.id.rcListFlashSaleProduct);
-        flashSaleProductService = ApiUtils.getFlashSaleProductService();
+        flashSaleProductService = AllService.getFlashSaleProductService();
 
         flashSaleProductService.getAllFSP().enqueue(new Callback<List<FlashSaleProduct>>() {
             @Override

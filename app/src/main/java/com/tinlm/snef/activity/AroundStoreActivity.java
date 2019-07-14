@@ -28,7 +28,9 @@ import com.tinlm.snef.R;
 import com.tinlm.snef.adapter.ListStoreAdapter;
 import com.tinlm.snef.algo.GeocodingLocation;
 import com.tinlm.snef.constain.ConstainApp;
+import com.tinlm.snef.fragment.StoreAroundFragment;
 import com.tinlm.snef.model.Store;
+import com.tinlm.snef.service.AllService;
 import com.tinlm.snef.service.StoreService;
 import com.tinlm.snef.utilities.ApiUtils;
 import com.tinlm.snef.utilities.LocationUtilities;
@@ -59,7 +61,7 @@ public class AroundStoreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_around_store);
-        storeService = ApiUtils.getStoreService();
+        storeService = AllService.getStoreService();
         navigateDashboard();
         checkLocationPermission();
         getCurrentLocation();

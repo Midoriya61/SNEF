@@ -15,5 +15,5 @@ public interface StoreService {
     Call<List<Store>> getListStoreArround();
 
     @GET(ConstainServer.StoreURL + ConstainServer.GetStoreById + "{storeId}")
-    Call<List<Store>> getStoreById(@Path("storeId") int storeId);
+    Call<Store> getStoreById(@Path("storeId") int storeId);
 }

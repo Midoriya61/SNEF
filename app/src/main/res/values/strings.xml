@@ -36,7 +36,8 @@
     <string name="msg_rating" translatable="false">Đánh giá</string>
     <string name="msg_find" translatable="false">Bạn tìm gì hôm nay</string>
     <string name="msg_open_hour" translatable="false">Giờ mở cửa</string>
-
+    <string name="msg_still_not_rating" translatable="false">Chưa có đánh giá</string>
+0`
 
     <string name="StatusSouldOut" translatable="false">Bán hết</string>
     <string name="StatusNearlySouldOut" translatable="false">Sắp bán hết</string>

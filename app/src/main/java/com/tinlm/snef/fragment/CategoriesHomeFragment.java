@@ -16,6 +16,7 @@ import com.tinlm.snef.R;
 import com.tinlm.snef.activity.DashboardActivity;
 import com.tinlm.snef.adapter.CategoriesAdapter;
 import com.tinlm.snef.model.Categories;
+import com.tinlm.snef.service.AllService;
 import com.tinlm.snef.service.CategoriesService;
 import com.tinlm.snef.utilities.ApiUtils;
 
@@ -39,7 +40,7 @@ public class CategoriesHomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_categories_home, container, false);
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         rcListCategories = view.findViewById(R.id.rcListCategories);
-        categoriesService = ApiUtils.getCategoriesService();
+        categoriesService = AllService.getCategoriesService();
 
         categoriesService.getAllCategories().enqueue(new Callback<List<Categories>>() {
             @Override

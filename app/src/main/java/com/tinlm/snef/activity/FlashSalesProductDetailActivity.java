@@ -20,11 +20,14 @@ import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.database.DBManager;
 import com.tinlm.snef.model.Cart;
 import com.tinlm.snef.model.Store;
+import com.tinlm.snef.service.AllService;
+import com.tinlm.snef.service.StoreService;
 import com.tinlm.snef.utilities.LocationUtilities;
 import com.tinlm.snef.utilities.StoreProductImageUtilities;
 import com.tinlm.snef.utilities.StoreProductUtilities;
 import com.tinlm.snef.utilities.StoreUtilities;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -90,8 +93,10 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
 
         final Intent intent = getIntent();
         fspId = intent.getIntExtra(ConstainApp.FLASHSALEPRODUCTID, 0);
+        StoreService storeService = AllService.getStoreService();
 
         int storeId = intent.getIntExtra(ConstainApp.STOREID,0);
+
         StoreUtilities storeUtilities = new StoreUtilities();
         Store store = storeUtilities.getStoreById(storeId);
         storeName.setText( store.getStoreName());

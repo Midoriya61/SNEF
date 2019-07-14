@@ -55,10 +55,7 @@ public class StoreProductImageUtilities {
             JSONArray arr = new JSONArray(respone);
             result = new ArrayList<>();
             for (int i  = 0; i < arr.length(); i++) {
-                JSONObject jsonObj = arr.getJSONObject(i);
-                if(jsonObj.has(imageSrc)) {
-                    result.add(jsonObj.getString(imageSrc));
-                }
+                result.add((String) arr.get(i));
             }
 
         }catch (Exception e){
