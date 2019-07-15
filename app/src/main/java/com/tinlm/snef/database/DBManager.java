@@ -27,23 +27,48 @@ public class DBManager extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sqlQuery = "CREATE TABLE " + ConstainApp.JS_CART + " ( " +
-                ConstainApp.JS_FSPID + " integer primary key, " +
-                ConstainApp.JS_IMAGEPRODUCT + " TEXT, " +
-                ConstainApp.JS_PRODUCTNAME + " TEXT, " +
-                ConstainApp.JS_STORENAME + " TEXT, " +
-                ConstainApp.JS_PRICE + " float, " +
-                ConstainApp.JS_DISCOUNT + " integer, " +
-                ConstainApp.JS_QUANTITY + " integer) ";
-        db.execSQL(sqlQuery);
+//        String sqlQuery = "CREATE TABLE " + ConstainApp.JS_CART + " ( " +
+//                ConstainApp.JS_FSPID + " integer primary key, " +
+//                ConstainApp.JS_IMAGEPRODUCT + " TEXT, " +
+//                ConstainApp.JS_PRODUCTNAME + " TEXT, " +
+//                ConstainApp.JS_STORENAME + " TEXT, " +
+//                ConstainApp.JS_PRICE + " float, " +
+//                ConstainApp.JS_DISCOUNT + " integer, " +
+//                ConstainApp.JS_QUANTITY + " integer) ";
+//        db.execSQL(sqlQuery);
+
+        String sqlQueryOrderDetail = "CREATE TABLE " + ConstainApp.LIST_ORDER_DETAIL + " ( " +
+                    ConstainApp.JS_ORDERDETAILID + " integer primary key, " +
+                    ConstainApp.JS_ORDERID + " integer, " +
+                    ConstainApp.JS_FSPID + " integer, " +
+                    ConstainApp.JS_QUANTITY + " integer, " +
+                    ConstainApp.JS_ORDERDETAILPRICE + " float) ";
+        db.execSQL(sqlQueryOrderDetail);
+
         Toast.makeText(context, "Create successfylly", Toast.LENGTH_SHORT).show();
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS "+ ConstainApp.JS_CART);
+        db.execSQL("DROP TABLE IF EXISTS "+ ConstainApp.LIST_ORDER_DETAIL);
         onCreate(db);
+    }
+
+    //Add new a order detail
+    public void addOrderDetail(OrderDetail orderDetail){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(ConstainApp.JS_ORDERDETAILID, orderDetail.getOrderDetailId());
+        values.put(ConstainApp.JS_ORDERID, orderDetail.getOrderId());
+        values.put(ConstainApp.JS_FSPID, orderDetail.getFspId());
+        values.put(ConstainApp.JS_QUANTITY, orderDetail.getQuantity());
+        values.put(ConstainApp.JS_ORDERDETAILPRICE, orderDetail.getOrderDetailPrice());
+
+        //Neu de null thi khi value bang null thi loi
+
+        db.insert(ConstainApp.LIST_ORDER_DETAIL,null,values);
+        db.close();
     }
 
 
@@ -65,6 +90,32 @@ public class DBManager extends SQLiteOpenHelper {
 
         db.close();
     }
+
+    public List<OrderDetail> getAllOrderDetail() {
+        List<OrderDetail> ORList = new ArrayList<>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + ConstainApp.LIST_ORDER_DETAIL;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                OrderDetail orderDetail = new OrderDetail();
+                orderDetail.setOrderDetailId(cursor.getInt(cursor.getColumnIndex(ConstainApp.JS_ORDERDETAILID)));
+                orderDetail.setOrderId(cursor.getInt(cursor.getColumnIndex(ConstainApp.JS_ORDERID)));
+                orderDetail.setFspId(cursor.getInt(cursor.getColumnIndex(ConstainApp.JS_FSPID)));
+                orderDetail.setQuantity(cursor.getInt(cursor.getColumnIndex(ConstainApp.JS_QUANTITY)));
+                orderDetail.setOrderDetailPrice(cursor.getFloat(cursor.getColumnIndex(ConstainApp.JS_ORDERDETAILPRICE)));
+                ORList.add(orderDetail);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return ORList;
+    }
+
+
 
     /*
     Update name of cart
@@ -209,6 +260,30 @@ public class DBManager extends SQLiteOpenHelper {
         return (cartList);
     }
 
-
+//    public List<OrderDetail> getAllOD() {
+//        List<OrderDetail> ODList = new ArrayList<>();
+//        // Select All Query
+//        String selectQuery = "SELECT  * FROM " + ConstainApp.LIST_ORDER_DETAIL;
+//
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        Cursor cursor = db.rawQuery(selectQuery, null);
+//
+//        if (cursor.moveToFirst()) {
+//            do {
+//                OrderDetail orderDetail = new OrderDetail();
+//                orderDetail.setOrderDetailId(cursor.getInt(cursor.getColumnIndex(ConstainApp.ORDERID)));
+//                cart.setImageProduct(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_IMAGEPRODUCT)));
+//                cart.setProductName(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_PRODUCTNAME)));
+//                cart.setStoreName(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_STORENAME)));
+//                cart.setPrice(cursor.getFloat(cursor.getColumnIndex(ConstainApp.JS_PRICE)));
+//                cart.setDiscount(cursor.getInt(cursor.getColumnIndex(ConstainApp.JS_DISCOUNT)));
+//                cart.setQuantity(cursor.getInt(cursor.getColumnIndex(ConstainApp.JS_QUANTITY)));
+//                cartList.add(cart);
+//            } while (cursor.moveToNext());
+//        }
+//        cursor.close();
+//        db.close();
+//        return cartList;
+//    }
 
 }
