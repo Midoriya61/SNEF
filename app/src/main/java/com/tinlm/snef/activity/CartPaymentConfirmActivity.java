@@ -146,7 +146,8 @@ public class CartPaymentConfirmActivity extends AppCompatActivity {
 
                     if (state.equals("approved")) //if the payment worked, the state equals approved
                     {
-                        txtTotalPaymentConfirm.setText("Success");
+                        Intent intent = new Intent(this, OrderHistoryActivity.class);
+                        startActivity(intent);
 //                        DBManager dbManager = new DBManager(CartActivity.this);
 //                        List<Cart> cartList = dbManager.getProductByStoreName(intent.getStringExtra(ConstainApp.JS_STORENAME));
 //                        for (int i = 0; i < cartList.size(); i++) {

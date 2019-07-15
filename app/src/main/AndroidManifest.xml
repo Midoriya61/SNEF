@@ -25,6 +25,7 @@
         <activity android:name=".activity.CategoryActivity" />
         <activity android:name=".activity.DashboardActivity" />
         <activity android:name=".activity.CartPaymentConfirmActivity" />
+        <activity android:name=".activity.OrderHistoryActivity" />
         <activity android:name=".activity.LoginActivity" />
 
         ListStoreOrderItemAdapter
