@@ -78,6 +78,7 @@ public class ListFSPFragment extends Fragment {
 
                 mShimmerViewContainer.stopShimmer();
                 mShimmerViewContainer.setVisibility(View.GONE);
+
             }
 
             @Override

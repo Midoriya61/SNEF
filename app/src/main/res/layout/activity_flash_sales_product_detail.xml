@@ -104,18 +104,35 @@
                             />
 
                     </FrameLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="40dp">
                         <TextView
                             android:id="@+id/foodName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginBottom="0dp"
                             android:text="Thịt bò"
                             android:textSize="18dp"
-                            android:textStyle="bold"
-                            android:layout_marginLeft="40dp"
-                            android:layout_marginTop="20dp"
-                            android:layout_marginRight="40dp" />
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:id="@+id/imgLoveProduct"
+                            android:src="@drawable/notlike"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_alignParentRight="true"
+                            android:onClick="clickToLoveProduct"
+
+                            />
+                    </RelativeLayout>
+
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -227,6 +244,7 @@
                                 android:textSize="18dp"
                                 android:textStyle="bold"
                                 android:singleLine="true"
+                                android:onClick="clickToStore"
                                 android:textColor="@color/redApp"/>
 
                         </LinearLayout>
@@ -236,10 +254,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-
                         android:layout_marginTop="15dp"
-                        android:layout_marginBottom="15dp">
-
+                        android:layout_marginBottom="15dp">2
 
                         <TextView
                             android:paddingLeft="15dp"
@@ -247,6 +263,46 @@
                             android:layout_height="wrap_content"
                             android:textSize="25dp"
                             android:text="@string/msg_description" />
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="40dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:text="@string/msg_warehouse"
+
+                                   />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" " />
+
+                                <TextView
+                                    android:id="@+id/quantityMax"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:onClick="clickToStore"
+                                    android:singleLine="true" />
+
+                            </LinearLayout>
+                        </RelativeLayout>
+
+
+
                         <TextView
                             android:id="@+id/txtDescriptionBookInCase"
                             android:paddingLeft="15dp"

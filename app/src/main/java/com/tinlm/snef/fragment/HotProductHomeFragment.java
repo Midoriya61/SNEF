@@ -83,6 +83,7 @@ public class HotProductHomeFragment extends Fragment {
                 rcListHost.setAdapter(flashSaleProductAdapter);
                 mShimmerViewContainer.stopShimmer();
                 mShimmerViewContainer.setVisibility(View.GONE);
+
             }
 
             @Override

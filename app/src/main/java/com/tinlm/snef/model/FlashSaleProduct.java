@@ -29,8 +29,6 @@ public class FlashSaleProduct implements Comparable<FlashSaleProduct> {
     @Expose
         private float price;
 
-        private String description;
-
     @SerializedName("storeProductId")
     @Expose
         private int storeProductId;
@@ -53,8 +51,13 @@ public class FlashSaleProduct implements Comparable<FlashSaleProduct> {
     @Expose
     private String imageSrc;
 
+    @SerializedName("description")
+    @Expose
+    private String description;
+
         public FlashSaleProduct() {
         }
+
 
     public int getTotalQuantity() {
         return totalQuantity;

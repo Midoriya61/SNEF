@@ -33,7 +33,6 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
     List<FlashSaleProduct> flashSaleProductList;
     String sreenName;
 
-
     private Runnable runnable;
     private Handler handler = new Handler();
     private String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
@@ -124,7 +123,6 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
         flashSaleProductHolder.flashSaleProductLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(mContext, FlashSalesProductDetailActivity.class);
                 intent.putExtra(ConstainApp.FLASHSALEPRODUCTID,flashSaleProduct.getFlashSaleProductId());
                 intent.putExtra(ConstainApp.PRODUCTNAME,flashSaleProduct.getProductName());

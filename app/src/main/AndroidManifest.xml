@@ -24,13 +24,10 @@
         <activity android:name=".activity.AroundStoreActivity" />
         <activity android:name=".activity.CategoryActivity" />
         <activity android:name=".activity.DashboardActivity" />
-        <activity android:name=".activity.CartPaymentConfirmActivity" />
+        <activity android:name=".activity.CartActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.PayPalActivity" />
-
-        ListStoreOrderItemAdapter
         <activity android:name=".activity.MainActivity">
-
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -39,13 +39,9 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
     @Override
     public void onBindViewHolder(@NonNull CategoriesViewHolder categoriesViewHolder, int i) {
-
         final Categories category = categoryList.get(i);
         Picasso.get().load(category.getImageSrc()).resize(400,250).into(categoriesViewHolder.imgCategory);
         categoriesViewHolder.txtCategogy.setText(category.getCategoryName());
-
-
-
         categoriesViewHolder.layoutCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,8 +51,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
                 mContext.startActivity(intent);
             }
         });
-
-
     }
 
     @Override

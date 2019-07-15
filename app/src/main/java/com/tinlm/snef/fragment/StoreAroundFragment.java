@@ -85,6 +85,7 @@ public class StoreAroundFragment extends Fragment {
                 rcStoreAround.addItemDecoration(new DividerItemDecoration(StoreAroundFragment.this.getContext(), 0));
                 SnapHelper snapHelper = new PagerSnapHelper();
                 snapHelper.attachToRecyclerView(rcStoreAround);
+
             }
 
             @Override
