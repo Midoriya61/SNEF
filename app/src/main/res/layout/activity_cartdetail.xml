@@ -38,7 +38,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/txtTotalCartPrice"
+                    android:id="@+id/txtTotalCartPrice2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@+id/dashPrice"
@@ -61,7 +61,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/btnCheckout"
+                android:id="@+id/btnCheckout2"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="20dp"
@@ -97,7 +97,7 @@
                 android:orientation="vertical">
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rcListCartItem"
+                    android:id="@+id/rcListCartItem2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 

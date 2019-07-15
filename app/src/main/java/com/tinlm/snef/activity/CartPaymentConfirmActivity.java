@@ -1,6 +1,7 @@
 package com.tinlm.snef.activity;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
@@ -21,32 +21,26 @@ import com.paypal.android.sdk.payments.PaymentActivity;
 import com.paypal.android.sdk.payments.PaymentConfirmation;
 import com.tinlm.snef.R;
 import com.tinlm.snef.adapter.ListCartAdapter;
-import com.tinlm.snef.adapter.ListStoreAdapter;
-import com.tinlm.snef.adapter.ListStoreOrderItemAdapter;
+import com.tinlm.snef.adapter.ListCartPaymentConfirmAdapter;
 import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.database.DBManager;
-import com.tinlm.snef.fragment.CustomDialogFragment;
 import com.tinlm.snef.model.Cart;
-import com.tinlm.snef.model.Store;
-import com.tinlm.snef.model.StoreOrderItem;
-import com.tinlm.snef.utilities.OrderDetailUtilities;
+import com.tinlm.snef.model.OrderDetail;
 import com.tinlm.snef.utilities.StoreProductImageUtilities;
-import com.tinlm.snef.utilities.StoreUtilities;
 
 import java.math.BigDecimal;
-import java.text.BreakIterator;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CartActivity extends AppCompatActivity {
+public class CartPaymentConfirmActivity extends AppCompatActivity {
 
     DecimalFormat df = new DecimalFormat("#,###,###,###");
-    RecyclerView rcListCartItem;
-    TextView txtTotalCartPrice;
-    ElegantNumberButton btnCartQuantity;
+    RecyclerView rcListCartPaymentConfirm;
+    TextView txtTotalPaymentConfirm;
     Button btnCheckout;
+    TextView tvStoreName;
     int totalAmount = 0;
     int fspId;
     Intent intent;
@@ -63,7 +57,7 @@ public class CartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cartdetail);
+        setContentView(R.layout.activity_paymentconfirm);
         init();
     }
 
@@ -71,7 +65,7 @@ public class CartActivity extends AppCompatActivity {
 
         intent = getIntent();
 
-        DBManager dbManager = new DBManager(CartActivity.this);
+        DBManager dbManager = new DBManager(CartPaymentConfirmActivity.this);
         List<Cart> cartList = dbManager.getProductByStoreName(intent.getStringExtra(ConstainApp.JS_STORENAME));
 
         if (cartList.size() == 0) {
@@ -91,16 +85,16 @@ public class CartActivity extends AppCompatActivity {
 
     // Create list flash sale product
     public void createListCart() {
-        rcListCartItem = findViewById(R.id.rcListCartItem);
-        txtTotalCartPrice = findViewById(R.id.txtTotalCartPrice);
-        btnCartQuantity = findViewById(R.id.btnCartQuantity);
+        rcListCartPaymentConfirm = findViewById(R.id.rcListCartPaymentConfirm);
+        txtTotalPaymentConfirm = findViewById(R.id.txtTotalPaymentConfirm);
+        tvStoreName = findViewById(R.id.tvStoreName);
 
         Map<Integer, String> listImageProduct = new HashMap<>();
-        OrderDetailUtilities orderDetailUtilities = new OrderDetailUtilities();
+//        OrderDetailUtilities orderDetailUtilities = new OrderDetailUtilities();
         StoreProductImageUtilities imageUltilities = new StoreProductImageUtilities();
 
 
-        DBManager dbManager = new DBManager(CartActivity.this);
+        DBManager dbManager = new DBManager(CartPaymentConfirmActivity.this);
         List<Cart> cartList = dbManager.getProductByStoreName(intent.getStringExtra(ConstainApp.JS_STORENAME));
         for (int i = 0; i < cartList.size(); i++) {
 
@@ -109,19 +103,21 @@ public class CartActivity extends AppCompatActivity {
 
         }
 
-        ListCartAdapter listCartAdapter = new ListCartAdapter(this, cartList, listImageProduct);
+        ListCartPaymentConfirmAdapter listCartPaymentConfirmAdapter = new ListCartPaymentConfirmAdapter(this, cartList, listImageProduct);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false);
-        rcListCartItem.setItemAnimator(new DefaultItemAnimator());
-        rcListCartItem.setLayoutManager(mLayoutManager);
-        rcListCartItem.setAdapter(listCartAdapter);
+        rcListCartPaymentConfirm.setItemAnimator(new DefaultItemAnimator());
+        rcListCartPaymentConfirm.setLayoutManager(mLayoutManager);
+        rcListCartPaymentConfirm.setAdapter(listCartPaymentConfirmAdapter);
 
         for (int i = 0; i < cartList.size(); i++) {
 
             totalAmount += (((cartList.get(i).getPrice() * cartList.get(i).getDiscount()) / 100) * cartList.get(i).getQuantity());
         }
-        txtTotalCartPrice.setText(String.valueOf(df.format(totalAmount)));
+        txtTotalPaymentConfirm.setText(String.valueOf(df.format(totalAmount)));
+        tvStoreName.setText(String.valueOf(intent.getStringExtra(ConstainApp.JS_STORENAME)));
     }
+
 
 
     public void clickToPay(View view) {
@@ -132,6 +128,10 @@ public class CartActivity extends AppCompatActivity {
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, m_configuration);
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
         startActivityForResult(intent, m_paypalRequestCode);
+    }
+
+    public void AddToOrder() {
+
     }
 
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -146,10 +146,31 @@ public class CartActivity extends AppCompatActivity {
                     String state = confirmation.getProofOfPayment().getState();
 
                     if (state.equals("approved")) //if the payment worked, the state equals approved
-                        txtTotalCartPrice.setText("Thanh Toan Thanh Cong!");
-                    else txtTotalCartPrice.setText("Error in the payment.");
+                    {
+                        txtTotalPaymentConfirm.setText("Success");
+//                        DBManager dbManager = new DBManager(CartActivity.this);
+//                        List<Cart> cartList = dbManager.getProductByStoreName(intent.getStringExtra(ConstainApp.JS_STORENAME));
+//                        for (int i = 0; i < cartList.size(); i++) {
+//
+//                            Cart cart = dbManager.getProductById(cartList.get(i).getFspId());
+//                            OrderDetail orderDetail = new OrderDetail();
+//                            List<OrderDetail> ORList = dbManager.getAllOrderDetail();
+//                            ContentValues values = new ContentValues();
+//
+//                            orderDetail.setOrderDetailId((ORList.get(ORList.size() - 1).getOrderDetailId()) + 1);
+//                            orderDetail.setOrderId((ORList.get(ORList.size() - 1).getOrderId()) + 1);
+//                            orderDetail.setFspId(cart.getFspId());
+//                            orderDetail.setQuantity(cart.getQuantity());
+//                            orderDetail.setOrderDetailPrice(totalAmount);
+//                            dbManager.addOrderDetail(orderDetail);
+//
+//                        }
+//
+//                        dbManager.getAllOrderDetail();
+
+                    } else txtTotalPaymentConfirm.setText("Error in the payment.");
                 } else
-                    txtTotalCartPrice.setText("Confirmation is null");
+                    txtTotalPaymentConfirm.setText("Confirmation is null");
             }
         }
     }

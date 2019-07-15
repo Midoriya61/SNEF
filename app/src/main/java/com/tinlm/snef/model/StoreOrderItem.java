@@ -1,9 +1,21 @@
 package com.tinlm.snef.model;
 
+import java.util.List;
+
 public class StoreOrderItem {
 
     private String storeName;
     private int quantityOrder;
+
+    public List<Cart> getCartList() {
+        return cartList;
+    }
+
+    public void setCartList(List<Cart> cartList) {
+        this.cartList = cartList;
+    }
+
+    List<Cart> cartList;
 
     public StoreOrderItem(String storeName, int quantityOrder) {
         this.storeName = storeName;
