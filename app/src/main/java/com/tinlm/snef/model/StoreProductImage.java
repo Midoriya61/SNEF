@@ -1,14 +1,19 @@
 package com.tinlm.snef.model;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.tinlm.snef.constain.ConstainServer;
 
 public class StoreProductImage {
 
-
+    @SerializedName("fspId")
+    @Expose
     private int fspId;
-
+    @SerializedName("imageSrc")
+    @Expose
     private String imageSrc;
-
+    @SerializedName("storeProductId")
+    @Expose
     private int storeProductId;
 
     public StoreProductImage() {

@@ -72,7 +72,8 @@ public class FlashSaleProductUtilities {
                 }
 
                 if(jsonObj.has(endDate)){
-                    flashSaleProduct.setEndDate(Date.valueOf(jsonObj.getString(endDate)));
+//                    flashSaleProduct.setEndDate(Date.valueOf(jsonObj.getString(endDate)));
+                    flashSaleProduct.setEndDate(jsonObj.getString(endDate));
                 }
                 if(jsonObj.has(discount)){
                     flashSaleProduct.setDiscount(jsonObj.getInt(discount));
@@ -130,7 +131,8 @@ public class FlashSaleProductUtilities {
                 }
 
                 if(jsonObj.has(endDate)){
-                    flashSaleProduct.setEndDate(Date.valueOf(jsonObj.getString(endDate)));
+//                    flashSaleProduct.setEndDate(Date.valueOf(jsonObj.getString(endDate)));
+                    flashSaleProduct.setEndDate(jsonObj.getString(endDate));
                 }
                 if(jsonObj.has(discount)){
                     flashSaleProduct.setDiscount(jsonObj.getInt(discount));
@@ -172,7 +174,7 @@ public class FlashSaleProductUtilities {
                 if(jsonObj.has(flashSalesId)){
                     flashSaleProduct.setFlashSalesId(jsonObj.getInt(flashSalesId));
                 }
-                if(jsonObj.has(productName)){
+                if(!jsonObj.getString(productName).contains("null")){
                     flashSaleProduct.setProductName(jsonObj.getString(productName));
                 }
                 if(jsonObj.has(spQuantity)){
@@ -185,8 +187,9 @@ public class FlashSaleProductUtilities {
                     flashSaleProduct.setStoreId(jsonObj.getInt(storeId));
                 }
 
-                if(jsonObj.has(endDate)){
-                    flashSaleProduct.setEndDate(Date.valueOf(jsonObj.getString(endDate)));
+                if(!jsonObj.getString(endDate).contains("null")){
+//                    flashSaleProduct.setEndDate(Date.valueOf(jsonObj.getString(endDate)));
+                    flashSaleProduct.setEndDate(jsonObj.getString(endDate));
                 }
                 if(jsonObj.has(discount)){
                     flashSaleProduct.setDiscount(jsonObj.getInt(discount));
@@ -242,7 +245,8 @@ public class FlashSaleProductUtilities {
                 }
 
                 if(!jsonObj.getString(endDate).contains("null")){
-                    flashSaleProduct.setEndDate(Date.valueOf(jsonObj.getString(endDate)));
+//                    flashSaleProduct.setEndDate(Date.valueOf(jsonObj.getString(endDate)));
+                    flashSaleProduct.setEndDate(jsonObj.getString(endDate));
                 }
                 if(jsonObj.has(discount)){
                     flashSaleProduct.setDiscount(jsonObj.getInt(discount));

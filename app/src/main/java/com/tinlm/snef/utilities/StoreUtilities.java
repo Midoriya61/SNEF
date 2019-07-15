@@ -58,7 +58,10 @@ public class StoreUtilities {
                     store.setOpenHour(jsonObj.getString(openHour));
                 }
                 if(jsonObj.has(closeHour)){
-                    store.setClodeHour(jsonObj.getString(closeHour));
+                    store.setCloseHour(jsonObj.getString(closeHour));
+                }
+                if(jsonObj.has(avatar)){
+                    store.setAvatar(jsonObj.getString(avatar));
                 }
 
                 result.add(store);
@@ -92,7 +95,7 @@ public class StoreUtilities {
                     store.setOpenHour(jsonObj.getString(openHour));
                 }
                 if(jsonObj.has(closeHour)){
-                    store.setClodeHour(jsonObj.getString(closeHour));
+                    store.setCloseHour(jsonObj.getString(closeHour));
                 }if(jsonObj.has(ratingPoint)){
                     store.setRatingPoint(jsonObj.getDouble(ratingPoint));
                 }

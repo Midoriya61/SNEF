@@ -1,38 +1,78 @@
 package com.tinlm.snef.model;
 
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+
 import java.sql.Date;
 
-public class FlashSaleProduct {
+public class FlashSaleProduct implements Comparable<FlashSaleProduct> {
 
-//        @SerializedName("flashSaleProductId")
+
+    @SerializedName("flashSaleProductId")
+    @Expose
         private int flashSaleProductId;
-//    @SerializedName("quantity")
+    @SerializedName("quantity")
+    @Expose
         private int quantity;
-//    @SerializedName("discount")
+    @SerializedName("discount")
+    @Expose
         private int discount;
-//    @SerializedName("endDate")
-        private Date endDate;
-//    @SerializedName("productName")
+    @SerializedName("endDate")
+    @Expose
+        private String endDate;
+    @SerializedName("productName")
+    @Expose
         private String productName;
-//    @SerializedName("price")
+    @SerializedName("price")
+    @Expose
         private float price;
 
         private String description;
-//    @SerializedName("storeProductId")
+
+    @SerializedName("storeProductId")
+    @Expose
         private int storeProductId;
-//    @SerializedName("flashSalesId")
+    @SerializedName("flashSalesId")
+    @Expose
         private int flashSalesId;
-//    @SerializedName("storeId")
+    @SerializedName("storeId")
+    @Expose
         private int storeId;
-//    @SerializedName("spQuantity")
+    @SerializedName("spQuantity")
+    @Expose
+
         private int spQuantity;
+
+    @SerializedName("totalQuantity")
+    @Expose
+    private int totalQuantity;
+
+    @SerializedName("imageSrc")
+    @Expose
+    private String imageSrc;
 
         public FlashSaleProduct() {
         }
 
+    public int getTotalQuantity() {
+        return totalQuantity;
+    }
 
+    public void setTotalQuantity(int totalQuantity) {
+        this.totalQuantity = totalQuantity;
+    }
 
-        public int getStoreId() {
+    public String getImageSrc() {
+        return imageSrc;
+    }
+
+    public void setImageSrc(String imageSrc) {
+        this.imageSrc = imageSrc;
+    }
+
+    public int getStoreId() {
             return storeId;
         }
 
@@ -88,15 +128,15 @@ public class FlashSaleProduct {
             this.discount = discount;
         }
 
-        public Date getEndDate() {
-            return endDate;
-        }
+    public String getEndDate() {
+        return endDate;
+    }
 
-        public void setEndDate(Date endDate) {
-            this.endDate = endDate;
-        }
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
 
-        public String getProductName() {
+    public String getProductName() {
             return productName;
         }
 
@@ -121,4 +161,10 @@ public class FlashSaleProduct {
         public void setDescription(String description) {
             this.description = description;
         }
+
+
+    @Override
+    public int compareTo(FlashSaleProduct o) {
+        return this.endDate.compareTo(o.getEndDate());
     }
+}

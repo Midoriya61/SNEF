@@ -14,7 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.ProductByCategoryActivity"></activity>
+        <activity android:name=".activity.SearchProductByNameActivity"></activity>
+        <activity android:name=".activity.SearchActivity" />
+        <activity android:name=".activity.StoreActivity" />
+        <activity android:name=".activity.ProductByCategoryActivity" />
         <activity android:name=".activity.FlashSalesProductDetailActivity" />
         <activity android:name=".activity.AccountActivity" />
         <activity android:name=".activity.OrderActivity" />
@@ -23,7 +26,6 @@
         <activity android:name=".activity.DashboardActivity" />
         <activity android:name=".activity.CartPaymentConfirmActivity" />
         <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.PayPalActivity" />
 
         ListStoreOrderItemAdapter
         <activity android:name=".activity.MainActivity">

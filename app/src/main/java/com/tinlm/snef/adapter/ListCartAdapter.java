@@ -17,10 +17,14 @@ import android.widget.TextView;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.squareup.picasso.Picasso;
 import com.tinlm.snef.R;
-import com.tinlm.snef.activity.CartActivity;
+import com.tinlm.snef.activity.CartPaymentConfirmActivity;
+import com.tinlm.snef.activity.OrderActivity;
 import com.tinlm.snef.constain.ConstainApp;
+import com.tinlm.snef.adapter.ListStoreOrderItemAdapter;
 import com.tinlm.snef.database.DBManager;
 import com.tinlm.snef.model.Cart;
+
+import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -55,7 +59,6 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
         View v = LayoutInflater.from(mContext).inflate(R.layout.list_cart, viewGroup, false);
         listCartHolder = new ListCartHolder(v);
 
-
         return listCartHolder;
     }
 
@@ -63,8 +66,9 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
     ////07/07/2019 HieuTB Create
     // Load data into layout
     @Override
-    public void onBindViewHolder(@NonNull ListCartHolder listCartHolder, int i) {
+    public void onBindViewHolder(@NonNull final ListCartHolder listCartHolder, int i) {
         final Cart cart = cartList.get(i);
+
 
 
         String productCartImage = listImageCartProduct.get(cart.getFspId());
@@ -75,10 +79,10 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
 
         listCartHolder.txtCartFoodName.setText(cart.getProductName());
 
-        listCartHolder.btnCartQuantity.setNumber(String.valueOf(cart.getQuantity()));
+        listCartHolder.txtQuantity.setText(String.valueOf(cart.getQuantity()));
 
         listCartHolder.txtCartPrice.setText(String.format("%,d", (int) ((cart.getPrice() * cart.getDiscount()) / 100)) + "");
-//
+
 
 //        btnChange.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
 //            @Override
@@ -94,36 +98,26 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
 //            }
 //        });
 
-        listCartHolder.btnCartQuantity.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
-            @Override
-            public void onValueChange(ElegantNumberButton view, int oldValue, int newValue) {
-                if (newValue != oldValue) {
-                    cart.setQuantity(newValue);
-                    DBManager dbManager = new DBManager(mContext);
-                    dbManager.updateCartQuantity(cart);
-                    TextView txtTotalCartPrice = ((CartActivity) mContext).findViewById(R.id.txtTotalCartPrice);
-
-                    if (newValue > oldValue) {
-                        txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(",", "")) + (int) ((cart.getPrice() * cart.getDiscount()) / 100))));
-                    } else if (newValue < oldValue) {
-                        txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(",", "")) - (int) ((cart.getPrice() * cart.getDiscount()) / 100))));
-                    }
-
-
-                }
-            }
-        });
-
-        listCartHolder.btnRemove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DBManager dbManager = new DBManager(mContext);
-                dbManager.deleteCart(cart);
-                ((CartActivity) mContext).finish();
-                ((CartActivity) mContext).startActivity(((CartActivity) mContext).getIntent());
-
-            }
-        });
+//        listCartHolder.btnCartQuantity.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
+//            @Override
+//            public void onValueChange(ElegantNumberButton view, int oldValue, int newValue) {
+//                if (newValue != oldValue) {
+//                    cart.setQuantity(newValue);
+//                    DBManager dbManager = new DBManager(mContext);
+//                    dbManager.updateCartQuantity(cart);
+//
+////                    TextView txtTotalCartPrice = vg.findViewById(R.id.txtTotalCartPrice);
+//                    TextView txtTotalCartPrice = ((OrderActivity) mContext).findViewById(R.id.txtTotalCartPrice);
+//                    if (newValue > oldValue) {
+//                        txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(",", "")) + (int) ((cart.getPrice() * cart.getDiscount()) / 100))));
+//                    } else if (newValue < oldValue) {
+//
+//                        txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(",", "")) - (int) ((cart.getPrice() * cart.getDiscount()) / 100))));
+//                    }
+//
+//                }
+//            }
+//        });
 
 //        listCartHolder.listCartLayout.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -158,18 +152,16 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
 
         TextView txtCartFoodName, txtCartPrice;
 
-        ElegantNumberButton btnCartQuantity;
-        Button btnRemove;
+        TextView txtQuantity;
 
         LinearLayout listCartLayout;
 
         public ListCartHolder(@NonNull View itemView) {
             super(itemView);
             imgCartFood = itemView.findViewById(R.id.imgCartFood);
-            btnRemove = itemView.findViewById(R.id.btnRemove);
             txtCartFoodName = itemView.findViewById(R.id.txtCartFoodName);
             txtCartPrice = itemView.findViewById(R.id.txtCartPrice);
-            btnCartQuantity = itemView.findViewById(R.id.btnCartQuantity);
+            txtQuantity = itemView.findViewById(R.id.txtQuantity);
             listCartLayout = itemView.findViewById(R.id.listCartLayout);
         }
     }

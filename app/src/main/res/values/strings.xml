@@ -1,44 +1,51 @@
 <resources>
-    <string name="app_name">SNEF</string>
-    <string name="ms_Login">Đăng nhập</string>
-    <string name="ms_InputUsername">Nhận tên đăng nhập</string>
-    <string name="ms_InputPassword">Nhập mật khẩu</string>
-    <string name="ms_HintUsername">Tên đăng nhập</string>
-    <string name="ms_HintPassword">Mật khẩu</string>
-    <string name="home_page">Trang chủ</string>
-    <string name="category_page">Danh mục</string>
-    <string name="account_page">Tài khoản</string>
-    <string name="payment_page">Thanh toán</string>
-    <string name="around_page">Gần đây</string>
-    <string name="search_hint">Tìm kiếm</string>
-    <string name="message_store_around">Cửa hàng gần bạn</string>
-    <string name="message_product_category">Bạn muốn tìm sản phẩm gì?</string>
-    <string name="message_hot_product">Ưu đãi nỗi bật</string>
-    <string name="suggest_today">Gợi ý hôm nay</string>
-    <string name="title_location_permission">Vị trí</string>
-    <string name="text_location_permission">Cho phép truy cập vị trí của bạn</string>
-    <string name="ok">Cho phép</string>
-    <string name="no">Không</string>
-    <string name="OpenGPS">Mở GPS</string>
-    <string name="msg_follow">Theo dỏi</string>
-    <string name="msg_update_profile">Theo dỏi</string>
-    <string name="msg_order_history">Lịch sử mua</string>
-    <string name="msg_help">Hổ trợ</string>
-    <string name="msg_logout">Đăng xuất</string>
-    <string name="msg_expired_date">Kết thúc trong</string>
-    <string name="msg_add_to_add">Thêm vào giỏ</string>
-    <string name="msg_provided_by_store">Cung cấp bởi </string>
-    <string name="msg_description">Mô tả sản phẩm</string>
-    <string name="msg_product_info_detail">Thông tin chia tiết</string>
-    <string name="msg_see_more">Xem thêm</string>
-    <string name="msg_add_to_cart_success">Sản phẩm đã được thêm vào giỏ hàng</string>
+    <string name="app_name" translatable="false">SNEF</string>
+    <string name="ms_Login" translatable="false">Đăng nhập</string>
+    <string name="ms_InputUsername" translatable="false">Nhận tên đăng nhập</string>
+    <string name="ms_InputPassword" translatable="false">Nhập mật khẩu</string>
+    <string name="ms_HintUsername" translatable="false">Tên đăng nhập</string>
+    <string name="ms_HintPassword" translatable="false">Mật khẩu</string>
+    <string name="home_page" translatable="false">Trang chủ</string>
+    <string name="category_page" translatable="false">Danh mục</string>
+    <string name="account_page" translatable="false">Tài khoản</string>
+    <string name="payment_page" translatable="false">Thanh toán</string>
+    <string name="around_page" translatable="false">Gần đây</string>
+    <string name="search_hint" translatable="false">Tìm kiếm</string>
+    <string name="message_store_around" translatable="false">Cửa hàng gần bạn</string>
+    <string name="message_product_category" translatable="false">Bạn muốn tìm sản phẩm gì?</string>
+    <string name="message_hot_product" translatable="false">Khuyến mãi hot</string>
+    <string name="suggest_today" translatable="false">Gợi ý hôm nay</string>
+    <string name="title_location_permission" translatable="false">Vị trí</string>
+    <string name="text_location_permission" translatable="false">Cho phép truy cập vị trí của bạn</string>
+    <string name="ok" translatable="false">Cho phép</string>
+    <string name="no" translatable="false">Không</string>
+    <string name="OpenGPS" translatable="false">Mở GPS</string>
+    <string name="msg_follow" translatable="false">Yêu thích</string>
+    <string name="msg_update_profile" translatable="false">Theo dỏi</string>
+    <string name="msg_order_history" translatable="false">Lịch sử mua</string>
+    <string name="msg_help" translatable="false">Hổ trợ</string>
+    <string name="msg_logout" translatable="false">Đăng xuất</string>
+    <string name="msg_expired_date" translatable="false">Kết thúc trong</string>
+    <string name="msg_add_to_add" translatable="false">Thêm vào giỏ</string>
+    <string name="msg_provided_by_store" translatable="false">Cung cấp bởi </string>
+    <string name="msg_description" translatable="false">Mô tả sản phẩm</string>
+    <string name="msg_product_info_detail" translatable="false">Thông tin chia tiết</string>
+    <string name="msg_see_more" translatable="false">Xem thêm</string>
+    <string name="msg_add_to_cart_success" translatable="false">Sản phẩm đã được thêm vào giỏ hàng</string>
+    <string name="msg_address" translatable="false">Địa chỉ</string>
+    <string name="msg_rating" translatable="false">Đánh giá</string>
+    <string name="msg_find" translatable="false">Bạn tìm gì hôm nay</string>
+    <string name="msg_open_hour" translatable="false">Giờ mở cửa</string>
 
 
-    <string name="StatusSouldOut">Bán hết</string>
-    <string name="StatusNearlySouldOut">Sắp bán hết</string>
-    <string name="StatusSould">Đã bán</string>
-    <string name="StatusJustOpen">Vừa mở bán"</string>
-    <string name="Open24">Open 24/7</string>
+    <string name="StatusSouldOut" translatable="false">Bán hết</string>
+    <string name="StatusNearlySouldOut" translatable="false">Sắp bán hết</string>
+    <string name="StatusSould" translatable="false">Đã bán</string>
+    <string name="StatusJustOpen" translatable="false">Vừa mở bán"</string>
+    <string name="Open24" translatable="false">Open 24/7</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 
 
 </resources>
