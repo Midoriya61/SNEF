@@ -121,7 +121,6 @@ public class CartPaymentConfirmActivity extends AppCompatActivity {
     }
 
 
-
     public void clickToPay(View view) {
         PayPalPayment payment = new PayPalPayment(new BigDecimal(totalAmount), "USD",
                 "Test Pay with Paypal", PayPalPayment.PAYMENT_INTENT_SALE);
@@ -147,27 +146,9 @@ public class CartPaymentConfirmActivity extends AppCompatActivity {
                     if (state.equals("approved")) //if the payment worked, the state equals approved
                     {
                         Intent intent = new Intent(this, OrderHistoryActivity.class);
+                        intent.putExtra(ConstainApp.JS_STORENAME, tvStoreName.getText());
                         startActivity(intent);
-//                        DBManager dbManager = new DBManager(CartActivity.this);
-//                        List<Cart> cartList = dbManager.getProductByStoreName(intent.getStringExtra(ConstainApp.JS_STORENAME));
-//                        for (int i = 0; i < cartList.size(); i++) {
 //
-//                            Cart cart = dbManager.getProductById(cartList.get(i).getFspId());
-//                            OrderDetail orderDetail = new OrderDetail();
-//                            List<OrderDetail> ORList = dbManager.getAllOrderDetail();
-//                            ContentValues values = new ContentValues();
-//
-//                            orderDetail.setOrderDetailId((ORList.get(ORList.size() - 1).getOrderDetailId()) + 1);
-//                            orderDetail.setOrderId((ORList.get(ORList.size() - 1).getOrderId()) + 1);
-//                            orderDetail.setFspId(cart.getFspId());
-//                            orderDetail.setQuantity(cart.getQuantity());
-//                            orderDetail.setOrderDetailPrice(totalAmount);
-//                            dbManager.addOrderDetail(orderDetail);
-//
-//                        }
-//
-//                        dbManager.getAllOrderDetail();
-
                     } else txtTotalPaymentConfirm.setText("Error in the payment.");
                 } else
                     txtTotalPaymentConfirm.setText("Confirmation is null");

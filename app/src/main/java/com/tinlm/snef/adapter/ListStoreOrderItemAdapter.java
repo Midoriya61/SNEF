@@ -72,6 +72,8 @@ public class ListStoreOrderItemAdapter extends RecyclerView.Adapter<ListStoreOrd
                 LinearLayoutManager.VERTICAL, false));
         listStoreOrderItemHolder.rcListCartItem.setAdapter(listCartAdapter);
 
+
+
 //        int totalAmount = 0;
 //
 //        for (int i = 0; i < cartList.size(); i++) {
