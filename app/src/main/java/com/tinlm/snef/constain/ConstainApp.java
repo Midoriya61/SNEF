@@ -38,6 +38,7 @@ public class ConstainApp {
     public static final String ENDDATE = "ENDDATE";
     public static final String STOREPRODUCTID = "STOREPRODUCTID";
     public static final String CATEGORYID = "CATEGORYID";
+    public static final String  CATEGORYNAME = "CATEGORYNAME";
     public static final String STOREAVATAR = "STOREAVATAR";
     public static final String ADDRESS = "ADDRESS";
     public static final String SEARCHPRODUCTNAME = "SEARCHPRODUCTNAME";
