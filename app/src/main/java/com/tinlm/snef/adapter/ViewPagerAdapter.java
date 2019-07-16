@@ -39,7 +39,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.custom_layout, null);
-        ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
+        ImageView imageView = view.findViewById(R.id.imageView);
         Picasso.get().load(listImage.get(position)).into(imageView);
 
         ViewPager vp = (ViewPager) container;

@@ -5,7 +5,6 @@ import com.tinlm.snef.model.Store;
 
 import java.util.List;
 
-
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -16,5 +15,5 @@ public interface StoreService {
     Call<List<Store>> getListStoreArround();
 
     @GET(ConstainServer.StoreURL + ConstainServer.GetStoreById + "{storeId}")
-    Call<Store> getStoreById(@Path("storeId") int storeId);
+    Call<List<Store>> getStoreById(@Path("storeId") int storeId);
 }

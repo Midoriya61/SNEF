@@ -6,9 +6,9 @@ import com.tinlm.snef.constain.ConstainServer;
 
 public class StoreProductImage {
 
-    @SerializedName("spiId")
+    @SerializedName("fspId")
     @Expose
-    private int spiId;
+    private int fspId;
     @SerializedName("imageSrc")
     @Expose
     private String imageSrc;
@@ -19,12 +19,18 @@ public class StoreProductImage {
     public StoreProductImage() {
     }
 
-    public int getSpiId() {
-        return spiId;
+    public StoreProductImage(int fspId, String imageSrc, int storeProductId) {
+        this.fspId = fspId;
+        this.imageSrc = imageSrc;
+        this.storeProductId = storeProductId;
     }
 
-    public void setSpiId(int spiId) {
-        this.spiId = spiId;
+    public int getFspId() {
+        return fspId;
+    }
+
+    public void setFspId(int fspId) {
+        this.fspId = fspId;
     }
 
     public String getImageSrc() {

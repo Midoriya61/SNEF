@@ -15,7 +15,22 @@
         android:weightSum="1"
         android:padding="10dp"
         >
-
+        <!--<android.support.v7.widget.CardView-->
+            <!--android:background="@color/colorMain"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="0.85"-->
+            <!--&gt;-->
+            <!--<TextView-->
+                <!--android:id="@+id/txtRate"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="20dp"-->
+                <!--android:drawableLeft="@drawable/find"-->
+                <!--android:drawablePadding="10dp"-->
+                <!--android:text="@string/msg_find"-->
+                <!--android:padding="10dp"/>-->
+        <!--</android.support.v7.widget.CardView>-->
         <SearchView
         android:id="@+id/searchProductBar"
         android:background="@color/colorMain"

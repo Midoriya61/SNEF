@@ -17,7 +17,6 @@ import android.widget.Toast;
 import com.tinlm.snef.R;
 import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.constain.ConstainServer;
-import com.tinlm.snef.service.AllService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
-
     }
 
     private void init() {

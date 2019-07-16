@@ -2,165 +2,125 @@ package com.tinlm.snef.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Display;
 import android.view.MenuItem;
+import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.tinlm.snef.R;
-import com.tinlm.snef.adapter.ListCartAdapter;
-import com.tinlm.snef.adapter.ListCartPaymentConfirmAdapter;
-import com.tinlm.snef.adapter.ListStoreOrderItemAdapter;
 import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.database.DBManager;
 import com.tinlm.snef.model.Cart;
-import com.tinlm.snef.utilities.StoreProductImageUtilities;
+import com.tinlm.snef.model.Store;
 
 import java.text.DateFormat;
-import java.text.DecimalFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
 public class OrderHistoryActivity extends AppCompatActivity {
 
+    BottomNavigationView bottomNavigation;
     Intent intent;
     Context mContext;
+    List<Cart> cartList;
 
-    DecimalFormat df = new DecimalFormat("#,###,###,###");
-    RecyclerView rcListCartPaymentConfirm;
-    TextView txtTotalPaymentConfirm;
-    TextView tvStoreName;
-    TextView txtOrderStatus;
     TextView txtOrderID;
+    TextView txtOrderStatus;
+    TextView txtOrderDateTime;
     TextView txtConfirmCode;
-    int confirmCode;
-    int orderID = 53;
-    int totalAmount;
-    TextView txtOrderTime;
-    TextView txtOrderDate;
+    RecyclerView rcListOrderItem;
+    TextView txtTotalOrderPrice;
+    TextView storeName;
+    TextView storeAddress;
+    TextView storeDistance;
+    TextView storeWorkTime;
+    ImageView storeAvatar;
+    Store store;
 
-    BottomNavigationView bottomNavigation;
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_orderhistory);
-        navigateDashboard();
+        setContentView(R.layout.activity_order);
         init();
+        navigateDashboard();
     }
 
     private void init() {
         intent = getIntent();
 
-        DBManager dbManager = new DBManager(OrderHistoryActivity.this);
-        List<Cart> cartList = dbManager.getProductByStoreName(intent.getStringExtra(ConstainApp.JS_STORENAME));
-
-        if (cartList.size() == 0) {
-            this.finish();
-        } else createListCart();
-    }
-
-    private void createListCart() {
-        rcListCartPaymentConfirm = findViewById(R.id.rcListCartPaymentConfirm);
-        txtTotalPaymentConfirm = findViewById(R.id.txtTotalPaymentConfirm);
-        tvStoreName = findViewById(R.id.tvStoreName);
-        txtOrderStatus = findViewById(R.id.txtOrderStatus);
-        txtOrderID = findViewById(R.id.txtOrderStatus);
-        txtConfirmCode = findViewById(R.id.txtConfirmCode);
-        txtOrderDate = findViewById(R.id.txtOrderDate);
-
-        Map<Integer, String> listImageProduct = new HashMap<>();
-//        OrderDetailUtilities orderDetailUtilities = new OrderDetailUtilities();
-        StoreProductImageUtilities imageUltilities = new StoreProductImageUtilities();
-
+        txtOrderID.findViewById(R.id.txtOrderID);
+        txtOrderStatus.findViewById(R.id.txtOrderStatus);
+        txtOrderDateTime.findViewById(R.id.txtOrderDateTime);
+        txtConfirmCode.findViewById(R.id.txtConfirmCode);
+        rcListOrderItem.findViewById(R.id.rcListOrderItem);
+        txtTotalOrderPrice.findViewById(R.id.txtTotalOrderPrice);
+        storeName.findViewById(R.id.storeName);
+        storeAddress.findViewById(R.id.storeAddress);
+        storeDistance.findViewById(R.id.storeDistance);
+        storeWorkTime.findViewById(R.id.storeWorkTime);
+        storeAvatar.findViewById(R.id.storeAvatar);
 
         DBManager dbManager = new DBManager(OrderHistoryActivity.this);
-        List<Cart> cartList = dbManager.getProductByStoreName(intent.getStringExtra(ConstainApp.JS_STORENAME));
-        for (int i = 0; i < cartList.size(); i++) {
-
-            String productImage = imageUltilities.getOneImageByStoreProductId(cartList.get(i).getFspId());
-            listImageProduct.put(cartList.get(i).getFspId(), productImage);
-
-        }
-
-        ListCartAdapter listCartAdapter = new ListCartAdapter(OrderHistoryActivity.this, cartList, listImageProduct);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(OrderHistoryActivity.this,
-                LinearLayoutManager.VERTICAL, false);
-        rcListCartPaymentConfirm.setItemAnimator(new DefaultItemAnimator());
-        rcListCartPaymentConfirm.setLayoutManager(mLayoutManager);
-        rcListCartPaymentConfirm.setAdapter(listCartAdapter);
-        rcListCartPaymentConfirm.addItemDecoration(new DividerItemDecoration(this, 0));
-
-        for (int i = 0; i < cartList.size(); i++) {
-
-            totalAmount += (((cartList.get(i).getPrice() * cartList.get(i).getDiscount()) / 100) * cartList.get(i).getQuantity());
-        }
-        txtTotalPaymentConfirm.setText(String.valueOf(df.format(totalAmount)));
-        tvStoreName.setText(String.valueOf(intent.getStringExtra(ConstainApp.JS_STORENAME)));
-        txtOrderStatus.setText(String.valueOf("Chờ Lấy Hàng"));
-        orderID = orderID + 1;
-        txtOrderID.setText(String.valueOf(orderID));
-        final int min = 100000000;
-        final int max = 999999999;
-        confirmCode = new Random().nextInt((max - min) + 1) + min;
-        txtConfirmCode.setText(String.valueOf(confirmCode));
+        cartList = dbManager.getProductByStoreName(intent.getStringExtra(ConstainApp.JS_STORENAME));
+//        store = dbManager.getStoreByName(intent.getStringExtra(ConstainApp.JS_STORENAME));
 
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-        txtOrderDate.setText(currentDateTimeString);
+        txtOrderDateTime.setText(currentDateTimeString);
 
-        for (int i = 0; i < cartList.size(); i++) {
-            dbManager.deleteCart(cartList.get(i));
-        }
+        storeName.setText(store.getStoreName());
+        storeAddress.setText(store.getAddress());
+
+        WindowManager wm = (WindowManager)mContext.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int height = size.y;
+        Picasso.get().load(store.getAvatar()).resize(0, height / 6).into(storeAvatar);
 
     }
+
 
     private void navigateDashboard() {
         bottomNavigation = findViewById(R.id.bottomNavigation);
-
+        bottomNavigation.setSelectedItemId(R.id.action_orders);
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 Intent intent;
                 switch (menuItem.getItemId()) {
                     case R.id.action_home:
+                        intent = new Intent(OrderHistoryActivity.this, DashboardActivity.class);
+                        startActivity(intent);
+                        finish();
                         break;
                     case R.id.action_category:
                         intent = new Intent(OrderHistoryActivity.this, CategoryActivity.class);
-                        finish();
                         startActivity(intent);
-
+                        finish();
                         break;
                     case R.id.action_around:
                         intent = new Intent(OrderHistoryActivity.this, AroundStoreActivity.class);
-                        finish();
                         startActivity(intent);
-
+                        finish();
                         break;
                     case R.id.action_orders:
-                        intent = new Intent(OrderHistoryActivity.this, OrderActivity.class);
-                        finish();
-                        startActivity(intent);
 
                         break;
                     case R.id.action_account:
                         intent = new Intent(OrderHistoryActivity.this, AccountActivity.class);
-                        finish();
                         startActivity(intent);
-
+                        finish();
                         break;
                 }
                 return false;
             }
         });
     }
-
 }

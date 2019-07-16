@@ -19,8 +19,7 @@ public class OrderDetailUtilities {
 
         try {
             URL urll = new URL(url);
-            HttpGetRequest httpGetRequest = new HttpGetRequest();
-            respone = httpGetRequest.execute(urll.openStream()).get();
+            respone = ReadStream.readStream(urll.openStream());
             result = Integer.parseInt(respone);
 
         }catch (Exception e){

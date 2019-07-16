@@ -44,6 +44,7 @@ public class OrderActivity extends AppCompatActivity {
     }
 
     private void init() {
+
         intent = getIntent();
 
         rcOrderStore = findViewById(R.id.rcOrderStore);

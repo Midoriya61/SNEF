@@ -12,8 +12,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.tinlm.snef.R;
-import com.tinlm.snef.activity.CartPaymentConfirmActivity;
+import com.tinlm.snef.activity.CartActivity;
 import com.tinlm.snef.activity.OrderActivity;
+import com.tinlm.snef.activity.PayPalActivity;
 import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.database.DBManager;
 import com.tinlm.snef.model.Cart;
@@ -69,30 +70,37 @@ public class ListStoreOrderItemAdapter extends RecyclerView.Adapter<ListStoreOrd
 //        listStoreOrderItemHolder.rcListCartItem.getAdapter();
 
         listStoreOrderItemHolder.rcListCartItem.setLayoutManager(new LinearLayoutManager(mContext,
-                LinearLayoutManager.VERTICAL, false));
+                        LinearLayoutManager.VERTICAL,false));
         listStoreOrderItemHolder.rcListCartItem.setAdapter(listCartAdapter);
 
+        int totalAmount = 0;
 
+        for (int i = 0; i < cartList.size(); i++) {
 
-//        int totalAmount = 0;
+            totalAmount += (((cartList.get(i).getPrice() * cartList.get(i).getDiscount()) / 100) * cartList.get(i).getQuantity());
+        }
+        listStoreOrderItemHolder.txtTotalCartPrice.setText(String.valueOf(df.format(totalAmount)));
 //
-//        for (int i = 0; i < cartList.size(); i++) {
-//
-//            totalAmount += (((cartList.get(i).getPrice() * cartList.get(i).getDiscount()) / 100) * cartList.get(i).getQuantity());
-//        }
-//        listStoreOrderItemHolder.txtTotalCartPrice.setText(String.valueOf(df.format(totalAmount)));
+//        listStoreOrderItemHolder.cardOrderStoreItem.setOnClickListener(new View.OnClickListener() {
+////
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(mContext, CartActivity.class);
+//                intent.putExtra(ConstainApp.JS_STORENAME,storeOrderItem.getStoreName());
+//                mContext.startActivity(intent);
+//            }
+//        });
+        listStoreOrderItemHolder.tvStoreName.setText(storeOrderItem.getStoreName());
 
-        listStoreOrderItemHolder.cardOrderStoreItem.setOnClickListener(new View.OnClickListener() {
+        listStoreOrderItemHolder.btnCheckout.setOnClickListener(new View.OnClickListener() {
             //
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, CartPaymentConfirmActivity.class);
+                Intent intent = new Intent(mContext, PayPalActivity.class);
                 intent.putExtra(ConstainApp.JS_STORENAME, storeOrderItem.getStoreName());
                 mContext.startActivity(intent);
             }
         });
-        listStoreOrderItemHolder.tvStoreName.setText(storeOrderItem.getStoreName());
-
 
     }
 
@@ -103,18 +111,21 @@ public class ListStoreOrderItemAdapter extends RecyclerView.Adapter<ListStoreOrd
 
     public static class ListStoreOrderItemHolder extends RecyclerView.ViewHolder {
 
-        TextView tvStoreName;
+        TextView tvStoreName, txtTotalCartPrice;
 
-        CardView cardOrderStoreItem;
+        CardView cardOrderStoreItem, btnCheckout;
 
         RecyclerView rcListCartItem;
 
 
         public ListStoreOrderItemHolder(@NonNull View itemView) {
             super(itemView);
+            txtTotalCartPrice = itemView.findViewById(R.id.txtTotalCartPrice);
             tvStoreName = itemView.findViewById(R.id.tvStoreName);
             cardOrderStoreItem = itemView.findViewById(R.id.cardOrderStoreItem);
             rcListCartItem = itemView.findViewById(R.id.rcListCartItem);
+            btnCheckout = itemView.findViewById(R.id.btnCheckout);
+
         }
     }
 }
