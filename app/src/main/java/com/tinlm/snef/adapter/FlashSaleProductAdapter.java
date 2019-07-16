@@ -20,8 +20,7 @@ import com.squareup.picasso.Picasso;
 import com.tinlm.snef.R;
 import com.tinlm.snef.activity.FlashSalesProductDetailActivity;
 import com.tinlm.snef.constain.ConstainApp;
-import com.tinlm.snef.fragment.HotProductHomeFragment;
-import com.tinlm.snef.fragment.ListFSPFragment;
+
 import com.tinlm.snef.model.FlashSaleProduct;
 
 import java.text.DateFormat;
@@ -34,7 +33,6 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
     List<FlashSaleProduct> flashSaleProductList;
     String sreenName;
 
-
     private Runnable runnable;
     private Handler handler = new Handler();
     private String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
@@ -43,7 +41,6 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
                                   String sreenName) {
         this.mContext = mContext;
         this.flashSaleProductList = flashSaleProductList;
-
         this.sreenName = sreenName;
     }
 
@@ -55,8 +52,6 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
         FlashSaleProductHolder flashSaleProductHolder;
         View v = LayoutInflater.from(mContext).inflate(R.layout.list_flash_sale_product, viewGroup, false);
         flashSaleProductHolder = new FlashSaleProductHolder(v);
-
-
         return flashSaleProductHolder;
     }
 
@@ -66,16 +61,8 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
     @Override
     public void onBindViewHolder(@NonNull FlashSaleProductHolder flashSaleProductHolder, int i) {
         final FlashSaleProduct flashSaleProduct = flashSaleProductList.get(i);
-
-
-
-
         Picasso.get().load("https://res.cloudinary.com/dr4hpc9gi/image/upload/v1558970388/FoodStoreImage/discount.png")
                 .resize(200,120).into(flashSaleProductHolder.imgDiscount);
-
-
-
-
         if(sreenName.equals(ConstainApp.SCHotProductHomeFragment)) {
             if(flashSaleProduct.getImageSrc() == null) {
                 Picasso.get().load("https://res.cloudinary.com/dr4hpc9gi/image/upload/v1559727025/noimage.jpg")
@@ -136,7 +123,6 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
         flashSaleProductHolder.flashSaleProductLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(mContext, FlashSalesProductDetailActivity.class);
                 intent.putExtra(ConstainApp.FLASHSALEPRODUCTID,flashSaleProduct.getFlashSaleProductId());
                 intent.putExtra(ConstainApp.PRODUCTNAME,flashSaleProduct.getProductName());

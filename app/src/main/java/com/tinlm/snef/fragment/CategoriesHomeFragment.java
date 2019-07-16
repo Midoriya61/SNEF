@@ -13,17 +13,18 @@ import android.view.ViewGroup;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.tinlm.snef.R;
-import com.tinlm.snef.activity.DashboardActivity;
 import com.tinlm.snef.adapter.CategoriesAdapter;
 import com.tinlm.snef.model.Categories;
+import com.tinlm.snef.service.AllService;
 import com.tinlm.snef.service.CategoriesService;
-import com.tinlm.snef.utilities.ApiUtils;
+import com.tinlm.snef.utilities.CategoriesUtilities;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 
 
 public class CategoriesHomeFragment extends Fragment {
@@ -39,17 +40,15 @@ public class CategoriesHomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_categories_home, container, false);
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         rcListCategories = view.findViewById(R.id.rcListCategories);
-        categoriesService = ApiUtils.getCategoriesService();
-
+        categoriesService = AllService.getCategoriesService();
+//        CategoriesUtilities categoriesUtilities = new CategoriesUtilities();
         categoriesService.getAllCategories().enqueue(new Callback<List<Categories>>() {
             @Override
             public void onResponse(Call<List<Categories>> call, Response<List<Categories>> response) {
                 List<Categories> categoryList = response.body();
 //                CategoriesUtilities categoriesUtilities = new CategoriesUtilities();
 //                categoryList = categoriesUtilities.getAllCategories();
-
                 CategoriesAdapter categoriesAdapter = new CategoriesAdapter(CategoriesHomeFragment.this.getContext(), categoryList);
-
                 final RecyclerView.LayoutManager mLayoutManager
                         = new LinearLayoutManager(CategoriesHomeFragment.this.getContext(),
                         LinearLayoutManager.HORIZONTAL, false);
