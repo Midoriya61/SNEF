@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCartHolder> {
+public class ListOrderHistoryProductAdapter extends RecyclerView.Adapter<ListOrderHistoryProductAdapter.ListOrderHistoryProductHolder> {
 
     Context mContext;
     List<Cart> cartList = new ArrayList<>();
@@ -34,7 +34,7 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
     private Runnable runnable;
     private Handler handler = new Handler();
 
-    public ListCartAdapter(Context mContext, List<Cart> cartList,
+    public ListOrderHistoryProductAdapter(Context mContext, List<Cart> cartList,
                            Map<Integer, String> listImageCartProduct) {
         this.mContext = mContext;
         this.cartList = cartList;
@@ -47,34 +47,34 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
     // Load into ListCartHolder
     @NonNull
     @Override
-    public ListCartHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        ListCartHolder listCartHolder;
-        View v = LayoutInflater.from(mContext).inflate(R.layout.list_cart, viewGroup, false);
-        listCartHolder = new ListCartHolder(v);
+    public ListOrderHistoryProductHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        ListOrderHistoryProductHolder listOrderHistoryProductHolder;
+        View v = LayoutInflater.from(mContext).inflate(R.layout.list_orderhistoryproduct, viewGroup, false);
+        listOrderHistoryProductHolder = new ListOrderHistoryProductHolder(v);
 
 
-        return listCartHolder;
+        return listOrderHistoryProductHolder;
     }
 
 
     ////07/07/2019 HieuTB Create
     // Load data into layout
     @Override
-    public void onBindViewHolder(@NonNull final ListCartHolder listCartHolder, int i) {
+    public void onBindViewHolder(@NonNull final ListOrderHistoryProductHolder listOrderHistoryProductHolder, int i) {
         final Cart cart = cartList.get(i);
         final int position = i;
 
         String productCartImage = listImageCartProduct.get(cart.getFspId());
 
 
-        Picasso.get().load(productCartImage).resize(500, 500).into(listCartHolder.imgCartFood);
+        Picasso.get().load(productCartImage).resize(500, 500).into(listOrderHistoryProductHolder.imgCartFood);
 
 
-        listCartHolder.txtCartFoodName.setText(cart.getProductName());
+        listOrderHistoryProductHolder.txtCartFoodName.setText(cart.getProductName());
 
-        listCartHolder.btnCartQuantity.setNumber(String.valueOf(cart.getQuantity()));
+        listOrderHistoryProductHolder.txtQuantity.setText(String.valueOf(cart.getQuantity()));
 
-        listCartHolder.txtCartPrice.setText(String.format("%,d", (int) ((cart.getPrice() * cart.getDiscount()) / 100)) + "");
+        listOrderHistoryProductHolder.txtCartPrice.setText(String.format("%,d", (int) ((cart.getPrice() * cart.getDiscount()) / 100)) + "");
 //
 
 //        btnChange.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
@@ -91,17 +91,7 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
 //            }
 //        });
 
-        listCartHolder.btnCartQuantity.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
-            @Override
-            public void onValueChange(ElegantNumberButton view, int oldValue, int newValue) {
-                if (newValue != oldValue) {
-                    cart.setQuantity(newValue);
-                    DBManager dbManager = new DBManager(mContext);
-                    dbManager.updateCartQuantity(cart);
-                    notifyItemChanged(position);
 
-                    ((OrderActivity) mContext).recreate();
-                    ((OrderActivity) mContext).overridePendingTransition(0, 0);
 //                    ((OrderActivity) mContext).startActivity(((OrderActivity) mContext).getIntent());
 //                    ((OrderActivity) mContext).overridePendingTransition(0, 0);
 
@@ -115,18 +105,10 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
 //                        txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(",", "")) - (int) ((cart.getPrice() * cart.getDiscount()) / 100))));
 //                    }
 
-                }
-            }
-        });
 
 
-        listCartHolder.btnRemove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DBManager dbManager = new DBManager(mContext);
-                dbManager.deleteCart(cart);
-                ((OrderActivity) mContext).recreate();
-                ((OrderActivity) mContext).overridePendingTransition(0, 0);
+
+
 //                ((OrderActivity) mContext).recreate();
 //                ((OrderActivity) mContext).overridePendingTransition(0, 0);
 
@@ -139,8 +121,6 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
 //                }
 
 
-            }
-        });
 
 //        listCartHolder.listCartLayout.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -169,24 +149,22 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
     }
 
 
-    public class ListCartHolder extends RecyclerView.ViewHolder {
+    public class ListOrderHistoryProductHolder extends RecyclerView.ViewHolder {
 
         ImageView imgCartFood;
 
         TextView txtCartFoodName, txtCartPrice;
 
-        ElegantNumberButton btnCartQuantity;
-        TextView btnRemove;
+        TextView txtQuantity;
 
         LinearLayout listCartLayout;
 
-        public ListCartHolder(@NonNull View itemView) {
+        public ListOrderHistoryProductHolder (@NonNull View itemView) {
             super(itemView);
             imgCartFood = itemView.findViewById(R.id.imgCartFood);
-            btnRemove = itemView.findViewById(R.id.btnRemove);
             txtCartFoodName = itemView.findViewById(R.id.txtCartFoodName);
             txtCartPrice = itemView.findViewById(R.id.txtCartPrice);
-            btnCartQuantity = itemView.findViewById(R.id.btnCartQuantity);
+            txtQuantity = itemView.findViewById(R.id.txtQuantity);
             listCartLayout = itemView.findViewById(R.id.listCartLayout);
         }
     }

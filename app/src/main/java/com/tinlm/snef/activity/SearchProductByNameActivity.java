@@ -16,7 +16,6 @@ import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.fragment.HotProductHomeFragment;
 import com.tinlm.snef.fragment.ListFSPFragment;
 import com.tinlm.snef.model.FlashSaleProduct;
-import com.tinlm.snef.service.AllService;
 import com.tinlm.snef.service.FlashSaleProductService;
 import com.tinlm.snef.utilities.ApiUtils;
 import com.tinlm.snef.utilities.OrderDetailUtilities;
@@ -51,11 +50,23 @@ public class SearchProductByNameActivity extends AppCompatActivity {
         rcListProductByName = findViewById(R.id.rcListProductByName);
         txtSearchProduct.setText(intent.getStringExtra(ConstainApp.SEARCHPRODUCTNAME));
 
-        flashSaleProductService = AllService.getFlashSaleProductService();
+        flashSaleProductService = ApiUtils.getFlashSaleProductService();
         flashSaleProductService.getFSPByName(intent.getStringExtra(ConstainApp.SEARCHPRODUCTNAME)).enqueue(new Callback<List<FlashSaleProduct>>() {
             @Override
             public void onResponse(Call<List<FlashSaleProduct>> call, Response<List<FlashSaleProduct>> response) {
                 List<FlashSaleProduct> flashSaleProducts = response.body();
+                Map<Integer, String> listImageProduct = new HashMap<>();
+                Map<Integer, Integer> listTotalPrice = new HashMap<>();
+//                StoreProductImageUtilities imageUltilities = new StoreProductImageUtilities();
+//                OrderDetailUtilities orderDetailUtilities = new OrderDetailUtilities();
+//
+//                for (int i = 0; i < flashSaleProducts.size(); i++) {
+//                    //get image of product
+//                    String productImage = imageUltilities.getOneImageByStoreProductId(flashSaleProducts.get(i).getStoreProductId());
+//                    listImageProduct.put(flashSaleProducts.get(i).getStoreProductId(), productImage);
+//                    int totalQuantity = orderDetailUtilities.getQuantityByFSPId(flashSaleProducts.get(i).getFlashSaleProductId());
+//                    listTotalPrice.put(flashSaleProducts.get(i).getFlashSaleProductId(), totalQuantity);
+//                }
                 FlashSaleProductAdapter flashSaleProductAdapter = new FlashSaleProductAdapter(SearchProductByNameActivity.this
                         , flashSaleProducts, ConstainApp.SCSearchProductByNameActivity);
 

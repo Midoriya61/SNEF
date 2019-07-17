@@ -27,7 +27,7 @@
     <string name="msg_logout" translatable="false">Đăng xuất</string>
     <string name="msg_expired_date" translatable="false">Kết thúc trong</string>
     <string name="msg_add_to_add" translatable="false">Thêm vào giỏ</string>
-    <string name="msg_provided_by_store" translatable="false">Cung cấp bởi </string>
+    <string name="msg_provided_by_store" translatable="false">Cung cấp bởi  </string>
     <string name="msg_description" translatable="false">Mô tả sản phẩm</string>
     <string name="msg_product_info_detail" translatable="false">Thông tin chia tiết</string>
     <string name="msg_see_more" translatable="false">Xem thêm</string>
@@ -36,8 +36,7 @@
     <string name="msg_rating" translatable="false">Đánh giá</string>
     <string name="msg_find" translatable="false">Bạn tìm gì hôm nay</string>
     <string name="msg_open_hour" translatable="false">Giờ mở cửa</string>
-    <string name="msg_still_not_rating" translatable="false">Chưa có đánh giá</string>
-    <string name="msg_warehouse" translatable="false">Kho: </string>
+
     <string name="btn_delcart" translatable="false">Xóa</string>
     <string name="btn_confirmpayment" translatable="false">XÁC NHẬN THANH TOÁN</string>
 

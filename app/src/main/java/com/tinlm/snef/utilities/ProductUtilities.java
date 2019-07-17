@@ -34,8 +34,7 @@ public class ProductUtilities {
 
         try {
             URL urll = new URL(url);
-            HttpGetRequest httpGetRequest = new HttpGetRequest();
-            respone = httpGetRequest.execute(urll.openStream()).get();
+            respone = ReadStream.readStream(urll.openStream());
             JSONArray arr = new JSONArray(respone);
 
             for (int i = 0; i < arr.length(); i++)

@@ -2,16 +2,11 @@ package com.tinlm.snef.utilities;
 
 import com.tinlm.snef.constain.ConstainServer;
 import com.tinlm.snef.model.FlashSaleProduct;
-import com.tinlm.snef.model.Like;
 import com.tinlm.snef.service.CategoriesService;
 import com.tinlm.snef.service.FlashSaleProductService;
-import com.tinlm.snef.service.LikeService;
 import com.tinlm.snef.service.ProductService;
 import com.tinlm.snef.service.StoreProductImageService;
-import com.tinlm.snef.service.StoreProductService;
 import com.tinlm.snef.service.StoreService;
-
-import retrofit2.Retrofit;
 
 public class ApiUtils {
 
@@ -39,18 +34,7 @@ public class ApiUtils {
 
     // Store
     public static StoreService getStoreService() {
-        StoreService storeService = RetrofitClient.getClient(ConstainServer.BaseURL).create(StoreService.class);
-        return storeService;
+        return RetrofitClient.getClient(ConstainServer.BaseURL).create(StoreService.class);
     }
 
-    // Store Product
-    public static StoreProductService getStoreProductService() {
-        return RetrofitClient.getClient(ConstainServer.BaseURL).create(StoreProductService.class);
-    }
-
-    // Like
-
-    public static LikeService getLikeService() {
-        return RetrofitClient.getClient(ConstainServer.BaseURL).create(LikeService.class);
-    }
 }
