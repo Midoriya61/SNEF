@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
-        android:layout_alignBottom="@+id/bottomNavigationView"
+
         android:layout_marginBottom="64dp"
         android:background="@color/grayLight"
         android:orientation="vertical">
