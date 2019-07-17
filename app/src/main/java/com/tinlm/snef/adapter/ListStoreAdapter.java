@@ -71,14 +71,10 @@ public class ListStoreAdapter extends RecyclerView.Adapter<ListStoreAdapter.List
         Point size = new Point();
         display.getSize(size);
         int height = size.y;
-        Picasso.get().load(currentStore.getAvatar()).resize(0,height / 7).into(listStoreViewHolder.storeAvatar);
+        Picasso.get().load(currentStore.getAvatar()).resize(0,height / 6).into(listStoreViewHolder.storeAvatar);
         listStoreViewHolder.storeWorkTime.setText(openHour);
         listStoreViewHolder.storeDistance.setText((Math.floor(currentStore.getDistance() * 100) / 100) + " km");
-        if (currentStore.getRatingPoint() == 0) {
-            listStoreViewHolder.ratingPoint.setText(mContext.getResources().getString(R.string.msg_still_not_rating));
-        } else {
-            listStoreViewHolder.ratingPoint.setText(mContext.getResources().getString(R.string.msg_rating) + ": " + currentStore.getRatingPoint()+ "/5");
-        }
+
         final String finalOpenHour = openHour;
         listStoreViewHolder.viewStore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +102,7 @@ public class ListStoreAdapter extends RecyclerView.Adapter<ListStoreAdapter.List
 
     public class ListStoreViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView storeName,storeDistance, storeWorkTime, storeAddress, ratingPoint;
+        private TextView storeName,storeDistance, storeWorkTime, storeAddress;
         private ImageView storeAvatar;
         private LinearLayout viewStore;
 
@@ -119,7 +115,6 @@ public class ListStoreAdapter extends RecyclerView.Adapter<ListStoreAdapter.List
             storeAddress = itemView.findViewById(R.id.storeAddress);
             storeAvatar = itemView.findViewById(R.id.storeAvatar);
             viewStore = itemView.findViewById(R.id.viewStore);
-            ratingPoint = itemView.findViewById(R.id.ratingPoint);
         }
     }
 }

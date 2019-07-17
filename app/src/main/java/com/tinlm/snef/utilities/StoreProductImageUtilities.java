@@ -29,8 +29,7 @@ public class StoreProductImageUtilities {
 
         try {
             URL urll = new URL(url);
-            HttpGetRequest httpGetRequest = new HttpGetRequest();
-            respone = httpGetRequest.execute(urll.openStream()).get();
+            respone = ReadStream.readStream(urll.openStream());
             JSONObject jsonObj = new JSONObject(respone);
             if(jsonObj.has(imageSrc)){
                 result = jsonObj.getString(imageSrc);
@@ -52,12 +51,14 @@ public class StoreProductImageUtilities {
 
         try {
             URL urll = new URL(url);
-            HttpGetRequest httpGetRequest = new HttpGetRequest();
-            respone = httpGetRequest.execute(urll.openStream()).get();
+            respone = ReadStream.readStream(urll.openStream());
             JSONArray arr = new JSONArray(respone);
             result = new ArrayList<>();
             for (int i  = 0; i < arr.length(); i++) {
-                result.add((String) arr.get(i));
+                JSONObject jsonObj = arr.getJSONObject(i);
+                if(jsonObj.has(imageSrc)) {
+                    result.add(jsonObj.getString(imageSrc));
+                }
             }
 
         }catch (Exception e){
