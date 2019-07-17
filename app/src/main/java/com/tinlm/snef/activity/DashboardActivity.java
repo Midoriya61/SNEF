@@ -78,4 +78,9 @@ public class DashboardActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+    public void clickToShoppingCart(View view) {
+        Intent intent = new Intent(this, OrderActivity.class);
+        startActivity(intent);
+    }
 }

@@ -10,4 +10,10 @@
     <color name="grayLight">#f2f2f2</color>
     <color name="lightOrange">#ffd4b3</color>
     <color name="orange">#FE6F00</color>
+    <color name="green">#028A0F</color>
+    <color name="blue">#0066AE</color>
+    <color name="warmGray">#DADEDF</color>
+    <color name="persianRed">#CA3433</color>
+
+
 </resources>

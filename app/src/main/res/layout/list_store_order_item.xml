@@ -28,7 +28,7 @@
                 android:layout_margin="5dp"
                 android:text="Store Name"
                 android:textColor="@color/colorMain"
-                android:textSize="20dp"
+                android:textSize="22dp"
                 android:textStyle="bold" />
 
 
@@ -54,9 +54,12 @@
                 android:id="@+id/btnCheckout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:onClick="clickToPayCart"
-                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardBackgroundColor="@color/green"
                 app:cardCornerRadius="15dp">
 
                 <LinearLayout
@@ -90,7 +93,7 @@
                             android:layout_height="wrap_content"
                             android:text="00,00"
                             android:textColor="@color/colorMain"
-                            android:textSize="20dp"
+                            android:textSize="22dp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -98,7 +101,7 @@
                             android:layout_height="wrap_content"
                             android:text=" đ"
                             android:textColor="@color/colorMain"
-                            android:textSize="20dp"
+                            android:textSize="22dp"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>

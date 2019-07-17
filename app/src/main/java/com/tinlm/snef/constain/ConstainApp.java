@@ -57,6 +57,7 @@ public class ConstainApp {
     public static final String JS_FSPID = "FSPID";
     public static final String JS_PCount = "PCount";
     public static final String JS_CART = "CART";
+    public static final String JS_ORDERTABLE = "ORDERTABLE";
     public static final String JS_DB_NAME = "cart_list";
     public static final String JS_DISCOUNT = "DISCOUNT";
 

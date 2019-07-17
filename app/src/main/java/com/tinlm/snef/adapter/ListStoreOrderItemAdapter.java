@@ -12,18 +12,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.tinlm.snef.R;
-import com.tinlm.snef.activity.CartActivity;
-import com.tinlm.snef.activity.OrderActivity;
 import com.tinlm.snef.activity.PayPalActivity;
 import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.database.DBManager;
 import com.tinlm.snef.model.Cart;
-import com.tinlm.snef.model.FlashSaleProduct;
 import com.tinlm.snef.model.StoreOrderItem;
 import com.tinlm.snef.utilities.StoreProductImageUtilities;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,6 +50,7 @@ public class ListStoreOrderItemAdapter extends RecyclerView.Adapter<ListStoreOrd
     @Override
     public void onBindViewHolder(@NonNull ListStoreOrderItemHolder listStoreOrderItemHolder, int a) {
         final StoreOrderItem storeOrderItem = storeOrderItems.get(a);
+        final int positon = a;
         StoreProductImageUtilities imageUltilities = new StoreProductImageUtilities();
         Map<Integer, String> listImageProduct = new HashMap<>();
         DBManager dbManager = new DBManager(mContext);
@@ -70,8 +67,10 @@ public class ListStoreOrderItemAdapter extends RecyclerView.Adapter<ListStoreOrd
 //        listStoreOrderItemHolder.rcListCartItem.getAdapter();
 
         listStoreOrderItemHolder.rcListCartItem.setLayoutManager(new LinearLayoutManager(mContext,
-                        LinearLayoutManager.VERTICAL,false));
+                LinearLayoutManager.VERTICAL, false));
         listStoreOrderItemHolder.rcListCartItem.setAdapter(listCartAdapter);
+
+        listCartAdapter.notifyDataSetChanged();
 
         int totalAmount = 0;
 
@@ -80,7 +79,8 @@ public class ListStoreOrderItemAdapter extends RecyclerView.Adapter<ListStoreOrd
             totalAmount += (((cartList.get(i).getPrice() * cartList.get(i).getDiscount()) / 100) * cartList.get(i).getQuantity());
         }
         listStoreOrderItemHolder.txtTotalCartPrice.setText(String.valueOf(df.format(totalAmount)));
-//
+
+
 //        listStoreOrderItemHolder.cardOrderStoreItem.setOnClickListener(new View.OnClickListener() {
 ////
 //            @Override
@@ -101,6 +101,7 @@ public class ListStoreOrderItemAdapter extends RecyclerView.Adapter<ListStoreOrd
                 mContext.startActivity(intent);
             }
         });
+
 
     }
 

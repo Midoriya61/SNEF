@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Handler;
+import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +15,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.tinlm.snef.R;
 import com.tinlm.snef.adapter.ListStoreOrderItemAdapter;
@@ -39,11 +44,15 @@ public class OrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
+
         init();
+
+
         navigateDashboard();
     }
 
-    private void init() {
+
+    public void init() {
 
         intent = getIntent();
 
@@ -124,8 +133,8 @@ public class OrderActivity extends AppCompatActivity {
         rcOrderStore.setAdapter(storeOrderItemAdapter);
         rcOrderStore.addItemDecoration(new DividerItemDecoration(this, 0));
 
-    }
 
+    }
 
     private void navigateDashboard() {
         bottomNavigation = findViewById(R.id.bottomNavigation);

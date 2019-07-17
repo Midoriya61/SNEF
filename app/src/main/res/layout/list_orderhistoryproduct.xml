@@ -13,15 +13,15 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
 
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_weight="0.2"
         android:orientation="vertical">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.8"
+            android:layout_height="match_parent"
             android:background="@color/colorMain"
             app:cardCornerRadius="10dp">
 
@@ -34,21 +34,6 @@
 
         </android.support.v7.widget.CardView>
 
-        <TextView
-            android:id="@+id/btnRemove"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="0.2"
-            android:background="@color/colorMain"
-            android:gravity="center"
-            android:text="@string/btn_delcart"
-            android:textColor="@color/persianRed"
-            android:textSize="16dp"
-            android:textStyle="bold" />
-
     </LinearLayout>
 
 
@@ -56,15 +41,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_weight="0.8"
+        android:layout_weight="0.6"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="0.5"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="0.6"
             android:gravity="left"
             android:orientation="vertical">
 
@@ -93,7 +79,7 @@
                     android:layout_toLeftOf="@+id/dashPrice"
                     android:text="$00.00"
                     android:textColor="@color/green"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -104,41 +90,43 @@
                     android:layout_marginRight="20dp"
                     android:text=" đ"
                     android:textColor="@color/green"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
 
-
             </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="0.4"
-            android:orientation="horizontal">
 
-            <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
-                android:id="@+id/btnCartQuantity"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="0.5"
-                app:backGroundColor="@color/warmGray"
-                app:initialNumber="1"
-                app:textColor="@color/green"
-                app:textSize="8dp" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.6">
-
-            </LinearLayout>
-        </LinearLayout>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.2"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical"
+        android:gravity="right"
+        android:layout_marginRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="x "
+            android:textColor="@color/green"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            />
+
+        <TextView
+            android:id="@+id/txtQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20"
+            android:textColor="@color/green"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            />
+    </LinearLayout>
 
 </LinearLayout>

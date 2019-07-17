@@ -32,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         init();
         String userIsLogn = getAccountLogin();
         if(userIsLogn != null) {
+
             Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
             startActivity(intent);
             finish();
@@ -64,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                 editor.putString(ConstainApp.PHONE, customer.getPhone());
                 editor.putInt(ConstainApp.CUSTOMERID, customer.getCustomerId());
                 editor.apply();
+
                 Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                 startActivity(intent);
                 finish();
@@ -77,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
         String username;
         SharedPreferences sharedPreferences = getSharedPreferences(ConstainApp.login_Prefer, MODE_PRIVATE);
         username = sharedPreferences.getString(ConstainApp.USERNAME,null);
+
         return username;
     }
 

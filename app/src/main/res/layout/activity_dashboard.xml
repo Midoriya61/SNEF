@@ -20,7 +20,7 @@
             android:background="@color/colorMain"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.85"
+            android:layout_weight="0.7"
             android:onClick="clickToSearchProduct"
             >
             <TextView
@@ -47,6 +47,13 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:src="@drawable/filter"
+            android:layout_weight="0.15"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:onClick="clickToShoppingCart"
+            android:src="@drawable/shoppingcart_icon"
             android:layout_weight="0.15"/>
 
     </LinearLayout>
