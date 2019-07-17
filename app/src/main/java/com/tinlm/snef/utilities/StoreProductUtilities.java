@@ -15,7 +15,7 @@ public class StoreProductUtilities {
 
     // Get quantity of store product by store product id
     public int getQuantityById( int storeProductId ) {
-       int result = 0;
+        int result = 0;
 
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -25,7 +25,8 @@ public class StoreProductUtilities {
 
         try {
             URL urll = new URL(url);
-            respone = ReadStream.readStream(urll.openStream());
+            HttpGetRequest httpGetRequest = new HttpGetRequest();
+            respone = httpGetRequest.execute(urll.openStream()).get();
             result = Integer.parseInt(respone);
 
         }catch (Exception e){
@@ -35,7 +36,7 @@ public class StoreProductUtilities {
     }
 
     public String getDesById( int storeProductId ) {
-       String result = "";
+        String result = "";
 
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -45,7 +46,8 @@ public class StoreProductUtilities {
 
         try {
             URL urll = new URL(url);
-            respone = ReadStream.readStream(urll.openStream());
+            HttpGetRequest httpGetRequest = new HttpGetRequest();
+            respone = httpGetRequest.execute(urll.openStream()).get();
             result = respone;
 
         }catch (Exception e){
