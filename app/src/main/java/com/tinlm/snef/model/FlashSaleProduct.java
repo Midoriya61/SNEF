@@ -12,38 +12,36 @@ public class FlashSaleProduct implements Comparable<FlashSaleProduct> {
 
     @SerializedName("flashSaleProductId")
     @Expose
-        private int flashSaleProductId;
+    private int flashSaleProductId;
     @SerializedName("quantity")
     @Expose
-        private int quantity;
+    private int quantity;
     @SerializedName("discount")
     @Expose
-        private int discount;
+    private int discount;
     @SerializedName("endDate")
     @Expose
-        private String endDate;
+    private String endDate;
     @SerializedName("productName")
     @Expose
-        private String productName;
+    private String productName;
     @SerializedName("price")
     @Expose
-        private float price;
-
-        private String description;
+    private float price;
 
     @SerializedName("storeProductId")
     @Expose
-        private int storeProductId;
+    private int storeProductId;
     @SerializedName("flashSalesId")
     @Expose
-        private int flashSalesId;
+    private int flashSalesId;
     @SerializedName("storeId")
     @Expose
-        private int storeId;
+    private int storeId;
     @SerializedName("spQuantity")
     @Expose
 
-        private int spQuantity;
+    private int spQuantity;
 
     @SerializedName("totalQuantity")
     @Expose
@@ -53,8 +51,13 @@ public class FlashSaleProduct implements Comparable<FlashSaleProduct> {
     @Expose
     private String imageSrc;
 
-        public FlashSaleProduct() {
-        }
+    @SerializedName("description")
+    @Expose
+    private String description;
+
+    public FlashSaleProduct() {
+    }
+
 
     public int getTotalQuantity() {
         return totalQuantity;
@@ -73,60 +76,60 @@ public class FlashSaleProduct implements Comparable<FlashSaleProduct> {
     }
 
     public int getStoreId() {
-            return storeId;
-        }
+        return storeId;
+    }
 
-        public void setStoreId(int storeId) {
-            this.storeId = storeId;
-        }
+    public void setStoreId(int storeId) {
+        this.storeId = storeId;
+    }
 
-        public int getSpQuantity() {
-            return spQuantity;
-        }
+    public int getSpQuantity() {
+        return spQuantity;
+    }
 
-        public void setSpQuantity(int spQuantity) {
-            this.spQuantity = spQuantity;
-        }
+    public void setSpQuantity(int spQuantity) {
+        this.spQuantity = spQuantity;
+    }
 
-        public int getStoreProductId() {
-            return storeProductId;
-        }
+    public int getStoreProductId() {
+        return storeProductId;
+    }
 
-        public void setStoreProductId(int storeProductId) {
-            this.storeProductId = storeProductId;
-        }
+    public void setStoreProductId(int storeProductId) {
+        this.storeProductId = storeProductId;
+    }
 
-        public int getFlashSalesId() {
-            return flashSalesId;
-        }
+    public int getFlashSalesId() {
+        return flashSalesId;
+    }
 
-        public void setFlashSalesId(int flashSalesId) {
-            this.flashSalesId = flashSalesId;
-        }
+    public void setFlashSalesId(int flashSalesId) {
+        this.flashSalesId = flashSalesId;
+    }
 
-        public int getFlashSaleProductId() {
-            return flashSaleProductId;
-        }
+    public int getFlashSaleProductId() {
+        return flashSaleProductId;
+    }
 
-        public void setFlashSaleProductId(int flashSaleProductId) {
-            this.flashSaleProductId = flashSaleProductId;
-        }
+    public void setFlashSaleProductId(int flashSaleProductId) {
+        this.flashSaleProductId = flashSaleProductId;
+    }
 
-        public int getQuantity() {
-            return quantity;
-        }
+    public int getQuantity() {
+        return quantity;
+    }
 
-        public void setQuantity(int quantity) {
-            this.quantity = quantity;
-        }
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
-        public int getDiscount() {
-            return discount;
-        }
+    public int getDiscount() {
+        return discount;
+    }
 
-        public void setDiscount(int discount) {
-            this.discount = discount;
-        }
+    public void setDiscount(int discount) {
+        this.discount = discount;
+    }
 
     public String getEndDate() {
         return endDate;
@@ -137,30 +140,30 @@ public class FlashSaleProduct implements Comparable<FlashSaleProduct> {
     }
 
     public String getProductName() {
-            return productName;
-        }
+        return productName;
+    }
 
-        public void setProductName(String productName) {
-            this.productName = productName;
-        }
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
 
 
 
-        public float getPrice() {
-            return price;
-        }
+    public float getPrice() {
+        return price;
+    }
 
-        public void setPrice(float price) {
-            this.price = price;
-        }
+    public void setPrice(float price) {
+        this.price = price;
+    }
 
-        public String getDescription() {
-            return description;
-        }
+    public String getDescription() {
+        return description;
+    }
 
-        public void setDescription(String description) {
-            this.description = description;
-        }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
 
     @Override

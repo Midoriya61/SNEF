@@ -16,6 +16,7 @@ import com.tinlm.snef.R;
 import com.tinlm.snef.adapter.FlashSaleProductAdapter;
 import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.model.FlashSaleProduct;
+import com.tinlm.snef.service.AllService;
 import com.tinlm.snef.service.FlashSaleProductService;
 import com.tinlm.snef.service.StoreProductImageService;
 import com.tinlm.snef.utilities.ApiUtils;
@@ -50,7 +51,7 @@ public class HotProductHomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_hot_product_home, container, false);
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         rcListHost = view.findViewById(R.id.rcListHost);
-        flashSaleProductService = ApiUtils.getFlashSaleProductService();
+        flashSaleProductService = AllService.getFlashSaleProductService();
 
 
         flashSaleProductService.getHotFlashSaleProduct().enqueue(new Callback<List<FlashSaleProduct>>() {
@@ -82,6 +83,7 @@ public class HotProductHomeFragment extends Fragment {
                 rcListHost.setAdapter(flashSaleProductAdapter);
                 mShimmerViewContainer.stopShimmer();
                 mShimmerViewContainer.setVisibility(View.GONE);
+
             }
 
             @Override

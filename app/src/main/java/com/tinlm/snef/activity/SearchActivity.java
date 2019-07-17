@@ -16,6 +16,7 @@ import com.tinlm.snef.adapter.ProductNameAdapter;
 import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.fragment.CategoriesHomeFragment;
 import com.tinlm.snef.model.Product;
+import com.tinlm.snef.service.AllService;
 import com.tinlm.snef.service.ProductService;
 import com.tinlm.snef.utilities.ApiUtils;
 import com.tinlm.snef.utilities.ProductUtilities;
@@ -45,47 +46,67 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void init() {
-        ProductUtilities productUtilities = new ProductUtilities();
+//        ProductUtilities productUtilities = new ProductUtilities();
         searchProductBar = findViewById(R.id.searchProductBar);
         listNameProduct = findViewById(R.id.listNameProduct);
-
-        List<Product> listProductName = new ArrayList<>();
-        listProductName = productUtilities.getListNameProduct();
-        productNameAdapter = new ProductNameAdapter(SearchActivity.this, listProductName);
-        RecyclerView.LayoutManager mLayoutManager
-                = new LinearLayoutManager(SearchActivity.this,
-                LinearLayoutManager.VERTICAL, false);
-        listNameProduct.setItemAnimator(new DefaultItemAnimator());
-        listNameProduct.setLayoutManager(mLayoutManager);
-        listNameProduct.setAdapter(productNameAdapter);
+        productService = AllService.getProductService();
 
 
-        productList = productUtilities.getListNameProduct();
-
-        // change text and load suggest product name
-        searchProductBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        productService.getListNameProduct().enqueue(new Callback<List<Product>>() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                Intent intent = new Intent(SearchActivity.this, SearchProductByNameActivity.class);
-                intent.putExtra(ConstainApp.SEARCHPRODUCTNAME, query);
-                startActivity(intent);
-                return true;
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                List<Product> listProductName = response.body();
+                productNameAdapter = new ProductNameAdapter(SearchActivity.this, listProductName);
+                RecyclerView.LayoutManager mLayoutManager
+                        = new LinearLayoutManager(SearchActivity.this,
+                        LinearLayoutManager.VERTICAL, false);
+                listNameProduct.setItemAnimator(new DefaultItemAnimator());
+                listNameProduct.setLayoutManager(mLayoutManager);
+                listNameProduct.setAdapter(productNameAdapter);
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                List<Product> products = new ArrayList<>();
+            public void onFailure(Call<List<Product>> call, Throwable t) {
 
-                for (Product product: productList
-                     ) {
-                    if (product.getProductName().toLowerCase().contains(newText)) {
-                        products.add(product);
-                    }
-                }
-                productNameAdapter.updateReceiptsList(products);
-                return true;
             }
         });
+
+        productService.getListNameProduct().enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                productList = response.body();
+                // change text and load suggest product name
+                searchProductBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        Intent intent = new Intent(SearchActivity.this, SearchProductByNameActivity.class);
+                        intent.putExtra(ConstainApp.SEARCHPRODUCTNAME, query);
+                        startActivity(intent);
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        List<Product> products = new ArrayList<>();
+
+                        for (Product product: productList
+                        ) {
+                            if (product.getProductName().toLowerCase().contains(newText)) {
+                                products.add(product);
+                            }
+                        }
+                        productNameAdapter.updateReceiptsList(products);
+                        return true;
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+
+            }
+        });
+
     }
 
 }
