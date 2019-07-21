@@ -25,11 +25,15 @@ import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.database.DBManager;
 import com.tinlm.snef.model.Cart;
 import com.tinlm.snef.model.Order;
+import com.tinlm.snef.model.OrderDetail;
 import com.tinlm.snef.model.Store;
+import com.tinlm.snef.utilities.OrderDetailUtilities;
+import com.tinlm.snef.utilities.OrderUtilities;
 import com.tinlm.snef.utilities.StoreProductImageUtilities;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -68,12 +72,13 @@ public class OrderHistoryActivity extends AppCompatActivity {
     private void init() {
 
         intent = getIntent();
-        DBManager dbManager = new DBManager(OrderHistoryActivity.this);
-        order = dbManager.getOrderbyId(intent.getIntExtra(ConstainApp.JS_ORDERID, 0));
 
-        intent = getIntent();
-        DBManager dbManager2 = new DBManager(OrderHistoryActivity.this);
-        List<Cart> cartList = dbManager2.getProductByStoreName(intent.getStringExtra(ConstainApp.JS_STORENAME));
+        OrderUtilities orderUtilities = new OrderUtilities();
+        order = orderUtilities.getLastOrder();
+
+        SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
+        String orderDate = dateformat.format(order.getDateOrder());
+
 
         txtOrderID = findViewById(R.id.txtOrderID);
         txtOrderStatus = findViewById(R.id.txtOrderStatus);
@@ -82,6 +87,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
 
         rcListOrderItem = findViewById(R.id.rcListOrderItem);
         txtTotalOrderPrice = findViewById(R.id.txtTotalOrderPrice);
+
 //        storeName.findViewById(R.id.storeName);
 //        storeAddress.findViewById(R.id.storeAddress);
 //        storeDistance.findViewById(R.id.storeDistance);
@@ -91,26 +97,28 @@ public class OrderHistoryActivity extends AppCompatActivity {
 
         txtOrderID.setText(String.valueOf(order.getOrderId()));
         if (order.isStatus() != true) {
-            String orderStatus = "Đã Thanh Toán";
-            txtOrderStatus.setText(orderStatus.toString());
+            txtOrderStatus.setText(R.string.orderstatus_paid);
         } else {
-            String orderStatus = "Đã Nhận Hàng";
-            txtOrderStatus.setText(orderStatus.toString());
+            txtOrderStatus.setText(R.string.orderstatus_pickedup);
         }
-        txtOrderDateTime.setText(order.getDateOrder().toString());
+        txtOrderDateTime.setText(orderDate);
         txtConfirmCode.setText(order.getConfirmationCode());
 
+        OrderDetailUtilities orderDetailUtilities = new OrderDetailUtilities();
+        int orderId = orderUtilities.getLastOrder().getOrderId();
+        List<OrderDetail> orderDetailList = orderDetailUtilities.getAllOrderDetailByOrderId(orderId);
+
         Map<Integer, String> listImageProduct = new HashMap<>();
-//        OrderDetailUtilities orderDetailUtilities = new OrderDetailUtilities();
         StoreProductImageUtilities imageUltilities = new StoreProductImageUtilities();
 
-        for (int i = 0; i < cartList.size(); i++) {
+        for (int i = 0; i < orderDetailList.size(); i++) {
 
-            String productImage = imageUltilities.getOneImageByStoreProductId(cartList.get(i).getFspId());
-            listImageProduct.put(cartList.get(i).getFspId(), productImage);
+            String productImage = imageUltilities.getOneImageByStoreProductId(orderDetailList.get(i).getFlashSaleProductId());
+            listImageProduct.put(orderDetailList.get(i).getFlashSaleProductId(), productImage);
 
         }
-        ListOrderHistoryProductAdapter listOrderHistoryProductAdapter = new ListOrderHistoryProductAdapter(OrderHistoryActivity.this, cartList, listImageProduct);
+
+        ListOrderHistoryProductAdapter listOrderHistoryProductAdapter = new ListOrderHistoryProductAdapter(OrderHistoryActivity.this, orderDetailList, listImageProduct);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(OrderHistoryActivity.this,
                 LinearLayoutManager.VERTICAL, false);
         rcListOrderItem.setItemAnimator(new DefaultItemAnimator());
@@ -118,12 +126,15 @@ public class OrderHistoryActivity extends AppCompatActivity {
         rcListOrderItem.setAdapter(listOrderHistoryProductAdapter);
         rcListOrderItem.addItemDecoration(new DividerItemDecoration(this, 0));
 
-        for (int i = 0; i < cartList.size(); i++) {
+        for (int i = 0; i < orderDetailList.size(); i++) {
 
-            totalAmount += (((cartList.get(i).getPrice() * cartList.get(i).getDiscount()) / 100) * cartList.get(i).getQuantity());
+            totalAmount += orderDetailList.get(i).getOrderDetailPrice();
         }
         txtTotalOrderPrice.setText(String.valueOf(df.format(totalAmount)));
 
+        String storeName = intent.getStringExtra(ConstainApp.JS_STORENAME);
+        DBManager dbManager = new DBManager(OrderHistoryActivity.this);
+        List<Cart> cartList = dbManager.getAllCartByStoreName(storeName);
         for (int a = 0; a < cartList.size(); a++) {
             dbManager.deleteCart(cartList.get(a));
         }

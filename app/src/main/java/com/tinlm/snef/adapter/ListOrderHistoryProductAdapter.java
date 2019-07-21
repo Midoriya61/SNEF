@@ -17,6 +17,9 @@ import com.tinlm.snef.R;
 import com.tinlm.snef.activity.OrderActivity;
 import com.tinlm.snef.database.DBManager;
 import com.tinlm.snef.model.Cart;
+import com.tinlm.snef.model.FlashSaleProduct;
+import com.tinlm.snef.model.OrderDetail;
+import com.tinlm.snef.utilities.FlashSaleProductUtilities;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -26,19 +29,19 @@ import java.util.Map;
 public class ListOrderHistoryProductAdapter extends RecyclerView.Adapter<ListOrderHistoryProductAdapter.ListOrderHistoryProductHolder> {
 
     Context mContext;
-    List<Cart> cartList = new ArrayList<>();
-    Map<Integer, String> listImageCartProduct;
+    List<OrderDetail> orderDetailList = new ArrayList<>();
+    Map<Integer, String> listImageOrderHistory;
     DecimalFormat df = new DecimalFormat("#,###,###,###");
 
 
     private Runnable runnable;
     private Handler handler = new Handler();
 
-    public ListOrderHistoryProductAdapter(Context mContext, List<Cart> cartList,
-                           Map<Integer, String> listImageCartProduct) {
+    public ListOrderHistoryProductAdapter(Context mContext, List<OrderDetail> orderDetailList,
+                           Map<Integer, String> listImageOrderHistory) {
         this.mContext = mContext;
-        this.cartList = cartList;
-        this.listImageCartProduct = listImageCartProduct;
+        this.orderDetailList = orderDetailList;
+        this.listImageOrderHistory = listImageOrderHistory;
 
 
     }
@@ -61,21 +64,26 @@ public class ListOrderHistoryProductAdapter extends RecyclerView.Adapter<ListOrd
     // Load data into layout
     @Override
     public void onBindViewHolder(@NonNull final ListOrderHistoryProductHolder listOrderHistoryProductHolder, int i) {
-        final Cart cart = cartList.get(i);
+
+        final OrderDetail orderDetail = orderDetailList.get(i);
         final int position = i;
 
-        String productCartImage = listImageCartProduct.get(cart.getFspId());
+        String productOrderHistoryImage = listImageOrderHistory.get(orderDetail.getFlashSaleProductId());
+
+        Picasso.get().load(productOrderHistoryImage).resize(500, 500).into(listOrderHistoryProductHolder.imgCartFood);
+
+        FlashSaleProductUtilities flashSaleProductUtilities = new FlashSaleProductUtilities();
+        FlashSaleProduct fsp = flashSaleProductUtilities.getFSPById(orderDetailList.get(i).getFlashSaleProductId());
 
 
-        Picasso.get().load(productCartImage).resize(500, 500).into(listOrderHistoryProductHolder.imgCartFood);
+        listOrderHistoryProductHolder.txtCartFoodName.setText(fsp.getProductName());
 
+        listOrderHistoryProductHolder.txtQuantity.setText(String.valueOf(orderDetail.getQuantity()));
 
-        listOrderHistoryProductHolder.txtCartFoodName.setText(cart.getProductName());
-
-        listOrderHistoryProductHolder.txtQuantity.setText(String.valueOf(cart.getQuantity()));
-
-        listOrderHistoryProductHolder.txtCartPrice.setText(String.format("%,d", (int) ((cart.getPrice() * cart.getDiscount()) / 100)) + "");
+//        listOrderHistoryProductHolder.txtCartPrice.setText(String.format("%,d", (int) ((fsp.getPrice() * fsp.getDiscount()) / 100)) + "");
 //
+        float orderDetailPrice = orderDetailList.get(i).getOrderDetailPrice()/orderDetailList.get(i).getQuantity();
+        listOrderHistoryProductHolder.txtCartPrice.setText(String.format("%,d", (int) orderDetailPrice));
 
 //        btnChange.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
 //            @Override
@@ -145,7 +153,7 @@ public class ListOrderHistoryProductAdapter extends RecyclerView.Adapter<ListOrd
     // Get size of list
     @Override
     public int getItemCount() {
-        return cartList.size();
+        return orderDetailList.size();
     }
 
 

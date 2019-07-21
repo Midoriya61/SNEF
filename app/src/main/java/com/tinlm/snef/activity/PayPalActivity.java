@@ -31,6 +31,9 @@ import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.database.DBManager;
 import com.tinlm.snef.model.Cart;
 import com.tinlm.snef.model.Order;
+import com.tinlm.snef.utilities.OrderDetailUtilities;
+import com.tinlm.snef.utilities.OrderUtilities;
+import com.tinlm.snef.utilities.StoreProductImageUtilities;
 
 
 public class PayPalActivity extends AppCompatActivity {
@@ -66,7 +69,7 @@ public class PayPalActivity extends AppCompatActivity {
         intent = getIntent();
 
         DBManager dbManager = new DBManager(PayPalActivity.this);
-        cartList = dbManager.getProductByStoreName(intent.getStringExtra(ConstainApp.JS_STORENAME));
+        cartList = dbManager.getAllCartByStoreName(intent.getStringExtra(ConstainApp.JS_STORENAME));
 
         for (int i = 0; i < cartList.size(); i++) {
 
@@ -101,48 +104,38 @@ public class PayPalActivity extends AppCompatActivity {
 
                     if (state.equals("approved")) //if the payment worked, the state equals approved
                     {
-//                        intent2 = getIntent();
-//                        int accountId = intent2.getIntExtra(ConstainApp.CUSTOMERID,0);
-
+                        //Get current customer ID
                         SharedPreferences sharedPreferences = getSharedPreferences(ConstainApp.login_Prefer, MODE_PRIVATE);
                         int accountId = sharedPreferences.getInt(ConstainApp.CUSTOMERID, 0);
 
-                        Date currentTime = Calendar.getInstance().getTime();
-                        java.sql.Date sqlDate = new java.sql.Date(currentTime.getTime());
-
-//
+                        //Get random confirmation code
                         int min = 100000000;
                         int max = 999999999;
-
                         Random r = new Random();
-                        int randomConfirmCode = r.nextInt(max - min + 1) + min;
+                        String confirmationCode = String.valueOf(r.nextInt(max - min + 1) + min);
 
+                        //Create a new order
+                        OrderUtilities orderUtilities = new OrderUtilities();
+                        orderUtilities.insertNewOrder(confirmationCode, accountId);
+                        int lastOrderId = orderUtilities.getLastOrder().getOrderId();
 
                         DBManager dbManager = new DBManager(PayPalActivity.this);
-                        orderList = dbManager.getAllOrder();
+                        cartList = dbManager.getAllCartByStoreName(intent.getStringExtra(ConstainApp.JS_STORENAME));
 
-                        if(orderList == null) {
-                            order = new Order();
-                            order.setOrderId(1);
-                            order.setDateOrder(sqlDate);
-                            order.setConfirmationCode(String.valueOf(randomConfirmCode));
-                            order.setStatus(true);
-                            order.setRatingPoint(0);
-                            order.setAccountId(accountId);
-                            dbManager.createOrder(order);
-                        } else {
-                            order = new Order();
-                            order.setOrderId((orderList.get(orderList.size()-1).getOrderId())+1);
-                            order.setDateOrder(sqlDate);
-                            order.setConfirmationCode(String.valueOf(randomConfirmCode));
-                            order.setStatus(true);
-                            order.setRatingPoint(0);
-                            order.setAccountId(accountId);
-                            dbManager.createOrder(order);
+                        //Insert order detail into the created order
+                        OrderDetailUtilities orderDetailUtilities = new OrderDetailUtilities();
+                        for (int i = 0; i < cartList.size(); i++) {
+                            orderDetailUtilities.insertNewOrderDetail(
+                                    lastOrderId,
+                                    cartList.get(i).getFspId(),
+                                    cartList.get(i).getQuantity(),
+                                    cartList.get(i).getQuantity() *
+                                            ((cartList.get(i).getPrice() * cartList.get(i).getDiscount()) / 100));
                         }
 
+                        //Send user to Order History screen
                         Intent intent = new Intent(this, OrderHistoryActivity.class);
-                        intent.putExtra(ConstainApp.JS_ORDERID, order.getOrderId());
+                        intent.putExtra(ConstainApp.JS_ORDERID, lastOrderId);
                         intent.putExtra(ConstainApp.JS_STORENAME, cartList.get(0).getStoreName());
                         this.startActivity(intent);
 

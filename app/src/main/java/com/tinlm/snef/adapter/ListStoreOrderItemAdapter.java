@@ -54,7 +54,7 @@ public class ListStoreOrderItemAdapter extends RecyclerView.Adapter<ListStoreOrd
         StoreProductImageUtilities imageUltilities = new StoreProductImageUtilities();
         Map<Integer, String> listImageProduct = new HashMap<>();
         DBManager dbManager = new DBManager(mContext);
-        List<Cart> cartList = dbManager.getProductByStoreName(storeOrderItems.get(a).getStoreName());
+        List<Cart> cartList = dbManager.getAllCartByStoreName(storeOrderItems.get(a).getStoreName());
         for (int i = 0; i < cartList.size(); i++) {
 
             String productImage = imageUltilities.getOneImageByStoreProductId(cartList.get(i).getFspId());

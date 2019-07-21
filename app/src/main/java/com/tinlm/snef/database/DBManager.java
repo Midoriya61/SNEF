@@ -210,7 +210,7 @@ public class DBManager extends SQLiteOpenHelper {
         return store;
     }
 
-    public List<Cart> getProductByStoreName(String storeName) {
+    public List<Cart> getAllCartByStoreName(String storeName) {
         List<Cart> cartList = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT * " +

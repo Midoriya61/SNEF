@@ -16,6 +16,7 @@ public class ConstainServer {
     public static final String GetAllFSP = "getAllFSP/";
     public static final String GetFSPByCategoryId = "getFSPByCategoryId/";
     public static final String GetFSPByName = "getFSPByName/";
+    public static final String GetFSPById = "getFSPById/";
 
     //Store Product Image
     public static final String StoreProductImageURL = "storeProductImage/";
@@ -43,9 +44,18 @@ public class ConstainServer {
     public static final String LoginURL = "login/";
 
     //Order
+    public static final String OrderURL = "order/";
+    public static final String InsertNewOrder = "insertNewOrder/";
+    public static final String GetLastOrder = "getLastOrder/";
+
+
+    //OrderDetail
+    public static final String OrderDetailURL = "orderDetail/";
+    public static final String InsertNewOrderDetail = "insertNewOrderDetail/";
+    public static final String GetAllOrderDetailByOrderId = "getAllOrderDetailByOrderId/";
 
 
     //    public static final String BaseURL = "https://snef-api-part2.herokuapp.com/";
-    public static final String BaseURL = "http://192.168.1.3:6432/";
+    public static final String BaseURL = "http://172.16.1.216:6432/";
 
 }

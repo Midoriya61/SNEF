@@ -39,7 +39,8 @@
 
     <string name="btn_delcart" translatable="false">Xóa</string>
     <string name="btn_confirmpayment" translatable="false">XÁC NHẬN THANH TOÁN</string>
-
+    <string name="orderstatus_paid" translatable="false">Đã Thanh Toán</string>
+    <string name="orderstatus_pickedup" translatable="false">Đã Nhận Hàng</string>
 
     <string name="StatusSouldOut" translatable="false">Bán hết</string>
     <string name="StatusNearlySouldOut" translatable="false">Sắp bán hết</string>
