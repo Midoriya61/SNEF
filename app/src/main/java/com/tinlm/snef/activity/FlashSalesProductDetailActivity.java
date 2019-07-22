@@ -116,7 +116,7 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
 //        description.setMaxLines(1);
         StoreProductImageUtilities storeProductImageUtilities = new StoreProductImageUtilities();
         List<String> listImage = storeProductImageUtilities.getImageByStoreProductId(intent.getIntExtra(ConstainApp.STOREPRODUCTID,0));
-        imgProduct = listImage.get(0);
+//        imgProduct = listImage.get(0);
         imgProductFS =  findViewById(R.id.imgProductFS);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(FlashSalesProductDetailActivity.this, listImage);
         imgProductFS.setAdapter(viewPagerAdapter);
