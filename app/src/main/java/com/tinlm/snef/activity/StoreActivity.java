@@ -21,6 +21,7 @@ import com.tinlm.snef.adapter.FlashSaleProductAdapter;
 import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.fragment.ListFSPFragment;
 import com.tinlm.snef.model.FlashSaleProduct;
+import com.tinlm.snef.service.AllService;
 import com.tinlm.snef.service.FlashSaleProductService;
 import com.tinlm.snef.utilities.ApiUtils;
 import com.tinlm.snef.utilities.OrderDetailUtilities;
@@ -52,7 +53,7 @@ public class StoreActivity extends AppCompatActivity {
     }
 
     private void createProduct() {
-        flashSaleProductService = ApiUtils.getFlashSaleProductService();
+        flashSaleProductService = AllService.getFlashSaleProductService();
 
         flashSaleProductService.getFSPByCategoryId(intent.getIntExtra(ConstainApp.STOREID, 0)).enqueue(new Callback<List<FlashSaleProduct>>() {
             @Override
@@ -73,7 +74,7 @@ public class StoreActivity extends AppCompatActivity {
 //                    listTotalPrice.put(flashSaleProducts.get(i).getFlashSaleProductId(), totalQuantity);
 //                }
                 FlashSaleProductAdapter flashSaleProductAdapter = new FlashSaleProductAdapter(getBaseContext(), flashSaleProducts,
-                         ConstainApp.SCStoreActivity);
+                        ConstainApp.SCStoreActivity);
                 RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getBaseContext(),2);
                 rcListFlashSaleProduct.setItemAnimator(new DefaultItemAnimator());
                 rcListFlashSaleProduct.setLayoutManager(mLayoutManager);
@@ -96,7 +97,7 @@ public class StoreActivity extends AppCompatActivity {
         txtOpenHour.setText(intent.getStringExtra(ConstainApp.OPENHOUR));
         float ratingPoint = intent.getFloatExtra(ConstainApp.RATINGPOINT, 0);
         if (ratingPoint == 0) {
-            txtPRatingPoint.setText("Chưa có đánh giá");
+            txtPRatingPoint.setText(getResources().getString(R.string.msg_still_not_rating));
         } else {
             txtPRatingPoint.setText(intent.getStringExtra(ConstainApp.RATINGPOINT));
         }
