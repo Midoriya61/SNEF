@@ -94,7 +94,6 @@
                         android:id="@+id/imgProductFS"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-
                         />
 
                     <ImageView
@@ -104,7 +103,6 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/background_cicler"
                         android:src="@drawable/button_back_red" />
-
                 </FrameLayout>
 
                 <TextView
@@ -113,7 +111,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_marginLeft="40dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginRight="40dp"
                     android:layout_marginBottom="0dp"
                     android:text="Thịt bò"
@@ -268,35 +266,38 @@
                         android:textSize="20dp"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <com.borjabravo.readmoretextview.ReadMoreTextView
                         android:id="@+id/txtDescriptionBookInCase"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:paddingLeft="35dp"
                         android:paddingRight="35dp"
-                        android:singleLine="true"
+                        app:trimExpandedText="@string/msg_show_less"
+                        app:trimCollapsedText="@string/msg_show_more"
+                        app:trimMode="trimModeLine"
+                        app:trimLines="4"
                         android:text="Đây là quyển sách tín viết ra nhằm đi truyền đạo"
                         android:textSize="18dp" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginLeft="20dp"
-                        android:background="@drawable/dash_line" />
+                    <!--<TextView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:layout_marginRight="20dp"-->
+                        <!--android:layout_marginLeft="20dp"-->
+                        <!--android:background="@drawable/dash_line" />-->
 
-                    <TextView
-                        android:id="@+id/textReadMore"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:onClick="clickToReadMore"
-                        android:text="@string/msg_see_more"
-                        android:textColor="@color/redApp"
-                        android:textSize="18dp" />
+                    <!--<TextView-->
+                        <!--android:id="@+id/textReadMore"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:onClick="clickToReadMore"-->
+                        <!--android:text="@string/msg_see_more"-->
+                        <!--android:textColor="@color/redApp"-->
+                        <!--android:textSize="18dp" />-->
                 </LinearLayout>
 
                 <!--<com.cepheuen.elegantnumberbutton.view.ElegantNumberButton-->

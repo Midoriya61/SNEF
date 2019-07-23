@@ -67,14 +67,8 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
     public void onBindViewHolder(@NonNull FlashSaleProductHolder flashSaleProductHolder, int i) {
         final FlashSaleProduct flashSaleProduct = flashSaleProductList.get(i);
 
-
-
-
         Picasso.get().load("https://res.cloudinary.com/dr4hpc9gi/image/upload/v1558970388/FoodStoreImage/discount.png")
                 .resize(200,120).into(flashSaleProductHolder.imgDiscount);
-
-
-
 
         if(sreenName.equals(ConstainApp.SCHotProductHomeFragment)) {
             if(flashSaleProduct.getImageSrc() == null) {
@@ -92,9 +86,9 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
             int height = size.y;
             if(flashSaleProduct.getImageSrc() == null) {
                 Picasso.get().load("https://res.cloudinary.com/dr4hpc9gi/image/upload/v1559727025/noimage.jpg")
-                        .resize(width / 2,height / 3).into(flashSaleProductHolder.imgFood);
+                        .resize(width / 2,height / 4).into(flashSaleProductHolder.imgFood);
             }else {
-                Picasso.get().load(flashSaleProduct.getImageSrc()).resize(width / 2,height / 3).into(flashSaleProductHolder.imgFood);
+                Picasso.get().load(flashSaleProduct.getImageSrc()).resize(width / 2,height / 4).into(flashSaleProductHolder.imgFood);
             }
         }
 
@@ -104,7 +98,6 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
         int productPrice = (int) flashSaleProduct.getPrice();
         flashSaleProductHolder.txtPrice.setText((String.format("%,d", productPrice)) + "");
         flashSaleProductHolder.txtDiscount.setText("-" + flashSaleProduct.getDiscount() + "%");
-
 //        String strProductPrice = (String.format("%,d", productPrice));
 
         flashSaleProductHolder.textPriceDiscount.setText(String.format("%,d",(int)(productPrice - ((flashSaleProduct.getPrice()
@@ -136,7 +129,6 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
         flashSaleProductHolder.flashSaleProductLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(mContext, FlashSalesProductDetailActivity.class);
                 intent.putExtra(ConstainApp.FLASHSALEPRODUCTID,flashSaleProduct.getFlashSaleProductId());
                 intent.putExtra(ConstainApp.PRODUCTNAME,flashSaleProduct.getProductName());

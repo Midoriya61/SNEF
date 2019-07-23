@@ -62,7 +62,7 @@ public class ListStoreOrderItemAdapter extends RecyclerView.Adapter<ListStoreOrd
 
         }
 
-        ListCartAdapter listCartAdapter = new ListCartAdapter(mContext, cartList, listImageProduct);
+        ListCartAdapter listCartAdapter = new ListCartAdapter(mContext, cartList, listImageProduct, listStoreOrderItemHolder.txtTotalCartPrice);
 
 //        listStoreOrderItemHolder.rcListCartItem.getAdapter();
 

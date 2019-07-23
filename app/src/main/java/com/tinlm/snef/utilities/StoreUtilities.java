@@ -100,6 +100,27 @@ public class StoreUtilities {
                     store.setRatingPoint(jsonObj.getDouble(ratingPoint));
                 }
 
+                if(jsonObj.has(address)){
+                    store.setAddress(jsonObj.getString(address));
+                }
+                if(jsonObj.has(district)){
+                    store.setDistrict(jsonObj.getString(district));
+                }
+
+                if(jsonObj.has(ward)){
+                    store.setWard(jsonObj.getString(ward));
+                }
+                if(jsonObj.has(city)){
+                    store.setCity(jsonObj.getString(city));
+                }
+                if(jsonObj.has(country)){
+                    store.setCountry(jsonObj.getString(country));
+                }
+                if(jsonObj.has(avatar)){
+                    store.setAvatar(jsonObj.getString(avatar));
+                }
+
+
                 store.setStoreId(storeId);
 
 

@@ -25,21 +25,21 @@ import java.util.Map;
 
 public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCartHolder> {
 
-    Context mContext;
-    List<Cart> cartList = new ArrayList<>();
-    Map<Integer, String> listImageCartProduct;
-    DecimalFormat df = new DecimalFormat("#,###,###,###");
-
+    private Context mContext;
+    private List<Cart> cartList = new ArrayList<>();
+    private Map<Integer, String> listImageCartProduct;
+    private DecimalFormat df = new DecimalFormat("#,###,###,###");
+    private TextView txtTotalCartPrice;
 
     private Runnable runnable;
     private Handler handler = new Handler();
 
     public ListCartAdapter(Context mContext, List<Cart> cartList,
-                           Map<Integer, String> listImageCartProduct) {
+                           Map<Integer, String> listImageCartProduct, TextView txtTotalCartPrice) {
         this.mContext = mContext;
         this.cartList = cartList;
         this.listImageCartProduct = listImageCartProduct;
-
+        this.txtTotalCartPrice = txtTotalCartPrice;
 
     }
 
@@ -100,20 +100,20 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
                     dbManager.updateCartQuantity(cart);
                     notifyItemChanged(position);
 
-                    ((OrderActivity) mContext).recreate();
-                    ((OrderActivity) mContext).overridePendingTransition(0, 0);
+//                    ((OrderActivity) mContext).recreate();
+//                    ((OrderActivity) mContext).overridePendingTransition(0, 0);
 //                    ((OrderActivity) mContext).startActivity(((OrderActivity) mContext).getIntent());
 //                    ((OrderActivity) mContext).overridePendingTransition(0, 0);
 
 //                    mContext.startActivity(((OrderActivity) mContext).getIntent());
 
 //                    TextView txtTotalCartPrice = ((OrderActivity) mContext).findViewById(R.id.txtTotalCartPrice);
-//                    if (newValue > oldValue) {
-//                        txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(",", "")) + (int) ((cart.getPrice() * cart.getDiscount()) / 100))));
-//                    } else if (newValue < oldValue) {
-//
-//                        txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(",", "")) - (int) ((cart.getPrice() * cart.getDiscount()) / 100))));
-//                    }
+                    if (newValue > oldValue) {
+                        txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(".", "")) + (int) ((cart.getPrice() * cart.getDiscount()) / 100))));
+                    } else if (newValue < oldValue) {
+
+                        txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(".", "")) - (int) ((cart.getPrice() * cart.getDiscount()) / 100))));
+                    }
 
                 }
             }

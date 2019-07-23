@@ -122,10 +122,9 @@
 
             <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
                 android:id="@+id/btnCartQuantity"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="0.5"
                 app:backGroundColor="@color/warmGray"
                 app:initialNumber="1"
                 app:textColor="@color/green"

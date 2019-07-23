@@ -36,6 +36,8 @@
     <string name="msg_rating" translatable="false">Đánh giá</string>
     <string name="msg_find" translatable="false">Bạn tìm gì hôm nay</string>
     <string name="msg_open_hour" translatable="false">Giờ mở cửa</string>
+    <string name="msg_show_more" translatable="false">Xem thêm</string>
+    <string name="msg_show_less" translatable="false">Thu gọn</string>
 
     <string name="btn_delcart" translatable="false">Xóa</string>
     <string name="btn_confirmpayment" translatable="false">XÁC NHẬN THANH TOÁN</string>
@@ -50,6 +52,10 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+
+
+    // firebase
+    <string name="project_id" translatable="false">010</string>
 
 
 </resources>

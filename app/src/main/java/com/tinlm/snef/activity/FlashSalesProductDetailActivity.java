@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.borjabravo.readmoretextview.ReadMoreTextView;
 import com.tinlm.snef.R;
 import com.tinlm.snef.adapter.ViewPagerAdapter;
 import com.tinlm.snef.algo.GeocodingLocation;
@@ -42,16 +43,19 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
     //ElegantNumberButton btnChange;
     //Button addToCart;
     // totalPrice
-    TextView foodPriceDiscount, foodName, expiredDate,foodPrice;
-    ViewPager imgProductFS;
-    CountdownView cv_countdownViewTest1;
-    String imgProduct;
-    int fspId;
-    float price;
-    int discount;
+    private TextView foodPriceDiscount, foodName, expiredDate,foodPrice;
+    private ViewPager imgProductFS;
+    private CountdownView cv_countdownViewTest1;
+    private String imgProduct;
+    private int fspId;
+    private float price;
+    private int discount;
 //    int discount;
 
-    TextView storeName, description, textReadMore;
+    private TextView storeName;
+    private ReadMoreTextView description;
+    private Store store;
+//    , textReadMore;
             //, storeLocation, workingTime;
 //
 //    BottomNavigationView bottomNavigation;
@@ -84,7 +88,7 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
         cv_countdownViewTest1 = findViewById(R.id.cv_countdownViewTest1);
         storeName = findViewById(R.id.storeName);
         description = findViewById(R.id.txtDescriptionBookInCase);
-        textReadMore = findViewById(R.id.textReadMore);
+//        textReadMore = findViewById(R.id.textReadMore);
 //        storeLocation = findViewById(R.id.storeLocation);
 //        workingTime = findViewById(R.id.workingTime);
 
@@ -93,7 +97,7 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
 
         int storeId = intent.getIntExtra(ConstainApp.STOREID,0);
         StoreUtilities storeUtilities = new StoreUtilities();
-        Store store = storeUtilities.getStoreById(storeId);
+        store = storeUtilities.getStoreById(storeId);
         storeName.setText( store.getStoreName());
         storeName.setPaintFlags(storeName.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
@@ -117,6 +121,10 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
         StoreProductImageUtilities storeProductImageUtilities = new StoreProductImageUtilities();
         List<String> listImage = storeProductImageUtilities.getImageByStoreProductId(intent.getIntExtra(ConstainApp.STOREPRODUCTID,0));
 //        imgProduct = listImage.get(0);
+        if (listImage.size() == 0) {
+            listImage.add("https://res.cloudinary.com/dr4hpc9gi/image/upload/v1559727025/noimage.jpg");
+        }
+
         imgProductFS =  findViewById(R.id.imgProductFS);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(FlashSalesProductDetailActivity.this, listImage);
         imgProductFS.setAdapter(viewPagerAdapter);
@@ -153,14 +161,38 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
 //                }
 //            }
 //        });
+
+        storeName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentStore = new Intent(FlashSalesProductDetailActivity.this, StoreActivity.class);
+                intentStore.putExtra(ConstainApp.JS_STORENAME, store.getStoreName());
+                intentStore.putExtra(ConstainApp.STOREAVATAR, store.getAvatar());
+                String address = store.getAddress() + ", " + store.getDistrict() + ", " +
+                        store.getWard() + ", " + store.getCity() + ", " + store.getCountry();
+                intentStore.putExtra(ConstainApp.ADDRESS, address);
+                intentStore.putExtra(ConstainApp.RATINGPOINT, store.getRatingPoint());
+                intentStore.putExtra(ConstainApp.STOREID, store.getStoreId());
+
+                String finalOpenHour = "";
+                if(store.getOpenHour().equals(store.getCloseHour())) {
+                    finalOpenHour = getResources().getString(R.string.Open24);
+
+                }else
+                    finalOpenHour = store.getOpenHour() + " - " + store.getCloseHour();
+
+                intentStore.putExtra(ConstainApp.OPENHOUR, finalOpenHour);
+                startActivity(intentStore);
+            }
+        });
     }
 
 
 
-    public void clickToReadMore(View view) {
-        textReadMore.setVisibility(View.INVISIBLE);
-        description.setSingleLine(false);
-    }
+//    public void clickToReadMore(View view) {
+//        textReadMore.setVisibility(View.INVISIBLE);
+//        description.setSingleLine(false);
+//    }
 
 //    private void navigateDashboard() {
 //        bottomNavigation = findViewById(R.id.bottomNavigation);
