@@ -26,8 +26,7 @@ import java.util.Map;
 public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCartHolder> {
 
     private Context mContext;
-    private List<Cart> cartList = new ArrayList<>();
-    private Map<Integer, String> listImageCartProduct;
+    private List<Cart> cartList;
     private DecimalFormat df = new DecimalFormat("#,###,###,###");
     private TextView txtTotalCartPrice;
 
@@ -35,10 +34,9 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
     private Handler handler = new Handler();
 
     public ListCartAdapter(Context mContext, List<Cart> cartList,
-                           Map<Integer, String> listImageCartProduct, TextView txtTotalCartPrice) {
+                            TextView txtTotalCartPrice) {
         this.mContext = mContext;
         this.cartList = cartList;
-        this.listImageCartProduct = listImageCartProduct;
         this.txtTotalCartPrice = txtTotalCartPrice;
 
     }
@@ -64,10 +62,10 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
         final Cart cart = cartList.get(i);
         final int position = i;
 
-        String productCartImage = listImageCartProduct.get(cart.getFspId());
+//        String productCartImage = listImageCartProduct.get(cart.getFspId());
 
 
-        Picasso.get().load(productCartImage).resize(500, 500).into(listCartHolder.imgCartFood);
+        Picasso.get().load(cart.getImageProduct()).resize(500, 500).into(listCartHolder.imgCartFood);
 
 
         listCartHolder.txtCartFoodName.setText(cart.getProductName());

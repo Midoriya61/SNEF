@@ -17,12 +17,8 @@ import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.database.DBManager;
 import com.tinlm.snef.model.Cart;
 import com.tinlm.snef.model.StoreOrderItem;
-import com.tinlm.snef.utilities.StoreProductImageUtilities;
-
 import java.text.DecimalFormat;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ListStoreOrderItemAdapter extends RecyclerView.Adapter<ListStoreOrderItemAdapter.ListStoreOrderItemHolder> {
 
@@ -51,18 +47,18 @@ public class ListStoreOrderItemAdapter extends RecyclerView.Adapter<ListStoreOrd
     public void onBindViewHolder(@NonNull ListStoreOrderItemHolder listStoreOrderItemHolder, int a) {
         final StoreOrderItem storeOrderItem = storeOrderItems.get(a);
         final int positon = a;
-        StoreProductImageUtilities imageUltilities = new StoreProductImageUtilities();
-        Map<Integer, String> listImageProduct = new HashMap<>();
+//        StoreProductImageUtilities imageUltilities = new StoreProductImageUtilities();
+//        Map<Integer, String> listImageProduct = new HashMap<>();
         DBManager dbManager = new DBManager(mContext);
         List<Cart> cartList = dbManager.getAllCartByStoreName(storeOrderItems.get(a).getStoreName());
-        for (int i = 0; i < cartList.size(); i++) {
+//        for (int i = 0; i < cartList.size(); i++) {
+//
+//            String productImage = imageUltilities.getOneImageByStoreProductId(cartList.get(i).getFspId());
+//            listImageProduct.put(cartList.get(i).getFspId(), productImage);
+//
+//        }
 
-            String productImage = imageUltilities.getOneImageByStoreProductId(cartList.get(i).getFspId());
-            listImageProduct.put(cartList.get(i).getFspId(), productImage);
-
-        }
-
-        ListCartAdapter listCartAdapter = new ListCartAdapter(mContext, cartList, listImageProduct, listStoreOrderItemHolder.txtTotalCartPrice);
+        ListCartAdapter listCartAdapter = new ListCartAdapter(mContext, cartList, listStoreOrderItemHolder.txtTotalCartPrice);
 
 //        listStoreOrderItemHolder.rcListCartItem.getAdapter();
 

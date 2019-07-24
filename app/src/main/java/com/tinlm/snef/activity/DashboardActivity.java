@@ -34,7 +34,6 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void navigateDashboard() {
         bottomNavigation = findViewById(R.id.bottomNavigation);
-
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -46,25 +45,21 @@ public class DashboardActivity extends AppCompatActivity {
                         intent = new Intent(DashboardActivity.this, CategoryActivity.class);
                         finish();
                         startActivity(intent);
-
                         break;
                     case R.id.action_around:
                         intent = new Intent(DashboardActivity.this, AroundStoreActivity.class);
                         finish();
                         startActivity(intent);
-
                         break;
                     case R.id.action_orders:
                         intent = new Intent(DashboardActivity.this, OrderActivity.class);
                         finish();
                         startActivity(intent);
-
                         break;
                     case R.id.action_account:
                         intent = new Intent(DashboardActivity.this, AccountActivity.class);
                         finish();
                         startActivity(intent);
-
                         break;
                 }
                 return false;

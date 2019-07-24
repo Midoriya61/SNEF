@@ -1,17 +1,35 @@
 package com.tinlm.snef.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.sql.Date;
 
 public class Order {
 
-
+    @SerializedName("orderId")
+    @Expose
     private int orderId;
+    @SerializedName("dateOrder")
+    @Expose
     private Date dateOrder;
+    @SerializedName("totalPrice")
+    @Expose
     private float totalPrice;
+    @SerializedName("confirmationCode")
+    @Expose
     private String confirmationCode;
+    @SerializedName("orderQuantity")
+    @Expose
     private int orderQuantity;
+    @SerializedName("accountId")
+    @Expose
     private int accountId;
+    @SerializedName("status")
+    @Expose
     private boolean status;
+    @SerializedName("ratingPoint")
+    @Expose
     private float ratingPoint;
 
     public Order() {

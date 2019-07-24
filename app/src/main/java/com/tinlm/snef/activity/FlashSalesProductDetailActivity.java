@@ -124,6 +124,7 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
         if (listImage.size() == 0) {
             listImage.add("https://res.cloudinary.com/dr4hpc9gi/image/upload/v1559727025/noimage.jpg");
         }
+        imgProduct = listImage.get(0);
 
         imgProductFS =  findViewById(R.id.imgProductFS);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(FlashSalesProductDetailActivity.this, listImage);
