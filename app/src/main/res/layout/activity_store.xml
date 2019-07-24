@@ -102,7 +102,7 @@
                     android:text="@string/msg_address" />
                 <TextView
                     android:id="@+id/txtAddress"
-
+                    android:onClick="clickToDirectStore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16dp"
@@ -147,6 +147,29 @@
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray"
                 android:layout_marginBottom="20dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:paddingBottom="15dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="|"
+                    android:textColor="@color/redApp"
+                    android:textSize="25dp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/txtSuggestToday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/msg_product"
+                    android:textColor="#3B3B3B"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rcListFlashSaleProduct"

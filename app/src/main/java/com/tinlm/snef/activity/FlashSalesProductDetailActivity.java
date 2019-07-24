@@ -174,6 +174,8 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
                 intentStore.putExtra(ConstainApp.ADDRESS, address);
                 intentStore.putExtra(ConstainApp.RATINGPOINT, store.getRatingPoint());
                 intentStore.putExtra(ConstainApp.STOREID, store.getStoreId());
+                intentStore.putExtra(ConstainApp.LATITUDE, store.getLatitude());
+                intentStore.putExtra(ConstainApp.LONGITUDE, store.getLocationId());
 
                 String finalOpenHour = "";
                 if(store.getOpenHour().equals(store.getCloseHour())) {

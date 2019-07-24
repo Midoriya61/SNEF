@@ -38,6 +38,8 @@
     <string name="msg_open_hour" translatable="false">Giờ mở cửa</string>
     <string name="msg_show_more" translatable="false">Xem thêm</string>
     <string name="msg_show_less" translatable="false">Thu gọn</string>
+    <string name="msg_product" translatable="false">Sản phẩm</string>
+
 
     <string name="btn_delcart" translatable="false">Xóa</string>
     <string name="btn_confirmpayment" translatable="false">XÁC NHẬN THANH TOÁN</string>
