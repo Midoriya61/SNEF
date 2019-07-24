@@ -9,8 +9,13 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.tinlm.snef.R;
+import com.tinlm.snef.database.DBManager;
+import com.tinlm.snef.model.Cart;
+
+import java.util.List;
 
 // 6/23/2019 TinLM Create class
 // 6/23/2019 TinLM Create init
@@ -19,17 +24,37 @@ import com.tinlm.snef.R;
 // 6/23/2019 TinLM Create createListFSP
 public class DashboardActivity extends AppCompatActivity {
 
-//    RecyclerView rcListCategories;
+    //    RecyclerView rcListCategories;
 //    RecyclerView rcListHost;
     RecyclerView rcListFlashSaleProduct;
 
     BottomNavigationView bottomNavigation;
+    public TextView txtCartNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         navigateDashboard();
+        txtCartNumber = findViewById(R.id.txtCartNumber);
+        txtCartNumber.setText(String.valueOf(getCartNumber()));
+    }
+
+    @Override
+    public void onResume() {  // After a pause OR at startup
+        super.onResume();
+        txtCartNumber = findViewById(R.id.txtCartNumber);
+        txtCartNumber.setText(String.valueOf(getCartNumber()));
+    }
+
+    public int getCartNumber() {
+        DBManager dbManager = new DBManager(DashboardActivity.this);
+        List<Cart> cartList = dbManager.getAllCart();
+        int cartNumber = 0;
+        for (int i = 0; i < cartList.size(); i++) {
+            cartNumber += cartList.get(i).getQuantity();
+        }
+        return cartNumber;
     }
 
     private void navigateDashboard() {

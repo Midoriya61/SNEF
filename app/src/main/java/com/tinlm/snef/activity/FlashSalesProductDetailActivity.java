@@ -26,6 +26,8 @@ import com.tinlm.snef.utilities.StoreProductImageUtilities;
 import com.tinlm.snef.utilities.StoreProductUtilities;
 import com.tinlm.snef.utilities.StoreUtilities;
 
+import org.apache.commons.collections.functors.StringValueTransformer;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -43,20 +45,26 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
     //ElegantNumberButton btnChange;
     //Button addToCart;
     // totalPrice
-    private TextView foodPriceDiscount, foodName, expiredDate,foodPrice;
+    private TextView foodPriceDiscount, foodName, expiredDate, foodPrice;
     private ViewPager imgProductFS;
     private CountdownView cv_countdownViewTest1;
     private String imgProduct;
     private int fspId;
     private float price;
     private int discount;
+
 //    int discount;
 
     private TextView storeName;
     private ReadMoreTextView description;
     private Store store;
+    private TextView txtCartNumber;
+    TextView txtCartNumberDB;
+    Context mContext;
+
+
 //    , textReadMore;
-            //, storeLocation, workingTime;
+    //, storeLocation, workingTime;
 //
 //    BottomNavigationView bottomNavigation;
 //
@@ -79,6 +87,10 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
     private void init() {
         //btnChange = findViewById(R.id.btnChange);
         //addToCart = findViewById(R.id.addToCart);
+
+        txtCartNumber = findViewById(R.id.txtCartNumber);
+        txtCartNumber.setText(String.valueOf(getCartNumber()));
+
         foodPriceDiscount = findViewById(R.id.foodPriceDiscount);
 //        totalPrice = findViewById(R.id.totalPrice);
         foodName = findViewById(R.id.foodName);
@@ -95,10 +107,10 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
         final Intent intent = getIntent();
         fspId = intent.getIntExtra(ConstainApp.FLASHSALEPRODUCTID, 0);
 
-        int storeId = intent.getIntExtra(ConstainApp.STOREID,0);
+        int storeId = intent.getIntExtra(ConstainApp.STOREID, 0);
         StoreUtilities storeUtilities = new StoreUtilities();
         store = storeUtilities.getStoreById(storeId);
-        storeName.setText( store.getStoreName());
+        storeName.setText(store.getStoreName());
         storeName.setPaintFlags(storeName.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
 
@@ -111,21 +123,21 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
 //        }
 
         price = intent.getFloatExtra(ConstainApp.PRICE, 0);
-        discount = intent.getIntExtra(ConstainApp.DISCOUNT,0);
-        foodPrice.setText(String.format("%,d", (int)price) + " đ");
-        foodPriceDiscount.setText((String.format("%,d",intent.getIntExtra(ConstainApp.DISCOUNT,0) * (int)price/100)));
+        discount = intent.getIntExtra(ConstainApp.DISCOUNT, 0);
+        foodPrice.setText(String.format("%,d", (int) price) + " đ");
+        foodPriceDiscount.setText((String.format("%,d", intent.getIntExtra(ConstainApp.DISCOUNT, 0) * (int) price / 100)));
 
         StoreProductUtilities storeProductUtilities = new StoreProductUtilities();
-        description.setText(storeProductUtilities.getDesById(intent.getIntExtra(ConstainApp.STOREPRODUCTID,0)).replace(" n ","\n"));
+        description.setText(storeProductUtilities.getDesById(intent.getIntExtra(ConstainApp.STOREPRODUCTID, 0)).replace(" n ", "\n"));
 //        description.setMaxLines(1);
         StoreProductImageUtilities storeProductImageUtilities = new StoreProductImageUtilities();
-        List<String> listImage = storeProductImageUtilities.getImageByStoreProductId(intent.getIntExtra(ConstainApp.STOREPRODUCTID,0));
+        List<String> listImage = storeProductImageUtilities.getImageByStoreProductId(intent.getIntExtra(ConstainApp.STOREPRODUCTID, 0));
 //        imgProduct = listImage.get(0);
         if (listImage.size() == 0) {
             listImage.add("https://res.cloudinary.com/dr4hpc9gi/image/upload/v1559727025/noimage.jpg");
         }
 
-        imgProductFS =  findViewById(R.id.imgProductFS);
+        imgProductFS = findViewById(R.id.imgProductFS);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(FlashSalesProductDetailActivity.this, listImage);
         imgProductFS.setAdapter(viewPagerAdapter);
 
@@ -175,10 +187,10 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
                 intentStore.putExtra(ConstainApp.STOREID, store.getStoreId());
 
                 String finalOpenHour = "";
-                if(store.getOpenHour().equals(store.getCloseHour())) {
+                if (store.getOpenHour().equals(store.getCloseHour())) {
                     finalOpenHour = getResources().getString(R.string.Open24);
 
-                }else
+                } else
                     finalOpenHour = store.getOpenHour() + " - " + store.getCloseHour();
 
                 intentStore.putExtra(ConstainApp.OPENHOUR, finalOpenHour);
@@ -186,7 +198,6 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
             }
         });
     }
-
 
 
 //    public void clickToReadMore(View view) {
@@ -233,13 +244,22 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
 //        });
 //    }
 
+    public int getCartNumber() {
+        DBManager dbManager = new DBManager(FlashSalesProductDetailActivity.this);
+        List<Cart> cartList = dbManager.getAllCart();
+        int cartNumber = 0;
+        for (int i = 0; i < cartList.size(); i++) {
+            cartNumber += cartList.get(i).getQuantity();
+        }
+        return cartNumber;
+    }
 
     public void clickAddToCard(View view) {
         DBManager dbManager = new DBManager(FlashSalesProductDetailActivity.this);
 
 
         Cart cart = dbManager.getProductById(fspId);
-        if(cart == null) {
+        if (cart == null) {
             cart = new Cart();
             cart.setStoreName(storeName.getText().toString());
             cart.setProductName(foodName.getText().toString());
@@ -248,11 +268,18 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
             cart.setPrice(price);
             cart.setDiscount(discount);
             dbManager.addCart(cart);
+            txtCartNumber.setText(String.valueOf(Integer.parseInt(String.valueOf(txtCartNumber.getText())) + 1));
+//            txtCartNumberDB = ((DashboardActivity) mContext).findViewById(R.id.txtCartNumber);
+//            txtCartNumberDB.setText(String.valueOf(Integer.parseInt(String.valueOf(txtCartNumber.getText())) + 1));
+
         } else {
             dbManager.updateCart(cart);
-        }
-        Toast.makeText(this,R.string.msg_add_to_cart_success, Toast.LENGTH_SHORT).show();
+            txtCartNumber.setText(String.valueOf(Integer.parseInt(String.valueOf(txtCartNumber.getText())) + 1));
+//            txtCartNumberDB = ((DashboardActivity) mContext).findViewById(R.id.txtCartNumber);
+//            txtCartNumberDB.setText(String.valueOf(Integer.parseInt(String.valueOf(txtCartNumber.getText())) + 1));
 
+        }
+        Toast.makeText(this, R.string.msg_add_to_cart_success, Toast.LENGTH_SHORT).show();
 
 
 //        cart.setQuantity(Integer.parseInt(btnChange.getNumber()));

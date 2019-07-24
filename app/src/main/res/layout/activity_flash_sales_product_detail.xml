@@ -28,6 +28,100 @@
     <!--android:layout_gravity="right"/>-->
     <!--</LinearLayout>-->
 
+    <!--Top bar-->
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/redApp"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:weightSum="1">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:background="@color/colorMain"
+            android:onClick="clickToSearchProduct">
+
+            <TextView
+                android:id="@+id/txtRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/find"
+                android:drawablePadding="10dp"
+                android:padding="10dp"
+                android:text="@string/msg_find"
+                android:textSize="20dp" />
+        </android.support.v7.widget.CardView>
+        <!--<android.support.v7.widget.SearchView-->
+        <!--android:id="@+id/searchBar"-->
+        <!--android:background="@color/colorMain"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="0.85"-->
+        <!--app:queryHint="@string/search_hint"-->
+        <!--app:defaultQueryHint="Thử coi"-->
+        <!--android:clickable="true"-->
+        <!--&gt;</android.support.v7.widget.SearchView>-->
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.15"
+            android:src="@drawable/filter" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.15">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="clickToShoppingCart"
+                android:src="@drawable/shoppingcart_icon" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6">
+                </LinearLayout>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="10dp"
+                    android:layout_weight="0.4"
+                    app:cardBackgroundColor="@color/cartIconColor"
+                    android:layout_gravity="top|end">
+
+                    <TextView
+                        android:id="@+id/txtCartNumber"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="99"
+                        android:layout_margin="3dp"
+                        android:textColor="@color/colorMain"
+                        android:textStyle="bold"
+                        android:textSize="14dp"/>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+
+        </FrameLayout>
+
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/centerHome"
         android:layout_width="match_parent"
@@ -93,16 +187,9 @@
                     <android.support.v4.view.ViewPager
                         android:id="@+id/imgProductFS"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        />
+                        android:layout_height="match_parent" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/background_cicler"
-                        android:src="@drawable/button_back_red" />
+
                 </FrameLayout>
 
                 <TextView
@@ -156,9 +243,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:textStyle="bold"
                         android:text="@string/msg_expired_date"
-                        android:textSize="18dp" />
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
 
                 </RelativeLayout>
 
@@ -215,8 +302,8 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="15dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginRight="40dp">
+                    android:layout_marginRight="40dp"
+                    android:layout_marginBottom="10dp">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -229,8 +316,8 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:text="@string/msg_provided_by_store"
-                            android:textStyle="italic"
-                            android:textSize="18dp" />
+                            android:textSize="18dp"
+                            android:textStyle="italic" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -273,31 +360,31 @@
                         android:layout_marginTop="5dp"
                         android:paddingLeft="35dp"
                         android:paddingRight="35dp"
-                        app:trimExpandedText="@string/msg_show_less"
-                        app:trimCollapsedText="@string/msg_show_more"
-                        app:trimMode="trimModeLine"
-                        app:trimLines="4"
                         android:text="Đây là quyển sách tín viết ra nhằm đi truyền đạo"
-                        android:textSize="18dp" />
+                        android:textSize="18dp"
+                        app:trimCollapsedText="@string/msg_show_more"
+                        app:trimExpandedText="@string/msg_show_less"
+                        app:trimLines="4"
+                        app:trimMode="trimModeLine" />
 
                     <!--<TextView-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="10dp"-->
-                        <!--android:layout_marginRight="20dp"-->
-                        <!--android:layout_marginLeft="20dp"-->
-                        <!--android:background="@drawable/dash_line" />-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_marginRight="20dp"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:background="@drawable/dash_line" />-->
 
                     <!--<TextView-->
-                        <!--android:id="@+id/textReadMore"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:layout_marginTop="10dp"-->
-                        <!--android:onClick="clickToReadMore"-->
-                        <!--android:text="@string/msg_see_more"-->
-                        <!--android:textColor="@color/redApp"-->
-                        <!--android:textSize="18dp" />-->
+                    <!--android:id="@+id/textReadMore"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:onClick="clickToReadMore"-->
+                    <!--android:text="@string/msg_see_more"-->
+                    <!--android:textColor="@color/redApp"-->
+                    <!--android:textSize="18dp" />-->
                 </LinearLayout>
 
                 <!--<com.cepheuen.elegantnumberbutton.view.ElegantNumberButton-->
@@ -328,11 +415,11 @@
             </LinearLayout>
         </ScrollView>
 
-<android.support.v7.widget.CardView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-</android.support.v7.widget.CardView>
+        </android.support.v7.widget.CardView>
     </LinearLayout>
 
 
@@ -358,28 +445,28 @@
             android:textColor="@color/colorMain"
             android:textSize="22sp"
             android:textStyle="bold" />
-    <!--<LinearLayout-->
-    <!--android:orientation="horizontal"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_alignParentRight="true"-->
-    <!--android:padding="10dp">-->
-    <!--<TextView-->
-    <!--android:id="@+id/totalPrice"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="33,000 "-->
-    <!--android:textSize="22sp"-->
-    <!--android:textStyle="bold"-->
-    <!--android:textColor="@color/colorMain"/>-->
-    <!--<TextView-->
-    <!--android:text=" đ"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:textSize="20sp"-->
-    <!--android:textStyle="bold"-->
-    <!--android:textColor="@color/colorMain"/>-->
-    <!--</LinearLayout>-->
-</RelativeLayout><!--<LinearLayout--><!--android:orientation="horizontal"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content">--><!--<android.support.design.widget.BottomNavigationView--><!--android:id="@+id/bottomNavigation"--><!--android:layout_width="match_parent"--><!--android:layout_height="56dp"--><!--android:background="@drawable/border_top"--><!--app:itemIconTint="@color/colorMain"--><!--app:itemTextColor="@color/colorMain"--><!--app:menu="@menu/bottom_nav_menu"--><!--android:layout_gravity="bottom"--><!--/>--><!--</LinearLayout>-->
+        <!--<LinearLayout-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:padding="10dp">-->
+        <!--<TextView-->
+        <!--android:id="@+id/totalPrice"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="33,000 "-->
+        <!--android:textSize="22sp"-->
+        <!--android:textStyle="bold"-->
+        <!--android:textColor="@color/colorMain"/>-->
+        <!--<TextView-->
+        <!--android:text=" đ"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textSize="20sp"-->
+        <!--android:textStyle="bold"-->
+        <!--android:textColor="@color/colorMain"/>-->
+        <!--</LinearLayout>-->
+    </RelativeLayout><!--<LinearLayout--><!--android:orientation="horizontal"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content">--><!--<android.support.design.widget.BottomNavigationView--><!--android:id="@+id/bottomNavigation"--><!--android:layout_width="match_parent"--><!--android:layout_height="56dp"--><!--android:background="@drawable/border_top"--><!--app:itemIconTint="@color/colorMain"--><!--app:itemTextColor="@color/colorMain"--><!--app:menu="@menu/bottom_nav_menu"--><!--android:layout_gravity="bottom"--><!--/>--><!--</LinearLayout>-->
 
-    </RelativeLayout>
+</RelativeLayout>
