@@ -96,11 +96,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+                android:id="@+id/tvOrderHistory"
                 android:text="@string/msg_order_history"
                 android:layout_marginLeft="10dp"
                 android:textSize="16dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:onClick="clickToShowHistoryOrder"/>
         </LinearLayout>
 
         <LinearLayout

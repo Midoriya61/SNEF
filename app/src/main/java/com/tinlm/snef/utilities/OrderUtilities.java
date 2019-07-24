@@ -48,7 +48,8 @@ public class OrderUtilities {
 
         try {
             URL urll = new URL(url);
-            respone = ReadStream.readStream(urll.openStream());
+            HttpGetRequest httpGetRequest = new HttpGetRequest();
+            respone = httpGetRequest.execute(urll.openStream()).get();
             JSONObject jsonObj = new JSONObject(respone);
 
             if(jsonObj.has(orderId)){
@@ -57,6 +58,7 @@ public class OrderUtilities {
             if(jsonObj.has(dateOrder)){
                 java.util.Date date = sdf1.parse(jsonObj.getString(dateOrder));
                 java.sql.Date dateOrderSql = new java.sql.Date(date.getTime());
+
                 store.setDateOrder(dateOrderSql);
             }
             if(jsonObj.has(confirmationCode)){

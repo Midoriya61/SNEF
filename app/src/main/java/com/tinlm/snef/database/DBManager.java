@@ -62,7 +62,7 @@ public class DBManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(ConstainApp.JS_FSPID, cart.getFspId());
-        values.put(ConstainApp.JS_IMAGEPRODUCT, cart.getFspId());
+        values.put(ConstainApp.JS_IMAGEPRODUCT, cart.getImageProduct());
         values.put(ConstainApp.JS_PRODUCTNAME, cart.getProductName());
         values.put(ConstainApp.JS_STORENAME, cart.getStoreName());
         values.put(ConstainApp.JS_PRICE, cart.getPrice());
@@ -267,6 +267,7 @@ public class DBManager extends SQLiteOpenHelper {
             order = new Order();
             order.setOrderId(cursor.getInt(cursor.getColumnIndex(ConstainApp.JS_ORDERID)));
             order.setDateOrder(Date.valueOf(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_DATEORDER))));
+//            order.setDateOrder(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_DATEORDER)));
             order.setConfirmationCode(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_CONFIMRCODE)));
             order.setStatus(Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_ORDERSTATUS))));
             order.setRatingPoint(cursor.getFloat(cursor.getColumnIndex(ConstainApp.JS_ORDERRATING)));
@@ -290,6 +291,7 @@ public class DBManager extends SQLiteOpenHelper {
                 Order order = new Order();
                 order.setOrderId(cursor.getInt(cursor.getColumnIndex(ConstainApp.JS_ORDERID)));
                 order.setDateOrder(Date.valueOf(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_DATEORDER))));
+//                order.setDateOrder(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_DATEORDER)));
                 order.setConfirmationCode(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_CONFIMRCODE)));
                 order.setStatus(Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_ORDERSTATUS))));
                 order.setRatingPoint(cursor.getFloat(cursor.getColumnIndex(ConstainApp.JS_ORDERRATING)));
