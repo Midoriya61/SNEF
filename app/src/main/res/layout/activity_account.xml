@@ -90,7 +90,8 @@
             android:background="@color/colorMain"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:onClick="clickToShowAllOrderHistory">
             <ImageView
                 android:src="@drawable/history"
                 android:layout_width="wrap_content"

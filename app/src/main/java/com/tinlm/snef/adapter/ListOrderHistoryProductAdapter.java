@@ -30,18 +30,17 @@ public class ListOrderHistoryProductAdapter extends RecyclerView.Adapter<ListOrd
 
     Context mContext;
     List<OrderDetail> orderDetailList = new ArrayList<>();
-    Map<Integer, String> listImageOrderHistory;
+//    Map<Integer, String> listImageOrderHistory;
     DecimalFormat df = new DecimalFormat("#,###,###,###");
 
 
     private Runnable runnable;
     private Handler handler = new Handler();
 
-    public ListOrderHistoryProductAdapter(Context mContext, List<OrderDetail> orderDetailList,
-                           Map<Integer, String> listImageOrderHistory) {
+    public ListOrderHistoryProductAdapter(Context mContext, List<OrderDetail> orderDetailList) {
         this.mContext = mContext;
         this.orderDetailList = orderDetailList;
-        this.listImageOrderHistory = listImageOrderHistory;
+//        this.listImageOrderHistory = listImageOrderHistory;
 
 
     }
@@ -68,12 +67,12 @@ public class ListOrderHistoryProductAdapter extends RecyclerView.Adapter<ListOrd
         final OrderDetail orderDetail = orderDetailList.get(i);
         final int position = i;
 
-        String productOrderHistoryImage = listImageOrderHistory.get(orderDetail.getFlashSaleProductId());
-
-        Picasso.get().load(productOrderHistoryImage).resize(500, 500).into(listOrderHistoryProductHolder.imgCartFood);
+//        String productOrderHistoryImage = listImageOrderHistory.get(orderDetail.getFlashSaleProductId());
 
         FlashSaleProductUtilities flashSaleProductUtilities = new FlashSaleProductUtilities();
-        FlashSaleProduct fsp = flashSaleProductUtilities.getFSPById(orderDetailList.get(i).getFlashSaleProductId());
+        FlashSaleProduct fsp = flashSaleProductUtilities.getFSPById(orderDetail.getFlashSaleProductId());
+
+        Picasso.get().load(fsp.getImageSrc()).resize(500, 500).into(listOrderHistoryProductHolder.imgCartFood);
 
 
         listOrderHistoryProductHolder.txtCartFoodName.setText(fsp.getProductName());
@@ -82,7 +81,7 @@ public class ListOrderHistoryProductAdapter extends RecyclerView.Adapter<ListOrd
 
 //        listOrderHistoryProductHolder.txtCartPrice.setText(String.format("%,d", (int) ((fsp.getPrice() * fsp.getDiscount()) / 100)) + "");
 //
-        float orderDetailPrice = orderDetailList.get(i).getOrderDetailPrice()/orderDetailList.get(i).getQuantity();
+        float orderDetailPrice = orderDetail.getOrderDetailPrice()/orderDetail.getQuantity();
         listOrderHistoryProductHolder.txtCartPrice.setText(String.format("%,d", (int) orderDetailPrice));
 
 //        btnChange.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {

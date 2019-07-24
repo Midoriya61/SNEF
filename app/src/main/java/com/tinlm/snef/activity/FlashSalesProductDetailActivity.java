@@ -310,4 +310,8 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
     }
 
 
+    public void clickToShoppingCart(View view) {
+        Intent intent = new Intent(this, OrderActivity.class);
+        startActivity(intent);
+    }
 }
