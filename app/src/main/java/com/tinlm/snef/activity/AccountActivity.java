@@ -75,9 +75,8 @@ public class AccountActivity extends AppCompatActivity {
         txtAccountName.setText(sharedPreferences.getString(ConstainApp.LASTNAME, null) + " " + sharedPreferences.getString(ConstainApp.FIRSTNAME, null));
     }
 
-    public void clickToShowHistoryOrder(View view) {
-        Intent intent = new Intent(this, OrderHistoryActivity.class);
-
+    public void clickToShowAllOrderHistory(View view) {
+        Intent intent = new Intent(this, AllOrderHistoryActivity.class);
         startActivity(intent);
     }
 }

@@ -47,7 +47,8 @@ public class ConstainServer {
     public static final String OrderURL = "order/";
     public static final String InsertNewOrder = "insertNewOrder/";
     public static final String GetLastOrder = "getLastOrder/";
-
+    public static final String GetAllOrder = "getAllOrder/";
+    public static final String GetOrderById = "getOrderById/";
 
     //OrderDetail
     public static final String OrderDetailURL = "orderDetail/";

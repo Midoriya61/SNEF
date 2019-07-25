@@ -17,4 +17,9 @@ public interface OrderService {
     @GET(ConstainServer.OrderURL + ConstainServer.GetLastOrder)
     Call<Order> getLastOrder();
 
+    @GET(ConstainServer.OrderURL + ConstainServer.GetAllOrder)
+    Call getAllOrder();
+
+    @GET(ConstainServer.OrderURL + ConstainServer.GetOrderById + "{orderId}")
+    Call getOrderById(@Path("orderId") int orderId);
 }

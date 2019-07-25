@@ -40,6 +40,8 @@
     <string name="msg_show_less" translatable="false">Thu gọn</string>
     <string name="msg_product" translatable="false">Sản phẩm</string>
     <string name="msg_login_fail" translatable="false">User</string>
+    <string name="msg_still_not_rating" translatable="false">Chưa có đánh giá</string>
+    <string name="msg_warehouse" translatable="false">Kho: </string>
 
 
     <string name="btn_delcart" translatable="false">Xóa</string>

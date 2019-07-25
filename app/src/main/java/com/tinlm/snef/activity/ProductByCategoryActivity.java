@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
 
 import com.tinlm.snef.R;
 import com.tinlm.snef.adapter.FlashSaleProductAdapter;
@@ -31,6 +33,7 @@ public class ProductByCategoryActivity extends AppCompatActivity {
     RecyclerView rcListPdCategory;
     FlashSaleProductService flashSaleProductService;
     Intent intent;
+    TextView txtCategogy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +44,14 @@ public class ProductByCategoryActivity extends AppCompatActivity {
 
     private void init() {
         rcListPdCategory = findViewById(R.id.rcListPdCategory);
+        txtCategogy = findViewById(R.id.txtCategogy);
         flashSaleProductService = ApiUtils.getFlashSaleProductService();
 
 
         intent = getIntent();
         FlashSaleProductUtilities flashSaleProductUtilities = new FlashSaleProductUtilities();
+
+        txtCategogy.setText(intent.getStringExtra(ConstainApp.CATEGORYNAME));
 
 //        flashSaleProducts = flashSaleProductUtilities.getFSPByCategoryId(intent.getIntExtra(ConstainApp.CATEGORYID, 0));
         flashSaleProductService.getFSPByCategoryId(intent.getIntExtra(ConstainApp.CATEGORYID, 0)).enqueue(new Callback<List<FlashSaleProduct>>() {
@@ -78,6 +84,11 @@ public class ProductByCategoryActivity extends AppCompatActivity {
 
             }
         });
-
     }
+
+    public void clickToSearchProduct(View view) {
+        Intent intent = new Intent(this, SearchActivity.class);
+        startActivity(intent);
+    }
+
 }

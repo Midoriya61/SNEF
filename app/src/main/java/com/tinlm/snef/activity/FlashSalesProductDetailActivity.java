@@ -283,6 +283,28 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
 //            e.printStackTrace();
 //        }
     }
+    public void clickToStore(View view) {
+        Intent intent = new Intent(this, StoreActivity.class);
+
+        intent.putExtra(ConstainApp.JS_STORENAME, store.getStoreName());
+        intent.putExtra(ConstainApp.STOREAVATAR, store.getAvatar());
+        String address = store.getAddress() + ", " + store.getDistrict() + ", " +
+                store.getWard() + ", " + store.getCity() + ", " + store.getCountry();
+        intent.putExtra(ConstainApp.ADDRESS, address);
+        intent.putExtra(ConstainApp.RATINGPOINT, store.getRatingPoint());
+        intent.putExtra(ConstainApp.STOREID, store.getStoreId());
+
+        String openHour = "";
+        if(store.getOpenHour().equals(store.getCloseHour())) {
+            openHour = getResources().getString(R.string.Open24);
+
+        }else
+            openHour = store.getOpenHour() + " - " + store.getCloseHour();
+
+        intent.putExtra(ConstainApp.OPENHOUR, openHour);
+        startActivity(intent);
+    }
+
 
 
 }

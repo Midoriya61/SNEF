@@ -19,7 +19,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1"
+            android:layout_weight="0.08"
             android:background="@color/redApp"
             android:gravity="center_vertical"
             android:orientation="vertical">
@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="10dp"
-                android:text="Lịch Sử Đơn Hàng"
+                android:text="Thông Tin Đơn Hàng"
                 android:textColor="@color/colorMain"
                 android:textSize="20dp"
                 android:textStyle="bold" />
@@ -38,7 +38,7 @@
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.9"
+            android:layout_weight="0.92"
             android:fillViewport="true">
 
             <LinearLayout
@@ -223,7 +223,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
                             android:layout_marginTop="20dp"
-                            android:text="Thông Tin Đơn Hàng"
+                            android:text="Chi Tiết Đơn Hàng"
                             android:textSize="18dp"
                             android:textStyle="bold" />
 
@@ -231,9 +231,8 @@
                             android:id="@+id/rcListOrderItem"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@color/colorMain"
                             android:layout_marginTop="10dp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
                             >
 
 
@@ -242,8 +241,8 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="30dp"
-                            android:layout_marginRight="30dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
                             android:background="@drawable/dash_line" />
 
                         <LinearLayout
@@ -308,7 +307,6 @@
                         android:layout_margin="20dp"
                         android:background="@color/colorMain"
                         android:orientation="horizontal"
-
                         >
 
                         <ImageView

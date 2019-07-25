@@ -80,6 +80,11 @@ public class PayPalActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onResume() {  // After a pause OR at startup
+        super.onResume();
+    }
+
     void pay(View view) {
 
     }

@@ -28,6 +28,7 @@ public class FlashSaleProductUtilities {
     private static final String storeId = "storeId";
     private static final String discount = "discount";
     private static final String endDate = "endDate";
+    private static final String imageSrc = "imageSrc";
 
     // 6/17/2019 TinLM Create getHotFlashSaleProduct
     public List<FlashSaleProduct> getHotFlashSaleProduct() {
@@ -298,7 +299,9 @@ public class FlashSaleProductUtilities {
             if (jsonObj.has(storeId)) {
                 fsp.setStoreId(jsonObj.getInt(storeId));
             }
-
+            if (jsonObj.has(imageSrc)) {
+                fsp.setImageSrc(jsonObj.getString(imageSrc));
+            }
             if (!jsonObj.getString(endDate).contains("null")) {
                 fsp.setEndDate(jsonObj.getString(endDate));
             }
