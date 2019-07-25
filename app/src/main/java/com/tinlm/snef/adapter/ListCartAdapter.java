@@ -107,10 +107,10 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
 
 //                    TextView txtTotalCartPrice = ((OrderActivity) mContext).findViewById(R.id.txtTotalCartPrice);
                     if (newValue > oldValue) {
-                        txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(".", "")) + (int) ((cart.getPrice() * cart.getDiscount()) / 100))));
+                        txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(",", "")) + (int) ((cart.getPrice() * cart.getDiscount()) / 100))));
                     } else if (newValue < oldValue) {
 
-                        txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(".", "")) - (int) ((cart.getPrice() * cart.getDiscount()) / 100))));
+                        txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(",", "")) - (int) ((cart.getPrice() * cart.getDiscount()) / 100))));
                     }
 
                 }
