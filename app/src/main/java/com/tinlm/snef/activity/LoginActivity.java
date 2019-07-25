@@ -21,6 +21,7 @@ public class LoginActivity extends AppCompatActivity {
 
     CardView formLoginButton;
     ImageView appImage;
+    TextView errLogin;
 
 
     EditText txtUsername , txtPassword;
@@ -43,33 +44,39 @@ public class LoginActivity extends AppCompatActivity {
 
     // setting layout for screen
     private void init() {
+
         formLoginButton = findViewById(R.id.formLoginButton);
         appImage = findViewById(R.id.appImage);
         txtUsername = findViewById(R.id.txtUsername);
         txtPassword = findViewById(R.id.txtPassword);
+        errLogin = findViewById(R.id.errLogin);
 
         formLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CustomerUtilities customerUtilities = new CustomerUtilities();
-                String adf = txtUsername.getText().toString();
                 Customer customer = customerUtilities.login(txtUsername.getText().toString(), txtPassword.getText().toString());
-                SharedPreferences sharedPreferences = getSharedPreferences(ConstainApp.login_Prefer, MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString(ConstainApp.USERNAME, customer.getUsername());
-                editor.putString(ConstainApp.PASSWORD, customer.getPassword());
-                editor.putString(ConstainApp.FIRSTNAME, customer.getFirstName());
-                editor.putString(ConstainApp.LASTNAME, customer.getLastName());
-                editor.putString(ConstainApp.EMAIL, customer.getEmail());
-                editor.putString(ConstainApp.AVATAR, customer.getAvatar());
-                editor.putString(ConstainApp.PHONE, customer.getPhone());
-                editor.putInt(ConstainApp.CUSTOMERID, customer.getCustomerId());
-                editor.apply();
+                if(customer == null) {
+                    errLogin.setText(getResources().getString(R.string.msg_login_fail));
+                } else {
+                    SharedPreferences sharedPreferences = getSharedPreferences(ConstainApp.login_Prefer, MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(ConstainApp.USERNAME, customer.getUsername());
+                    editor.putString(ConstainApp.PASSWORD, customer.getPassword());
+                    editor.putString(ConstainApp.FIRSTNAME, customer.getFirstName());
+                    editor.putString(ConstainApp.LASTNAME, customer.getLastName());
+                    editor.putString(ConstainApp.EMAIL, customer.getEmail());
+                    editor.putString(ConstainApp.AVATAR, customer.getAvatar());
+                    editor.putString(ConstainApp.PHONE, customer.getPhone());
+                    editor.putInt(ConstainApp.CUSTOMERID, customer.getCustomerId());
+                    editor.apply();
 
-                Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                startActivity(intent);
-                finish();
-            }
+                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                }
+                }
         });
     }
 
@@ -84,4 +91,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+    public void clickToRegister(View view) {
+    }
 }

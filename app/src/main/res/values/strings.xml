@@ -39,6 +39,7 @@
     <string name="msg_show_more" translatable="false">Xem thêm</string>
     <string name="msg_show_less" translatable="false">Thu gọn</string>
     <string name="msg_product" translatable="false">Sản phẩm</string>
+    <string name="msg_login_fail" translatable="false">User</string>
 
 
     <string name="btn_delcart" translatable="false">Xóa</string>
@@ -58,6 +59,14 @@
 
     // firebase
     <string name="project_id" translatable="false">010</string>
+
+    // button
+    <string name="msg_last_name" translatable="false">Họ</string>
+    <string name="input_last_name" translatable="false">Nhập họ</string>
+    <string name="msg_first_name" translatable="false">Tên</string>
+    <string name="input_first_name" translatable="false">Nhập tên</string>
+
+
 
 
 </resources>
