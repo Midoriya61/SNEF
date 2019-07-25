@@ -22,4 +22,7 @@ public interface OrderService {
 
     @GET(ConstainServer.OrderURL + ConstainServer.GetOrderById + "{orderId}")
     Call getOrderById(@Path("orderId") int orderId);
+
+    @GET(ConstainServer.OrderURL + ConstainServer.UpdateRatingBar + "{orderId}" + "{ratingPoint}")
+    Call updateRatingBar(@Path("orderId") int orderId, @Path("ratingPoint") int ratingPoint);
 }

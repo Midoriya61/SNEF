@@ -43,7 +43,6 @@ public class AllOrderHistoryActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigation;
     RecyclerView rcOrderHistory;
     List<Order> orderList;
-    List<OrderDetail> orderDetailList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +62,7 @@ public class AllOrderHistoryActivity extends AppCompatActivity {
         ListOrderHistoryAdapter orderHistoryAdapter = new ListOrderHistoryAdapter(
                 AllOrderHistoryActivity.this, orderList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(AllOrderHistoryActivity.this,
-                LinearLayoutManager.VERTICAL, true
-        );
+                LinearLayoutManager.VERTICAL,true);
         rcOrderHistory.setItemAnimator(new DefaultItemAnimator());
         rcOrderHistory.setLayoutManager(mLayoutManager);
         rcOrderHistory.setAdapter(orderHistoryAdapter);
@@ -74,7 +72,7 @@ public class AllOrderHistoryActivity extends AppCompatActivity {
 
     private void navigateDashboard() {
         bottomNavigation = findViewById(R.id.bottomNavigation);
-        bottomNavigation.setSelectedItemId(R.id.action_orders);
+        bottomNavigation.setSelectedItemId(R.id.action_account);
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {

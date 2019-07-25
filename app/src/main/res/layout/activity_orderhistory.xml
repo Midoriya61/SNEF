@@ -231,9 +231,8 @@
                             android:id="@+id/rcListOrderItem"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/colorMain"
                             android:layout_marginTop="10dp"
-                            >
+                            android:background="@color/colorMain">
 
 
                         </android.support.v7.widget.RecyclerView>
@@ -306,19 +305,11 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
                         android:background="@color/colorMain"
-                        android:orientation="horizontal"
-                        >
-
-                        <ImageView
-                            android:id="@+id/storeAvatar"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.2" />
+                        android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
                             android:layout_weight="0.8"
                             android:orientation="vertical">
 
@@ -342,28 +333,47 @@
                                 android:orientation="horizontal">
 
 
-                                <TextView
-                                    android:id="@+id/storeDistance"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="0.8 km away " />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text=" | " />
-
-                                <TextView
-                                    android:id="@+id/storeWorkTime"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text=" Open 24/7" />
                             </LinearLayout>
                         </LinearLayout>
 
                     </LinearLayout>
 
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txtRating"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:text="@string/question_rating"
+                    android:textColor="@color/blue"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp" />
+
+
+                <Button
+                    android:id="@+id/btnSubmitRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:backgroundTint="@color/blue"
+                    android:text="@string/btn_submitrating"
+                    android:textColor="@color/colorMain"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
 
             </LinearLayout>
 
