@@ -7,6 +7,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,8 +17,9 @@ import com.tinlm.snef.constain.ConstainApp;
 
 public class AccountActivity extends AppCompatActivity {
     private ImageView imgAvatar;
-    private TextView txtAccountName,txtEditProfile;
+    private TextView txtAccountName,txtEditProfile,tvOrderHistory;
     private SharedPreferences sharedPreferences;
+
 
 
     BottomNavigationView bottomNavigation;
@@ -71,5 +73,10 @@ public class AccountActivity extends AppCompatActivity {
 
         txtAccountName = findViewById(R.id.txtAccountName);
         txtAccountName.setText(sharedPreferences.getString(ConstainApp.LASTNAME, null) + " " + sharedPreferences.getString(ConstainApp.FIRSTNAME, null));
+    }
+
+    public void clickToShowAllOrderHistory(View view) {
+        Intent intent = new Intent(this, AllOrderHistoryActivity.class);
+        startActivity(intent);
     }
 }

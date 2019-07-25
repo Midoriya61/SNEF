@@ -21,8 +21,9 @@ import com.tinlm.snef.constain.ConstainApp;
 // 6/23/2019 TinLM Create createListFSP
 public class DashboardActivity extends AppCompatActivity {
 
-
-    BottomNavigationView bottomNavigation;
+//    RecyclerView rcListCategories;
+//    RecyclerView rcListHost;
+BottomNavigationView bottomNavigation;
     TextView txtRFind;
 
     @Override

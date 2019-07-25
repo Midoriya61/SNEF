@@ -14,6 +14,7 @@
     <color name="blue">#0066AE</color>
     <color name="warmGray">#DADEDF</color>
     <color name="persianRed">#CA3433</color>
+    <color name="cartIconColor">#3949ab</color>
 
 
 </resources>

@@ -10,12 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.Date;
-
-
-import okhttp3.OkHttpClient;
 
 import com.paypal.android.sdk.payments.*;
 
@@ -84,6 +78,11 @@ public class PayPalActivity extends AppCompatActivity {
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
         startActivityForResult(intent, m_paypalRequestCode);
 
+    }
+
+    @Override
+    public void onResume() {  // After a pause OR at startup
+        super.onResume();
     }
 
     void pay(View view) {

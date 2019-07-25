@@ -43,6 +43,8 @@ public class ConstainApp {
     public static final String ADDRESS = "ADDRESS";
     public static final String SEARCHPRODUCTNAME = "SEARCHPRODUCTNAME";
     public static final String OPENHOUR = "OPENHOUR";
+    public static final String LATITUDE = "LATITUDE";
+    public static final String LONGITUDE = "LONGITUDE";
 
 
     // Date time

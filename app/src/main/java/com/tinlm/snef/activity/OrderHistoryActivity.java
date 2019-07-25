@@ -24,12 +24,15 @@ import com.tinlm.snef.adapter.ListOrderHistoryProductAdapter;
 import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.database.DBManager;
 import com.tinlm.snef.model.Cart;
+import com.tinlm.snef.model.FlashSaleProduct;
 import com.tinlm.snef.model.Order;
 import com.tinlm.snef.model.OrderDetail;
 import com.tinlm.snef.model.Store;
+import com.tinlm.snef.utilities.FlashSaleProductUtilities;
 import com.tinlm.snef.utilities.OrderDetailUtilities;
 import com.tinlm.snef.utilities.OrderUtilities;
 import com.tinlm.snef.utilities.StoreProductImageUtilities;
+import com.tinlm.snef.utilities.StoreUtilities;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -55,12 +58,11 @@ public class OrderHistoryActivity extends AppCompatActivity {
     TextView txtConfirmCode;
     RecyclerView rcListOrderItem;
     TextView txtTotalOrderPrice;
-//    TextView storeName;
-//    TextView storeAddress;
-//    TextView storeDistance;
-//    TextView storeWorkTime;
-//    ImageView storeAvatar;
-//    Store store;
+    TextView storeName;
+    TextView storeAddress;
+    TextView storeDistance;
+    TextView storeWorkTime;
+    ImageView storeAvatar;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,9 +76,10 @@ public class OrderHistoryActivity extends AppCompatActivity {
         intent = getIntent();
 
         OrderUtilities orderUtilities = new OrderUtilities();
-        order = orderUtilities.getLastOrder();
+        int orderId = intent.getIntExtra(ConstainApp.JS_ORDERID,0);
+        order = orderUtilities.getOrderById(orderId);
 
-        SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
         String orderDate = dateformat.format(order.getDateOrder());
 
 
@@ -88,14 +91,14 @@ public class OrderHistoryActivity extends AppCompatActivity {
         rcListOrderItem = findViewById(R.id.rcListOrderItem);
         txtTotalOrderPrice = findViewById(R.id.txtTotalOrderPrice);
 
-//        storeName.findViewById(R.id.storeName);
-//        storeAddress.findViewById(R.id.storeAddress);
-//        storeDistance.findViewById(R.id.storeDistance);
-//        storeWorkTime.findViewById(R.id.storeWorkTime);
-//        storeAvatar.findViewById(R.id.storeAvatar);
+        storeName = findViewById(R.id.storeName);
+        storeAddress = findViewById(R.id.storeAddress);
+        storeDistance = findViewById(R.id.storeDistance);
+        storeWorkTime = findViewById(R.id.storeWorkTime);
+        storeAvatar = findViewById(R.id.storeAvatar);
 
 
-        txtOrderID.setText(String.valueOf(order.getOrderId()));
+        txtOrderID.setText(String.valueOf(orderId));
         if (order.isStatus() != true) {
             txtOrderStatus.setText(R.string.orderstatus_paid);
         } else {
@@ -105,20 +108,48 @@ public class OrderHistoryActivity extends AppCompatActivity {
         txtConfirmCode.setText(order.getConfirmationCode());
 
         OrderDetailUtilities orderDetailUtilities = new OrderDetailUtilities();
-        int orderId = orderUtilities.getLastOrder().getOrderId();
         List<OrderDetail> orderDetailList = orderDetailUtilities.getAllOrderDetailByOrderId(orderId);
 
-        Map<Integer, String> listImageProduct = new HashMap<>();
-        StoreProductImageUtilities imageUltilities = new StoreProductImageUtilities();
 
-        for (int i = 0; i < orderDetailList.size(); i++) {
+        FlashSaleProductUtilities flashSaleProductUtilities = new FlashSaleProductUtilities();
+        FlashSaleProduct fsp = flashSaleProductUtilities.getFSPById(orderDetailList.get(0).getFlashSaleProductId());
 
-            String productImage = imageUltilities.getOneImageByStoreProductId(orderDetailList.get(i).getFlashSaleProductId());
-            listImageProduct.put(orderDetailList.get(i).getFlashSaleProductId(), productImage);
+        StoreUtilities storeUtilities = new StoreUtilities();
+        Store store = storeUtilities.getStoreById(fsp.getStoreId());
 
-        }
+        storeName.setText(store.getStoreName());
+        String openHour = "";
+        if(store.getOpenHour().equals(store.getCloseHour())) {
+            openHour = this.getResources().getString(R.string.Open24);
 
-        ListOrderHistoryProductAdapter listOrderHistoryProductAdapter = new ListOrderHistoryProductAdapter(OrderHistoryActivity.this, orderDetailList, listImageProduct);
+        }else
+            openHour = store.getOpenHour() + " - " + store.getCloseHour();
+
+        storeAddress.setText(store.getAddress() + ", " + store.getDistrict() + ", " +
+                store.getWard()
+                + ", " + store.getCity() + ", " + store.getCountry());
+        WindowManager wm = (WindowManager)this.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int height = size.y;
+        Picasso.get().load(store.getAvatar()).resize(0,height / 6).into(storeAvatar);
+        storeWorkTime.setText(openHour);
+        storeDistance.setText((Math.floor(store.getDistance() * 100) / 100) + " km");
+
+        final String finalOpenHour = openHour;
+
+//        Map<Integer, String> listImageProduct = new HashMap<>();
+//        StoreProductImageUtilities imageUltilities = new StoreProductImageUtilities();
+//
+//        for (int i = 0; i < orderDetailList.size(); i++) {
+//
+//            String productImage = imageUltilities.getOneImageByStoreProductId(orderDetailList.get(i).getFlashSaleProductId());
+//            listImageProduct.put(orderDetailList.get(i).getFlashSaleProductId(), productImage);
+//
+//        }
+
+        ListOrderHistoryProductAdapter listOrderHistoryProductAdapter = new ListOrderHistoryProductAdapter(OrderHistoryActivity.this, orderDetailList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(OrderHistoryActivity.this,
                 LinearLayoutManager.VERTICAL, false);
         rcListOrderItem.setItemAnimator(new DefaultItemAnimator());

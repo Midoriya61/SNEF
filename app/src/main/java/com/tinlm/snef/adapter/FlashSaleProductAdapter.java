@@ -20,7 +20,8 @@ import com.squareup.picasso.Picasso;
 import com.tinlm.snef.R;
 import com.tinlm.snef.activity.FlashSalesProductDetailActivity;
 import com.tinlm.snef.constain.ConstainApp;
-
+import com.tinlm.snef.fragment.HotProductHomeFragment;
+import com.tinlm.snef.fragment.ListFSPFragment;
 import com.tinlm.snef.model.FlashSaleProduct;
 
 import java.text.DateFormat;
@@ -33,14 +34,16 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
     List<FlashSaleProduct> flashSaleProductList;
     String sreenName;
 
+
     private Runnable runnable;
     private Handler handler = new Handler();
     private String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     public FlashSaleProductAdapter(Context mContext, List<FlashSaleProduct> flashSaleProductList,
-                                   String sreenName) {
+                                  String sreenName) {
         this.mContext = mContext;
         this.flashSaleProductList = flashSaleProductList;
+
         this.sreenName = sreenName;
     }
 
@@ -52,6 +55,8 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
         FlashSaleProductHolder flashSaleProductHolder;
         View v = LayoutInflater.from(mContext).inflate(R.layout.list_flash_sale_product, viewGroup, false);
         flashSaleProductHolder = new FlashSaleProductHolder(v);
+
+
         return flashSaleProductHolder;
     }
 
@@ -61,8 +66,10 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
     @Override
     public void onBindViewHolder(@NonNull FlashSaleProductHolder flashSaleProductHolder, int i) {
         final FlashSaleProduct flashSaleProduct = flashSaleProductList.get(i);
+
         Picasso.get().load("https://res.cloudinary.com/dr4hpc9gi/image/upload/v1558970388/FoodStoreImage/discount.png")
                 .resize(200,120).into(flashSaleProductHolder.imgDiscount);
+
         if(sreenName.equals(ConstainApp.SCHotProductHomeFragment)) {
             if(flashSaleProduct.getImageSrc() == null) {
                 Picasso.get().load("https://res.cloudinary.com/dr4hpc9gi/image/upload/v1559727025/noimage.jpg")
@@ -79,9 +86,9 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
             int height = size.y;
             if(flashSaleProduct.getImageSrc() == null) {
                 Picasso.get().load("https://res.cloudinary.com/dr4hpc9gi/image/upload/v1559727025/noimage.jpg")
-                        .resize(width / 2,height / 3).into(flashSaleProductHolder.imgFood);
+                        .resize(width / 2,height / 4).into(flashSaleProductHolder.imgFood);
             }else {
-                Picasso.get().load(flashSaleProduct.getImageSrc()).resize(width / 2,height / 3).into(flashSaleProductHolder.imgFood);
+                Picasso.get().load(flashSaleProduct.getImageSrc()).resize(width / 2,height / 4).into(flashSaleProductHolder.imgFood);
             }
         }
 
@@ -91,7 +98,6 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
         int productPrice = (int) flashSaleProduct.getPrice();
         flashSaleProductHolder.txtPrice.setText((String.format("%,d", productPrice)) + "");
         flashSaleProductHolder.txtDiscount.setText("-" + flashSaleProduct.getDiscount() + "%");
-
 //        String strProductPrice = (String.format("%,d", productPrice));
 
         flashSaleProductHolder.textPriceDiscount.setText(String.format("%,d",(int)(productPrice - ((flashSaleProduct.getPrice()

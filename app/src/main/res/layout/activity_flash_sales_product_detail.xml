@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/grayLight"
     tools:context=".activity.FlashSalesProductDetailActivity">
 
     <!--&lt;!&ndash;Top bar&ndash;&gt;-->
@@ -27,12 +28,106 @@
     <!--android:layout_gravity="right"/>-->
     <!--</LinearLayout>-->
 
+    <!--Top bar-->
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/redApp"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:weightSum="1">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:background="@color/colorMain"
+            android:onClick="clickToSearchProduct">
+
+            <TextView
+                android:id="@+id/txtRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/find"
+                android:drawablePadding="10dp"
+                android:padding="10dp"
+                android:text="@string/msg_find"
+                android:textSize="20dp" />
+        </android.support.v7.widget.CardView>
+        <!--<android.support.v7.widget.SearchView-->
+        <!--android:id="@+id/searchBar"-->
+        <!--android:background="@color/colorMain"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="0.85"-->
+        <!--app:queryHint="@string/search_hint"-->
+        <!--app:defaultQueryHint="Thử coi"-->
+        <!--android:clickable="true"-->
+        <!--&gt;</android.support.v7.widget.SearchView>-->
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.15"
+            android:src="@drawable/filter" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.15">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="clickToShoppingCart"
+                android:src="@drawable/shoppingcart_icon" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6">
+                </LinearLayout>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="10dp"
+                    android:layout_weight="0.4"
+                    app:cardBackgroundColor="@color/cartIconColor"
+                    android:layout_gravity="top|end">
+
+                    <TextView
+                        android:id="@+id/txtCartNumber"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="99"
+                        android:layout_margin="3dp"
+                        android:textColor="@color/colorMain"
+                        android:textStyle="bold"
+                        android:textSize="14dp"/>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+
+        </FrameLayout>
+
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/centerHome"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-
+        android:layout_below="@+id/topBar"
+        android:layout_alignBottom="@+id/bottomNavigationView"
         android:layout_marginBottom="64dp"
         android:background="@color/grayLight"
         android:orientation="vertical">
@@ -77,75 +172,51 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="false"
-            >
+            android:layout_marginBottom="40dp"
+            android:fillViewport="false">
+
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="320dp"
-                    >
+                    android:layout_height="320dp">
 
                     <android.support.v4.view.ViewPager
                         android:id="@+id/imgProductFS"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="match_parent" />
 
-                        />
-                    <ImageView
-                        android:src="@drawable/button_back_red"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/background_cicler"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginLeft="10dp"
-                        />
 
                 </FrameLayout>
-                <RelativeLayout
-                    android:layout_width="match_parent"
+
+                <TextView
+                    android:id="@+id/foodName"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="0dp"
                     android:layout_marginLeft="40dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="40dp">
-                    <TextView
-                        android:id="@+id/foodName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Thịt bò"
-                        android:textSize="18dp"
-                        android:textStyle="bold"/>
-
-                    <ImageView
-                        android:id="@+id/imgLoveProduct"
-                        android:src="@drawable/notlike"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_alignParentRight="true"
-                        android:onClick="clickToLoveProduct"
-
-                        />
-                </RelativeLayout>
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginBottom="0dp"
+                    android:text="Thịt bò"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
                     android:layout_marginTop="5dp"
-                    >
+                    android:layout_marginRight="40dp">
+
                     <LinearLayout
-                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        >
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/foodPriceDiscount"
@@ -153,42 +224,54 @@
                             android:layout_height="match_parent"
                             android:text="11000"
                             android:textColor="@color/redApp"
-                            android:textSize="18dp"
+                            android:textSize="25dp"
                             android:textStyle="bold" />
+
                         <TextView
-                            android:layout_toRightOf="@id/foodPriceDiscount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
+                            android:layout_toRightOf="@id/foodPriceDiscount"
                             android:text=" đ"
                             android:textColor="@color/redApp"
-                            android:textSize="18dp"
+                            android:textSize="25dp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
                     <TextView
-                        android:id="@+id/foodPrice"
+                        android:id="@+id/expiredDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:background="@drawable/dash_line"
-                        android:text="22000 VND"
-                        android:textSize="16dp"
+                        android:text="@string/msg_expired_date"
+                        android:textSize="18dp"
                         android:textStyle="bold" />
+
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_marginTop="5dp" >
-                    <TextView
-                        android:id="@+id/expiredDate"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="40dp">
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/msg_expired_date"
-                        android:textSize="16dp" />
+                        android:layout_height="match_parent"
+
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/foodPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/dash_line"
+                            android:text="22000"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
 
                     <cn.iwgang.countdownview.CountdownView
                         android:id="@+id/cv_countdownViewTest1"
@@ -204,10 +287,10 @@
                         app:isShowTimeBgDivisionLine="false"
                         app:suffixGravity="center"
                         app:suffixTextColor="#000000"
-                        app:suffixTextSize="20sp"
+                        app:suffixTextSize="22sp"
                         app:timeBgColor="#FF5000"
                         app:timeTextColor="#FFFFFF"
-                        app:timeTextSize="18sp"/>
+                        app:timeTextSize="18sp" />
 
 
                 </RelativeLayout>
@@ -216,36 +299,39 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="40dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginRight="40dp"
-                    android:layout_marginTop="5dp"
-                    >
+                    android:layout_marginBottom="10dp">
+
                     <LinearLayout
-                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        >
+                        android:orientation="horizontal">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:text="@string/msg_provided_by_store"
                             android:textSize="18dp"
-                            android:textStyle="bold" />
+                            android:textStyle="italic" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text=" "/>
+                            android:text=" " />
+
                         <TextView
                             android:id="@+id/storeName"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:textSize="18dp"
-                            android:textStyle="bold"
                             android:singleLine="true"
-                            android:onClick="clickToStore"
-                            android:textColor="@color/redApp"/>
+                            android:textColor="@color/redApp"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
                 </RelativeLayout>
@@ -253,79 +339,52 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp">2
+
+                    android:layout_marginBottom="15dp"
+                    android:orientation="vertical">
+
 
                     <TextView
-                        android:paddingLeft="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="25dp"
-                        android:text="@string/msg_description" />
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="40dp">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:text="@string/msg_warehouse"
-
-                                />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text=" " />
-
-                            <TextView
-                                android:id="@+id/quantityMax"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:onClick="clickToStore"
-                                android:singleLine="true" />
-
-                        </LinearLayout>
-                    </RelativeLayout>
-
-
-
-                    <TextView
-                        android:id="@+id/txtDescriptionBookInCase"
-                        android:paddingLeft="15dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:paddingLeft="25dp"
+                        android:text="@string/msg_description"
                         android:textSize="20dp"
-                        android:singleLine="true"
-                        android:text="Đây là quyển sách tín viết ra nhằm đi truyền đạo" />
-                    <TextView
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/dash_line"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:layout_marginTop="10dp"
-                        android:id="@+id/textReadMore"
-                        android:onClick="clickToReadMore"
+                        android:textStyle="bold" />
+
+                    <com.borjabravo.readmoretextview.ReadMoreTextView
+                        android:id="@+id/txtDescriptionBookInCase"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/redApp"
-                        android:textSize="20sp"
-                        android:layout_gravity="center"
-                        android:text="@string/msg_see_more"/>
+                        android:layout_marginTop="5dp"
+                        android:paddingLeft="35dp"
+                        android:paddingRight="35dp"
+                        android:text="Đây là quyển sách tín viết ra nhằm đi truyền đạo"
+                        android:textSize="18dp"
+                        app:trimCollapsedText="@string/msg_show_more"
+                        app:trimExpandedText="@string/msg_show_less"
+                        app:trimLines="4"
+                        app:trimMode="trimModeLine" />
+
+                    <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_marginRight="20dp"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:background="@drawable/dash_line" />-->
+
+                    <!--<TextView-->
+                    <!--android:id="@+id/textReadMore"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:onClick="clickToReadMore"-->
+                    <!--android:text="@string/msg_see_more"-->
+                    <!--android:textColor="@color/redApp"-->
+                    <!--android:textSize="18dp" />-->
                 </LinearLayout>
 
                 <!--<com.cepheuen.elegantnumberbutton.view.ElegantNumberButton-->
@@ -356,7 +415,11 @@
             </LinearLayout>
         </ScrollView>
 
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
+        </android.support.v7.widget.CardView>
     </LinearLayout>
 
 
@@ -365,8 +428,13 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginLeft="90dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="90dp"
+        android:layout_marginBottom="20dp"
         android:background="@color/redApp"
         android:orientation="horizontal">
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -377,7 +445,6 @@
             android:textColor="@color/colorMain"
             android:textSize="22sp"
             android:textStyle="bold" />
-
         <!--<LinearLayout-->
         <!--android:orientation="horizontal"-->
         <!--android:layout_width="wrap_content"-->
@@ -400,21 +467,6 @@
         <!--android:textStyle="bold"-->
         <!--android:textColor="@color/colorMain"/>-->
         <!--</LinearLayout>-->
-    </RelativeLayout>
-    <!--<LinearLayout-->
-    <!--android:orientation="horizontal"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content">-->
-    <!--<android.support.design.widget.BottomNavigationView-->
-    <!--android:id="@+id/bottomNavigation"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="56dp"-->
-    <!--android:background="@drawable/border_top"-->
-    <!--app:itemIconTint="@color/colorMain"-->
-    <!--app:itemTextColor="@color/colorMain"-->
-    <!--app:menu="@menu/bottom_nav_menu"-->
-    <!--android:layout_gravity="bottom"-->
-    <!--/>-->
-    <!--</LinearLayout>-->
+    </RelativeLayout><!--<LinearLayout--><!--android:orientation="horizontal"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content">--><!--<android.support.design.widget.BottomNavigationView--><!--android:id="@+id/bottomNavigation"--><!--android:layout_width="match_parent"--><!--android:layout_height="56dp"--><!--android:background="@drawable/border_top"--><!--app:itemIconTint="@color/colorMain"--><!--app:itemTextColor="@color/colorMain"--><!--app:menu="@menu/bottom_nav_menu"--><!--android:layout_gravity="bottom"--><!--/>--><!--</LinearLayout>-->
 
 </RelativeLayout>

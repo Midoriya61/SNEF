@@ -27,7 +27,6 @@ import com.tinlm.snef.activity.AroundStoreActivity;
 import com.tinlm.snef.adapter.ListStoreAdapter;
 import com.tinlm.snef.algo.GeocodingLocation;
 import com.tinlm.snef.model.Store;
-import com.tinlm.snef.service.AllService;
 import com.tinlm.snef.service.StoreService;
 import com.tinlm.snef.utilities.ApiUtils;
 
@@ -60,7 +59,7 @@ public class StoreAroundFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_store_around, container, false);
         checkLocationPermission();
         getCurrentLocation();
-        storeService = AllService.getStoreService();
+        storeService = ApiUtils.getStoreService();
         rcStoreAround = view.findViewById(R.id.rcStoreAround);
 //        StoreUtilities storeUtilities = new StoreUtilities();
         storeService.getListStoreArround().enqueue(new Callback<List<Store>>() {

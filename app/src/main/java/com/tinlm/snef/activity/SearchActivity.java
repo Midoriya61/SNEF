@@ -16,11 +16,8 @@ import com.tinlm.snef.adapter.ProductNameAdapter;
 import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.fragment.CategoriesHomeFragment;
 import com.tinlm.snef.model.Product;
-import com.tinlm.snef.service.AllService;
 import com.tinlm.snef.service.ProductService;
 import com.tinlm.snef.utilities.ApiUtils;
-import com.tinlm.snef.utilities.ProductUtilities;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +46,7 @@ public class SearchActivity extends AppCompatActivity {
 //        ProductUtilities productUtilities = new ProductUtilities();
         searchProductBar = findViewById(R.id.searchProductBar);
         listNameProduct = findViewById(R.id.listNameProduct);
-        productService = AllService.getProductService();
+        productService = ApiUtils.getProductService();
 
 
         productService.getListNameProduct().enqueue(new Callback<List<Product>>() {

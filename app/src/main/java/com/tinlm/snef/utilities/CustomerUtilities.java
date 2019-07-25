@@ -35,7 +35,8 @@ public class CustomerUtilities {
 
         try {
             URL urll = new URL(url);
-            respone = ReadStream.readStream(urll.openStream());
+            HttpGetRequest httpGetRequest = new HttpGetRequest();
+            respone = httpGetRequest.execute(urll.openStream()).get();
             JSONObject jsonObj = new JSONObject(respone);
             if (jsonObj != null) {
                 result = new Customer();

@@ -2,7 +2,9 @@ package com.tinlm.snef.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.graphics.Point;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -79,8 +81,6 @@ public class StoreActivity extends AppCompatActivity {
                 rcListFlashSaleProduct.setItemAnimator(new DefaultItemAnimator());
                 rcListFlashSaleProduct.setLayoutManager(mLayoutManager);
                 rcListFlashSaleProduct.setAdapter(flashSaleProductAdapter);
-
-
             }
 
             @Override
@@ -94,6 +94,7 @@ public class StoreActivity extends AppCompatActivity {
         intent = getIntent();
         storeName.setText(intent.getStringExtra(ConstainApp.JS_STORENAME));
         txtAddress.setText(intent.getStringExtra(ConstainApp.ADDRESS));
+        txtAddress.setPaintFlags(txtAddress.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         txtOpenHour.setText(intent.getStringExtra(ConstainApp.OPENHOUR));
         float ratingPoint = intent.getFloatExtra(ConstainApp.RATINGPOINT, 0);
         if (ratingPoint == 0) {
@@ -108,7 +109,6 @@ public class StoreActivity extends AppCompatActivity {
         int width = size.x;
         int height = size.y;
         Picasso.get().load(intent.getStringExtra(ConstainApp.STOREAVATAR)).resize(width, height/3).into(storeAvatar);
-
     }
 
     private void init() {
@@ -118,5 +118,19 @@ public class StoreActivity extends AppCompatActivity {
         storeAvatar = findViewById(R.id.storeAvatar);
         rcListFlashSaleProduct = findViewById(R.id.rcListFlashSaleProduct);
         txtOpenHour = findViewById(R.id.txtOpenHour);
+    }
+
+    public void clickToDirectStore(View view) {
+//        Uri gmmIntentUri = Uri.parse("google.navigation:q=latitude,longitude");
+//        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+//        mapIntent.setPackage("com.google.android.apps.maps");
+//        startActivity(mapIntent);
+        String packageName = "com.google.android.apps.maps";
+
+        String query = "google.navigation:q="+ intent.getStringExtra(ConstainApp.ADDRESS);
+        Intent intentMap = this.getPackageManager().getLaunchIntentForPackage(packageName);
+        intentMap.setAction(Intent.ACTION_VIEW);
+        intentMap.setData(Uri.parse(query));
+        startActivity(intentMap);
     }
 }
