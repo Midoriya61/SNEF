@@ -2,6 +2,7 @@ package com.tinlm.snef.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +54,7 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
     private int fspId;
     private float price;
     private int discount;
+    private Button btnAddToCart;
 
 //    int discount;
 
@@ -128,7 +131,7 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
         foodPriceDiscount.setText((String.format("%,d", intent.getIntExtra(ConstainApp.DISCOUNT, 0) * (int) price / 100)));
 
         StoreProductUtilities storeProductUtilities = new StoreProductUtilities();
-        description.setText(storeProductUtilities.getDesById(intent.getIntExtra(ConstainApp.STOREPRODUCTID, 0)).replace(" n ", "\n"));
+        description.setText(intent.getStringExtra(ConstainApp.DESCRIPTION));
 //        description.setMaxLines(1);
         StoreProductImageUtilities storeProductImageUtilities = new StoreProductImageUtilities();
         List<String> listImage = storeProductImageUtilities.getImageByStoreProductId(intent.getIntExtra(ConstainApp.STOREPRODUCTID, 0));
@@ -152,9 +155,16 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
             //expiredDate.setText(endDate);
             long milliseconds = date.getTime();
             cv_countdownViewTest1.start(milliseconds - currentMillisecond);
+            if( milliseconds <= currentMillisecond ) {
+                btnAddToCart.setText(getResources().getString(R.string.msg_end_sell));
+                btnAddToCart.setClickable(false);
+                btnAddToCart.setBackgroundColor(Color.GRAY);
+                btnAddToCart.setTextColor(Color.WHITE);
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
 
 //        totalPrice = findViewById(R.id.totalPrice);
 //        totalPrice.setText(String.format("%,d",intent.getIntExtra(ConstainApp.DISCOUNT,0) * (int)price/100));
@@ -174,6 +184,7 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
 //                }
 //            }
 //        });
+        saveSawTable();
 
         storeName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,6 +199,7 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
                 intentStore.putExtra(ConstainApp.STOREID, store.getStoreId());
                 intentStore.putExtra(ConstainApp.LATITUDE, store.getLatitude());
                 intentStore.putExtra(ConstainApp.LONGITUDE, store.getLocationId());
+                intentStore.putExtra(ConstainApp.STOREPHONE, store.getPhone());
 
                 String finalOpenHour = "";
                 if (store.getOpenHour().equals(store.getCloseHour())) {
@@ -337,5 +349,10 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
     public void clickToShoppingCart(View view) {
         Intent intent = new Intent(this, OrderActivity.class);
         startActivity(intent);
+    }
+
+    private void saveSawTable() {
+        DBManager dbManager = new DBManager(FlashSalesProductDetailActivity.this);
+        dbManager.addTableSaw(fspId);
     }
 }

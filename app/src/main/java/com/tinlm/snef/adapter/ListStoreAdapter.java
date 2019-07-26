@@ -92,6 +92,7 @@ public class ListStoreAdapter extends RecyclerView.Adapter<ListStoreAdapter.List
                 intent.putExtra(ConstainApp.RATINGPOINT, currentStore.getRatingPoint());
                 intent.putExtra(ConstainApp.STOREID, currentStore.getStoreId());
                 intent.putExtra(ConstainApp.OPENHOUR, finalOpenHour);
+                intent.putExtra(ConstainApp.STOREPHONE, currentStore.getPhone());
                 mContext.startActivity(intent);
             }
         });

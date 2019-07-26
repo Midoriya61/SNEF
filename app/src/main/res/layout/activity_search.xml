@@ -19,25 +19,53 @@
         <SearchView
             android:id="@+id/searchProductBar"
             android:background="@color/colorMain"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.85"
             app:queryHint="@string/msg_find"
             app:defaultQueryHint="Thử coi"
             android:focusable="true"
             app:iconifiedByDefault="false"
+
             ></SearchView>
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/filter"
-            android:layout_weight="0.15"/>
+
     </LinearLayout>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tablayout"
+        android:layout_below="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/redWhite"
+        app:tabSelectedTextColor="@color/blue"
+        app:tabTextColor="@color/colorPrimaryDark"
+        >
+
+    <android.support.design.widget.TabItem
+        android:id="@+id/tabSaw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/msg_saw_recent"
+        />
+
+
+    <android.support.design.widget.TabItem
+        android:id="@+id/tabFound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/msg_found" />
+    </android.support.design.widget.TabLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_below="@+id/tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listNameProduct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/topBar"
+        android:visibility="invisible"
         android:background="@color/grayLight"
         android:layout_marginTop="5dp"
         ></android.support.v7.widget.RecyclerView>

@@ -43,6 +43,7 @@ public class SearchProductByNameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_product_by_name);
         init();
+
     }
 
     private void init() {

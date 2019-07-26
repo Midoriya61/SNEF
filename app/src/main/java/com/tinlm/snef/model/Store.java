@@ -51,17 +51,24 @@ public class Store implements Comparable<Store>{
     @Expose
     private double longitude;
 
+    @SerializedName("phone")
+    @Expose
+    private String phone;
+
     private String accountName;
-
-
-
-
-
     // variable for layout
     private double distance;
 
 
     public Store() {
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public int getStoreId() {

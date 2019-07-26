@@ -29,6 +29,7 @@ public class StoreUtilities {
     private static final String country = "country";
     private static final String latitude = "latitude";
     private static final String longitude = "longitude";
+    private static final String phone = "phone";
 
     // 6/18/2019 TinLM Create getListStoreArround
     public List<Store> getListStoreArround() {
@@ -89,6 +90,9 @@ public class StoreUtilities {
                 }
                 if(jsonObj.has(longitude)){
                     store.setLongitude(jsonObj.getDouble(longitude));
+                }
+                if(jsonObj.getString(phone) != null){
+                    store.setPhone(jsonObj.getString(phone));
                 }
 
                 result.add(store);
@@ -152,7 +156,9 @@ public class StoreUtilities {
             if(jsonObj.has(longitude)){
                 store.setLongitude(jsonObj.getDouble(longitude));
             }
-
+            if(jsonObj.has(phone)){
+                store.setPhone(jsonObj.getString(phone));
+            }
             store.setStoreId(storeId);
 
         }catch (Exception e){
