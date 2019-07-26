@@ -13,6 +13,10 @@ import android.widget.TextView;
 
 import com.tinlm.snef.R;
 import com.tinlm.snef.constain.ConstainApp;
+import com.tinlm.snef.database.DBManager;
+import com.tinlm.snef.model.Cart;
+
+import java.util.List;
 
 // 6/23/2019 TinLM Create class
 // 6/23/2019 TinLM Create init
@@ -21,10 +25,12 @@ import com.tinlm.snef.constain.ConstainApp;
 // 6/23/2019 TinLM Create createListFSP
 public class DashboardActivity extends AppCompatActivity {
 
-//    RecyclerView rcListCategories;
+    //    RecyclerView rcListCategories;
 //    RecyclerView rcListHost;
-BottomNavigationView bottomNavigation;
+    BottomNavigationView bottomNavigation;
     TextView txtRFind;
+    private TextView txtCartNumber;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +39,32 @@ BottomNavigationView bottomNavigation;
         txtRFind = findViewById(R.id.txtRFind);
         Intent dbIntent = getIntent();
         String searchString = dbIntent.getStringExtra(ConstainApp.SEARCHPRODUCTNAME);
-        if(searchString != null ) {
-            if((searchString.length() != 0 && !searchString.equals(getResources().getString(R.string.msg_find)))) {
+        if (searchString != null) {
+            if ((searchString.length() != 0 && !searchString.equals(getResources().getString(R.string.msg_find)))) {
                 txtRFind.setText(searchString);
             }
         }
 
+        txtCartNumber = findViewById(R.id.txtCartNumber);
+        txtCartNumber.setText(String.valueOf(getCartNumber()));
+
         navigateDashboard();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        txtCartNumber.setText(String.valueOf(getCartNumber()));
+    }
+
+    public int getCartNumber() {
+        DBManager dbManager = new DBManager(DashboardActivity.this);
+        List<Cart> cartList = dbManager.getAllCart();
+        int cartNumber = 0;
+        for (int i = 0; i < cartList.size(); i++) {
+            cartNumber += cartList.get(i).getQuantity();
+        }
+        return cartNumber;
     }
 
     private void navigateDashboard() {
@@ -86,8 +111,8 @@ BottomNavigationView bottomNavigation;
     public void clickToSearchProduct(View view) {
         Intent intent = new Intent(this, SearchActivity.class);
         String searchProduct = txtRFind.getText().toString();
-        if(searchProduct != null) {
-            if(  (searchProduct.length() != 0 && !searchProduct.equals(getResources().getString(R.string.msg_find))) ) {
+        if (searchProduct != null) {
+            if ((searchProduct.length() != 0 && !searchProduct.equals(getResources().getString(R.string.msg_find)))) {
                 intent.putExtra(ConstainApp.SEARCHPRODUCTNAME, searchProduct);
             }
         }

@@ -38,7 +38,6 @@ public class ListOrderHistoryAdapter extends RecyclerView.Adapter<ListOrderHisto
 
     private Context mContext;
     private List<Order> orderList;
-    private List<OrderDetail> orderDetailList;
     private DecimalFormat df = new DecimalFormat("#,###,###,###");
 
     private Runnable runnable;
@@ -70,16 +69,7 @@ public class ListOrderHistoryAdapter extends RecyclerView.Adapter<ListOrderHisto
         final Order order = orderList.get(i);
         final int position = i;
 
-        OrderDetailUtilities orderDetailUtilities = new OrderDetailUtilities();
-        orderDetailList = orderDetailUtilities.getAllOrderDetailByOrderId(order.getOrderId());
-
-        FlashSaleProductUtilities flashSaleProductUtilities = new FlashSaleProductUtilities();
-        FlashSaleProduct fsp = flashSaleProductUtilities.getFSPById(orderDetailList.get(0).getFlashSaleProductId());
-
-        StoreUtilities storeUtilities = new StoreUtilities();
-        Store store = storeUtilities.getStoreById(fsp.getStoreId());
-
-        listOrderHistoryHolder.txtStoreName.setText(store.getStoreName());
+        listOrderHistoryHolder.txtOrderID.setText(String.valueOf(order.getOrderId()));
 
         listOrderHistoryHolder.txtDateOrder.setText(String.valueOf(order.getDateOrder()));
 
@@ -89,17 +79,11 @@ public class ListOrderHistoryAdapter extends RecyclerView.Adapter<ListOrderHisto
             listOrderHistoryHolder.txtOrderStatus.setText(R.string.orderstatus_pickedup);
         }
 
-        int totalQuantity = 0;
-        for (int a = 0; a < orderDetailList.size(); a++) {
-            totalQuantity += orderDetailList.get(a).getQuantity();
-        }
-        listOrderHistoryHolder.txtTotalQuantity.setText(String.format("%,d", (int) totalQuantity));
+        listOrderHistoryHolder.txtTotalQuantity.setText(String.format("%,d", (int) order.getOrderQuantity()));
 
-        int totalOrderPrice = 0;
-        for (int a = 0; a < orderDetailList.size(); a++) {
-            totalOrderPrice += orderDetailList.get(a).getOrderDetailPrice();
-        }
-        listOrderHistoryHolder.txtTotalOrderPrice.setText(String.format("%,d", (int) totalOrderPrice));
+        listOrderHistoryHolder.txtTotalOrderPrice.setText(String.format("%,d", (int) order.getTotalPrice()));
+
+        listOrderHistoryHolder.txtStoreName.setText(order.getStoreName());
 
         listOrderHistoryHolder.listOrderHistoryLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,15 +106,14 @@ public class ListOrderHistoryAdapter extends RecyclerView.Adapter<ListOrderHisto
 
     public class ListOrderHistoryHolder extends RecyclerView.ViewHolder {
 
-        TextView txtStoreName, txtDateOrder, txtTotalQuantity, txtTotalOrderPrice, txtOrderStatus;
-
-        TextView txtStoreNameOD;
+        TextView txtStoreName, txtDateOrder, txtTotalQuantity, txtTotalOrderPrice, txtOrderStatus, txtOrderID;
 
         LinearLayout listOrderHistoryLayout;
 
         public ListOrderHistoryHolder(@NonNull View itemView) {
             super(itemView);
             txtStoreName = itemView.findViewById(R.id.txtStoreName);
+            txtOrderID = itemView.findViewById(R.id.txtOrderID);
             txtDateOrder = itemView.findViewById(R.id.txtDateOrder);
             txtTotalQuantity = itemView.findViewById(R.id.txtTotalQuantity);
             txtTotalOrderPrice = itemView.findViewById(R.id.txtTotalOrderPrice);

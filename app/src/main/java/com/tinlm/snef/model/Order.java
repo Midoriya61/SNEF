@@ -31,6 +31,12 @@ public class Order {
     @SerializedName("ratingPoint")
     @Expose
     private float ratingPoint;
+    @SerializedName("storeId")
+    @Expose
+    private int storeId;
+    @SerializedName("storeName")
+    @Expose
+    private String storeName;
 
     public Order() {
     }
@@ -99,6 +105,21 @@ public class Order {
         this.ratingPoint = ratingPoint;
     }
 
+    public int getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(int storeId) {
+        this.storeId = storeId;
+    }
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
+    }
 
 }
 

@@ -7,14 +7,18 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Display;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -48,7 +52,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
     Intent intent;
     Context mContext;
     Order order;
-    int totalAmount = 0;
     DecimalFormat df = new DecimalFormat("#,###,###,###");
 
 
@@ -60,9 +63,10 @@ public class OrderHistoryActivity extends AppCompatActivity {
     TextView txtTotalOrderPrice;
     TextView storeName;
     TextView storeAddress;
-    TextView storeDistance;
-    TextView storeWorkTime;
-    ImageView storeAvatar;
+
+    RatingBar ratingBar;
+    Button btnSubmitRating;
+    TextView txtRating;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,79 +79,40 @@ public class OrderHistoryActivity extends AppCompatActivity {
 
         intent = getIntent();
 
-        OrderUtilities orderUtilities = new OrderUtilities();
-        int orderId = intent.getIntExtra(ConstainApp.JS_ORDERID,0);
-        order = orderUtilities.getOrderById(orderId);
-
-        SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
-        String orderDate = dateformat.format(order.getDateOrder());
-
-
         txtOrderID = findViewById(R.id.txtOrderID);
         txtOrderStatus = findViewById(R.id.txtOrderStatus);
         txtOrderDateTime = findViewById(R.id.txtOrderDateTime);
         txtConfirmCode = findViewById(R.id.txtConfirmCode);
-
         rcListOrderItem = findViewById(R.id.rcListOrderItem);
         txtTotalOrderPrice = findViewById(R.id.txtTotalOrderPrice);
-
         storeName = findViewById(R.id.storeName);
         storeAddress = findViewById(R.id.storeAddress);
-        storeDistance = findViewById(R.id.storeDistance);
-        storeWorkTime = findViewById(R.id.storeWorkTime);
-        storeAvatar = findViewById(R.id.storeAvatar);
+        ratingBar = findViewById(R.id.ratingBar);
+        btnSubmitRating = findViewById(R.id.btnSubmitRating);
+        txtRating = findViewById(R.id.txtRating);
 
+        final OrderUtilities orderUtilities = new OrderUtilities();
+        final int orderId = intent.getIntExtra(ConstainApp.JS_ORDERID, 0);
+        order = orderUtilities.getOrderById(orderId);
 
+        //Set text for top section
         txtOrderID.setText(String.valueOf(orderId));
+
         if (order.isStatus() != true) {
             txtOrderStatus.setText(R.string.orderstatus_paid);
         } else {
             txtOrderStatus.setText(R.string.orderstatus_pickedup);
         }
+
+        SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+        String orderDate = dateformat.format(order.getDateOrder());
         txtOrderDateTime.setText(orderDate);
+
         txtConfirmCode.setText(order.getConfirmationCode());
 
+        //Set recycler view for order detail
         OrderDetailUtilities orderDetailUtilities = new OrderDetailUtilities();
         List<OrderDetail> orderDetailList = orderDetailUtilities.getAllOrderDetailByOrderId(orderId);
-
-
-        FlashSaleProductUtilities flashSaleProductUtilities = new FlashSaleProductUtilities();
-        FlashSaleProduct fsp = flashSaleProductUtilities.getFSPById(orderDetailList.get(0).getFlashSaleProductId());
-
-        StoreUtilities storeUtilities = new StoreUtilities();
-        Store store = storeUtilities.getStoreById(fsp.getStoreId());
-
-        storeName.setText(store.getStoreName());
-        String openHour = "";
-        if(store.getOpenHour().equals(store.getCloseHour())) {
-            openHour = this.getResources().getString(R.string.Open24);
-
-        }else
-            openHour = store.getOpenHour() + " - " + store.getCloseHour();
-
-        storeAddress.setText(store.getAddress() + ", " + store.getDistrict() + ", " +
-                store.getWard()
-                + ", " + store.getCity() + ", " + store.getCountry());
-        WindowManager wm = (WindowManager)this.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int height = size.y;
-        Picasso.get().load(store.getAvatar()).resize(0,height / 6).into(storeAvatar);
-        storeWorkTime.setText(openHour);
-        storeDistance.setText((Math.floor(store.getDistance() * 100) / 100) + " km");
-
-        final String finalOpenHour = openHour;
-
-//        Map<Integer, String> listImageProduct = new HashMap<>();
-//        StoreProductImageUtilities imageUltilities = new StoreProductImageUtilities();
-//
-//        for (int i = 0; i < orderDetailList.size(); i++) {
-//
-//            String productImage = imageUltilities.getOneImageByStoreProductId(orderDetailList.get(i).getFlashSaleProductId());
-//            listImageProduct.put(orderDetailList.get(i).getFlashSaleProductId(), productImage);
-//
-//        }
 
         ListOrderHistoryProductAdapter listOrderHistoryProductAdapter = new ListOrderHistoryProductAdapter(OrderHistoryActivity.this, orderDetailList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(OrderHistoryActivity.this,
@@ -157,12 +122,18 @@ public class OrderHistoryActivity extends AppCompatActivity {
         rcListOrderItem.setAdapter(listOrderHistoryProductAdapter);
         rcListOrderItem.addItemDecoration(new DividerItemDecoration(this, 0));
 
-        for (int i = 0; i < orderDetailList.size(); i++) {
+        txtTotalOrderPrice.setText(String.valueOf(df.format(order.getTotalPrice())));
 
-            totalAmount += orderDetailList.get(i).getOrderDetailPrice();
-        }
-        txtTotalOrderPrice.setText(String.valueOf(df.format(totalAmount)));
+        //Set text for store info
+        StoreUtilities storeUtilities = new StoreUtilities();
+        Store store = storeUtilities.getStoreById(order.getStoreId());
 
+        storeName.setText(store.getStoreName());
+        storeAddress.setText(store.getAddress() + ", " + store.getDistrict() + ", " +
+                store.getWard()
+                + ", " + store.getCity() + ", " + store.getCountry());
+
+        //Order created, then delete shopping cart
         String storeName = intent.getStringExtra(ConstainApp.JS_STORENAME);
         DBManager dbManager = new DBManager(OrderHistoryActivity.this);
         List<Cart> cartList = dbManager.getAllCartByStoreName(storeName);
@@ -170,28 +141,42 @@ public class OrderHistoryActivity extends AppCompatActivity {
             dbManager.deleteCart(cartList.get(a));
         }
 
+        //Rating bar
+        if(order.getRatingPoint() == 0){
+            btnSubmitRating.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v)
+                {
+                    orderUtilities.updateRatingBar(orderId, ratingBar.getRating());
+                    ratingBar.setEnabled(false);
+                    btnSubmitRating.setVisibility (View.INVISIBLE);
+                    txtRating.setText(R.string.msg_thanksrating);
+                }
+            });
+        }
+        else {
+            ratingBar.setRating(order.getRatingPoint());
+            ratingBar.setEnabled(false);
+            btnSubmitRating.setVisibility (View.INVISIBLE);
+            txtRating.setText(R.string.msg_thanksrating);
+        }
 
-//        store = dbManager.getStoreByName(intent.getStringExtra(ConstainApp.JS_STORENAME));
 
-//        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-//        txtOrderDateTime.setText(currentDateTimeString);
-
-//        storeName.setText(store.getStoreName());
-//        storeAddress.setText(store.getAddress());
-
-//        WindowManager wm = (WindowManager)mContext.getSystemService(Context.WINDOW_SERVICE);
-//        Display display = wm.getDefaultDisplay();
-//        Point size = new Point();
-//        display.getSize(size);
-//        int height = size.y;
-//        Picasso.get().load(store.getAvatar()).resize(0, height / 6).into(storeAvatar);
-
+//        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+//
+//            @Override
+//            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+//                if(btnSubmitRating.isc)
+//
+//            }
+//        });
     }
 
 
     private void navigateDashboard() {
+
         bottomNavigation = findViewById(R.id.bottomNavigation);
-        bottomNavigation.setSelectedItemId(R.id.action_orders);
+        bottomNavigation.setSelectedItemId(R.id.action_account);
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {

@@ -8,7 +8,7 @@
     <string name="home_page" translatable="false">Trang chủ</string>
     <string name="category_page" translatable="false">Danh mục</string>
     <string name="account_page" translatable="false">Tài khoản</string>
-    <string name="payment_page" translatable="false">Thanh toán</string>
+    <string name="payment_page" translatable="false">Giỏ Hàng</string>
     <string name="around_page" translatable="false">Gần đây</string>
     <string name="search_hint" translatable="false">Tìm kiếm</string>
     <string name="message_store_around" translatable="false">Cửa hàng gần bạn</string>
@@ -54,6 +54,9 @@
     <string name="btn_confirmpayment" translatable="false">XÁC NHẬN THANH TOÁN</string>
     <string name="orderstatus_paid" translatable="false">Đã Thanh Toán</string>
     <string name="orderstatus_pickedup" translatable="false">Đã Nhận Hàng</string>
+    <string name="question_rating" translatable="false">Bạn hài lòng với đơn hàng này chứ?</string>
+    <string name="btn_submitrating" translatable="false">Gửi Phản Hồi</string>
+    <string name="msg_thanksrating" translatable="false">Xin cảm ơn phản hồi của bạn!</string>
 
     <string name="StatusSouldOut" translatable="false">Bán hết</string>
     <string name="StatusNearlySouldOut" translatable="false">Sắp bán hết</string>
