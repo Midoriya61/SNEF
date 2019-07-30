@@ -25,6 +25,7 @@ public class ConstainApp {
     public static final String AVATAR = "AVATAR";
     public static final String CUSTOMERID = "CUSTOMERID";
     public static final String RATINGPOINT = "RATINGPOINT";
+    public static final String GENDER = "GENDER";
 
 
     // Intent

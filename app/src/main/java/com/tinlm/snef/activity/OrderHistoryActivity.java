@@ -129,9 +129,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
         Store store = storeUtilities.getStoreById(order.getStoreId());
 
         storeName.setText(store.getStoreName());
-        storeAddress.setText(store.getAddress() + ", " + store.getDistrict() + ", " +
-                store.getWard()
-                + ", " + store.getCity() + ", " + store.getCountry());
+        storeAddress.setText(store.getAddress());
 
         //Order created, then delete shopping cart
         String storeName = intent.getStringExtra(ConstainApp.JS_STORENAME);

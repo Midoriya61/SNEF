@@ -70,13 +70,18 @@ public class AccountActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(ConstainApp.login_Prefer, MODE_PRIVATE);
         imgAvatar = findViewById(R.id.imgAvatar);
         Picasso.get().load(sharedPreferences.getString(ConstainApp.AVATAR, null)).resize(300,350).into(imgAvatar);
-
         txtAccountName = findViewById(R.id.txtAccountName);
         txtAccountName.setText(sharedPreferences.getString(ConstainApp.LASTNAME, null) + " " + sharedPreferences.getString(ConstainApp.FIRSTNAME, null));
+        txtEditProfile = findViewById(R.id.txtEditProfile);
     }
 
     public void clickToShowAllOrderHistory(View view) {
         Intent intent = new Intent(this, AllOrderHistoryActivity.class);
+        startActivity(intent);
+    }
+
+    public void clickToModifyAccount(View view) {
+        Intent intent = new Intent(this, EditAccountActivity.class);
         startActivity(intent);
     }
 }

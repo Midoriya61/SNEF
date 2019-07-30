@@ -192,8 +192,7 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
                 Intent intentStore = new Intent(FlashSalesProductDetailActivity.this, StoreActivity.class);
                 intentStore.putExtra(ConstainApp.JS_STORENAME, store.getStoreName());
                 intentStore.putExtra(ConstainApp.STOREAVATAR, store.getAvatar());
-                String address = store.getAddress() + ", " + store.getDistrict() + ", " +
-                        store.getWard() + ", " + store.getCity() + ", " + store.getCountry();
+                String address = store.getAddress();
                 intentStore.putExtra(ConstainApp.ADDRESS, address);
                 intentStore.putExtra(ConstainApp.RATINGPOINT, store.getRatingPoint());
                 intentStore.putExtra(ConstainApp.STOREID, store.getStoreId());
@@ -327,8 +326,7 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
 
         intent.putExtra(ConstainApp.JS_STORENAME, store.getStoreName());
         intent.putExtra(ConstainApp.STOREAVATAR, store.getAvatar());
-        String address = store.getAddress() + ", " + store.getDistrict() + ", " +
-                store.getWard() + ", " + store.getCity() + ", " + store.getCountry();
+        String address = store.getAddress();
         intent.putExtra(ConstainApp.ADDRESS, address);
         intent.putExtra(ConstainApp.RATINGPOINT, store.getRatingPoint());
         intent.putExtra(ConstainApp.STOREID, store.getStoreId());

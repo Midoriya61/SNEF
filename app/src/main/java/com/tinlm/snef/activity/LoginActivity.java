@@ -68,7 +68,12 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString(ConstainApp.EMAIL, customer.getEmail());
                     editor.putString(ConstainApp.AVATAR, customer.getAvatar());
                     editor.putString(ConstainApp.PHONE, customer.getPhone());
-                    editor.putInt(ConstainApp.CUSTOMERID, customer.getCustomerId());
+                    if( customer.getGender() == 0 ) {
+                        editor.putString(ConstainApp.GENDER, "Nam");
+                    } else {
+                        editor.putString(ConstainApp.GENDER, "Nữ");
+                    }
+
                     editor.apply();
 
                     Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);

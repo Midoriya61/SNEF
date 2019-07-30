@@ -65,16 +65,16 @@
         <!--app:defaultQueryHint="Thử coi"-->
         <!--android:clickable="true"-->
         <!--&gt;</android.support.v7.widget.SearchView>-->
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.15"
-            android:src="@drawable/filter" />
+        <!--<ImageView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="0.15"-->
+            <!--android:src="@drawable/filter" />-->
 
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.15">
+            android:layout_weight="0.2">
 
             <ImageView
                 android:layout_width="match_parent"

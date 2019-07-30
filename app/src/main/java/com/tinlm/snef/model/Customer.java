@@ -11,6 +11,7 @@ public class Customer {
     private String email;
     private String avatar;
     private boolean isActive;
+    private int gender;
 
     public Customer() {
     }
@@ -85,5 +86,13 @@ public class Customer {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
     }
 }

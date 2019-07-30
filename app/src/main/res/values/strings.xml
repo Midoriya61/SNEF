@@ -5,6 +5,7 @@
     <string name="ms_InputPassword" translatable="false">Nhập mật khẩu</string>
     <string name="ms_HintUsername" translatable="false">Tên đăng nhập</string>
     <string name="ms_HintPassword" translatable="false">Mật khẩu</string>
+    <string name="msg_change_password" translatable="false">Thay đổi mật khẩu</string>
     <string name="home_page" translatable="false">Trang chủ</string>
     <string name="category_page" translatable="false">Danh mục</string>
     <string name="account_page" translatable="false">Tài khoản</string>
@@ -48,6 +49,9 @@
     <string name="msg_direct" translatable="false">Chỉ đường</string>
     <string name="msg_phone" translatable="false">Số điện thoại</string>
     <string name="msg_yet_data" translatable="false">Chưa có dữ liệu</string>
+    <string name="msg_change_avatar" translatable="false">Chạm để thay đổi</string>
+    <string name="msg_gender" translatable="false">Giới tính</string>
+    <string name="msg_email" translatable="false">Email</string>
 
 
     <string name="btn_delcart" translatable="false">Xóa</string>
