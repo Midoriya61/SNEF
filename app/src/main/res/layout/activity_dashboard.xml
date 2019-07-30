@@ -43,16 +43,16 @@
         <!--app:defaultQueryHint="Thử coi"-->
         <!--android:clickable="true"-->
         <!--&gt;</android.support.v7.widget.SearchView>-->
-        <!--<ImageView-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="0.15"-->
-            <!--android:src="@drawable/filter" />-->
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.15"
+            android:src="@drawable/filter" />
 
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.3">
+            android:layout_weight="0.15">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -199,6 +199,7 @@
                     android:layout_marginTop="15dp"
                     android:orientation="horizontal"
                     android:paddingBottom="15dp">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -206,6 +207,7 @@
                         android:textColor="@color/redApp"
                         android:textSize="25dp"
                         android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/storeAround"
                         android:layout_width="wrap_content"

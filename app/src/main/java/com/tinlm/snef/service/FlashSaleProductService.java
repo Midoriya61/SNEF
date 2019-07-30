@@ -26,5 +26,5 @@ public interface FlashSaleProductService {
     Call<List<FlashSaleProduct>> getFSPByName(@Path("searchName") String searchName);
 
     @GET(ConstainServer.FlashSaleProductURL + ConstainServer.GetFSPById + "{flashSaleProductId}")
-    Call<FlashSaleProduct> getFSPById(@Path("flashSaleProductId") int flashSaleProductId);
+    Call getFSPById(@Path("flashSaleProductId") int flashSaleProductId);
 }

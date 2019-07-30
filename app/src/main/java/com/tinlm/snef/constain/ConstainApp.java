@@ -45,7 +45,6 @@ public class ConstainApp {
     public static final String OPENHOUR = "OPENHOUR";
     public static final String LATITUDE = "LATITUDE";
     public static final String LONGITUDE = "LONGITUDE";
-    public static final String STOREPHONE = "STOREPHONE";
 
 
     // Date time
@@ -64,8 +63,6 @@ public class ConstainApp {
     public static final String JS_ORDERTABLE = "ORDERTABLE";
     public static final String JS_DB_NAME = "cart_list";
     public static final String JS_DISCOUNT = "DISCOUNT";
-    public static final String JS_SAWTABLE = "SAWTABLE";
-    public static final String JS_FOUNDTABLE = "FOUNDTABLE";
 
     public static final String LIST_ORDER_DETAIL = "LIST_ORDER_DETAIL";
     public static final String JS_ORDERDETAILID = "ORDERDETAILID";
@@ -86,6 +83,5 @@ public class ConstainApp {
     public static final String SCStoreActivity = "StoreActivity";
     public static final String SCProductByCategoryActivity = "ProductByCategoryActivity";
     public static final String SCSearchProductByNameActivity = "SearchProductByNameActivity";
-    public static final String SawFragment = "SawFragment";
 
 }

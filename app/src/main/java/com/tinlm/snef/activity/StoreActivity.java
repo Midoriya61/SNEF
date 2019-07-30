@@ -39,7 +39,7 @@ import retrofit2.Response;
 
 public class StoreActivity extends AppCompatActivity {
 
-    TextView storeName,txtAddress, txtPRatingPoint, txtOpenHour, txtPhone;
+    TextView storeName,txtAddress, txtPRatingPoint, txtOpenHour;
     ImageView storeAvatar;
     RecyclerView rcListFlashSaleProduct;
     Intent intent;
@@ -96,7 +96,6 @@ public class StoreActivity extends AppCompatActivity {
         txtAddress.setText(intent.getStringExtra(ConstainApp.ADDRESS));
         txtAddress.setPaintFlags(txtAddress.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         txtOpenHour.setText(intent.getStringExtra(ConstainApp.OPENHOUR));
-        txtPhone.setText(intent.getStringExtra(ConstainApp.STOREPHONE));
         float ratingPoint = intent.getFloatExtra(ConstainApp.RATINGPOINT, 0);
         if (ratingPoint == 0) {
             txtPRatingPoint.setText(getResources().getString(R.string.msg_still_not_rating));
@@ -119,7 +118,6 @@ public class StoreActivity extends AppCompatActivity {
         storeAvatar = findViewById(R.id.storeAvatar);
         rcListFlashSaleProduct = findViewById(R.id.rcListFlashSaleProduct);
         txtOpenHour = findViewById(R.id.txtOpenHour);
-        txtPhone = findViewById(R.id.txtPhone);
     }
 
     public void clickToDirectStore(View view) {
@@ -128,6 +126,7 @@ public class StoreActivity extends AppCompatActivity {
 //        mapIntent.setPackage("com.google.android.apps.maps");
 //        startActivity(mapIntent);
         String packageName = "com.google.android.apps.maps";
+
         String query = "google.navigation:q="+ intent.getStringExtra(ConstainApp.ADDRESS);
         Intent intentMap = this.getPackageManager().getLaunchIntentForPackage(packageName);
         intentMap.setAction(Intent.ACTION_VIEW);

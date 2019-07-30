@@ -49,16 +49,6 @@ public class DBManager extends SQLiteOpenHelper {
                 ConstainApp.CUSTOMERID + " integer) ";
         db.execSQL(sqlQueryOrder);
 
-        // TInLM
-        sqlQuery = "CREATE TABLE " + ConstainApp.JS_SAWTABLE + " ( " +
-                ConstainApp.JS_FSPID + " integer primary key)";
-        db.execSQL(sqlQuery);
-
-        sqlQuery = "CREATE TABLE " + ConstainApp.JS_FOUNDTABLE + " ( " +
-                ConstainApp.JS_PRODUCTNAME + " TEXT primary key)";
-        db.execSQL(sqlQuery);
-
-
     }
 
     @Override
@@ -312,70 +302,6 @@ public class DBManager extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return orderList;
-    }
-
-    public void addTableSaw(int fspId){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(ConstainApp.JS_FSPID, fspId);
-        db.insert(ConstainApp.JS_SAWTABLE,null,values);
-
-        db.close();
-    }
-
-    public void addTableFound(String productName){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(ConstainApp.JS_PRODUCTNAME, productName);
-
-        db.insert(ConstainApp.JS_FOUNDTABLE,null,values);
-
-        db.close();
-    }
-    public List<Integer> getAllProductSaw() {
-        List<Integer> result = new ArrayList<>();
-        // Select All Query
-        String selectQuery = "SELECT * " +
-                " FROM " + ConstainApp.JS_SAWTABLE ;
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                result.add(cursor.getInt(cursor.getColumnIndex(ConstainApp.JS_FSPID)));
-
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        db.close();
-        return (result);
-    }
-    public List<String> getAllProductNameFound() {
-        List<String> result = new ArrayList<>();
-        // Select All Query
-        String selectQuery = "SELECT * " +
-                " FROM " + ConstainApp.JS_FOUNDTABLE ;
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                result.add(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_PRODUCTNAME)));
-
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        db.close();
-        return (result);
-    }
-
-    public void deleteFound(String productName) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(ConstainApp.JS_FOUNDTABLE, ConstainApp.PRODUCTNAME + " = ?",
-                new String[] { productName });
-        db.close();
     }
 
 }
