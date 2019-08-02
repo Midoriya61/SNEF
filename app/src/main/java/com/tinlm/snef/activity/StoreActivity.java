@@ -57,7 +57,7 @@ public class StoreActivity extends AppCompatActivity {
     private void createProduct() {
         flashSaleProductService = AllService.getFlashSaleProductService();
 
-        flashSaleProductService.getFSPByCategoryId(intent.getIntExtra(ConstainApp.STOREID, 0)).enqueue(new Callback<List<FlashSaleProduct>>() {
+        flashSaleProductService.getFSPByStoreId(intent.getIntExtra(ConstainApp.STOREID, 0)).enqueue(new Callback<List<FlashSaleProduct>>() {
             @Override
             public void onResponse(Call<List<FlashSaleProduct>> call, Response<List<FlashSaleProduct>> response) {
                 List<FlashSaleProduct> flashSaleProducts = response.body();

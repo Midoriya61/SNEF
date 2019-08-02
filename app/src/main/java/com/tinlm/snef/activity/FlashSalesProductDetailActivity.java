@@ -353,4 +353,7 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
         DBManager dbManager = new DBManager(FlashSalesProductDetailActivity.this);
         dbManager.addTableSaw(fspId);
     }
+
+    public void clickToSearchProduct(View view) {
+    }
 }

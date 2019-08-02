@@ -1,6 +1,7 @@
 package com.tinlm.snef.utilities;
 
 import android.os.StrictMode;
+import android.text.Editable;
 import android.util.Log;
 
 import com.tinlm.snef.constain.ConstainServer;
@@ -8,6 +9,7 @@ import com.tinlm.snef.model.Customer;
 
 import org.json.JSONObject;
 
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -63,4 +65,27 @@ public class CustomerUtilities {
         }
         return result;
     }
+
+    public boolean register(String username, String password, String firstName, String lastName) {
+        boolean result = false;
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        String url = ConstainServer.BaseURL + ConstainServer.CustomerURL + ConstainServer.CreateURL + username + "/" + password
+                + "/" + firstName + "/" + lastName;
+        String respone = "";
+
+        try {
+            URL urll = new URL(url);
+            HttpURLConnection client = ReadStream.getPostConnection(urll);
+            respone = ReadStream.readStream(client.getInputStream());
+            if(respone.contains("true")){
+                result = true;
+            }
+        }catch (Exception e){
+            Log.e("ErrorAddUser", e.getMessage());
+            return result;
+        }
+        return result;
+    }
+
 }

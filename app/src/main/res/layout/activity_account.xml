@@ -103,8 +103,7 @@
                 android:layout_marginLeft="10dp"
                 android:textSize="16dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="clickToShowHistoryOrder"/>
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
         <LinearLayout
@@ -145,6 +144,7 @@
                 android:layout_height="20dp"
                 android:layout_marginLeft="10dp"
                 android:text="@string/msg_logout"
+                android:onClick="clickToLogOut"
                 android:textSize="16dp" />
         </LinearLayout>
 

@@ -17,6 +17,8 @@ import com.tinlm.snef.constain.ConstainServer;
 import com.tinlm.snef.model.Customer;
 import com.tinlm.snef.utilities.CustomerUtilities;
 
+import org.w3c.dom.Text;
+
 public class LoginActivity extends AppCompatActivity {
 
     CardView formLoginButton;
@@ -47,8 +49,8 @@ public class LoginActivity extends AppCompatActivity {
 
         formLoginButton = findViewById(R.id.formLoginButton);
         appImage = findViewById(R.id.appImage);
-        txtUsername = findViewById(R.id.txtUsername);
-        txtPassword = findViewById(R.id.txtPassword);
+        txtUsername = (EditText) findViewById(R.id.txtUsername);
+        txtPassword = (EditText) findViewById(R.id.txtPassword);
         errLogin = findViewById(R.id.errLogin);
 
         formLoginButton.setOnClickListener(new View.OnClickListener() {
