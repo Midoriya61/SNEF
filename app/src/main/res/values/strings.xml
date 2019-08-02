@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">SNEF</string>
     <string name="ms_Login" translatable="false">Đăng nhập</string>
-    <string name="ms_InputUsername" translatable="false">Nhận tên đăng nhập</string>
+    <string name="ms_InputUsername" translatable="false">Nhập tên đăng nhập</string>
     <string name="ms_InputPassword" translatable="false">Nhập mật khẩu</string>
     <string name="ms_ConfirmPassword" translatable="false">Nhập lại mật khẩu</string>
     <string name="ms_HintUsername" translatable="false">Tên đăng nhập</string>

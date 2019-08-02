@@ -1,5 +1,6 @@
 package com.tinlm.snef.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -46,7 +47,6 @@ public class RegisterActivity extends AppCompatActivity {
             txtFirstName.setError("Bạn cần nhập tên");
             checked =false;
         }
-        String lastName = txtLastName.getText().toString();
         if(TextUtils.isEmpty(txtLastName.getText())){
             txtLastName.setError("Bạn cần nhập họ");
             checked =false;
@@ -63,24 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
             txtConfirmPassword.setError("Bạn cần nhập lại mật khẩu");
             checked =false;
         }
-//        if( checked ){
-//            CustomerUtilities utilities = new CustomerUtilities();
-//            String username = txtUsername.getText().toString();
-//            String password = txtPassword.getText().toString();
-//            String firstName = txtFirstName.getText().toString();
-//            String lastName = txtLastName.getText().toString();
-//            boolean resultAddUser = utilities.addUser(username, password, fullname);
-//            if( resultAddUser ) {
-//                notiRegister.setTextColor(getResources().getColor(R.color.colorPrimary));
-//                notiRegister.setText("Account is created successfully");
-//            } else {
-//                notiRegister.setTextColor(getResources().getColor(R.color.colorDanger));
-//                notiRegister.setText("Username is existed");
-//            }
-//        } else {
-//            notiRegister.setTextColor(getResources().getColor(R.color.colorDanger));
-//            notiRegister.setText("Please confirm all information");
-//        }
+
         if( checked ){
             if( !txtRegisterPassword.getText().toString().equals(txtConfirmPassword.getText().toString()) ) {
                 txtConfirmPassword.setError("Mật khẩu không trùng nhau");
@@ -89,9 +72,19 @@ public class RegisterActivity extends AppCompatActivity {
                 boolean result = customerUtilities.register(txtRegisterUsername.getText().toString(), txtRegisterPassword.getText().toString(),
                         txtFirstName.getText().toString(), txtLastName.getText().toString());
                 if( result == true ) {
-
+                    notiRegister.setText("Đăng ký thành công! Ấn vào đây để đăng nhập");
+                    notiRegister.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent  = new Intent(RegisterActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
                 } else {
-
+                    notiRegister.setTextColor(getResources().getColor(R.color.colorDanger));
+                    notiRegister.setText("Tên đăng nhập đã tồn tại");
+                    txtRegisterUsername.setError("Tên đăng nhập đã tồn tại");
                 }
             }
         } else {

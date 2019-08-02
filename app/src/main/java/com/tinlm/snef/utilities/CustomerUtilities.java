@@ -76,8 +76,11 @@ public class CustomerUtilities {
 
         try {
             URL urll = new URL(url);
-            HttpURLConnection client = ReadStream.getPostConnection(urll);
-            respone = ReadStream.readStream(client.getInputStream());
+            HttpGetRequest httpGetRequest = new HttpGetRequest();
+            HttpPostRequest httpPostRequest = new HttpPostRequest();
+            HttpURLConnection client = httpPostRequest.execute(urll).get();
+//            respone = ReadStream.readStream(client.getInputStream());
+            respone = httpGetRequest.execute(client.getInputStream()).get();
             if(respone.contains("true")){
                 result = true;
             }
