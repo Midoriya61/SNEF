@@ -43,21 +43,21 @@ public class AccountActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                         break;
-                    case R.id.action_category:
-                        intent = new Intent(AccountActivity.this, CategoryActivity.class);
-                        startActivity(intent);
-                        finish();
-                        break;
+//                    case R.id.action_category:
+//                        intent = new Intent(AccountActivity.this, CategoryActivity.class);
+//                        startActivity(intent);
+//                        finish();
+//                        break;
                     case R.id.action_around:
                         intent = new Intent(AccountActivity.this, AroundStoreActivity.class);
                         startActivity(intent);
                         finish();
                         break;
-                    case R.id.action_orders:
-                        intent = new Intent(AccountActivity.this, OrderActivity.class);
-                        startActivity(intent);
-                        finish();
-                        break;
+//                    case R.id.action_orders:
+//                        intent = new Intent(AccountActivity.this, OrderActivity.class);
+//                        startActivity(intent);
+//                        finish();
+//                        break;
                     case R.id.action_account:
                         break;
                 }

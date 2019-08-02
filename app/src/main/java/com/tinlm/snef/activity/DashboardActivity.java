@@ -77,24 +77,24 @@ public class DashboardActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.action_home:
                         break;
-                    case R.id.action_category:
-                        intent = new Intent(DashboardActivity.this, CategoryActivity.class);
-                        finish();
-                        startActivity(intent);
-
-                        break;
+//                    case R.id.action_category:
+//                        intent = new Intent(DashboardActivity.this, CategoryActivity.class);
+//                        finish();
+//                        startActivity(intent);
+//
+//                        break;
                     case R.id.action_around:
                         intent = new Intent(DashboardActivity.this, AroundStoreActivity.class);
                         finish();
                         startActivity(intent);
 
                         break;
-                    case R.id.action_orders:
-                        intent = new Intent(DashboardActivity.this, OrderActivity.class);
-                        finish();
-                        startActivity(intent);
-
-                        break;
+//                    case R.id.action_orders:
+//                        intent = new Intent(DashboardActivity.this, OrderActivity.class);
+//                        finish();
+//                        startActivity(intent);
+//
+//                        break;
                     case R.id.action_account:
                         intent = new Intent(DashboardActivity.this, AccountActivity.class);
                         finish();

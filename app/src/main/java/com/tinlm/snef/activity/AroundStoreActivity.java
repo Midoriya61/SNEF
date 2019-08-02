@@ -125,18 +125,18 @@ public class AroundStoreActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                         break;
-                    case R.id.action_category:
-                        intent = new Intent(AroundStoreActivity.this, CategoryActivity.class);
-                        startActivity(intent);
-                        finish();
-                        break;
+//                    case R.id.action_category:
+//                        intent = new Intent(AroundStoreActivity.this, CategoryActivity.class);
+//                        startActivity(intent);
+//                        finish();
+//                        break;
                     case R.id.action_around:
                         break;
-                    case R.id.action_orders:
-                        intent = new Intent(AroundStoreActivity.this, OrderActivity.class);
-                        startActivity(intent);
-                        finish();
-                        break;
+//                    case R.id.action_orders:
+//                        intent = new Intent(AroundStoreActivity.this, OrderActivity.class);
+//                        startActivity(intent);
+//                        finish();
+//                        break;
                     case R.id.action_account:
                         intent = new Intent(AroundStoreActivity.this, AccountActivity.class);
                         startActivity(intent);

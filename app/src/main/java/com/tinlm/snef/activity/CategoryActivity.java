@@ -35,39 +35,39 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
     private void navigateDashboard() {
-        bottomNavigation = findViewById(R.id.bottomNavigation);
-        bottomNavigation.setSelectedItemId(R.id.action_category);
-        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                Intent intent;
-                switch (menuItem.getItemId()) {
-                    case R.id.action_home:
-                        intent = new Intent(CategoryActivity.this, DashboardActivity.class);
-                        startActivity(intent);
-                        finish();
-                        break;
-                    case R.id.action_category:
-                        break;
-                    case R.id.action_around:
-                        intent = new Intent(CategoryActivity.this, AroundStoreActivity.class);
-                        startActivity(intent);
-                        finish();
-                        break;
-                    case R.id.action_orders:
-                        intent = new Intent(CategoryActivity.this, OrderActivity.class);
-                        startActivity(intent);
-                        finish();
-                        break;
-                    case R.id.action_account:
-                        intent = new Intent(CategoryActivity.this, AccountActivity.class);
-                        startActivity(intent);
-                        finish();
-                        break;
-                }
-                return false;
-            }
-        });
+//        bottomNavigation = findViewById(R.id.bottomNavigation);
+//        bottomNavigation.setSelectedItemId(R.id.action_category);
+//        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+//                Intent intent;
+//                switch (menuItem.getItemId()) {
+//                    case R.id.action_home:
+//                        intent = new Intent(CategoryActivity.this, DashboardActivity.class);
+//                        startActivity(intent);
+//                        finish();
+//                        break;
+//                    case R.id.action_category:
+//                        break;
+//                    case R.id.action_around:
+//                        intent = new Intent(CategoryActivity.this, AroundStoreActivity.class);
+//                        startActivity(intent);
+//                        finish();
+//                        break;
+//                    case R.id.action_orders:
+//                        intent = new Intent(CategoryActivity.this, OrderActivity.class);
+//                        startActivity(intent);
+//                        finish();
+//                        break;
+//                    case R.id.action_account:
+//                        intent = new Intent(CategoryActivity.this, AccountActivity.class);
+//                        startActivity(intent);
+//                        finish();
+//                        break;
+//                }
+//                return false;
+//            }
+//        });
     }
 
     private void init() {

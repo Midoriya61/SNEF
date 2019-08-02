@@ -22,17 +22,13 @@ public class LocationUtilities {
         StrictMode.setThreadPolicy(policy);
         String url = ConstainServer.BaseURL + ConstainServer.LocationURL + store.getLocationId();
         String respone = "";
-
         try {
             URL url1 = new URL(url);
             respone = ReadStream.readStream(url1.openStream());
             JSONObject jsonObject = new JSONObject(respone);
-
-
             if (jsonObject.has(address)) {
                 store.setAddress(jsonObject.getString(address));
             }
-
         } catch (Exception e) {
             Log.e("ELocation", e.getMessage());
         }

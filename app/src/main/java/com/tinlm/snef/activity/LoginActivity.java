@@ -35,12 +35,10 @@ public class LoginActivity extends AppCompatActivity {
         init();
         String userIsLogn = getAccountLogin();
         if(userIsLogn != null) {
-
             Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
             startActivity(intent);
             finish();
         }
-
 
     }
 
@@ -49,8 +47,8 @@ public class LoginActivity extends AppCompatActivity {
 
         formLoginButton = findViewById(R.id.formLoginButton);
         appImage = findViewById(R.id.appImage);
-        txtUsername = (EditText) findViewById(R.id.txtUsername);
-        txtPassword = (EditText) findViewById(R.id.txtPassword);
+        txtUsername =  findViewById(R.id.txtUsername);
+        txtPassword = findViewById(R.id.txtPassword);
         errLogin = findViewById(R.id.errLogin);
 
         formLoginButton.setOnClickListener(new View.OnClickListener() {

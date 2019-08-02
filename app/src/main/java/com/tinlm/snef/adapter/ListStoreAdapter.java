@@ -94,7 +94,6 @@ public class ListStoreAdapter extends RecyclerView.Adapter<ListStoreAdapter.List
             }
         });
 
-
     }
 
     @Override
