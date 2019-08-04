@@ -30,6 +30,7 @@
     <string name="msg_expired_date" translatable="false">Kết thúc trong</string>
     <string name="msg_add_to_add" translatable="false">Thêm vào giỏ</string>
     <string name="msg_end_sell" translatable="false">Kết thúc bán</string>
+    <string name="msg_fsp_end_sell" translatable="false">Ngày bán đã hết</string>
     <string name="msg_provided_by_store" translatable="false">Cung cấp bởi  </string>
     <string name="msg_description" translatable="false">Mô tả sản phẩm</string>
     <string name="msg_product_info_detail" translatable="false">Thông tin chia tiết</string>
@@ -50,9 +51,11 @@
     <string name="msg_direct" translatable="false">Chỉ đường</string>
     <string name="msg_phone" translatable="false">Số điện thoại</string>
     <string name="msg_yet_data" translatable="false">Chưa có dữ liệu</string>
+    <string name="msg_yet_product" translatable="false">Cửa hàng hiện chưa có sản phẩm</string>
     <string name="msg_change_avatar" translatable="false">Chạm để thay đổi</string>
     <string name="msg_gender" translatable="false">Giới tính</string>
     <string name="msg_email" translatable="false">Email</string>
+    <string name="msg_product_sould_out" translatable="false">Sản phẩm đã bán hết</string>
 
 
     <string name="btn_delcart" translatable="false">Xóa</string>

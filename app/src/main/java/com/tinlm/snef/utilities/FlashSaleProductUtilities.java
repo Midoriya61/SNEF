@@ -319,5 +319,26 @@ public class FlashSaleProductUtilities {
         return fsp;
     }
 
+    public int getRemaingQuantity(int flashSaleProductId) {
+        int result  = 0;
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        String url = ConstainServer.BaseURL + ConstainServer.FlashSaleProductURL +
+                ConstainServer.GetRemaingQuantity + flashSaleProductId;
+        String respone = "";
+
+        try {
+            URL urll = new URL(url);
+            HttpGetRequest httpGetRequest = new HttpGetRequest();
+            respone = httpGetRequest.execute(urll.openStream()).get();
+            result = Integer.parseInt(respone);
+
+        } catch (Exception e) {
+            Log.e("Error FSPById", e.getMessage());
+        }
+        return result;
+    }
+
 
 }

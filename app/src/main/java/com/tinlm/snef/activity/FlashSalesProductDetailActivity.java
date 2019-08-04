@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,12 +24,14 @@ import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.database.DBManager;
 import com.tinlm.snef.model.Cart;
 import com.tinlm.snef.model.Store;
+import com.tinlm.snef.utilities.FlashSaleProductUtilities;
 import com.tinlm.snef.utilities.LocationUtilities;
 import com.tinlm.snef.utilities.StoreProductImageUtilities;
 import com.tinlm.snef.utilities.StoreProductUtilities;
 import com.tinlm.snef.utilities.StoreUtilities;
 
 import org.apache.commons.collections.functors.StringValueTransformer;
+import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -54,7 +57,8 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
     private int fspId;
     private float price;
     private int discount;
-    private Button btnAddToCart;
+    private TextView btnAddToCart;
+    private RelativeLayout llAddToCard;
 
 //    int discount;
 
@@ -65,6 +69,7 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
     TextView txtCartNumberDB;
     Context mContext;
 
+    private String endDate;
 
 //    , textReadMore;
     //, storeLocation, workingTime;
@@ -102,6 +107,8 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
         imgProductFS = findViewById(R.id.imgProductFS);
         cv_countdownViewTest1 = findViewById(R.id.cv_countdownViewTest1);
         storeName = findViewById(R.id.storeName);
+        llAddToCard = findViewById(R.id.llAddToCard);
+        btnAddToCart = findViewById(R.id.btnAddToCart);
         description = findViewById(R.id.txtDescriptionBookInCase);
 //        textReadMore = findViewById(R.id.textReadMore);
 //        storeLocation = findViewById(R.id.storeLocation);
@@ -128,7 +135,7 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
         price = intent.getFloatExtra(ConstainApp.PRICE, 0);
         discount = intent.getIntExtra(ConstainApp.DISCOUNT, 0);
         foodPrice.setText(String.format("%,d", (int) price) + " đ");
-        foodPriceDiscount.setText((String.format("%,d", intent.getIntExtra(ConstainApp.DISCOUNT, 0) * (int) price / 100)));
+        foodPriceDiscount.setText((String.format("%,d", (int) price - intent.getIntExtra(ConstainApp.DISCOUNT, 0) * (int) price / 100)));
 
         StoreProductUtilities storeProductUtilities = new StoreProductUtilities();
         description.setText(intent.getStringExtra(ConstainApp.DESCRIPTION));
@@ -146,8 +153,19 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
         imgProductFS.setAdapter(viewPagerAdapter);
 
         foodName.setText(intent.getStringExtra(ConstainApp.PRODUCTNAME));
-        String endDate = intent.getStringExtra(ConstainApp.ENDDATE);
+        endDate = intent.getStringExtra(ConstainApp.ENDDATE);
         //expiredDate.setText(endDate);
+        // check remaining quantity of fsp
+        int totalQuanitity = intent.getIntExtra(ConstainApp.TOTALQUANTITY, 0);
+        int quantity = intent.getIntExtra(ConstainApp.QUANTITY, 0);
+        if( totalQuanitity >= quantity ) {
+            btnAddToCart.setText(getResources().getString(R.string.msg_product_sould_out) + "");
+            btnAddToCart.setClickable(false);
+            llAddToCard.setBackgroundColor(Color.GRAY);
+            btnAddToCart.setTextColor(Color.WHITE);
+        }
+
+        //check date flash sales if customer review product saw
         try {
             Date currentTime = Calendar.getInstance().getTime();
             long currentMillisecond = currentTime.getTime();
@@ -158,7 +176,7 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
             if( milliseconds <= currentMillisecond ) {
                 btnAddToCart.setText(getResources().getString(R.string.msg_end_sell));
                 btnAddToCart.setClickable(false);
-                btnAddToCart.setBackgroundColor(Color.GRAY);
+                llAddToCard.setBackgroundColor(Color.GRAY);
                 btnAddToCart.setTextColor(Color.WHITE);
             }
         } catch (ParseException e) {
@@ -168,7 +186,7 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
 
 //        totalPrice = findViewById(R.id.totalPrice);
 //        totalPrice.setText(String.format("%,d",intent.getIntExtra(ConstainApp.DISCOUNT,0) * (int)price/100));
-        final int quantity = intent.getIntExtra(ConstainApp.QUANTITY, 0);
+
 //        btnChange.setRange(1,quantity);
 //
 //        btnChange.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
@@ -269,31 +287,58 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
     }
 
     public void clickAddToCard(View view) {
-        DBManager dbManager = new DBManager(FlashSalesProductDetailActivity.this);
+        FlashSaleProductUtilities flashSaleProductUtilities = new FlashSaleProductUtilities();
+        int remaningQuantity = flashSaleProductUtilities.getRemaingQuantity(fspId);
+        if( remaningQuantity == 0 ) {
+            Toast.makeText(FlashSalesProductDetailActivity.this, getResources().getString(R.string.msg_product_sould_out), Toast.LENGTH_SHORT).show();
 
+        } else  {
 
-        Cart cart = dbManager.getProductById(fspId);
-        if (cart == null) {
-            cart = new Cart();
-            cart.setStoreName(storeName.getText().toString());
-            cart.setProductName(foodName.getText().toString());
-            cart.setImageProduct(imgProduct);
-            cart.setFspId(fspId);
-            cart.setPrice(price);
-            cart.setDiscount(discount);
-            dbManager.addCart(cart);
-            txtCartNumber.setText(String.valueOf(Integer.parseInt(String.valueOf(txtCartNumber.getText())) + 1));
+            //check date flash sales if customer review product saw
+            try {
+                Date currentTime = Calendar.getInstance().getTime();
+                long currentMillisecond = currentTime.getTime();
+                Date date = new SimpleDateFormat("yyyy-MM-dd").parse(endDate);
+                //expiredDate.setText(endDate);
+                long milliseconds = date.getTime();
+                cv_countdownViewTest1.start(milliseconds - currentMillisecond);
+                if( milliseconds <= currentMillisecond ) {
+                    btnAddToCart.setClickable(false);
+                    btnAddToCart.setText(getResources().getString(R.string.msg_end_sell));
+                    llAddToCard.setBackgroundColor(Color.GRAY);
+                    btnAddToCart.setTextColor(Color.WHITE);
+                    Toast.makeText(FlashSalesProductDetailActivity.this,getResources().getString(R.string.msg_fsp_end_sell), Toast.LENGTH_SHORT).show();
+                } else {
+                    DBManager dbManager = new DBManager(FlashSalesProductDetailActivity.this);
+
+                    Cart cart = dbManager.getProductById(fspId);
+                    if (cart == null) {
+                        cart = new Cart();
+                        cart.setStoreName(storeName.getText().toString());
+                        cart.setProductName(foodName.getText().toString());
+                        cart.setImageProduct(imgProduct);
+                        cart.setFspId(fspId);
+                        cart.setPrice(price);
+                        cart.setDiscount(discount);
+                        dbManager.addCart(cart);
+                        txtCartNumber.setText(String.valueOf(Integer.parseInt(String.valueOf(txtCartNumber.getText())) + 1));
 //            txtCartNumberDB = ((DashboardActivity) mContext).findViewById(R.id.txtCartNumber);
 //            txtCartNumberDB.setText(String.valueOf(Integer.parseInt(String.valueOf(txtCartNumber.getText())) + 1));
-
-        } else {
-            dbManager.updateCart(cart);
-            txtCartNumber.setText(String.valueOf(Integer.parseInt(String.valueOf(txtCartNumber.getText())) + 1));
+                    } else {
+                        dbManager.updateCart(cart);
+                        txtCartNumber.setText(String.valueOf(Integer.parseInt(String.valueOf(txtCartNumber.getText())) + 1));
 //            txtCartNumberDB = ((DashboardActivity) mContext).findViewById(R.id.txtCartNumber);
 //            txtCartNumberDB.setText(String.valueOf(Integer.parseInt(String.valueOf(txtCartNumber.getText())) + 1));
+                    }
+                    Toast.makeText(this, R.string.msg_add_to_cart_success, Toast.LENGTH_SHORT).show();
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
         }
-        Toast.makeText(this, R.string.msg_add_to_cart_success, Toast.LENGTH_SHORT).show();
+
+
 
 
 //        cart.setQuantity(Integer.parseInt(btnChange.getNumber()));
@@ -323,26 +368,21 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
     }
     public void clickToStore(View view) {
         Intent intent = new Intent(this, StoreActivity.class);
-
         intent.putExtra(ConstainApp.JS_STORENAME, store.getStoreName());
         intent.putExtra(ConstainApp.STOREAVATAR, store.getAvatar());
         String address = store.getAddress();
         intent.putExtra(ConstainApp.ADDRESS, address);
         intent.putExtra(ConstainApp.RATINGPOINT, store.getRatingPoint());
         intent.putExtra(ConstainApp.STOREID, store.getStoreId());
-
         String openHour = "";
         if(store.getOpenHour().equals(store.getCloseHour())) {
             openHour = getResources().getString(R.string.Open24);
-
         }else
             openHour = store.getOpenHour() + " - " + store.getCloseHour();
 
         intent.putExtra(ConstainApp.OPENHOUR, openHour);
         startActivity(intent);
     }
-
-
 
     public void clickToShoppingCart(View view) {
         Intent intent = new Intent(this, OrderActivity.class);

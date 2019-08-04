@@ -15,6 +15,7 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -44,6 +45,7 @@ public class StoreActivity extends AppCompatActivity {
     RecyclerView rcListFlashSaleProduct;
     Intent intent;
     FlashSaleProductService flashSaleProductService;
+    RelativeLayout notYetProduct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,28 +63,18 @@ public class StoreActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<FlashSaleProduct>> call, Response<List<FlashSaleProduct>> response) {
                 List<FlashSaleProduct> flashSaleProducts = response.body();
-                Map<Integer, String> listImageProduct = new HashMap<>();
-                Map<Integer, Integer> listTotalPrice = new HashMap<>();
-//                FlashSaleProductUtilities flashSaleProductUtilities = new FlashSaleProductUtilities();
-//                StoreProductImageUtilities imageUltilities = new StoreProductImageUtilities();
-//                OrderDetailUtilities orderDetailUtilities = new OrderDetailUtilities();
-//
-//                for (int i = 0; i < flashSaleProducts.size(); i++) {
-//
-//                    String productImage = imageUltilities.getOneImageByStoreProductId(flashSaleProducts.get(i).getStoreProductId());
-//                    listImageProduct.put(flashSaleProducts.get(i).getStoreProductId(),productImage );
-//                    // get total quantity of order detail
-//                    int totalQuantity = orderDetailUtilities.getQuantityByFSPId(flashSaleProducts.get(i).getFlashSaleProductId());
-//                    listTotalPrice.put(flashSaleProducts.get(i).getFlashSaleProductId(), totalQuantity);
-//                }
-                FlashSaleProductAdapter flashSaleProductAdapter = new FlashSaleProductAdapter(getBaseContext(), flashSaleProducts,
-                        ConstainApp.SCStoreActivity);
-                RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getBaseContext(),2);
-                rcListFlashSaleProduct.setItemAnimator(new DefaultItemAnimator());
-                rcListFlashSaleProduct.setLayoutManager(mLayoutManager);
-                rcListFlashSaleProduct.setAdapter(flashSaleProductAdapter);
+                if( flashSaleProducts.size() == 0 ) {
+                    notYetProduct = findViewById(R.id.notYetProduct);
+                    notYetProduct.setVisibility(View.VISIBLE);
+                } else {
+                    FlashSaleProductAdapter flashSaleProductAdapter = new FlashSaleProductAdapter(getBaseContext(), flashSaleProducts,
+                            ConstainApp.SCStoreActivity);
+                    RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getBaseContext(),2);
+                    rcListFlashSaleProduct.setItemAnimator(new DefaultItemAnimator());
+                    rcListFlashSaleProduct.setLayoutManager(mLayoutManager);
+                    rcListFlashSaleProduct.setAdapter(flashSaleProductAdapter);
+                }
             }
-
             @Override
             public void onFailure(Call<List<FlashSaleProduct>> call, Throwable t) {
                 Log.d("ListFSPFragment", "error loading from API");

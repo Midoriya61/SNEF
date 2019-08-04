@@ -47,7 +47,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void init() {
-//        ProductUtilities productUtilities = new ProductUtilities();
+        // ProductUtilities productUtilities = new ProductUtilities();
         searchProductBar = findViewById(R.id.searchProductBar);
         listNameProduct = findViewById(R.id.listNameProduct);
         viewPager = findViewById(R.id.viewPager);
@@ -55,6 +55,23 @@ public class SearchActivity extends AppCompatActivity {
         TabViewPagerAdapter pageAdapter = new TabViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pageAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
         // get name of product
         productService = ApiUtils.getProductService();

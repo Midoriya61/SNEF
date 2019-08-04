@@ -17,6 +17,7 @@ public class ConstainServer {
     public static final String GetFSPByCategoryId = "getFSPByCategoryId/";
     public static final String GetFSPByName = "getFSPByName/";
     public static final String GetFSPById = "getFSPById/";
+    public static final String GetRemaingQuantity = "getRemaingQuantity/";
 
     //Store Product Image
     public static final String StoreProductImageURL = "storeProductImage/";
