@@ -36,6 +36,7 @@ public class ConstainApp {
     public static final String STOREID = "STOREID";
     public static final String PRICE = "PRICE";
     public static final String QUANTITY = "QUANTITY";
+    public static final String TOTALQUANTITY = "TOTALQUANTITY";
     public static final String ENDDATE = "ENDDATE";
     public static final String STOREPRODUCTID = "STOREPRODUCTID";
     public static final String CATEGORYID = "CATEGORYID";

@@ -62,7 +62,7 @@ public class StoreAroundFragment extends Fragment {
         storeService = ApiUtils.getStoreService();
         rcStoreAround = view.findViewById(R.id.rcStoreAround);
 //        StoreUtilities storeUtilities = new StoreUtilities();
-        storeService.getListStoreArround().enqueue(new Callback<List<Store>>() {
+        storeService.getListStoreArround(locationStoreCurrent[0], locationStoreCurrent[1]).enqueue(new Callback<List<Store>>() {
             @Override
             public void onResponse(Call<List<Store>> call, Response<List<Store>> response) {
 
@@ -70,7 +70,7 @@ public class StoreAroundFragment extends Fragment {
 
                 for (int i = 0; i < storeList.size(); i++) {
 //
-                    storeList.get(i).distanceBetween2Points(locationStoreCurrent[0], locationStoreCurrent[1]);
+//                    storeList.get(i).distanceBetween2Points(, locationStoreCurrent[1]);
 //            storeList.get(i).setDistance(i);
                 }
                 // Sort store by distance from phone to store

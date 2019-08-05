@@ -7,8 +7,6 @@
     tools:context=".activity.SearchProductByNameActivity">
     <!--Top bar-->
 
-
-
     <LinearLayout
         android:id="@+id/topBar"
         android:background="@color/redApp"

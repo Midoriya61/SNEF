@@ -38,12 +38,9 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
     private Runnable runnable;
     private Handler handler = new Handler();
     private String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
-
-    public FlashSaleProductAdapter(Context mContext, List<FlashSaleProduct> flashSaleProductList,
-                                  String sreenName) {
+    public FlashSaleProductAdapter(Context mContext, List<FlashSaleProduct> flashSaleProductList,                                  String sreenName) {
         this.mContext = mContext;
         this.flashSaleProductList = flashSaleProductList;
-
         this.sreenName = sreenName;
     }
 
@@ -111,7 +108,7 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
         flashSaleProductHolder.barSale.getLayoutParams().width = numberSout;
 
         // set status of product
-        if(totalQuantity == flashSaleProduct.getQuantity()) {
+        if(totalQuantity >= flashSaleProduct.getQuantity()) {
 
             flashSaleProductHolder.statusSale.setText( mContext.getResources().getString(R.string.StatusSouldOut));
         } else if (totalQuantity >= flashSaleProduct.getQuantity() * (100/80)) {
@@ -137,6 +134,7 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
                 intent.putExtra(ConstainApp.STOREID,flashSaleProduct.getStoreId());
                 intent.putExtra(ConstainApp.PRICE,flashSaleProduct.getPrice());
                 intent.putExtra(ConstainApp.QUANTITY,flashSaleProduct.getQuantity());
+                intent.putExtra(ConstainApp.TOTALQUANTITY,flashSaleProduct.getTotalQuantity());
                 DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 //                String endDate = df.format(flashSaleProduct.getEndDate());
                 String endDate = flashSaleProduct.getEndDate();

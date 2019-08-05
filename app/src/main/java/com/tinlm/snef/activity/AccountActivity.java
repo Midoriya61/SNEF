@@ -43,21 +43,21 @@ public class AccountActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                         break;
-                    case R.id.action_category:
-                        intent = new Intent(AccountActivity.this, CategoryActivity.class);
-                        startActivity(intent);
-                        finish();
-                        break;
+//                    case R.id.action_category:
+//                        intent = new Intent(AccountActivity.this, CategoryActivity.class);
+//                        startActivity(intent);
+//                        finish();
+//                        break;
                     case R.id.action_around:
                         intent = new Intent(AccountActivity.this, AroundStoreActivity.class);
                         startActivity(intent);
                         finish();
                         break;
-                    case R.id.action_orders:
-                        intent = new Intent(AccountActivity.this, OrderActivity.class);
-                        startActivity(intent);
-                        finish();
-                        break;
+//                    case R.id.action_orders:
+//                        intent = new Intent(AccountActivity.this, OrderActivity.class);
+//                        startActivity(intent);
+//                        finish();
+//                        break;
                     case R.id.action_account:
                         break;
                 }
@@ -84,4 +84,19 @@ public class AccountActivity extends AppCompatActivity {
         Intent intent = new Intent(this, EditAccountActivity.class);
         startActivity(intent);
     }
+
+    public void clickToShowHistoryOrder(View view) {
+    }
+
+    public void clickToLogOut(View view) {
+            SharedPreferences sharedPreferences = getSharedPreferences(ConstainApp.login_Prefer, MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.apply();
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        }
+
 }

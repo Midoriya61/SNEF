@@ -17,6 +17,8 @@ import com.tinlm.snef.constain.ConstainServer;
 import com.tinlm.snef.model.Customer;
 import com.tinlm.snef.utilities.CustomerUtilities;
 
+import org.w3c.dom.Text;
+
 public class LoginActivity extends AppCompatActivity {
 
     CardView formLoginButton;
@@ -33,12 +35,10 @@ public class LoginActivity extends AppCompatActivity {
         init();
         String userIsLogn = getAccountLogin();
         if(userIsLogn != null) {
-
             Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
             startActivity(intent);
             finish();
         }
-
 
     }
 
@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
 
         formLoginButton = findViewById(R.id.formLoginButton);
         appImage = findViewById(R.id.appImage);
-        txtUsername = findViewById(R.id.txtUsername);
+        txtUsername =  findViewById(R.id.txtUsername);
         txtPassword = findViewById(R.id.txtPassword);
         errLogin = findViewById(R.id.errLogin);
 
@@ -68,7 +68,6 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString(ConstainApp.EMAIL, customer.getEmail());
                     editor.putString(ConstainApp.AVATAR, customer.getAvatar());
                     editor.putString(ConstainApp.PHONE, customer.getPhone());
-                    editor.putInt(ConstainApp.ACCOUNTID, customer.getAccountId());
                     if( customer.getGender() == 0 ) {
                         editor.putString(ConstainApp.GENDER, "Nam");
                     } else {

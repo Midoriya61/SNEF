@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name" translatable="false">SNEF</string>
     <string name="ms_Login" translatable="false">Đăng nhập</string>
-    <string name="ms_InputUsername" translatable="false">Nhận tên đăng nhập</string>
+    <string name="ms_InputUsername" translatable="false">Nhập tên đăng nhập</string>
     <string name="ms_InputPassword" translatable="false">Nhập mật khẩu</string>
+    <string name="ms_ConfirmPassword" translatable="false">Nhập lại mật khẩu</string>
     <string name="ms_HintUsername" translatable="false">Tên đăng nhập</string>
     <string name="ms_HintPassword" translatable="false">Mật khẩu</string>
     <string name="msg_change_password" translatable="false">Thay đổi mật khẩu</string>
@@ -29,6 +30,7 @@
     <string name="msg_expired_date" translatable="false">Kết thúc trong</string>
     <string name="msg_add_to_add" translatable="false">Thêm vào giỏ</string>
     <string name="msg_end_sell" translatable="false">Kết thúc bán</string>
+    <string name="msg_fsp_end_sell" translatable="false">Ngày bán đã hết</string>
     <string name="msg_provided_by_store" translatable="false">Cung cấp bởi  </string>
     <string name="msg_description" translatable="false">Mô tả sản phẩm</string>
     <string name="msg_product_info_detail" translatable="false">Thông tin chia tiết</string>
@@ -41,7 +43,7 @@
     <string name="msg_show_more" translatable="false">Xem thêm</string>
     <string name="msg_show_less" translatable="false">Thu gọn</string>
     <string name="msg_product" translatable="false">Sản phẩm</string>
-    <string name="msg_login_fail" translatable="false">User</string>
+    <string name="msg_login_fail" translatable="false">Tên đăng hoặc mặt khẩu không đúng</string>
     <string name="msg_still_not_rating" translatable="false">Chưa có đánh giá</string>
     <string name="msg_warehouse" translatable="false">Kho: </string>
     <string name="msg_saw_recent" translatable="false">Đã xem gần đây</string>
@@ -49,9 +51,11 @@
     <string name="msg_direct" translatable="false">Chỉ đường</string>
     <string name="msg_phone" translatable="false">Số điện thoại</string>
     <string name="msg_yet_data" translatable="false">Chưa có dữ liệu</string>
+    <string name="msg_yet_product" translatable="false">Cửa hàng hiện chưa có sản phẩm</string>
     <string name="msg_change_avatar" translatable="false">Chạm để thay đổi</string>
     <string name="msg_gender" translatable="false">Giới tính</string>
     <string name="msg_email" translatable="false">Email</string>
+    <string name="msg_product_sould_out" translatable="false">Sản phẩm đã bán hết</string>
 
 
     <string name="btn_delcart" translatable="false">Xóa</string>
@@ -61,7 +65,6 @@
     <string name="question_rating" translatable="false">Bạn hài lòng với đơn hàng này chứ?</string>
     <string name="btn_submitrating" translatable="false">Gửi Phản Hồi</string>
     <string name="msg_thanksrating" translatable="false">Xin cảm ơn phản hồi của bạn!</string>
-    <string name="btn_contshopping" translatable="false">Tiếp Tục Mua Sắm</string>
 
     <string name="StatusSouldOut" translatable="false">Bán hết</string>
     <string name="StatusNearlySouldOut" translatable="false">Sắp bán hết</string>

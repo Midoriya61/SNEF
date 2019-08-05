@@ -247,7 +247,6 @@ public class DBManager extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(ConstainApp.JS_FSPID, fspId);
         db.insert(ConstainApp.JS_SAWTABLE,null,values);
-
         db.close();
     }
 

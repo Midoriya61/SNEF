@@ -200,14 +200,43 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rcListFlashSaleProduct"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:overScrollMode="never"
+                android:layout_marginBottom="20dp"
+                >
+                <RelativeLayout
+                    android:id="@+id/notYetProduct"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="invisible"
+                    >
+                    <ImageView
+                        android:id="@+id/iconSmile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/smile"
+                        android:layout_centerHorizontal="true"/>
+                    <TextView
+                        android:textSize="20dp"
+                        android:layout_below="@+id/iconSmile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textStyle="bold"
+                        android:text="@string/msg_yet_product"/>
+                </RelativeLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rcListFlashSaleProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
 
-                ></android.support.v7.widget.RecyclerView>
+                    ></android.support.v7.widget.RecyclerView>
+            </RelativeLayout>
+
+
 
         </LinearLayout>
 
