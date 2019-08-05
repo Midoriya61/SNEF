@@ -32,18 +32,6 @@ public class Store implements Comparable<Store>{
     @SerializedName("address")
     @Expose
     private String address;
-    @SerializedName("district")
-    @Expose
-    private String district;
-    @SerializedName("ward")
-    @Expose
-    private String ward;
-    @SerializedName("city")
-    @Expose
-    private String city;
-    @SerializedName("country")
-    @Expose
-    private String country;
     @SerializedName("latitude")
     @Expose
     private double latitude;
@@ -51,17 +39,24 @@ public class Store implements Comparable<Store>{
     @Expose
     private double longitude;
 
+    @SerializedName("phone")
+    @Expose
+    private String phone;
+
     private String accountName;
-
-
-
-
-
     // variable for layout
     private double distance;
 
 
     public Store() {
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public int getStoreId() {
@@ -134,38 +129,6 @@ public class Store implements Comparable<Store>{
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
-    }
-
-    public String getWard() {
-        return ward;
-    }
-
-    public void setWard(String ward) {
-        this.ward = ward;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
     }
 
     public double getLatitude() {

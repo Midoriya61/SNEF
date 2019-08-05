@@ -16,6 +16,43 @@
         android:background="@color/grayLight"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:id="@+id/emptyCartLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/empty_cart"></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Bạn chưa có sản phẩm nào trong giỏ hàng!"
+                android:textSize="18dp"
+                android:layout_marginBottom="50dp"
+                android:textStyle="italic" />
+
+            <Button
+                android:id="@+id/btnContinueShopping"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="@color/persianRed"
+                android:onClick="clickContinueShopping"
+                android:text="@string/btn_contshopping"
+                android:textColor="@color/colorMain"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

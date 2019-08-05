@@ -18,6 +18,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.tinlm.snef.R;
 import com.tinlm.snef.adapter.ListStoreOrderItemAdapter;
@@ -39,6 +40,7 @@ public class OrderActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigation;
     RecyclerView rcOrderStore;
     Intent intent;
+    LinearLayout emptyCartLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,16 +53,26 @@ public class OrderActivity extends AppCompatActivity {
         navigateDashboard();
     }
 
+    @Override
+    public void onResume() {  // After a pause OR at startup
+        super.onResume();
+        init();
+
+    }
+
 
     public void init() {
 
         intent = getIntent();
 
         rcOrderStore = findViewById(R.id.rcOrderStore);
+        emptyCartLayout = findViewById(R.id.emptyCartLayout);
 
         DBManager dbManager = new DBManager(OrderActivity.this);
         List<StoreOrderItem> storeOrderItems = dbManager.getAllCartGroupStore();
 
+        if (storeOrderItems.size() != 0) {
+            emptyCartLayout.setVisibility(View.GONE);
 
 //        SharedPreferences sharedPreferences = getSharedPreferences(ConstainApp.LIST_ORDER_DETAIL, MODE_PRIVATE);
 //        String json_array = sharedPreferences.getString(ConstainApp.JSARROD, null);
@@ -125,15 +137,18 @@ public class OrderActivity extends AppCompatActivity {
 //            }
 //        }
 
-        ListStoreOrderItemAdapter storeOrderItemAdapter = new ListStoreOrderItemAdapter(OrderActivity.this,storeOrderItems);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(OrderActivity.this,
-                LinearLayoutManager.VERTICAL, false);
-        rcOrderStore.setItemAnimator(new DefaultItemAnimator());
-        rcOrderStore.setLayoutManager(mLayoutManager);
-        rcOrderStore.setAdapter(storeOrderItemAdapter);
-        rcOrderStore.addItemDecoration(new DividerItemDecoration(this, 0));
+            ListStoreOrderItemAdapter storeOrderItemAdapter = new ListStoreOrderItemAdapter(OrderActivity.this, storeOrderItems);
+            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(OrderActivity.this,
+                    LinearLayoutManager.VERTICAL, false);
+            rcOrderStore.setItemAnimator(new DefaultItemAnimator());
+            rcOrderStore.setLayoutManager(mLayoutManager);
+            rcOrderStore.setAdapter(storeOrderItemAdapter);
+            rcOrderStore.addItemDecoration(new DividerItemDecoration(this, 0));
+        }
+        else {
+            emptyCartLayout.setVisibility(View.VISIBLE);
 
-
+        }
     }
 
     private void navigateDashboard() {
@@ -173,5 +188,8 @@ public class OrderActivity extends AppCompatActivity {
         });
     }
 
-
+    public void clickContinueShopping(View view) {
+        Intent intent = new Intent(this, DashboardActivity.class);
+        startActivity(intent);
+    }
 }

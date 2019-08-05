@@ -2,6 +2,7 @@ package com.tinlm.snef.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -67,6 +69,8 @@ public class OrderHistoryActivity extends AppCompatActivity {
     RatingBar ratingBar;
     Button btnSubmitRating;
     TextView txtRating;
+    EditText editTextComment;
+    CardView cvComment;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +94,8 @@ public class OrderHistoryActivity extends AppCompatActivity {
         ratingBar = findViewById(R.id.ratingBar);
         btnSubmitRating = findViewById(R.id.btnSubmitRating);
         txtRating = findViewById(R.id.txtRating);
+        editTextComment = findViewById(R.id.editTextComment);
+        cvComment = findViewById(R.id.cvComment);
 
         final OrderUtilities orderUtilities = new OrderUtilities();
         final int orderId = intent.getIntExtra(ConstainApp.JS_ORDERID, 0);
@@ -105,7 +111,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
         }
 
         SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
-        String orderDate = dateformat.format(order.getDateOrder());
+        final String orderDate = dateformat.format(order.getDateOrder());
         txtOrderDateTime.setText(orderDate);
 
         txtConfirmCode.setText(order.getConfirmationCode());
@@ -129,9 +135,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
         Store store = storeUtilities.getStoreById(order.getStoreId());
 
         storeName.setText(store.getStoreName());
-        storeAddress.setText(store.getAddress() + ", " + store.getDistrict() + ", " +
-                store.getWard()
-                + ", " + store.getCity() + ", " + store.getCountry());
+        storeAddress.setText(store.getAddress());
 
         //Order created, then delete shopping cart
         String storeName = intent.getStringExtra(ConstainApp.JS_STORENAME);
@@ -141,15 +145,17 @@ public class OrderHistoryActivity extends AppCompatActivity {
             dbManager.deleteCart(cartList.get(a));
         }
 
-        //Rating bar
+        //Submit Feedback
+
         if(order.getRatingPoint() == 0){
             btnSubmitRating.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v)
                 {
-                    orderUtilities.updateRatingBar(orderId, ratingBar.getRating());
+                    orderUtilities.submitFeedback(orderId, ratingBar.getRating(), editTextComment.getText().toString());
                     ratingBar.setEnabled(false);
                     btnSubmitRating.setVisibility (View.INVISIBLE);
+                    cvComment.setVisibility(View.INVISIBLE);
                     txtRating.setText(R.string.msg_thanksrating);
                 }
             });
@@ -157,7 +163,8 @@ public class OrderHistoryActivity extends AppCompatActivity {
         else {
             ratingBar.setRating(order.getRatingPoint());
             ratingBar.setEnabled(false);
-            btnSubmitRating.setVisibility (View.INVISIBLE);
+            btnSubmitRating.setVisibility (View.GONE);
+            cvComment.setVisibility(View.GONE);
             txtRating.setText(R.string.msg_thanksrating);
         }
 

@@ -5,6 +5,7 @@
     <string name="ms_InputPassword" translatable="false">Nhập mật khẩu</string>
     <string name="ms_HintUsername" translatable="false">Tên đăng nhập</string>
     <string name="ms_HintPassword" translatable="false">Mật khẩu</string>
+    <string name="msg_change_password" translatable="false">Thay đổi mật khẩu</string>
     <string name="home_page" translatable="false">Trang chủ</string>
     <string name="category_page" translatable="false">Danh mục</string>
     <string name="account_page" translatable="false">Tài khoản</string>
@@ -27,6 +28,7 @@
     <string name="msg_logout" translatable="false">Đăng xuất</string>
     <string name="msg_expired_date" translatable="false">Kết thúc trong</string>
     <string name="msg_add_to_add" translatable="false">Thêm vào giỏ</string>
+    <string name="msg_end_sell" translatable="false">Kết thúc bán</string>
     <string name="msg_provided_by_store" translatable="false">Cung cấp bởi  </string>
     <string name="msg_description" translatable="false">Mô tả sản phẩm</string>
     <string name="msg_product_info_detail" translatable="false">Thông tin chia tiết</string>
@@ -42,6 +44,14 @@
     <string name="msg_login_fail" translatable="false">User</string>
     <string name="msg_still_not_rating" translatable="false">Chưa có đánh giá</string>
     <string name="msg_warehouse" translatable="false">Kho: </string>
+    <string name="msg_saw_recent" translatable="false">Đã xem gần đây</string>
+    <string name="msg_found" translatable="false">Đã tìm</string>
+    <string name="msg_direct" translatable="false">Chỉ đường</string>
+    <string name="msg_phone" translatable="false">Số điện thoại</string>
+    <string name="msg_yet_data" translatable="false">Chưa có dữ liệu</string>
+    <string name="msg_change_avatar" translatable="false">Chạm để thay đổi</string>
+    <string name="msg_gender" translatable="false">Giới tính</string>
+    <string name="msg_email" translatable="false">Email</string>
 
 
     <string name="btn_delcart" translatable="false">Xóa</string>
@@ -51,6 +61,7 @@
     <string name="question_rating" translatable="false">Bạn hài lòng với đơn hàng này chứ?</string>
     <string name="btn_submitrating" translatable="false">Gửi Phản Hồi</string>
     <string name="msg_thanksrating" translatable="false">Xin cảm ơn phản hồi của bạn!</string>
+    <string name="btn_contshopping" translatable="false">Tiếp Tục Mua Sắm</string>
 
     <string name="StatusSouldOut" translatable="false">Bán hết</string>
     <string name="StatusNearlySouldOut" translatable="false">Sắp bán hết</string>
@@ -70,8 +81,6 @@
     <string name="input_last_name" translatable="false">Nhập họ</string>
     <string name="msg_first_name" translatable="false">Tên</string>
     <string name="input_first_name" translatable="false">Nhập tên</string>
-
-
 
 
 </resources>

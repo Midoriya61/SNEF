@@ -37,6 +37,9 @@ public class Order {
     @SerializedName("storeName")
     @Expose
     private String storeName;
+    @SerializedName("comment")
+    @Expose
+    private String comment;
 
     public Order() {
     }
@@ -119,6 +122,14 @@ public class Order {
 
     public void setStoreName(String storeName) {
         this.storeName = storeName;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
 }

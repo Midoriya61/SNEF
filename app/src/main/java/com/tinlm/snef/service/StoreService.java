@@ -11,8 +11,8 @@ import retrofit2.http.Path;
 
 public interface StoreService {
 
-    @GET(ConstainServer.StoreURL)
-    Call<List<Store>> getListStoreArround();
+    @GET(ConstainServer.StoreURL + "{latitude}/" + "{longitude}")
+    Call<List<Store>> getListStoreArround(@Path("latitude") double latitude, @Path("longitude") double longitude );
 
     @GET(ConstainServer.StoreURL + ConstainServer.GetStoreById + "{storeId}")
     Call<List<Store>> getStoreById(@Path("storeId") int storeId);

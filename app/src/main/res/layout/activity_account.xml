@@ -55,7 +55,8 @@
                     android:textSize="16dp"
                     android:text="Sửa Profile"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:onClick="clickToModifyAccount"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -102,8 +103,7 @@
                 android:layout_marginLeft="10dp"
                 android:textSize="16dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="clickToShowHistoryOrder"/>
+                android:layout_height="wrap_content"></TextView>
         </LinearLayout>
 
         <LinearLayout

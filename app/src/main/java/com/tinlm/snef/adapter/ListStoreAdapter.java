@@ -62,9 +62,7 @@ public class ListStoreAdapter extends RecyclerView.Adapter<ListStoreAdapter.List
         }else
             openHour = currentStore.getOpenHour() + " - " + currentStore.getCloseHour();
 
-        listStoreViewHolder.storeAddress.setText(currentStore.getAddress() + ", " + currentStore.getDistrict() + ", " +
-                currentStore.getWard()
-                + ", " + currentStore.getCity() + ", " + currentStore.getCountry());
+        listStoreViewHolder.storeAddress.setText(currentStore.getAddress());
 
         WindowManager wm = (WindowManager)mContext.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
@@ -86,12 +84,12 @@ public class ListStoreAdapter extends RecyclerView.Adapter<ListStoreAdapter.List
                 Intent intent = new Intent(mContext, StoreActivity.class);
                 intent.putExtra(ConstainApp.JS_STORENAME, currentStore.getStoreName());
                 intent.putExtra(ConstainApp.STOREAVATAR, currentStore.getAvatar());
-                String address = currentStore.getAddress() + ", " + currentStore.getDistrict() + ", " +
-                        currentStore.getWard() + ", " + currentStore.getCity() + ", " + currentStore.getCountry();
+                String address = currentStore.getAddress();
                 intent.putExtra(ConstainApp.ADDRESS, address);
                 intent.putExtra(ConstainApp.RATINGPOINT, currentStore.getRatingPoint());
                 intent.putExtra(ConstainApp.STOREID, currentStore.getStoreId());
                 intent.putExtra(ConstainApp.OPENHOUR, finalOpenHour);
+                intent.putExtra(ConstainApp.STOREPHONE, currentStore.getPhone());
                 mContext.startActivity(intent);
             }
         });

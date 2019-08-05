@@ -17,18 +17,14 @@ public class StoreUtilities {
     private static final String storeId = "storeId";
     private static final String accountId = "accountId";
     private static final String storeName = "storeName";
-    private static final String locationId = "locationId";
     private static final String ratingPoint = "ratingPoint";
     private static final String avatar = "avatar";
     private static final String openHour = "openHour";
     private static final String closeHour = "closeHour";
     private static final String address = "address";
-    private static final String district = "district";
-    private static final String ward = "ward";
-    private static final String city = "city";
-    private static final String country = "country";
     private static final String latitude = "latitude";
     private static final String longitude = "longitude";
+    private static final String phone = "phone";
 
     // 6/18/2019 TinLM Create getListStoreArround
     public List<Store> getListStoreArround() {
@@ -54,9 +50,6 @@ public class StoreUtilities {
                 if(jsonObj.has(storeName)){
                     store.setStoreName(jsonObj.getString(storeName));
                 }
-                if(jsonObj.has(locationId)){
-                    store.setLocationId(jsonObj.getInt(locationId));
-                }
                 if(jsonObj.has(openHour)){
                     store.setOpenHour(jsonObj.getString(openHour));
                 }
@@ -72,23 +65,14 @@ public class StoreUtilities {
                 if(jsonObj.has(address)){
                     store.setAddress(jsonObj.getString(address));
                 }
-                if(jsonObj.has(district)){
-                    store.setDistrict(jsonObj.getString(district));
-                }
-                if(jsonObj.has(ward)){
-                    store.setWard(jsonObj.getString(ward));
-                }
-                if(jsonObj.has(city)){
-                    store.setCity(jsonObj.getString(city));
-                }
-                if(jsonObj.has(country)){
-                    store.setCountry(jsonObj.getString(country));
-                }
                 if(jsonObj.has(latitude)){
                     store.setLatitude(jsonObj.getDouble(latitude));
                 }
                 if(jsonObj.has(longitude)){
                     store.setLongitude(jsonObj.getDouble(longitude));
+                }
+                if(jsonObj.getString(phone) != null){
+                    store.setPhone(jsonObj.getString(phone));
                 }
 
                 result.add(store);
@@ -116,9 +100,6 @@ public class StoreUtilities {
             if(jsonObj.has(storeName)){
                 store.setStoreName(jsonObj.getString(storeName));
             }
-            if(jsonObj.has(locationId)){
-                store.setLocationId(jsonObj.getInt(locationId));
-            }
             if(jsonObj.has(openHour)){
                 store.setOpenHour(jsonObj.getString(openHour));
             }
@@ -134,25 +115,15 @@ public class StoreUtilities {
             if(jsonObj.has(address)){
                 store.setAddress(jsonObj.getString(address));
             }
-            if(jsonObj.has(district)){
-                store.setDistrict(jsonObj.getString(district));
-            }
-            if(jsonObj.has(ward)){
-                store.setWard(jsonObj.getString(ward));
-            }
-            if(jsonObj.has(city)){
-                store.setCity(jsonObj.getString(city));
-            }
-            if(jsonObj.has(country)){
-                store.setCountry(jsonObj.getString(country));
-            }
             if(jsonObj.has(latitude)){
                 store.setLatitude(jsonObj.getDouble(latitude));
             }
             if(jsonObj.has(longitude)){
                 store.setLongitude(jsonObj.getDouble(longitude));
             }
-
+            if(jsonObj.has(phone)){
+                store.setPhone(jsonObj.getString(phone));
+            }
             store.setStoreId(storeId);
 
         }catch (Exception e){

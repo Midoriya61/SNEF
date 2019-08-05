@@ -25,19 +25,21 @@ import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.database.DBManager;
 import com.tinlm.snef.model.Cart;
 import com.tinlm.snef.model.Order;
+import com.tinlm.snef.model.Store;
 import com.tinlm.snef.utilities.OrderDetailUtilities;
 import com.tinlm.snef.utilities.OrderUtilities;
 import com.tinlm.snef.utilities.StoreProductImageUtilities;
+import com.tinlm.snef.utilities.StoreUtilities;
 
 
 public class PayPalActivity extends AppCompatActivity {
     TextView m_response;
     Intent intent;
-    Intent intent2;
     int totalAmount = 0;
     List<Cart> cartList;
     List<Order> orderList;
     Order order;
+    Context mContext;
 
     PayPalConfiguration m_configuration;
     //the id is in the link to the paypal account, we have to create an app and get its id
@@ -48,7 +50,7 @@ public class PayPalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paypal);
-
+        this.onBackPressed();
 
         m_response = findViewById(R.id.response);
 
@@ -80,11 +82,6 @@ public class PayPalActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onResume() {  // After a pause OR at startup
-        super.onResume();
-    }
-
     void pay(View view) {
 
     }
@@ -103,9 +100,14 @@ public class PayPalActivity extends AppCompatActivity {
 
                     if (state.equals("approved")) //if the payment worked, the state equals approved
                     {
+//                        super.onBackPressed();
+
+                        DBManager dbManager = new DBManager(PayPalActivity.this);
+                        cartList = dbManager.getAllCartByStoreName(intent.getStringExtra(ConstainApp.JS_STORENAME));
+
                         //Get current customer ID
                         SharedPreferences sharedPreferences = getSharedPreferences(ConstainApp.login_Prefer, MODE_PRIVATE);
-                        int accountId = sharedPreferences.getInt(ConstainApp.CUSTOMERID, 0);
+                        int accountId = sharedPreferences.getInt(ConstainApp.ACCOUNTID,0);
 
                         //Get random confirmation code
                         int min = 100000000;
@@ -113,13 +115,15 @@ public class PayPalActivity extends AppCompatActivity {
                         Random r = new Random();
                         String confirmationCode = String.valueOf(r.nextInt(max - min + 1) + min);
 
+                        //Get StoreId
+                        int storeId = cartList.get(0).getStoreId();
+
                         //Create a new order
                         OrderUtilities orderUtilities = new OrderUtilities();
-                        orderUtilities.insertNewOrder(confirmationCode, accountId);
-                        int lastOrderId = orderUtilities.getLastOrder().getOrderId();
+                        orderUtilities.insertNewOrder(confirmationCode, accountId, storeId);
+                        int lastOrderId = orderUtilities.getLastOrderId();
 
-                        DBManager dbManager = new DBManager(PayPalActivity.this);
-                        cartList = dbManager.getAllCartByStoreName(intent.getStringExtra(ConstainApp.JS_STORENAME));
+
 
                         //Insert order detail into the created order
                         OrderDetailUtilities orderDetailUtilities = new OrderDetailUtilities();
@@ -137,6 +141,7 @@ public class PayPalActivity extends AppCompatActivity {
                         intent.putExtra(ConstainApp.JS_ORDERID, lastOrderId);
                         intent.putExtra(ConstainApp.JS_STORENAME, cartList.get(0).getStoreName());
                         this.startActivity(intent);
+                        this.finish();
 
                     } else m_response.setText("Error in the payment.");
                 } else

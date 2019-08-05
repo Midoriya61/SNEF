@@ -2,7 +2,7 @@ package com.tinlm.snef.model;
 
 public class Customer {
 
-    private int customerId;
+    private int accountId;
     private String username;
     private String password;
     private String firstName;
@@ -11,16 +11,18 @@ public class Customer {
     private String email;
     private String avatar;
     private boolean isActive;
+    private int gender;
 
     public Customer() {
     }
 
-    public int getCustomerId() {
-        return customerId;
+
+    public int getAccountId() {
+        return accountId;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
     }
 
     public String getUsername() {
@@ -85,5 +87,13 @@ public class Customer {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
     }
 }

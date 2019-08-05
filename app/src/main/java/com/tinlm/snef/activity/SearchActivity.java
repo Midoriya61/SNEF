@@ -1,20 +1,21 @@
 package com.tinlm.snef.activity;
 
 import android.content.Intent;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.view.View;
 import android.widget.SearchView;
-import android.widget.SimpleAdapter;
 
 import com.tinlm.snef.R;
 import com.tinlm.snef.adapter.ProductNameAdapter;
+import com.tinlm.snef.adapter.TabViewPagerAdapter;
 import com.tinlm.snef.constain.ConstainApp;
-import com.tinlm.snef.fragment.CategoriesHomeFragment;
+import com.tinlm.snef.database.DBManager;
 import com.tinlm.snef.model.Product;
 import com.tinlm.snef.service.ProductService;
 import com.tinlm.snef.utilities.ApiUtils;
@@ -32,6 +33,9 @@ public class SearchActivity extends AppCompatActivity {
     ProductService productService;
     List<Product> productList = new ArrayList<>();
     ProductNameAdapter productNameAdapter;
+    TabLayout tabLayout;
+
+    private ViewPager viewPager;
 
 
 
@@ -46,9 +50,14 @@ public class SearchActivity extends AppCompatActivity {
 //        ProductUtilities productUtilities = new ProductUtilities();
         searchProductBar = findViewById(R.id.searchProductBar);
         listNameProduct = findViewById(R.id.listNameProduct);
+        viewPager = findViewById(R.id.viewPager);
+        tabLayout = findViewById(R.id.tablayout);
+        TabViewPagerAdapter pageAdapter = new TabViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(pageAdapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        // get name of product
         productService = ApiUtils.getProductService();
-
-
         productService.getListNameProduct().enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
@@ -68,6 +77,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+        // search product name
         productService.getListNameProduct().enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
@@ -76,6 +86,8 @@ public class SearchActivity extends AppCompatActivity {
                 searchProductBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                     @Override
                     public boolean onQueryTextSubmit(String query) {
+                        DBManager dbManager = new DBManager(SearchActivity.this);
+                        dbManager.addTableFound(query);
                         Intent intent = new Intent(SearchActivity.this, SearchProductByNameActivity.class);
                         intent.putExtra(ConstainApp.SEARCHPRODUCTNAME, query);
                         startActivity(intent);
@@ -85,7 +97,15 @@ public class SearchActivity extends AppCompatActivity {
                     @Override
                     public boolean onQueryTextChange(String newText) {
                         List<Product> products = new ArrayList<>();
-
+                        if( newText.length() > 0 ) {
+                            listNameProduct.setVisibility(View.VISIBLE);
+                            tabLayout.setVisibility(View.INVISIBLE);
+                            viewPager.setVisibility(View.INVISIBLE);
+                        } else {
+                            listNameProduct.setVisibility(View.INVISIBLE);
+                            tabLayout.setVisibility(View.VISIBLE);
+                            viewPager.setVisibility(View.VISIBLE);
+                        }
                         for (Product product: productList
                         ) {
                             if (product.getProductName().toLowerCase().contains(newText)) {
@@ -104,6 +124,10 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+
+
+
     }
+
 
 }
