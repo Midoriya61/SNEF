@@ -14,6 +14,7 @@
         android:orientation="horizontal"
         android:weightSum="1"
         >
+
         <android.support.v7.widget.SearchView
             android:id="@+id/searchBar"
             android:background="@color/colorMain"
@@ -28,11 +29,19 @@
             android:src="@drawable/filter"
             android:layout_weight="0.15"/>
     </LinearLayout>
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_below="@id/topBar"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:prompt="@string/msg_spinner_title"/>
     <LinearLayout
         android:id="@+id/centerHome"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/topBar"
+        android:layout_below="@+id/spinner"
         android:layout_alignBottom="@+id/bottomNavigationView"
         android:layout_marginBottom="64dp"
         android:background="@color/grayLight"
@@ -49,6 +58,28 @@
                 ></android.support.v7.widget.RecyclerView>
         </android.support.v4.widget.NestedScrollView>
     </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/notifiYetData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="invisible"
+        >
+        <ImageView
+            android:id="@+id/iconSmile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/smile"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:textSize="20dp"
+            android:layout_below="@+id/iconSmile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            android:text="@string/msg_yet_data"/>
+    </RelativeLayout>
     <LinearLayout
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"

@@ -15,11 +15,13 @@ import com.squareup.picasso.Picasso;
 import com.tinlm.snef.R;
 import com.tinlm.snef.constain.ConstainApp;
 
+/*
+ *
+  * */
 public class AccountActivity extends AppCompatActivity {
     private ImageView imgAvatar;
     private TextView txtAccountName,txtEditProfile,tvOrderHistory;
     private SharedPreferences sharedPreferences;
-
 
 
     BottomNavigationView bottomNavigation;

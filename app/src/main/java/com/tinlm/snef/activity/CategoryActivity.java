@@ -13,6 +13,7 @@ import android.view.MenuItem;
 
 import com.tinlm.snef.R;
 import com.tinlm.snef.adapter.CategoriesAdapter;
+import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.model.Categories;
 import com.tinlm.snef.utilities.CategoriesUtilities;
 
@@ -75,7 +76,7 @@ public class CategoryActivity extends AppCompatActivity {
         List<Categories> categoryList = new ArrayList<>();
         CategoriesUtilities categoriesUtilities = new CategoriesUtilities();
         categoryList = categoriesUtilities.getAllCategories();
-        CategoriesAdapter categoriesAdapter = new CategoriesAdapter(this, categoryList);
+        CategoriesAdapter categoriesAdapter = new CategoriesAdapter(this, categoryList, ConstainApp.CategoryActivity);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,3);
         rcListCategories.setItemAnimator(new DefaultItemAnimator());
         rcListCategories.setLayoutManager(mLayoutManager);

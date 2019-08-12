@@ -6,45 +6,34 @@ import com.tinlm.snef.constain.ConstainApp;
 
 public class Store implements Comparable<Store>{
     @SerializedName("storeId")
-    @Expose
     private int storeId;
     @SerializedName("accountId")
-    @Expose
     private int accountId;
     @SerializedName("storeName")
-    @Expose
     private String storeName;
     @SerializedName("locationId")
-    @Expose
     private int locationId;
     @SerializedName("ratingPoint")
-    @Expose
     private double ratingPoint;
     @SerializedName("avatar")
-    @Expose
     private String avatar;
     @SerializedName("openHour")
-    @Expose
     private String openHour;
     @SerializedName("closeHour")
-    @Expose
     private String closeHour;
     @SerializedName("address")
-    @Expose
     private String address;
     @SerializedName("latitude")
-    @Expose
     private double latitude;
     @SerializedName("longitude")
-    @Expose
     private double longitude;
-
     @SerializedName("phone")
-    @Expose
     private String phone;
 
     private String accountName;
     // variable for layout
+
+    @SerializedName("distance")
     private double distance;
 
 

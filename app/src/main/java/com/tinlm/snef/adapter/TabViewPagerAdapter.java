@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.tinlm.snef.fragment.FilterCategoriesFragment;
 import com.tinlm.snef.fragment.FoundFragment;
 import com.tinlm.snef.fragment.SawFragment;
 
@@ -23,7 +24,8 @@ public class TabViewPagerAdapter extends FragmentPagerAdapter {
                 return new SawFragment();
             case 1:
                 return new FoundFragment();
-
+            case 2:
+                return new FilterCategoriesFragment();
             default:
                 return null;
         }

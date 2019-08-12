@@ -19,6 +19,7 @@ import com.tinlm.snef.R;
 import com.tinlm.snef.activity.StoreActivity;
 import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.model.FlashSaleProduct;
+import com.tinlm.snef.model.Product;
 import com.tinlm.snef.model.Store;
 import com.tinlm.snef.utilities.FlashSaleProductUtilities;
 import com.tinlm.snef.utilities.LocationUtilities;
@@ -118,5 +119,10 @@ public class ListStoreAdapter extends RecyclerView.Adapter<ListStoreAdapter.List
             viewStore = itemView.findViewById(R.id.viewStore);
             ratingPoint = itemView.findViewById(R.id.ratingPoint);
         }
+    }
+    public void updateReceiptsList(List<Store> newlist) {
+        listStore.clear();
+        listStore.addAll(newlist);
+        this.notifyDataSetChanged();
     }
 }

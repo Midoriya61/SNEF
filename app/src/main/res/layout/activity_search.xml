@@ -52,6 +52,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/msg_found" />
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/tabCategories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/category_page"/>
+
     </android.support.design.widget.TabLayout>
 
     <android.support.v4.view.ViewPager
@@ -60,11 +67,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/listNameProduct"
+        android:id="@+id/rcCategoriesSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/topBar"
+        android:visibility="invisible"
+        android:layout_marginTop="5dp"
+        >
+
+    </android.support.v7.widget.RecyclerView>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/listNameProduct"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rcCategoriesSearch"
         android:visibility="invisible"
         android:background="@color/grayLight"
         android:layout_marginTop="5dp"

@@ -38,7 +38,8 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
     private Runnable runnable;
     private Handler handler = new Handler();
     private String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
-    public FlashSaleProductAdapter(Context mContext, List<FlashSaleProduct> flashSaleProductList,                                  String sreenName) {
+    public FlashSaleProductAdapter(Context mContext, List<FlashSaleProduct> flashSaleProductList,
+                                   String sreenName) {
         this.mContext = mContext;
         this.flashSaleProductList = flashSaleProductList;
         this.sreenName = sreenName;
@@ -182,5 +183,11 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
             barSale = itemView.findViewById(R.id.barSale);
             flashSaleProductLayout = itemView.findViewById(R.id.flashSaleProductLayout);
         }
+    }
+
+    public void updateSortList() {
+//        flashSaleProductList.clear();
+//        flashSaleProductList.addAll(newlist);
+        this.notifyDataSetChanged();
     }
 }

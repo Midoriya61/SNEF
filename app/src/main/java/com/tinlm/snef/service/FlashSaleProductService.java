@@ -22,9 +22,12 @@ public interface FlashSaleProductService {
     @GET(ConstainServer.FlashSaleProductURL + ConstainServer.GetFSPByStoreId + "{storeId}")
     Call<List<FlashSaleProduct>> getFSPByStoreId(@Path("storeId") int storeId);
 
-    @GET(ConstainServer.FlashSaleProductURL + ConstainServer.GetFSPByName + "{searchName}")
-    Call<List<FlashSaleProduct>> getFSPByName(@Path("searchName") String searchName);
+    @GET(ConstainServer.FlashSaleProductURL + ConstainServer.GetFSPByName + "{searchName}" + "/{searchCategories}")
+    Call<List<FlashSaleProduct>> getFSPByName(@Path("searchName") String searchName, @Path("searchCategories") String searchCategories);
 
     @GET(ConstainServer.FlashSaleProductURL + ConstainServer.GetFSPById + "{flashSaleProductId}")
     Call<FlashSaleProduct> getFSPById(@Path("flashSaleProductId") int flashSaleProductId);
+
+    @GET(ConstainServer.FlashSaleProductURL + ConstainServer.GetRemaingQuantity + "{flashSaleProductId}")
+    Call<Integer> getRemaingQuantity(@Path("flashSaleProductId") int flashSaleProductId);
 }

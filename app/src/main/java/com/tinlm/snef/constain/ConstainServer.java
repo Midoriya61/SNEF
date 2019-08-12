@@ -24,10 +24,6 @@ public class ConstainServer {
     public static final String GetOneImage = "getOneImage/";
     public static final String GetImage = "getImage/";
 
-    // Store Product
-    public static final String StoreProductURL = "storeProduct/";
-    public static final String GetQuantityByStoreProductId = "getQuantityById/";
-    public static final String GetDesById = "getDesById/";
 
     // Order Detail
     public static final String OrderDetail = "orderDetail/";
@@ -39,6 +35,7 @@ public class ConstainServer {
     // Store
     public static final String StoreURL = "store/";
     public static final String GetStoreById = "getById/";
+    public static final String GetStoreByDistance = "getStoreByDistance/";
 
     // Customer
     public static final String CustomerURL = "customer/";

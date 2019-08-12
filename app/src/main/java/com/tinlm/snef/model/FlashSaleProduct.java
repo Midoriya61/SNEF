@@ -168,6 +168,7 @@ public class FlashSaleProduct implements Comparable<FlashSaleProduct> {
 
     @Override
     public int compareTo(FlashSaleProduct o) {
-        return this.endDate.compareTo(o.getEndDate());
+        return (int) (this.price - o.getPrice());
     }
+
 }

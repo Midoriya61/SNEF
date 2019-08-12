@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".fragment.SawFragment"
    >
-
     <RelativeLayout
         android:id="@+id/notifiYetData"
         android:layout_width="wrap_content"

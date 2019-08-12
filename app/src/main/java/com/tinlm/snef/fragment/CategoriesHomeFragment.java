@@ -15,6 +15,7 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.tinlm.snef.R;
 import com.tinlm.snef.activity.DashboardActivity;
 import com.tinlm.snef.adapter.CategoriesAdapter;
+import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.model.Categories;
 import com.tinlm.snef.service.CategoriesService;
 import com.tinlm.snef.utilities.ApiUtils;
@@ -48,7 +49,7 @@ public class CategoriesHomeFragment extends Fragment {
 //                CategoriesUtilities categoriesUtilities = new CategoriesUtilities();
 //                categoryList = categoriesUtilities.getAllCategories();
 
-                CategoriesAdapter categoriesAdapter = new CategoriesAdapter(CategoriesHomeFragment.this.getContext(), categoryList);
+                CategoriesAdapter categoriesAdapter = new CategoriesAdapter(CategoriesHomeFragment.this.getContext(), categoryList, ConstainApp.CategoriesHomeFragment);
 
                 final RecyclerView.LayoutManager mLayoutManager
                         = new LinearLayoutManager(CategoriesHomeFragment.this.getContext(),

@@ -27,6 +27,14 @@ public class ConstainApp {
     public static final String RATINGPOINT = "RATINGPOINT";
     public static final String GENDER = "GENDER";
 
+    // Sharepreference sort price
+    public static final String SFSORTPRICE = "SORTPRICE";
+    public static final String IMGPRICE = "IMGPRICE";
+
+
+    // Categories filter preference
+    public static final String CATEGORIESPREFER = "SFCATEGORIESPREFER";
+    public static final String CATEGORIESID = "CATEGORIESID";
 
     // Intent
     public static final String FLASHSALEPRODUCTID = "FLASHSALEPRODUCTID";
@@ -88,6 +96,11 @@ public class ConstainApp {
     public static final String SCStoreActivity = "StoreActivity";
     public static final String SCProductByCategoryActivity = "ProductByCategoryActivity";
     public static final String SCSearchProductByNameActivity = "SearchProductByNameActivity";
+    public static final String CategoryActivity = "CategoryActivity";
     public static final String SawFragment = "SawFragment";
+    public static final String DashBoardActivity = "DashBoardActivity";
+    public static final String FilterDialogFragment = "FilterDialogFragment";
+    public static final String CategoriesHomeFragment = "CategoriesHomeFragment";
+    public static final String FilterCategoriesFragment = "FilterCategoriesFragment";
 
 }

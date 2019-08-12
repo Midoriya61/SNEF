@@ -5,11 +5,10 @@ import com.tinlm.snef.service.CategoriesService;
 import com.tinlm.snef.service.FlashSaleProductService;
 import com.tinlm.snef.service.ProductService;
 import com.tinlm.snef.service.StoreProductImageService;
-import com.tinlm.snef.service.StoreProductService;
 import com.tinlm.snef.service.StoreService;
 
 public class ApiUtils {
-
+    private static StoreService storeService = null;
     // Categories
     public static CategoriesService getCategoriesService() {
         return RetrofitClient.getClient(ConstainServer.BaseURL).create(CategoriesService.class);
@@ -34,14 +33,11 @@ public class ApiUtils {
 
     // Store
     public static StoreService getStoreService() {
-        StoreService storeService = RetrofitClient.getClient(ConstainServer.BaseURL).create(StoreService.class);
+        if (storeService == null) {
+            storeService = RetrofitClient.getClient(ConstainServer.BaseURL).create(StoreService.class);
+        }
+
         return storeService;
     }
-
-    // Store Product
-    public static StoreProductService getStoreProductService() {
-        return RetrofitClient.getClient(ConstainServer.BaseURL).create(StoreProductService.class);
-    }
-
 
 }

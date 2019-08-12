@@ -6,6 +6,7 @@
     <string name="ms_ConfirmPassword" translatable="false">Nhập lại mật khẩu</string>
     <string name="ms_HintUsername" translatable="false">Tên đăng nhập</string>
     <string name="ms_HintPassword" translatable="false">Mật khẩu</string>
+    <string name="ms_HintConfirmPassword" translatable="false">Nhập lại mật khẩu</string>
     <string name="msg_change_password" translatable="false">Thay đổi mật khẩu</string>
     <string name="home_page" translatable="false">Trang chủ</string>
     <string name="category_page" translatable="false">Danh mục</string>
@@ -56,6 +57,15 @@
     <string name="msg_gender" translatable="false">Giới tính</string>
     <string name="msg_email" translatable="false">Email</string>
     <string name="msg_product_sould_out" translatable="false">Sản phẩm đã bán hết</string>
+    <string name="msg_discount" translatable="false">Phần trăm giảm giá</string>
+    <string name="msg_min_discount" translatable="false">Thấp nhất</string>
+    <string name="msg_max_discount" translatable="false">Cao nhất</string>
+    <string name="msg_price" translatable="false">Giá</string>
+    <string name="msg_filter_tool" translatable="false">Bộ lọc</string>
+    <string name="msg_filter_ok" translatable="false">Áp dụng</string>
+    <string name="msg_filter_cancel" translatable="false">Xóa bộ lọc</string>
+    <string name="msg_spinner_title" translatable="false">Khoảng cách (Km)</string>
+    <string name="msg_register" translatable="false">Đăng ký</string>
 
 
     <string name="btn_delcart" translatable="false">Xóa</string>
