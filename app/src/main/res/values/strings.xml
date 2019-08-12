@@ -75,6 +75,7 @@
     <string name="question_rating" translatable="false">Bạn hài lòng với đơn hàng này chứ?</string>
     <string name="btn_submitrating" translatable="false">Gửi Phản Hồi</string>
     <string name="msg_thanksrating" translatable="false">Xin cảm ơn phản hồi của bạn!</string>
+    <string name="btn_contshopping" translatable="false">TIẾP TỤC MUA HÀNG</string>
 
     <string name="StatusSouldOut" translatable="false">Bán hết</string>
     <string name="StatusNearlySouldOut" translatable="false">Sắp bán hết</string>
