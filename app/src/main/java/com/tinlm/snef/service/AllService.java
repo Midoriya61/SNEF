@@ -11,8 +11,7 @@ public class AllService {
     private static CategoriesService categoriesService;;
     private static FlashSaleProductService flashSaleProductService;;
     private static ProductService productService;;
-    private static StoreProductImageService storeProductImageService;;
-    private static StoreProductService storeProductService;;
+    private static StoreProductImageService storeProductImageService;
 
     public static StoreService getStoreService() {
 
@@ -52,14 +51,6 @@ public class AllService {
             storeProductImageService = ApiUtils.getStoreProductImageService();
         }
         return storeProductImageService;
-
-    }
-
-    public static StoreProductService getStoreProductService() {
-        if( storeProductService == null ) {
-            storeProductService = ApiUtils.getStoreProductService();
-        }
-        return storeProductService;
 
     }
 }

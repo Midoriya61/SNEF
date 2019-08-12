@@ -10,16 +10,16 @@
     <LinearLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:background="@color/redApp"
         android:orientation="horizontal"
-        android:padding="10dp"
+        android:padding="5dp"
         android:weightSum="1">
 
         <android.support.v7.widget.CardView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.7"
+            android:layout_height="30dp"
+            android:layout_weight="0.8"
             android:background="@color/colorMain"
             android:onClick="clickToSearchProduct">
 
@@ -27,11 +27,10 @@
                 android:id="@+id/txtRFind"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/find"
-                android:drawablePadding="10dp"
-                android:padding="10dp"
-                android:text="@string/msg_find"
-                android:textSize="20dp" />
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:paddingLeft="15dp"
+                android:text="@string/msg_find"/>
         </android.support.v7.widget.CardView>
         <!--<android.support.v7.widget.SearchView-->
         <!--android:id="@+id/searchBar"-->
@@ -89,7 +88,7 @@
                     android:layout_margin="3dp"
                     android:textColor="@color/colorMain"
                     android:textStyle="bold"
-                    android:textSize="14dp"/>
+                    android:textSize="8dp"/>
 
             </android.support.v7.widget.CardView>
 
@@ -97,6 +96,12 @@
 
 
         </FrameLayout>
+        <!--<ImageView-->
+            <!--android:src="@drawable/filter"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="0.15"-->
+            <!--android:onClick="clickToFilter"/>-->
 
     </LinearLayout>
 
@@ -106,7 +111,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/topBar"
         android:layout_alignBottom="@+id/bottomNavigationView"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="40dp"
         android:background="@color/grayLight"
         android:orientation="vertical">
 
@@ -270,14 +275,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        >
 
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/bottomNavigation"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="@drawable/border_top"
+
             app:itemIconTint="@color/colorMain"
             app:itemTextColor="@color/colorMain"
             app:menu="@menu/bottom_nav_menu"

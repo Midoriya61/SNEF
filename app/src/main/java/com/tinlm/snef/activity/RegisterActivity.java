@@ -58,6 +58,11 @@ public class RegisterActivity extends AppCompatActivity {
         if(TextUtils.isEmpty(txtRegisterPassword.getText())){
             txtRegisterPassword.setError("Bạn cần nhập mật khẩu");
             checked =false;
+        } else {
+            if( txtRegisterPassword.getText().length() < 6 || txtRegisterPassword.getText().length() > 30 ) {
+                txtRegisterPassword.setError("Mật khẩu phải có độ dài từ 6 đến 30 ký tự");
+                checked =false;
+            }
         }
         if(TextUtils.isEmpty(txtConfirmPassword.getText())){
             txtConfirmPassword.setError("Bạn cần nhập lại mật khẩu");

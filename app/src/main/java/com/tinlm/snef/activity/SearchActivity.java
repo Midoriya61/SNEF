@@ -1,6 +1,7 @@
 package com.tinlm.snef.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -47,6 +48,17 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void init() {
+        // get filter categies for search
+
+
+        SharedPreferences sharedPreferences = getSharedPreferences(ConstainApp.CATEGORIESPREFER, MODE_PRIVATE);
+        String categories = sharedPreferences.getString(ConstainApp.CATEGORIESID, null);
+        if (categories != null) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(ConstainApp.CATEGORIESID, null);
+            editor.apply();
+        }
+
         // ProductUtilities productUtilities = new ProductUtilities();
         searchProductBar = findViewById(R.id.searchProductBar);
         listNameProduct = findViewById(R.id.listNameProduct);
@@ -110,7 +122,6 @@ public class SearchActivity extends AppCompatActivity {
                         startActivity(intent);
                         return true;
                     }
-
                     @Override
                     public boolean onQueryTextChange(String newText) {
                         List<Product> products = new ArrayList<>();

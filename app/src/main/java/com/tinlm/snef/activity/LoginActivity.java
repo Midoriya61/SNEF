@@ -91,7 +91,6 @@ public class LoginActivity extends AppCompatActivity {
         String username;
         SharedPreferences sharedPreferences = getSharedPreferences(ConstainApp.login_Prefer, MODE_PRIVATE);
         username = sharedPreferences.getString(ConstainApp.USERNAME,null);
-
         return username;
     }
 

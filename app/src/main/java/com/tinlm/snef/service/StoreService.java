@@ -1,5 +1,6 @@
 package com.tinlm.snef.service;
 
+import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.constain.ConstainServer;
 import com.tinlm.snef.model.Store;
 
@@ -14,6 +15,9 @@ public interface StoreService {
     @GET(ConstainServer.StoreURL + "{latitude}/" + "{longitude}")
     Call<List<Store>> getListStoreArround(@Path("latitude") double latitude, @Path("longitude") double longitude );
 
-    @GET(ConstainServer.StoreURL + ConstainServer.GetStoreById + "{storeId}")
-    Call<List<Store>> getStoreById(@Path("storeId") int storeId);
+    @GET(ConstainServer.StoreURL + ConstainServer.GetStoreByDistance + "{latitude}/" + "{longitude}/" + "{distance}")
+    Call<List<Store>> getStoreByDistance(@Path("latitude") double latitude, @Path("longitude") double longitude,@Path("distance") double distance );
+
+    @GET(ConstainServer.StoreURL + ConstainServer.GetStoreById  + "{storeId}")
+    Call<Store> getStoreById(@Path("storeId") int storeId);
 }

@@ -1,19 +1,26 @@
 package com.tinlm.snef.activity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.tinlm.snef.R;
 import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.database.DBManager;
+import com.tinlm.snef.fragment.FilterDialogFragment;
 import com.tinlm.snef.model.Cart;
 
 import java.util.List;
@@ -48,6 +55,21 @@ public class DashboardActivity extends AppCompatActivity {
         txtCartNumber = findViewById(R.id.txtCartNumber);
         txtCartNumber.setText(String.valueOf(getCartNumber()));
 
+        txtRFind.getViewTreeObserver()
+                .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        Drawable img = getResources().getDrawable(
+                                R.drawable.find);
+                        img.setBounds(-10, 0,
+                                (img.getIntrinsicWidth() * txtRFind.getMeasuredHeight() / img.getIntrinsicHeight()),
+                                txtRFind.getMeasuredHeight());
+                        txtRFind.setCompoundDrawables(img, null, null, null);
+                        txtRFind.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                });
+
+
         navigateDashboard();
     }
 
@@ -69,13 +91,13 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void navigateDashboard() {
         bottomNavigation = findViewById(R.id.bottomNavigation);
-
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 Intent intent;
                 switch (menuItem.getItemId()) {
                     case R.id.action_home:
+
                         break;
 //                    case R.id.action_category:
 //                        intent = new Intent(DashboardActivity.this, CategoryActivity.class);
@@ -124,5 +146,16 @@ public class DashboardActivity extends AppCompatActivity {
     public void clickToShoppingCart(View view) {
         Intent intent = new Intent(this, OrderActivity.class);
         startActivity(intent);
+    }
+
+
+    public void clickToFilter(View view) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FilterDialogFragment newFragment = new FilterDialogFragment();
+       newFragment.show(fragmentManager, "filter_search");
+
+
+
+
     }
 }
