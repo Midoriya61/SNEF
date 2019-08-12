@@ -3,6 +3,7 @@ package com.tinlm.snef.model;
 public class Cart {
 
     private String storeName;
+    private int storeId;
     public int quantity;
     private float price;
     private String productName;
@@ -78,4 +79,13 @@ public class Cart {
     public void setDiscount(int discount) {
         this.discount = discount;
     }
+
+    public int getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(int storeId) {
+        this.storeId = storeId;
+    }
+
 }

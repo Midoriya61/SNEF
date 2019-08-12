@@ -35,19 +35,11 @@ public class DBManager extends SQLiteOpenHelper {
                 ConstainApp.JS_IMAGEPRODUCT + " TEXT, " +
                 ConstainApp.JS_PRODUCTNAME + " TEXT, " +
                 ConstainApp.JS_STORENAME + " TEXT, " +
+                ConstainApp.STOREID + " integer, " +
                 ConstainApp.JS_PRICE + " float, " +
                 ConstainApp.JS_DISCOUNT + " integer, " +
                 ConstainApp.JS_QUANTITY + " integer) ";
         db.execSQL(sqlQuery);
-
-        String sqlQueryOrder = "CREATE TABLE " + ConstainApp.JS_ORDERTABLE + " ( " +
-                ConstainApp.JS_ORDERID + " integer primary key, " +
-                ConstainApp.JS_DATEORDER + " TEXT, " +
-                ConstainApp.JS_CONFIMRCODE + " TEXT, " +
-                ConstainApp.JS_ORDERSTATUS + " integer, " +
-                ConstainApp.JS_ORDERRATING + " float, " +
-                ConstainApp.CUSTOMERID + " integer) ";
-        db.execSQL(sqlQueryOrder);
 
         // TInLM
         sqlQuery = "CREATE TABLE " + ConstainApp.JS_SAWTABLE + " ( " +
@@ -75,6 +67,7 @@ public class DBManager extends SQLiteOpenHelper {
         values.put(ConstainApp.JS_IMAGEPRODUCT, cart.getImageProduct());
         values.put(ConstainApp.JS_PRODUCTNAME, cart.getProductName());
         values.put(ConstainApp.JS_STORENAME, cart.getStoreName());
+        values.put(ConstainApp.STOREID, cart.getStoreId());
         values.put(ConstainApp.JS_PRICE, cart.getPrice());
         values.put(ConstainApp.JS_DISCOUNT, cart.getDiscount());
         values.put(ConstainApp.JS_QUANTITY, 1);
@@ -123,6 +116,7 @@ public class DBManager extends SQLiteOpenHelper {
                 cart.setImageProduct(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_IMAGEPRODUCT)));
                 cart.setProductName(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_PRODUCTNAME)));
                 cart.setStoreName(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_STORENAME)));
+                cart.setStoreId(cursor.getInt(cursor.getColumnIndex(ConstainApp.STOREID)));
                 cart.setPrice(cursor.getFloat(cursor.getColumnIndex(ConstainApp.JS_PRICE)));
                 cart.setDiscount(cursor.getInt(cursor.getColumnIndex(ConstainApp.JS_DISCOUNT)));
                 cart.setQuantity(cursor.getInt(cursor.getColumnIndex(ConstainApp.JS_QUANTITY)));
@@ -206,7 +200,7 @@ public class DBManager extends SQLiteOpenHelper {
         Store store = null;
         // Select All Query
         String selectQuery = "SELECT * " +
-                " FROM " + ConstainApp.JS_CART + " WHERE " + ConstainApp.JS_STORENAME + "=" + storeName;
+                " FROM " + ConstainApp.JS_CART + " WHERE " + ConstainApp.JS_STORENAME + " = " + "'" + storeName + "'";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -236,6 +230,7 @@ public class DBManager extends SQLiteOpenHelper {
                 cart.setImageProduct(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_IMAGEPRODUCT)));
                 cart.setProductName(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_PRODUCTNAME)));
                 cart.setStoreName(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_STORENAME)));
+                cart.setStoreId(cursor.getInt(cursor.getColumnIndex(ConstainApp.STOREID)));
                 cart.setPrice(cursor.getFloat(cursor.getColumnIndex(ConstainApp.JS_PRICE)));
                 cart.setDiscount(cursor.getInt(cursor.getColumnIndex(ConstainApp.JS_DISCOUNT)));
                 cart.setQuantity(cursor.getInt(cursor.getColumnIndex(ConstainApp.JS_QUANTITY)));
@@ -245,73 +240,6 @@ public class DBManager extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return (cartList);
-    }
-
-    //Create a new a order
-    public void createOrder(Order order){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(ConstainApp.JS_ORDERID, order.getOrderId());
-        values.put(ConstainApp.JS_DATEORDER, order.getDateOrder().toString());
-        values.put(ConstainApp.JS_CONFIMRCODE, order.getConfirmationCode());
-        values.put(ConstainApp.JS_ORDERSTATUS, order.isStatus());
-        values.put(ConstainApp.JS_ORDERRATING, order.getRatingPoint());
-        values.put(ConstainApp.CUSTOMERID, order.getAccountId());
-
-        //Neu de null thi khi value bang null thi loi
-
-        db.insert(ConstainApp.JS_ORDERTABLE,null,values);
-        db.close();
-    }
-
-    public Order getOrderbyId(int orderId) {
-        Order order = null;
-        // Select All Query
-        String selectQuery = "SELECT * " +
-                " FROM " + ConstainApp.JS_ORDERTABLE + " WHERE " + ConstainApp.JS_ORDERID + "=" + orderId;
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        if (cursor.moveToFirst()) {
-            order = new Order();
-            order.setOrderId(cursor.getInt(cursor.getColumnIndex(ConstainApp.JS_ORDERID)));
-            order.setDateOrder(Date.valueOf(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_DATEORDER))));
-//            order.setDateOrder(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_DATEORDER)));
-            order.setConfirmationCode(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_CONFIMRCODE)));
-            order.setStatus(Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_ORDERSTATUS))));
-            order.setRatingPoint(cursor.getFloat(cursor.getColumnIndex(ConstainApp.JS_ORDERRATING)));
-            order.setAccountId(cursor.getInt(cursor.getColumnIndex(ConstainApp.CUSTOMERID)));
-        }
-        cursor.close();
-        db.close();
-        return order;
-    }
-
-    public List<Order> getAllOrder() {
-        List<Order> orderList = new ArrayList<>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + ConstainApp.JS_ORDERTABLE;
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                Order order = new Order();
-                order.setOrderId(cursor.getInt(cursor.getColumnIndex(ConstainApp.JS_ORDERID)));
-                order.setDateOrder(Date.valueOf(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_DATEORDER))));
-//                order.setDateOrder(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_DATEORDER)));
-                order.setConfirmationCode(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_CONFIMRCODE)));
-                order.setStatus(Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex(ConstainApp.JS_ORDERSTATUS))));
-                order.setRatingPoint(cursor.getFloat(cursor.getColumnIndex(ConstainApp.JS_ORDERRATING)));
-                order.setAccountId(cursor.getInt(cursor.getColumnIndex(ConstainApp.CUSTOMERID)));
-                orderList.add(order);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        db.close();
-        return orderList;
     }
 
     public void addTableSaw(int fspId){

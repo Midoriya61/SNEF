@@ -28,14 +28,15 @@ public class OrderUtilities {
     private static final String orderQuantity = "orderQuantity";
     private static final String storeId = "storeId";
     private static final String storeName = "storeName";
+    private static final String comment = "comment";
 
     public SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
 
-    public void insertNewOrder(String confirmationCode, int accountId) {
+    public void insertNewOrder(String confirmationCode, int accountId, int storeId) {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        String url = ConstainServer.BaseURL + ConstainServer.OrderURL + ConstainServer.InsertNewOrder + confirmationCode + "/" + accountId;
+        String url = ConstainServer.BaseURL + ConstainServer.OrderURL + ConstainServer.InsertNewOrder + confirmationCode + "/" + accountId + "/" + storeId;
 //        String respone = "";
 
         try {
@@ -97,6 +98,9 @@ public class OrderUtilities {
                 if (jsonObj.has(storeName)) {
                     order.setStoreName(jsonObj.getString(storeName));
                 }
+                if (jsonObj.has(comment)) {
+                    order.setComment(jsonObj.getString(comment));
+                }
 
                 result.add(order);
             }
@@ -107,57 +111,86 @@ public class OrderUtilities {
         return result;
     }
 
-    public Order getLastOrder() {
-        Order order = new Order();
+    public List<Order> getOrderByAccountId(int accountId) {
+        List<Order> result = new ArrayList<>();
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        String url = ConstainServer.BaseURL + ConstainServer.OrderURL + ConstainServer.GetLastOrder;
+        String url = ConstainServer.BaseURL + ConstainServer.OrderURL + ConstainServer.GetOrderByAccountId + accountId;
         String respone = "";
 
         try {
             URL urll = new URL(url);
             HttpGetRequest httpGetRequest = new HttpGetRequest();
             respone = httpGetRequest.execute(urll.openStream()).get();
-            JSONObject jsonObj = new JSONObject(respone);
+            JSONArray arr = new JSONArray(respone);
 
-            if (jsonObj.has(orderId)) {
-                order.setOrderId(jsonObj.getInt(orderId));
-            }
-            if (jsonObj.has(dateOrder)) {
-                java.util.Date date = sdf1.parse(jsonObj.getString(dateOrder));
-                java.sql.Date dateOrderSql = new java.sql.Date(date.getTime());
-                order.setDateOrder(dateOrderSql);
-            }
-            if (jsonObj.has(confirmationCode)) {
-                order.setConfirmationCode(jsonObj.getString(confirmationCode));
-            }
-            if (jsonObj.has(status)) {
-                order.setStatus(jsonObj.getBoolean(status));
-            }
-            if (jsonObj.has(ratingPoint)) {
-                order.setRatingPoint(BigDecimal.valueOf(jsonObj.getDouble(ratingPoint)).floatValue());
-            }
-            if (jsonObj.has(accountId)) {
-                order.setAccountId(jsonObj.getInt(accountId));
-            }
-            if (jsonObj.has(totalPrice)) {
-                order.setTotalPrice(BigDecimal.valueOf(jsonObj.getDouble(totalPrice)).floatValue());
-            }
-            if (jsonObj.has(orderQuantity)) {
-                order.setOrderQuantity(jsonObj.getInt(orderQuantity));
-            }
-            if (jsonObj.has(storeId)) {
-                order.setStoreId(jsonObj.getInt(storeId));
-            }
-            if (jsonObj.has(storeName)) {
-                order.setStoreName(jsonObj.getString(storeName));
+            for (int i = 0; i < arr.length(); i++) {
+                JSONObject jsonObj = arr.getJSONObject(i);
+                Order order = new Order();
+
+                if (jsonObj.has(orderId)) {
+                    order.setOrderId(jsonObj.getInt(orderId));
+                }
+                if (jsonObj.has(dateOrder)) {
+                    java.util.Date date = sdf1.parse(jsonObj.getString(dateOrder));
+                    java.sql.Date dateOrderSql = new java.sql.Date(date.getTime());
+                    order.setDateOrder(dateOrderSql);
+                }
+                if (jsonObj.has(confirmationCode)) {
+                    order.setConfirmationCode(jsonObj.getString(confirmationCode));
+                }
+                if (jsonObj.has(status)) {
+                    order.setStatus(jsonObj.getBoolean(status));
+                }
+                if (jsonObj.has(ratingPoint)) {
+                    order.setRatingPoint(BigDecimal.valueOf(jsonObj.getDouble(ratingPoint)).floatValue());
+                }
+
+                order.setAccountId(accountId);
+
+                if (jsonObj.has(totalPrice)) {
+                    order.setTotalPrice(BigDecimal.valueOf(jsonObj.getDouble(totalPrice)).floatValue());
+                }
+                if (jsonObj.has(orderQuantity)) {
+                    order.setOrderQuantity(jsonObj.getInt(orderQuantity));
+                }
+                if (jsonObj.has(storeId)) {
+                    order.setStoreId(jsonObj.getInt(storeId));
+                }
+                if (jsonObj.has(storeName)) {
+                    order.setStoreName(jsonObj.getString(storeName));
+                }
+                if (jsonObj.has(comment)) {
+                    order.setComment(jsonObj.getString(comment));
+                }
+
+                result.add(order);
             }
 
         } catch (Exception e) {
-            Log.e("Error Aroud", e.getMessage());
+            Log.e("Error AllOrder", e.getMessage());
         }
-        return order;
+        return result;
+    }
+
+    public int getLastOrderId() {
+        int result = 0;
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        String url = ConstainServer.BaseURL + ConstainServer.OrderURL + ConstainServer.GetLastOrderId;
+        String respone = "";
+
+        try {
+            URL urll = new URL(url);
+            HttpGetRequest httpGetRequest = new HttpGetRequest();
+            respone = httpGetRequest.execute(urll.openStream()).get();
+            result = Integer.parseInt(respone);
+
+        } catch (Exception e) {
+            Log.e("EGLOI", e.getMessage());
+        }
+        return result;
     }
 
     public Order getOrderById(int orderId) {
@@ -205,6 +238,9 @@ public class OrderUtilities {
             if (jsonObj.has(storeName)) {
                 order.setStoreName(jsonObj.getString(storeName));
             }
+            if (jsonObj.has(comment)) {
+                order.setComment(jsonObj.getString(comment));
+            }
 
         } catch (Exception e) {
             Log.e("Error GOBI", e.getMessage());
@@ -212,11 +248,11 @@ public class OrderUtilities {
         return order;
     }
 
-    public void updateRatingBar(int orderId, float ratingPoint) {
+    public void submitFeedback(int orderId, float ratingPoint, String comment) {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        String url = ConstainServer.BaseURL + ConstainServer.OrderURL + ConstainServer.UpdateRatingBar + orderId + "/" + ratingPoint;
+        String url = ConstainServer.BaseURL + ConstainServer.OrderURL + ConstainServer.SubmitFeedback + orderId + "/" + ratingPoint + "/" + comment;
 //        String respone = "";
 
         try {
@@ -224,7 +260,7 @@ public class OrderUtilities {
             ReadStream.readStream(urll.openStream());
 
         } catch (Exception e) {
-            Log.e("EURB", e.getMessage());
+            Log.e("ESFB", e.getMessage());
         }
     }
 

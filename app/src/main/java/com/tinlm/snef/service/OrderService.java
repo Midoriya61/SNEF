@@ -11,11 +11,14 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface OrderService {
-    @GET(ConstainServer.OrderURL + ConstainServer.InsertNewOrder + "{confirmationCode}/" + "{accountId}")
+    @GET(ConstainServer.OrderURL + ConstainServer.InsertNewOrder + "{confirmationCode}" + "{accountId}" + "{storeId}")
     Call insertNewOrder(@Path("confirmationCode") String confirmationCode, @Path("accountId") int accountId);
 
-    @GET(ConstainServer.OrderURL + ConstainServer.GetLastOrder)
-    Call<Order> getLastOrder();
+    @GET(ConstainServer.OrderURL + ConstainServer.GetOrderByAccountId + "{accountId}")
+    Call getOrderByAccountId(@Path("accountId") int accountId);
+
+    @GET(ConstainServer.OrderURL + ConstainServer.GetLastOrderId)
+    Call<Order> getLastOrderId();
 
     @GET(ConstainServer.OrderURL + ConstainServer.GetAllOrder)
     Call getAllOrder();
@@ -23,6 +26,7 @@ public interface OrderService {
     @GET(ConstainServer.OrderURL + ConstainServer.GetOrderById + "{orderId}")
     Call getOrderById(@Path("orderId") int orderId);
 
-    @GET(ConstainServer.OrderURL + ConstainServer.UpdateRatingBar + "{orderId}" + "{ratingPoint}")
-    Call updateRatingBar(@Path("orderId") int orderId, @Path("ratingPoint") int ratingPoint);
+    @GET(ConstainServer.OrderURL + ConstainServer.SubmitFeedback + "{orderId}" + "{ratingPoint}" + "{storeId}" + "{comment}")
+    Call submitFeedback(@Path("orderId") int orderId, @Path("ratingPoint") int ratingPoint,
+                        @Path("storeId") int storeId, @Path("comment") int comment);
 }

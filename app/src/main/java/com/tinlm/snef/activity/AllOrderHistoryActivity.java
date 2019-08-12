@@ -56,8 +56,11 @@ public class AllOrderHistoryActivity extends AppCompatActivity {
 
         rcOrderHistory = findViewById(R.id.rcOrderHistory);
 
+        SharedPreferences sharedPreferences = getSharedPreferences(ConstainApp.login_Prefer, MODE_PRIVATE);
+        int accountId = sharedPreferences.getInt(ConstainApp.ACCOUNTID,0);
+
         OrderUtilities orderUtilities = new OrderUtilities();
-        orderList = orderUtilities.getAllOrder();
+        orderList = orderUtilities.getOrderByAccountId(accountId);
 
         ListOrderHistoryAdapter orderHistoryAdapter = new ListOrderHistoryAdapter(
                 AllOrderHistoryActivity.this, orderList);
