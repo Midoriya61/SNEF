@@ -127,6 +127,7 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, FlashSalesProductDetailActivity.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra(ConstainApp.FLASHSALEPRODUCTID,flashSaleProduct.getFlashSaleProductId());
                 intent.putExtra(ConstainApp.PRODUCTNAME,flashSaleProduct.getProductName());
                 intent.putExtra(ConstainApp.DESCRIPTION,flashSaleProduct.getDescription());
