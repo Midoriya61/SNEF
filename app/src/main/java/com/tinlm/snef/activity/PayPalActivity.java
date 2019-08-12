@@ -50,7 +50,7 @@ public class PayPalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paypal);
-        this.onBackPressed();
+//        this.onBackPressed();
 
         m_response = findViewById(R.id.response);
 
@@ -141,7 +141,7 @@ public class PayPalActivity extends AppCompatActivity {
                         intent.putExtra(ConstainApp.JS_ORDERID, lastOrderId);
                         intent.putExtra(ConstainApp.JS_STORENAME, cartList.get(0).getStoreName());
                         this.startActivity(intent);
-                        this.finish();
+//                        this.finish();
 
                     } else m_response.setText("Error in the payment.");
                 } else
