@@ -48,11 +48,10 @@ public class ConstainServer {
     //Order
     public static final String OrderURL = "order/";
     public static final String InsertNewOrder = "insertNewOrder/";
-    public static final String GetLastOrderId = "getLastOrderId/";
+    public static final String GetLastOrder = "getLastOrder/";
     public static final String GetAllOrder = "getAllOrder/";
     public static final String GetOrderById = "getOrderById/";
-    public static final String SubmitFeedback = "submitFeedback/";
-    public static final String GetOrderByAccountId = "getOrderByAccountId/";
+    public static final String UpdateRatingBar = "updateRatingBar/";
 
     //OrderDetail
     public static final String OrderDetailURL = "orderDetail/";
@@ -63,6 +62,6 @@ public class ConstainServer {
     //    public static final String BaseURL = "https://snef-api-part2.herokuapp.com/";
     public static final String BaseURL = "http://54.169.254.58:6432/";
 //    public static final String BaseURL = "http://192.168.100.5:6432/";
-//    public static final String BaseURL = "http://192.168.1.3:6432/";
+//    public static final String BaseURL = "http://172.168.10.99:6432/";
 
 }
