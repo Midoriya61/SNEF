@@ -77,6 +77,7 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
     Context mContext;
 
     private String endDate;
+    private int storeId;
 
 //    , textReadMore;
     //, storeLocation, workingTime;
@@ -124,7 +125,7 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
         final Intent intent = getIntent();
         fspId = intent.getIntExtra(ConstainApp.FLASHSALEPRODUCTID, 0);
 
-        int storeId = intent.getIntExtra(ConstainApp.STOREID, 0);
+        storeId = intent.getIntExtra(ConstainApp.STOREID, 0);
         StoreService storeService = ApiUtils.getStoreService();
         storeService.getStoreById(storeId).enqueue(new Callback<Store>() {
             @Override
@@ -353,6 +354,7 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
                                 cart.setFspId(fspId);
                                 cart.setPrice(price);
                                 cart.setDiscount(discount);
+                                cart.setStoreId(storeId);
                                 dbManager.addCart(cart);
                                 txtCartNumber.setText(String.valueOf(Integer.parseInt(String.valueOf(txtCartNumber.getText())) + 1));
 //            txtCartNumberDB = ((DashboardActivity) mContext).findViewById(R.id.txtCartNumber);

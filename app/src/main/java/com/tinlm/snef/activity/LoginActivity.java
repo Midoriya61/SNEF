@@ -76,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         SharedPreferences sharedPreferences = getSharedPreferences(ConstainApp.login_Prefer, MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putInt(ConstainApp.ACCOUNTID, customer.getAccountId());
                         editor.putString(ConstainApp.USERNAME, customer.getUsername());
                         editor.putString(ConstainApp.PASSWORD, customer.getPassword());
                         editor.putString(ConstainApp.FIRSTNAME, customer.getFirstName());
