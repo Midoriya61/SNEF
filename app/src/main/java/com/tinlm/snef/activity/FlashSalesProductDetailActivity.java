@@ -100,6 +100,13 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        txtCartNumber.setText(String.valueOf(getCartNumber()));
+    }
+
+
     private void init() {
         //btnChange = findViewById(R.id.btnChange);
         //addToCart = findViewById(R.id.addToCart);
