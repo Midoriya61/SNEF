@@ -30,12 +30,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tinlm.snef.R;
 import com.tinlm.snef.adapter.ListStoreAdapter;
 import com.tinlm.snef.algo.GeocodingLocation;
 import com.tinlm.snef.constain.ConstainApp;
+import com.tinlm.snef.database.DBManager;
 import com.tinlm.snef.fragment.StoreAroundFragment;
 import com.tinlm.snef.model.Store;
 import com.tinlm.snef.service.AllService;
@@ -55,17 +57,19 @@ import retrofit2.Response;
 
 public class AroundStoreActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    RecyclerView rcStoreAround;
-    StoreService storeService;
-    double[] locationStoreCurrent = new double[2];
-    Spinner spinner;
-    ListStoreAdapter listStoreAdapter = null;
+    private RecyclerView rcStoreAround;
+    private StoreService storeService;
+    private double[] locationStoreCurrent = new double[2];
+    private Spinner spinner;
+    private ListStoreAdapter listStoreAdapter = null;
+    private TextView txtRFind;
 
-    RelativeLayout notifiYetData;
+    private RelativeLayout notifiYetData;
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
     protected LocationManager locationManager;
-    BottomNavigationView bottomNavigation;
+    private BottomNavigationView bottomNavigation;
+    private TextView txtCartNumber;
 
 
 
@@ -84,6 +88,10 @@ public class AroundStoreActivity extends AppCompatActivity implements AdapterVie
     private void init() {
         notifiYetData = findViewById(R.id.notifiYetData);
         spinner = findViewById(R.id.spinner);
+        txtRFind = findViewById(R.id.txtRFind);
+        txtCartNumber = findViewById(R.id.txtCartNumber);
+        txtCartNumber.setText(String.valueOf(new DBManager(this).getCartNumber()));
+
         spinner.setOnItemSelectedListener(this);
         // Spinner Drop down elements
         List<String> categories = new ArrayList<String>();
@@ -302,6 +310,23 @@ public class AroundStoreActivity extends AppCompatActivity implements AdapterVie
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    public void clickToShoppingCart(View view) {
+        Intent intent = new Intent(this, OrderActivity.class);
+        startActivity(intent);
+    }
+
+    public void clickToSearchProduct(View view) {
+        Intent intent = new Intent(this, SearchActivity.class);
+        String searchProduct = txtRFind.getText().toString();
+        if (searchProduct != null) {
+            if ((searchProduct.length() != 0 && !searchProduct.equals(getResources().getString(R.string.msg_find)))) {
+                intent.putExtra(ConstainApp.SEARCHPRODUCTNAME, searchProduct);
+            }
+        }
+
+        startActivity(intent);
     }
 
 

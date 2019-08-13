@@ -45,13 +45,11 @@ public class FoundFragment extends Fragment {
             notifiYetData = view.findViewById(R.id.notifiYetData);
             notifiYetData.setVisibility(View.VISIBLE);
         } else {
-
             ListFoundAdapter categoriesAdapter = new ListFoundAdapter(listFoundName, FoundFragment.this.getContext(),notifiYetData);
             rcListFound = view.findViewById(R.id.rcListFound);
             final RecyclerView.LayoutManager mLayoutManager
                     = new LinearLayoutManager(FoundFragment.this.getContext(),
                     LinearLayoutManager.VERTICAL, false);
-
             rcListFound.setItemAnimator(new DefaultItemAnimator());
             rcListFound.setLayoutManager(mLayoutManager);
             rcListFound.setAdapter(categoriesAdapter);

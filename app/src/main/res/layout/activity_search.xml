@@ -20,7 +20,7 @@
             android:id="@+id/searchProductBar"
             android:background="@color/colorMain"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             app:queryHint="@string/msg_find"
             app:defaultQueryHint="Thử coi"
             android:focusable="true"

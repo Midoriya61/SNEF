@@ -10,15 +10,15 @@
     <LinearLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:background="@color/redApp"
         android:orientation="horizontal"
-        android:padding="5dp"
+        android:padding="10dp"
         android:weightSum="1">
 
         <android.support.v7.widget.CardView
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_weight="0.8"
             android:background="@color/colorMain"
             android:onClick="clickToSearchProduct">
@@ -27,10 +27,11 @@
                 android:id="@+id/txtRFind"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="5dp"
-                android:paddingLeft="15dp"
-                android:text="@string/msg_find"/>
+                android:drawableLeft="@drawable/find"
+                android:drawablePadding="10dp"
+                android:padding="5dp"
+                android:text="@string/msg_find"
+                android:textSize="16dp" />
         </android.support.v7.widget.CardView>
         <!--<android.support.v7.widget.SearchView-->
         <!--android:id="@+id/searchBar"-->
@@ -43,10 +44,10 @@
         <!--android:clickable="true"-->
         <!--&gt;</android.support.v7.widget.SearchView>-->
         <!--<ImageView-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="0.15"-->
-            <!--android:src="@drawable/filter" />-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="0.15"-->
+        <!--android:src="@drawable/filter" />-->
 
         <FrameLayout
             android:layout_width="0dp"
@@ -70,38 +71,32 @@
                     android:layout_weight="0.6">
                 </LinearLayout>
 
-            <android.support.v7.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="10dp"
-                android:layout_weight="0.4"
-                app:cardBackgroundColor="@color/cartIconColor"
-                android:layout_gravity="top|end">
-
-                <TextView
-                    android:id="@+id/txtCartNumber"
-                    android:layout_gravity="center_horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_width="wrap_content"
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="99"
-                    android:layout_margin="3dp"
-                    android:textColor="@color/colorMain"
-                    android:textStyle="bold"
-                    android:textSize="8dp"/>
+                    app:cardCornerRadius="10dp"
+                    android:layout_weight="0.4"
+                    app:cardBackgroundColor="@color/cartIconColor"
+                    android:layout_gravity="top|end">
 
-            </android.support.v7.widget.CardView>
+                    <TextView
+                        android:id="@+id/txtCartNumber"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="99"
+                        android:layout_margin="3dp"
+                        android:textColor="@color/colorMain"
+                        android:textStyle="bold"
+                        android:textSize="14dp"/>
+
+                </android.support.v7.widget.CardView>
 
             </LinearLayout>
 
 
         </FrameLayout>
-        <!--<ImageView-->
-            <!--android:src="@drawable/filter"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="0.15"-->
-            <!--android:onClick="clickToFilter"/>-->
 
     </LinearLayout>
 
@@ -111,7 +106,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/topBar"
         android:layout_alignBottom="@+id/bottomNavigationView"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="64dp"
         android:background="@color/grayLight"
         android:orientation="vertical">
 
@@ -275,16 +270,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/bottomNavigation"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:layout_gravity="bottom"
             android:background="@drawable/border_top"
-
             app:itemIconTint="@color/colorMain"
             app:itemTextColor="@color/colorMain"
             app:menu="@menu/bottom_nav_menu"

@@ -152,40 +152,40 @@ public class OrderActivity extends AppCompatActivity {
     }
 
     private void navigateDashboard() {
-//        bottomNavigation = findViewById(R.id.bottomNavigation);
-//        bottomNavigation.setSelectedItemId(R.id.action_orders);
-//        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-//                Intent intent;
-//                switch (menuItem.getItemId()) {
-//                    case R.id.action_home:
-//                        intent = new Intent(OrderActivity.this, DashboardActivity.class);
-//                        startActivity(intent);
-//                        finish();
-//                        break;
+        bottomNavigation = findViewById(R.id.bottomNavigation);
+        bottomNavigation.setSelectedItemId(R.id.action_orders);
+        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Intent intent;
+                switch (menuItem.getItemId()) {
+                    case R.id.action_home:
+                        intent = new Intent(OrderActivity.this, DashboardActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
 //                    case R.id.action_category:
 //                        intent = new Intent(OrderActivity.this, CategoryActivity.class);
 //                        startActivity(intent);
 //                        finish();
 //                        break;
-//                    case R.id.action_around:
-//                        intent = new Intent(OrderActivity.this, AroundStoreActivity.class);
-//                        startActivity(intent);
-//                        finish();
-//                        break;
+                    case R.id.action_around:
+                        intent = new Intent(OrderActivity.this, AroundStoreActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
 //                    case R.id.action_orders:
 //
 //                        break;
-//                    case R.id.action_account:
-//                        intent = new Intent(OrderActivity.this, AccountActivity.class);
-//                        startActivity(intent);
-//                        finish();
-//                        break;
-//                }
-//                return false;
-//            }
-//        });
+                    case R.id.action_account:
+                        intent = new Intent(OrderActivity.this, AccountActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
     public void clickContinueShopping(View view) {

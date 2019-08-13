@@ -1,11 +1,14 @@
 package com.tinlm.snef.activity;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -30,16 +33,60 @@ import retrofit2.Response;
 
 public class ProductByCategoryActivity extends AppCompatActivity {
 
-    RecyclerView rcListPdCategory;
-    FlashSaleProductService flashSaleProductService;
-    Intent intent;
-    TextView txtCategogy;
+    private RecyclerView rcListPdCategory;
+    private FlashSaleProductService flashSaleProductService;
+    private Intent intent;
+    private TextView txtCategogy;
+    private BottomNavigationView bottomNavigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_by_category);
         init();
+        navigateDashboard();
+    }
+
+    private void navigateDashboard() {
+        bottomNavigation = findViewById(R.id.bottomNavigation);
+        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Intent intent;
+                switch (menuItem.getItemId()) {
+                    case R.id.action_home:
+                        intent = new Intent(ProductByCategoryActivity.this, DashboardActivity.class);
+                        finish();
+                        startActivity(intent);
+                        break;
+//                    case R.id.action_category:
+//                        intent = new Intent(DashboardActivity.this, CategoryActivity.class);
+//                        finish();
+//                        startActivity(intent);
+//
+//                        break;
+                    case R.id.action_around:
+                        intent = new Intent(ProductByCategoryActivity.this, AroundStoreActivity.class);
+                        finish();
+                        startActivity(intent);
+
+                        break;
+//                    case R.id.action_orders:
+//                        intent = new Intent(DashboardActivity.this, OrderActivity.class);
+//                        finish();
+//                        startActivity(intent);
+//
+//                        break;
+                    case R.id.action_account:
+                        intent = new Intent(ProductByCategoryActivity.this, AccountActivity.class);
+                        finish();
+                        startActivity(intent);
+
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
     private void init() {
@@ -47,9 +94,8 @@ public class ProductByCategoryActivity extends AppCompatActivity {
         txtCategogy = findViewById(R.id.txtCategogy);
         flashSaleProductService = ApiUtils.getFlashSaleProductService();
 
-
         intent = getIntent();
-        FlashSaleProductUtilities flashSaleProductUtilities = new FlashSaleProductUtilities();
+//        FlashSaleProductUtilities flashSaleProductUtilities = new FlashSaleProductUtilities();
 
         txtCategogy.setText(intent.getStringExtra(ConstainApp.CATEGORYNAME));
 

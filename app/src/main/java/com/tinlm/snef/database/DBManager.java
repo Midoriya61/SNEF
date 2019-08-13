@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
+import com.tinlm.snef.activity.DashboardActivity;
 import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.model.Cart;
 import com.tinlm.snef.model.Order;
@@ -303,6 +304,15 @@ public class DBManager extends SQLiteOpenHelper {
         db.delete(ConstainApp.JS_FOUNDTABLE, ConstainApp.PRODUCTNAME + " = ?",
                 new String[] { productName });
         db.close();
+    }
+
+    public int getCartNumber() {
+        List<Cart> cartList = getAllCart();
+        int cartNumber = 0;
+        for (int i = 0; i < cartList.size(); i++) {
+            cartNumber += cartList.get(i).getQuantity();
+        }
+        return cartNumber;
     }
 
 }

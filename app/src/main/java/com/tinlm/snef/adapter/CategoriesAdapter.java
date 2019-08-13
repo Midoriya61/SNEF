@@ -82,13 +82,13 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
                                 editor.apply();
                             }
                         } else {
-                            linearLayout.setBackgroundColor(Color.YELLOW);
+                            linearLayout.setBackgroundColor(Color.GRAY);
                             SharedPreferences.Editor editor= sharedPreferences.edit();
                             editor.putString(ConstainApp.CATEGORIESID,categoriesId + categorieId + ",");
                             editor.apply();
                         }
                     } else {
-                        linearLayout.setBackgroundColor(Color.YELLOW);
+                        linearLayout.setBackgroundColor(Color.GRAY);
                         SharedPreferences.Editor editor= sharedPreferences.edit();
                         editor.putString(ConstainApp.CATEGORIESID,categorieId + ",");
                         editor.apply();
