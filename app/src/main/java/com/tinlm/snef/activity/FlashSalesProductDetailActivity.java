@@ -75,6 +75,7 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
     private TextView txtCartNumber;
     TextView txtCartNumberDB;
     Context mContext;
+    private TextView txtRFind;
 
     private String endDate;
     private int storeId;
@@ -95,6 +96,16 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flash_sales_product_detail);
+
+        txtRFind = findViewById(R.id.txtRFind);
+        Intent dbIntent = getIntent();
+        String searchString = dbIntent.getStringExtra(ConstainApp.SEARCHPRODUCTNAME);
+        if (searchString != null) {
+            if ((searchString.length() != 0 && !searchString.equals(getResources().getString(R.string.msg_find)))) {
+                txtRFind.setText(searchString);
+            }
+        }
+
         init();
         //navigateDashboard();
 
@@ -205,6 +216,14 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
                 imgProductFS = findViewById(R.id.imgProductFS);
                 ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(FlashSalesProductDetailActivity.this, listImage);
                 imgProductFS.setAdapter(viewPagerAdapter);
+                imgProductFS.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent1 = new Intent(FlashSalesProductDetailActivity.this, MainActivity.class);
+                        startActivity(intent1);
+                        finish();
+                    }
+                });
             }
 
             @Override
@@ -215,7 +234,6 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
 //        StoreProductImageUtilities storeProductImageUtilities = new StoreProductImageUtilities();
 //        List<String> listImage = storeProductImageUtilities.getImageByStoreProductId(intent.getIntExtra(ConstainApp.STOREPRODUCTID, 0));
 //        imgProduct = listImage.get(0);
-
 
         foodName.setText(intent.getStringExtra(ConstainApp.PRODUCTNAME));
         endDate = intent.getStringExtra(ConstainApp.ENDDATE);
@@ -229,7 +247,6 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
             llAddToCard.setBackgroundColor(Color.GRAY);
             btnAddToCart.setTextColor(Color.WHITE);
         }
-
         //check date flash sales if customer review product saw
         try {
             Date currentTime = Calendar.getInstance().getTime();
@@ -446,5 +463,14 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
     }
 
     public void clickToSearchProduct(View view) {
+        Intent intent = new Intent(this, SearchActivity.class);
+        String searchProduct = txtRFind.getText().toString();
+        if (searchProduct != null) {
+            if ((searchProduct.length() != 0 && !searchProduct.equals(getResources().getString(R.string.msg_find)))) {
+                intent.putExtra(ConstainApp.SEARCHPRODUCTNAME, searchProduct);
+            }
+        }
+
+        startActivity(intent);
     }
 }

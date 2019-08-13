@@ -34,8 +34,8 @@ public class DashboardActivity extends AppCompatActivity {
 
     //    RecyclerView rcListCategories;
 //    RecyclerView rcListHost;
-    BottomNavigationView bottomNavigation;
-    TextView txtRFind;
+    private BottomNavigationView bottomNavigation;
+    private TextView txtRFind;
     private TextView txtCartNumber;
 
 
@@ -53,21 +53,21 @@ public class DashboardActivity extends AppCompatActivity {
         }
 
         txtCartNumber = findViewById(R.id.txtCartNumber);
-        txtCartNumber.setText(String.valueOf(getCartNumber()));
+        txtCartNumber.setText(String.valueOf(new DBManager(this).getCartNumber()));
 
-        txtRFind.getViewTreeObserver()
-                .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @Override
-                    public void onGlobalLayout() {
-                        Drawable img = getResources().getDrawable(
-                                R.drawable.find);
-                        img.setBounds(-10, 0,
-                                (img.getIntrinsicWidth() * txtRFind.getMeasuredHeight() / img.getIntrinsicHeight()),
-                                txtRFind.getMeasuredHeight());
-                        txtRFind.setCompoundDrawables(img, null, null, null);
-                        txtRFind.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                    }
-                });
+//        txtRFind.getViewTreeObserver()
+//                .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//                    @Override
+//                    public void onGlobalLayout() {
+//                        Drawable img = getResources().getDrawable(
+//                                R.drawable.find);
+//                        img.setBounds(-10, 0,
+//                                (img.getIntrinsicWidth() * txtRFind.getMeasuredHeight() / img.getIntrinsicHeight()),
+//                                txtRFind.getMeasuredHeight());
+//                        txtRFind.setCompoundDrawables(img, null, null, null);
+//                        txtRFind.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+//                    }
+//                });
 
 
         navigateDashboard();
@@ -76,18 +76,10 @@ public class DashboardActivity extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
-        txtCartNumber.setText(String.valueOf(getCartNumber()));
+        txtCartNumber.setText(String.valueOf(new DBManager(this).getCartNumber()));
     }
 
-    public int getCartNumber() {
-        DBManager dbManager = new DBManager(DashboardActivity.this);
-        List<Cart> cartList = dbManager.getAllCart();
-        int cartNumber = 0;
-        for (int i = 0; i < cartList.size(); i++) {
-            cartNumber += cartList.get(i).getQuantity();
-        }
-        return cartNumber;
-    }
+
 
     private void navigateDashboard() {
         bottomNavigation = findViewById(R.id.bottomNavigation);

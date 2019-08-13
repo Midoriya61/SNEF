@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.tinlm.snef.R;
 import com.tinlm.snef.adapter.FlashSaleProductAdapter;
 import com.tinlm.snef.constain.ConstainApp;
+import com.tinlm.snef.database.DBManager;
 import com.tinlm.snef.fragment.HotProductHomeFragment;
 import com.tinlm.snef.fragment.ListFSPFragment;
 import com.tinlm.snef.model.FlashSaleProduct;
@@ -46,6 +47,8 @@ public class SearchProductByNameActivity extends AppCompatActivity {
     private ImageView imgIncre, imgDecen;
     private FlashSaleProductService flashSaleProductService;
     private LinearLayout buttonSortPrice;
+    private TextView txtCartNumber;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +66,10 @@ public class SearchProductByNameActivity extends AppCompatActivity {
         imgIncre = findViewById(R.id.imgIncre);
         imgDecen = findViewById(R.id.imgDecen);
         buttonSortPrice = findViewById(R.id.buttonSortPrice);
+
+        txtCartNumber = findViewById(R.id.txtCartNumber);
+        txtCartNumber.setText(String.valueOf(new DBManager(this).getCartNumber()));
+
 
         // reset button sort of search price
         SharedPreferences sharedPreferencesSort = getSharedPreferences(ConstainApp.CATEGORIESPREFER, MODE_PRIVATE);
@@ -152,4 +159,10 @@ public class SearchProductByNameActivity extends AppCompatActivity {
         intent.putExtra(ConstainApp.SEARCHPRODUCTNAME, intent.getStringExtra(ConstainApp.SEARCHPRODUCTNAME));
         startActivity(intent);
     }
+
+    public void clickToShoppingCart(View view) {
+        Intent intent = new Intent(this, OrderActivity.class);
+        startActivity(intent);
+    }
+
 }

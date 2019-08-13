@@ -6,60 +6,119 @@
     android:layout_height="match_parent"
     tools:context=".activity.SearchProductByNameActivity">
     <!--Top bar-->
-
     <LinearLayout
         android:id="@+id/topBar"
-        android:background="@color/redApp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/redApp"
         android:orientation="horizontal"
-        android:weightSum="1"
         android:padding="10dp"
-        >
+        android:weightSum="1">
+
         <android.support.v7.widget.CardView
-            android:background="@color/colorMain"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.85"
-            android:onClick="clickToSearchProduct"
-            >
+            android:layout_weight="0.8"
+            android:background="@color/colorMain"
+            android:onClick="clickToSearchProduct">
+
             <TextView
                 android:id="@+id/txtSearchProduct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
                 android:drawableLeft="@drawable/find"
                 android:drawablePadding="10dp"
+                android:padding="5dp"
                 android:text="@string/msg_find"
-                android:padding="10dp"/>
+                android:textSize="16dp" />
         </android.support.v7.widget.CardView>
+        <!--<android.support.v7.widget.SearchView-->
+        <!--android:id="@+id/searchBar"-->
+        <!--android:background="@color/colorMain"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="0.85"-->
+        <!--app:queryHint="@string/search_hint"-->
+        <!--app:defaultQueryHint="Thử coi"-->
+        <!--android:clickable="true"-->
+        <!--&gt;</android.support.v7.widget.SearchView>-->
         <!--<ImageView-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:src="@drawable/filter"-->
-            <!--android:layout_weight="0.15"/>-->
-    </LinearLayout>
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="0.15"-->
+        <!--android:src="@drawable/filter" />-->
 
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="clickToShoppingCart"
+                android:src="@drawable/shoppingcart_icon" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6">
+                </LinearLayout>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="10dp"
+                    android:layout_weight="0.4"
+                    app:cardBackgroundColor="@color/cartIconColor"
+                    android:layout_gravity="top|end">
+
+                    <TextView
+                        android:id="@+id/txtCartNumber"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="99"
+                        android:layout_margin="3dp"
+                        android:textColor="@color/colorMain"
+                        android:textStyle="bold"
+                        android:textSize="14dp"/>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+
+        </FrameLayout>
+
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/topNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/topBar"
         android:layout_marginLeft="10dp"
+        android:gravity="right"
         android:orientation="horizontal">
-
         <LinearLayout
             android:id="@+id/buttonSortPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
             android:orientation="horizontal"
             >
-
             <TextView
                 android:id="@+id/txtSortPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:gravity="right"
                 android:text="@string/msg_price"
                 android:textSize="20dp" />
 
