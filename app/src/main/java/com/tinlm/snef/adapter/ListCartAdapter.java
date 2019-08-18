@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -174,7 +175,7 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
         TextView txtCartFoodName, txtCartPrice;
 
         ElegantNumberButton btnCartQuantity;
-        TextView btnRemove;
+        ImageView btnRemove;
 
         LinearLayout listCartLayout;
 

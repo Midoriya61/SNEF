@@ -7,6 +7,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="20dp"
     android:clickable="true"
+    app:cardCornerRadius="10dp"
+    android:background="@drawable/corner_order_bottom"
     android:foreground="?android:attr/selectableItemBackground">
 
     <LinearLayout
@@ -17,7 +19,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/redApp"
+            android:background="@drawable/corner_order_top"
             android:orientation="horizontal">
 
             <TextView
@@ -28,7 +30,7 @@
                 android:layout_margin="5dp"
                 android:text="Store Name"
                 android:textColor="@color/colorMain"
-                android:textSize="22dp"
+                android:textSize="18dp"
                 android:textStyle="bold" />
 
 
@@ -37,7 +39,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorMain"
+            android:background="@drawable/corner_order_bottom"
             android:orientation="vertical">
 
 
@@ -45,27 +47,31 @@
                 android:id="@+id/rcListCartItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorMain"
-                android:layout_margin="10dp">
+                android:layout_margin="10dp"
+                android:background="@color/colorMain">
 
             </android.support.v7.widget.RecyclerView>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/dash_line"/>
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/dash_line" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="30dp"
                     android:text="Tổng cộng"
-                    android:textSize="20dp"
+                    android:textSize="16dp"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -81,16 +87,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="00,00"
-                        android:textColor="@color/green"
-                        android:textSize="24dp"
+                        android:textColor="@color/redApp"
+                        android:textSize="18dp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=" đ"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="24dp"
+                        android:textColor="@color/redApp"
+                        android:textSize="18dp"
                         android:textStyle="bold">
 
                     </TextView>
@@ -102,43 +108,32 @@
                 android:id="@+id/btnCheckout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:onClick="clickToPayCart"
                 android:layout_gravity="center_horizontal"
-                app:cardBackgroundColor="@color/green"
-                app:cardCornerRadius="15dp">
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:onClick="clickToPayCart"
+                app:cardCornerRadius="50dp">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/button_general"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
+                        android:gravity="center_horizontal"
                         android:text="THANH TOÁN"
                         android:textColor="@color/colorMain"
-                        android:textSize="20dp"
+                        android:textSize="18dp"
                         android:textStyle="bold" />
 
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="5dp"
-                        android:gravity="right"
-                        android:orientation="horizontal">
-
-
-                    </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 

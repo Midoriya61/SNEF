@@ -150,6 +150,7 @@
                     android:id="@+id/listCategoriesFragment"
                     android:name="com.tinlm.snef.fragment.CategoriesHomeFragment"
                     android:layout_width="match_parent"
+                    android:layout_marginRight="20dp"
                     android:layout_height="wrap_content" />
 
                 <LinearLayout
@@ -182,8 +183,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/colorMain"
-                    android:orientation="vertical"
-                    android:paddingLeft="10dp">
+                    android:orientation="vertical">
 
                     <fragment
                         android:id="@+id/hostProductHomeFragment"
@@ -219,9 +219,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorMain"
-                    android:orientation="vertical"
-                    android:paddingLeft="10dp">
+                    android:orientation="vertical">
 
                     <fragment
                         android:id="@+id/listStoreAroundFragment"
@@ -257,6 +255,8 @@
                     android:id="@+id/listFSPFragment"
                     android:name="com.tinlm.snef.fragment.ListFSPFragment"
                     android:layout_width="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
@@ -277,7 +277,7 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_gravity="bottom"
-            android:background="@drawable/border_top"
+            android:background="@color/redApp"
             app:itemIconTint="@color/colorMain"
             app:itemTextColor="@color/colorMain"
             app:menu="@menu/bottom_nav_menu"

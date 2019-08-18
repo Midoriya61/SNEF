@@ -345,10 +345,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="20dp"
                     android:gravity="center_horizontal"
                     android:text="@string/question_rating"
-                    android:textColor="@color/blue"
+                    android:textColor="@color/redApp"
+
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
@@ -377,6 +377,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/cvComment"
                         android:layout_weight="0.6"
+                        android:background="@drawable/shadow_all"
                         app:cardBackgroundColor="@color/colorMain">
 
                         <EditText
@@ -401,11 +402,14 @@
 
                 <Button
                     android:id="@+id/btnSubmitRating"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="20dp"
-                    android:backgroundTint="@color/blue"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginRight="100dp"
+                    android:background="@drawable/button_general"
                     android:text="@string/btn_submitrating"
                     android:textColor="@color/colorMain"
                     android:textSize="16dp"

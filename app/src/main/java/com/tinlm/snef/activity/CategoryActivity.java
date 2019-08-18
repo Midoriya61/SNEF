@@ -10,10 +10,13 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.tinlm.snef.R;
 import com.tinlm.snef.adapter.CategoriesAdapter;
 import com.tinlm.snef.constain.ConstainApp;
+import com.tinlm.snef.database.DBManager;
 import com.tinlm.snef.model.Categories;
 import com.tinlm.snef.utilities.CategoriesUtilities;
 
@@ -24,15 +27,23 @@ import java.util.Locale;
 public class CategoryActivity extends AppCompatActivity {
 
     RecyclerView rcListCategories;
-
+    private TextView txtRFind, txtCartNumber;
     BottomNavigationView bottomNavigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
+        txtRFind = findViewById(R.id.txtRFind);
+        txtCartNumber = findViewById(R.id.txtCartNumber);
         init();
         navigateDashboard();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        txtCartNumber.setText(String.valueOf(new DBManager(this).getCartNumber()));
     }
 
     private void navigateDashboard() {
@@ -81,5 +92,23 @@ public class CategoryActivity extends AppCompatActivity {
         rcListCategories.setItemAnimator(new DefaultItemAnimator());
         rcListCategories.setLayoutManager(mLayoutManager);
         rcListCategories.setAdapter(categoriesAdapter);
+    }
+
+    public void clickToSearchProduct(View view) {
+        Intent intent = new Intent(this, SearchActivity.class);
+        String searchProduct = txtRFind.getText().toString();
+        if (searchProduct != null) {
+            if ((searchProduct.length() != 0 && !searchProduct.equals(getResources().getString(R.string.msg_find)))) {
+                intent.putExtra(ConstainApp.SEARCHPRODUCTNAME, searchProduct);
+            }
+        }
+
+        startActivity(intent);
+
+    }
+
+    public void clickToShoppingCart(View view) {
+        Intent intent = new Intent(this, OrderActivity.class);
+        startActivity(intent);
     }
 }

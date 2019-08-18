@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.tinlm.snef.R;
 import com.tinlm.snef.adapter.FlashSaleProductAdapter;
 import com.tinlm.snef.constain.ConstainApp;
+import com.tinlm.snef.database.DBManager;
 import com.tinlm.snef.model.FlashSaleProduct;
 import com.tinlm.snef.service.FlashSaleProductService;
 import com.tinlm.snef.utilities.ApiUtils;
@@ -37,14 +38,23 @@ public class ProductByCategoryActivity extends AppCompatActivity {
     private FlashSaleProductService flashSaleProductService;
     private Intent intent;
     private TextView txtCategogy;
+    private TextView txtRFind, txtCartNumber;
     private BottomNavigationView bottomNavigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_by_category);
+        txtRFind = findViewById(R.id.txtRFind);
+        txtCartNumber = findViewById(R.id.txtCartNumber);
         init();
         navigateDashboard();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        txtCartNumber.setText(String.valueOf(new DBManager(this).getCartNumber()));
     }
 
     private void navigateDashboard() {
@@ -134,6 +144,19 @@ public class ProductByCategoryActivity extends AppCompatActivity {
 
     public void clickToSearchProduct(View view) {
         Intent intent = new Intent(this, SearchActivity.class);
+        String searchProduct = txtRFind.getText().toString();
+        if (searchProduct != null) {
+            if ((searchProduct.length() != 0 && !searchProduct.equals(getResources().getString(R.string.msg_find)))) {
+                intent.putExtra(ConstainApp.SEARCHPRODUCTNAME, searchProduct);
+            }
+        }
+
+        startActivity(intent);
+
+    }
+
+    public void clickToShoppingCart(View view) {
+        Intent intent = new Intent(this, OrderActivity.class);
         startActivity(intent);
     }
 
