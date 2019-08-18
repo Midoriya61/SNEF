@@ -121,7 +121,7 @@ public class PayPalActivity extends AppCompatActivity {
                         //Create a new order
                         OrderUtilities orderUtilities = new OrderUtilities();
                         orderUtilities.insertNewOrder(confirmationCode, accountId, storeId);
-                        int lastOrderId = orderUtilities.getLastOrderId();
+                        int lastOrderId = orderUtilities.getLastOrderId(accountId);
 
 
 

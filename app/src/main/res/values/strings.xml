@@ -74,7 +74,8 @@
     <string name="orderstatus_pickedup" translatable="false">Đã Nhận Hàng</string>
     <string name="question_rating" translatable="false">Bạn hài lòng với đơn hàng này chứ?</string>
     <string name="btn_submitrating" translatable="false">Gửi Phản Hồi</string>
-    <string name="msg_thanksrating" translatable="false">Xin cảm ơn phản hồi của bạn!</string>
+    <string name="msg_thanksrating" translatable="false">Xin cảm ơn phản hồi của bạn.</string>
+    <string name="msg_askrating" translatable="false">Vui lòng để lại phản hồi trước khi gửi.</string>
     <string name="btn_contshopping" translatable="false">TIẾP TỤC MUA HÀNG</string>
 
     <string name="StatusSouldOut" translatable="false">Bán hết</string>

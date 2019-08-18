@@ -147,23 +147,31 @@ public class OrderHistoryActivity extends AppCompatActivity {
 
         //Submit Feedback
 
-        if(order.getRatingPoint() == 0){
+        if (order.getRatingPoint() == 0) {
             btnSubmitRating.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v)
-                {
-                    orderUtilities.submitFeedback(orderId, ratingBar.getRating(), editTextComment.getText().toString());
-                    ratingBar.setEnabled(false);
-                    btnSubmitRating.setVisibility (View.INVISIBLE);
-                    cvComment.setVisibility(View.INVISIBLE);
-                    txtRating.setText(R.string.msg_thanksrating);
+                public void onClick(View v) {
+                    if (ratingBar.getRating() == 0) {
+                        txtRating.setText(R.string.msg_askrating);
+                    } else {
+                        String comment = String.valueOf(editTextComment.getText());
+                        if (comment.equals("")) {
+                            orderUtilities.submitFeedback(orderId, ratingBar.getRating(), "null");
+                        } else {
+                            orderUtilities.submitFeedback(orderId, ratingBar.getRating(), editTextComment.getText().toString());
+                        }
+                        ratingBar.setEnabled(false);
+                        btnSubmitRating.setVisibility(View.INVISIBLE);
+                        cvComment.setVisibility(View.INVISIBLE);
+                        txtRating.setText(R.string.msg_thanksrating);
+                    }
+
                 }
             });
-        }
-        else {
+        } else {
             ratingBar.setRating(order.getRatingPoint());
             ratingBar.setEnabled(false);
-            btnSubmitRating.setVisibility (View.GONE);
+            btnSubmitRating.setVisibility(View.GONE);
             cvComment.setVisibility(View.GONE);
             txtRating.setText(R.string.msg_thanksrating);
         }

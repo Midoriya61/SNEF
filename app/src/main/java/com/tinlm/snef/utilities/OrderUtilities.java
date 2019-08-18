@@ -174,11 +174,11 @@ public class OrderUtilities {
         return result;
     }
 
-    public int getLastOrderId() {
+    public int getLastOrderId(int accountId) {
         int result = 0;
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        String url = ConstainServer.BaseURL + ConstainServer.OrderURL + ConstainServer.GetLastOrderId;
+        String url = ConstainServer.BaseURL + ConstainServer.OrderURL + ConstainServer.GetLastOrderId + accountId;
         String respone = "";
 
         try {
