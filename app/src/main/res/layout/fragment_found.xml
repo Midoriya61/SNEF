@@ -10,27 +10,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:visibility="invisible"
-        >
+        android:visibility="invisible">
+
         <ImageView
             android:id="@+id/iconSmile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/smile"
-            android:layout_centerHorizontal="true"/>
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/empty_found" />
+
         <TextView
-            android:textSize="20dp"
-            android:layout_below="@+id/iconSmile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold"
-            android:text="@string/msg_yet_data"/>
+            android:layout_below="@+id/iconSmile"
+            android:layout_marginTop="20dp"
+            android:text="@string/msg_yet_data"
+            android:textSize="16dp"
+
+            android:textStyle="italic" />
     </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rcListFound"
             android:layout_width="match_parent"

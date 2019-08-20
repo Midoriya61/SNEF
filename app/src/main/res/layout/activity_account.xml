@@ -25,7 +25,7 @@
             android:weightSum="4"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:background="@drawable/background_search_bar"
+            android:background="@drawable/shadow_all_corner"
             >
             <ImageView
                 android:id="@+id/imgAvatar"

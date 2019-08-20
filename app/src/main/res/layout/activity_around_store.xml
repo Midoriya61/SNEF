@@ -153,19 +153,19 @@
 
         <ImageView
             android:id="@+id/iconSmile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/smile" />
-
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/empty_found"
+            android:layout_centerHorizontal="true"/>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:textSize="16dp"
             android:layout_below="@+id/iconSmile"
-            android:text="@string/msg_yet_data"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"
+
+            android:text="@string/msg_yet_data"/>
     </RelativeLayout>
 
     <LinearLayout

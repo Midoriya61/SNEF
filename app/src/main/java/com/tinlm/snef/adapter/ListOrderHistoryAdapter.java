@@ -77,6 +77,7 @@ public class ListOrderHistoryAdapter extends RecyclerView.Adapter<ListOrderHisto
             listOrderHistoryHolder.txtOrderStatus.setText(R.string.orderstatus_paid);
         } else {
             listOrderHistoryHolder.txtOrderStatus.setText(R.string.orderstatus_pickedup);
+            listOrderHistoryHolder.statusView.setBackgroundResource(R.drawable.corner_sttcollected_bottom);
         }
 
         listOrderHistoryHolder.txtTotalQuantity.setText(String.format("%,d", (int) order.getOrderQuantity()));
@@ -108,7 +109,7 @@ public class ListOrderHistoryAdapter extends RecyclerView.Adapter<ListOrderHisto
 
         TextView txtStoreName, txtDateOrder, txtTotalQuantity, txtTotalOrderPrice, txtOrderStatus, txtOrderID;
 
-        LinearLayout listOrderHistoryLayout;
+        LinearLayout listOrderHistoryLayout, statusView;
 
         public ListOrderHistoryHolder(@NonNull View itemView) {
             super(itemView);
@@ -119,6 +120,7 @@ public class ListOrderHistoryAdapter extends RecyclerView.Adapter<ListOrderHisto
             txtTotalOrderPrice = itemView.findViewById(R.id.txtTotalOrderPrice);
             txtOrderStatus = itemView.findViewById(R.id.txtOrderStatus);
             listOrderHistoryLayout = itemView.findViewById(R.id.listOrderHistoryLayout);
+            statusView = itemView.findViewById(R.id.statusView);
         }
     }
 }

@@ -29,6 +29,7 @@ import com.tinlm.snef.algo.GeocodingLocation;
 import com.tinlm.snef.model.Store;
 import com.tinlm.snef.service.StoreService;
 import com.tinlm.snef.utilities.ApiUtils;
+import com.tinlm.snef.utilities.StoreUtilities;
 
 import java.util.Collections;
 import java.util.List;
@@ -61,37 +62,37 @@ public class StoreAroundFragment extends Fragment {
         getCurrentLocation();
         storeService = ApiUtils.getStoreService();
         rcStoreAround = view.findViewById(R.id.rcStoreAround);
-//        StoreUtilities storeUtilities = new StoreUtilities();
-//        storeService.getListStoreArround(locationStoreCurrent[0], locationStoreCurrent[1]).enqueue(new Callback<List<Store>>() {
-//            @Override
-//            public void onResponse(Call<List<Store>> call, Response<List<Store>> response) {
+        StoreUtilities storeUtilities = new StoreUtilities();
+        storeService.getListStoreArround(locationStoreCurrent[0], locationStoreCurrent[1]).enqueue(new Callback<List<Store>>() {
+            @Override
+            public void onResponse(Call<List<Store>> call, Response<List<Store>> response) {
+
+                List<Store> storeList = response.body();
+
+                for (int i = 0; i < storeList.size(); i++) {
 //
-//                List<Store> storeList = response.body();
-//
-//                for (int i = 0; i < storeList.size(); i++) {
-////
-////                    storeList.get(i).distanceBetween2Points(, locationStoreCurrent[1]);
-////            storeList.get(i).setDistance(i);
-//                }
-//                // Sort store by distance from phone to store
-//                Collections.sort(storeList);
-//                ListStoreAdapter listStoreAdapter = new ListStoreAdapter(storeList, StoreAroundFragment.this.getContext());
-//                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(StoreAroundFragment.this.getContext(),
-//                        LinearLayoutManager.HORIZONTAL, false);
-//                rcStoreAround.setItemAnimator(new DefaultItemAnimator());
-//                rcStoreAround.setLayoutManager(mLayoutManager);
-//                rcStoreAround.setAdapter(listStoreAdapter);
-//                rcStoreAround.addItemDecoration(new DividerItemDecoration(StoreAroundFragment.this.getContext(), 0));
-//                SnapHelper snapHelper = new PagerSnapHelper();
-//                snapHelper.attachToRecyclerView(rcStoreAround);
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Store>> call, Throwable t) {
-//                Log.e("Error ASA", t.getMessage());
-//            }
-//        });
+//                    storeList.get(i).distanceBetween2Points(, locationStoreCurrent[1]);
+//            storeList.get(i).setDistance(i);
+                }
+                // Sort store by distance from phone to store
+                Collections.sort(storeList);
+                ListStoreAdapter listStoreAdapter = new ListStoreAdapter(storeList, StoreAroundFragment.this.getContext());
+                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(StoreAroundFragment.this.getContext(),
+                        LinearLayoutManager.HORIZONTAL, false);
+                rcStoreAround.setItemAnimator(new DefaultItemAnimator());
+                rcStoreAround.setLayoutManager(mLayoutManager);
+                rcStoreAround.setAdapter(listStoreAdapter);
+                rcStoreAround.addItemDecoration(new DividerItemDecoration(StoreAroundFragment.this.getContext(), 0));
+                SnapHelper snapHelper = new PagerSnapHelper();
+                snapHelper.attachToRecyclerView(rcStoreAround);
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Store>> call, Throwable t) {
+                Log.e("Error ASA", t.getMessage());
+            }
+        });
         return view;
     }
 

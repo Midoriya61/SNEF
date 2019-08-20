@@ -18,10 +18,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.08"
+            android:layout_height="wrap_content"
             android:background="@color/redApp"
             android:gravity="center_vertical"
+            android:padding="10dp"
             android:orientation="vertical">
 
             <TextView
@@ -37,14 +37,13 @@
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.92"
+            android:layout_height="wrap_content"
             android:fillViewport="true">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rcOrderHistory"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
             </android.support.v7.widget.RecyclerView>
 

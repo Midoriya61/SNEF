@@ -4,127 +4,146 @@
     android:id="@+id/listCartLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:orientation="horizontal">
+    android:layout_marginTop="25dp"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        android:layout_marginLeft="20dp"
-        android:layout_weight="0.3">
-
-        <FrameLayout
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal">
 
-            <ImageView
-                android:id="@+id/imgCartFood"
-                android:background="@drawable/corner_all_10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="0.3">
+
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:scaleType="fitCenter" />
+                android:layout_gravity="center_horizontal">
 
-            <ImageView
-                android:id="@+id/btnRemove"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="top|end"
-                android:src="@drawable/button_remove_cart" />
-
-
-
-        </FrameLayout>
+                <ImageView
+                    android:id="@+id/imgCartFood"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/corner_all_10dp"
+                    android:scaleType="fitCenter" />
 
 
-    </LinearLayout>
+            </FrameLayout>
 
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="20dp"
-        android:layout_weight="0.7"
-        android:orientation="vertical">
+        </LinearLayout>
+
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:gravity="left"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="0.7"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txtCartFoodName"
+            <LinearLayout
                 android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="0.6"
+                android:gravity="left"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtCartFoodName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.4"
+                    android:singleLine="true"
+                    android:text="Food Name"
+                    android:textSize="15dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.6"
+                    android:orientation="horizontal"
+
+                    >
+
+                    <TextView
+                        android:id="@+id/txtCartPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/dashPrice"
+                        android:text="$00.00"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/dashPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:text=" đ"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.4"
-                android:singleLine="true"
-                android:text="Food Name"
-                android:textSize="16dp" />
+                android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="0.6"
-                android:orientation="horizontal"
-
-                >
-
-                <TextView
-                    android:id="@+id/txtCartPrice"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@+id/dashPrice"
-                    android:text="$00.00"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
+                    android:layout_weight="0.5"
+                    android:background="@drawable/button_quantity">
 
-                <TextView
-                    android:id="@+id/dashPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="20dp"
-                    android:text=" đ"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
+                    <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+                        android:id="@+id/btnCartQuantity"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="5dp"
 
+                        app:backGroundColor="@color/colorMain"
+                        app:initialNumber="1"
+                        app:textColor="@color/redApp"
+                        app:textSize="5dp" />
+                </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.4">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1 ">
+
+                    <ImageView
+                        android:id="@+id/btnRemove"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/delete_cart" />
+
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.4"
-            android:orientation="horizontal">
-
-            <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
-                android:id="@+id/btnCartQuantity"
-                android:layout_width="0dp"
-                android:layout_weight="0.6"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                app:backGroundColor="@color/gray50"
-                app:initialNumber="1"
-                app:textColor="@color/colorMain"
-                app:textSize="5dp" />
-
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.4">
-
-            </LinearLayout>
-        </LinearLayout>
     </LinearLayout>
-
-
 </LinearLayout>

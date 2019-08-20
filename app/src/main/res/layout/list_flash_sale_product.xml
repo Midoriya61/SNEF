@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/flashSaleProductLayout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -7,7 +8,7 @@
     android:layout_marginTop="10dp"
     android:background="@drawable/corner_all_10dp"
     android:orientation="vertical"
-    android:padding="5dp">
+    android:padding="10dp">
 
     <FrameLayout
         android:layout_width="wrap_content"
@@ -107,6 +108,10 @@
 
     </LinearLayout>
 
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -133,7 +138,7 @@
             android:gravity="left"
             android:textColor="@color/colorMain" />
     </RelativeLayout>
-
+    </android.support.v7.widget.CardView>
     <!--<TextView-->
     <!--android:id="@+id/txtDateExpired"-->
     <!--android:text="Th6 04. 2019"-->

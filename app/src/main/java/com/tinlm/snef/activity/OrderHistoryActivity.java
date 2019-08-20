@@ -7,6 +7,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -20,6 +21,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -71,6 +73,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
     TextView txtRating;
     EditText editTextComment;
     CardView cvComment;
+    LinearLayout statusView;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +99,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
         txtRating = findViewById(R.id.txtRating);
         editTextComment = findViewById(R.id.editTextComment);
         cvComment = findViewById(R.id.cvComment);
+        statusView = findViewById(R.id.statusView);
 
         final OrderUtilities orderUtilities = new OrderUtilities();
         final int orderId = intent.getIntExtra(ConstainApp.JS_ORDERID, 0);
@@ -108,6 +112,8 @@ public class OrderHistoryActivity extends AppCompatActivity {
             txtOrderStatus.setText(R.string.orderstatus_paid);
         } else {
             txtOrderStatus.setText(R.string.orderstatus_pickedup);
+            statusView.setBackgroundResource(R.drawable.corner_sttcollected_bottom);
+
         }
 
         SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
@@ -158,7 +164,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
                         if (comment.equals("")) {
                             orderUtilities.submitFeedback(orderId, ratingBar.getRating(), "null");
                         } else {
-                            orderUtilities.submitFeedback(orderId, ratingBar.getRating(), editTextComment.getText().toString());
+                            orderUtilities.submitFeedback(orderId, ratingBar.getRating(), comment);
                         }
                         ratingBar.setEnabled(false);
                         btnSubmitRating.setVisibility(View.INVISIBLE);

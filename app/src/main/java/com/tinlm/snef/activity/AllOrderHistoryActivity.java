@@ -65,7 +65,7 @@ public class AllOrderHistoryActivity extends AppCompatActivity {
         ListOrderHistoryAdapter orderHistoryAdapter = new ListOrderHistoryAdapter(
                 AllOrderHistoryActivity.this, orderList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(AllOrderHistoryActivity.this,
-                LinearLayoutManager.VERTICAL,true);
+                LinearLayoutManager.VERTICAL, true);
         rcOrderHistory.setItemAnimator(new DefaultItemAnimator());
         rcOrderHistory.setLayoutManager(mLayoutManager);
         rcOrderHistory.setAdapter(orderHistoryAdapter);

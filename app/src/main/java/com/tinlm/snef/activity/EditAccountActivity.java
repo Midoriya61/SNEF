@@ -35,10 +35,10 @@ public class EditAccountActivity extends AppCompatActivity {
         imgAvatar = findViewById(R.id.imgAvatar);
         txtGender = findViewById(R.id.txtGender);
         sharedPreferences = getSharedPreferences(ConstainApp.login_Prefer, MODE_PRIVATE);
-        edtUsername.setText(sharedPreferences.getString(ConstainApp.LASTNAME, null) + " " + sharedPreferences.getString(ConstainApp.FIRSTNAME, null));
+        edtUsername.setText(sharedPreferences.getString(ConstainApp.USERNAME, null));
         Picasso.get().load(sharedPreferences.getString(ConstainApp.AVATAR, null)).resize(300,350).into(imgAvatar);
-        edtPhone.setText(sharedPreferences.getString(ConstainApp.PHONE,""));
-        edtEmail.setText(sharedPreferences.getString(ConstainApp.EMAIL,""));
+        edtPhone.setText(sharedPreferences.getString(ConstainApp.PHONE," "));
+        edtEmail.setText(sharedPreferences.getString(ConstainApp.EMAIL," "));
         txtGender.setText(sharedPreferences.getString(ConstainApp.GENDER, "Giới tính thứ 3"));
     }
 }

@@ -45,7 +45,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     public void onBindViewHolder(@NonNull final CategoriesViewHolder categoriesViewHolder, int i) {
 
         final Categories category = categoryList.get(i);
-        Picasso.get().load(category.getImageSrc()).resize(400,250).into(categoriesViewHolder.imgCategory);
+        Picasso.get().load(category.getImageSrc()).resize(250,250).into(categoriesViewHolder.imgCategory);
         categoriesViewHolder.txtCategogy.setText(category.getCategoryName());
 
 

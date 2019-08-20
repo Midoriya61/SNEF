@@ -14,17 +14,18 @@
         >
         <ImageView
             android:id="@+id/iconSmile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/smile"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/empty_found"
             android:layout_centerHorizontal="true"/>
         <TextView
-            android:textSize="20dp"
+            android:textSize="16dp"
             android:layout_below="@+id/iconSmile"
             android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold"
+            android:textStyle="italic"
+
             android:text="@string/msg_yet_data"/>
     </RelativeLayout>
     <LinearLayout

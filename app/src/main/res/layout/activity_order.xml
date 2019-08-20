@@ -33,9 +33,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:layout_gravity="center_horizontal"
-                android:text="Bạn chưa có sản phẩm nào trong giỏ hàng!"
-                android:textSize="18dp"
+                android:text="@string/msg_emptycart"
+                android:textSize="16dp"
                 android:layout_marginBottom="50dp"
                 android:textStyle="italic" />
 
