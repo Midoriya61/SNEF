@@ -110,8 +110,8 @@ public class PayPalActivity extends AppCompatActivity {
                         int accountId = sharedPreferences.getInt(ConstainApp.ACCOUNTID,0);
 
                         //Get random confirmation code
-                        int min = 100000000;
-                        int max = 999999999;
+                        int min = 100000;
+                        int max = 999999;
                         Random r = new Random();
                         String confirmationCode = String.valueOf(r.nextInt(max - min + 1) + min);
 
