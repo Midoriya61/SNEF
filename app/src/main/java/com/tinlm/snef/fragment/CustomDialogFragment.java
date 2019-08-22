@@ -21,23 +21,23 @@ public class CustomDialogFragment extends DialogFragment {
         Dialog dialog = new Dialog(getActivity());
         dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
-        dialog.setContentView(R.layout.dialog_custom);
+        dialog.setContentView(R.layout.dialog_maxnum);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         // OK
 
-        dialog.findViewById(R.id.positive_button).setOnClickListener(new View.OnClickListener() {
+        dialog.findViewById(R.id.btnOK).setOnClickListener(new View.OnClickListener() {
             @Override            public void onClick(View v) {
                 dismiss();
             }
         });
-        // Close
-        dialog.findViewById(R.id.close_button).setOnClickListener(new View.OnClickListener() {
-            @Override            public void onClick(View v) {
-                dismiss();
-            }
-
-        });
+//        // Close
+//        dialog.findViewById(R.id.close_button).setOnClickListener(new View.OnClickListener() {
+//            @Override            public void onClick(View v) {
+//                dismiss();
+//            }
+//
+//        });
         return dialog;
     }
 }
