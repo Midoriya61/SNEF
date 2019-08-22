@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -50,7 +51,6 @@ public class PayPalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paypal);
-//        this.onBackPressed();
 
         m_response = findViewById(R.id.response);
 
@@ -82,13 +82,10 @@ public class PayPalActivity extends AppCompatActivity {
 
     }
 
-    void pay(View view) {
-
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        super.onBackPressed();
 
         if (requestCode == m_paypalRequestCode) {
             if (resultCode == Activity.RESULT_OK) {
@@ -107,7 +104,7 @@ public class PayPalActivity extends AppCompatActivity {
 
                         //Get current customer ID
                         SharedPreferences sharedPreferences = getSharedPreferences(ConstainApp.login_Prefer, MODE_PRIVATE);
-                        int accountId = sharedPreferences.getInt(ConstainApp.ACCOUNTID,0);
+                        int accountId = sharedPreferences.getInt(ConstainApp.ACCOUNTID, 0);
 
                         //Get random confirmation code
                         int min = 100000;
@@ -122,8 +119,6 @@ public class PayPalActivity extends AppCompatActivity {
                         OrderUtilities orderUtilities = new OrderUtilities();
                         orderUtilities.insertNewOrder(confirmationCode, accountId, storeId);
                         int lastOrderId = orderUtilities.getLastOrderId(accountId);
-
-
 
                         //Insert order detail into the created order
                         OrderDetailUtilities orderDetailUtilities = new OrderDetailUtilities();

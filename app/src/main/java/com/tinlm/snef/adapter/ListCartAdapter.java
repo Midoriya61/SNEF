@@ -1,6 +1,10 @@
 package com.tinlm.snef.adapter;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -18,14 +22,15 @@ import com.tinlm.snef.R;
 import com.tinlm.snef.activity.OrderActivity;
 import com.tinlm.snef.database.DBManager;
 import com.tinlm.snef.model.Cart;
+import com.tinlm.snef.model.FlashSaleProduct;
+import com.tinlm.snef.utilities.FlashSaleProductUtilities;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCartHolder> {
 
+    private Dialog dlMaxNum;
     private Context mContext;
     private List<Cart> cartList;
     private DecimalFormat df = new DecimalFormat("#,###,###,###");
@@ -35,7 +40,7 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
     private Handler handler = new Handler();
 
     public ListCartAdapter(Context mContext, List<Cart> cartList,
-                            TextView txtTotalCartPrice) {
+                           TextView txtTotalCartPrice) {
         this.mContext = mContext;
         this.cartList = cartList;
         this.txtTotalCartPrice = txtTotalCartPrice;
@@ -63,9 +68,13 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
         final Cart cart = cartList.get(i);
         final int position = i;
 
+        //Get quantity and total quantity
+        FlashSaleProductUtilities flashSaleProductUtilities = new FlashSaleProductUtilities();
+        FlashSaleProduct fsp = flashSaleProductUtilities.getFSPById(cart.getFspId());
+        final int quantity = fsp.getQuantity();
+        final int totalQuantity = fsp.getTotalQuantity();
+
 //        String productCartImage = listImageCartProduct.get(cart.getFspId());
-
-
         Picasso.get().load(cart.getImageProduct()).resize(500, 500).into(listCartHolder.imgCartFood);
 
 
@@ -93,11 +102,28 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
         listCartHolder.btnCartQuantity.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
             @Override
             public void onValueChange(ElegantNumberButton view, int oldValue, int newValue) {
+
+
                 if (newValue != oldValue) {
-                    cart.setQuantity(newValue);
-                    DBManager dbManager = new DBManager(mContext);
-                    dbManager.updateCartQuantity(cart);
-                    notifyItemChanged(position);
+
+                    if (newValue <= (quantity - totalQuantity)) {
+                        if (newValue > oldValue) {
+                            txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(",", "")) + (int) ((cart.getPrice() * cart.getDiscount()) / 100))));
+                        } else if (newValue < oldValue) {
+
+                            txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(",", "")) - (int) ((cart.getPrice() * cart.getDiscount()) / 100))));
+                        }
+
+                        cart.setQuantity(newValue);
+                        DBManager dbManager = new DBManager(mContext);
+                        dbManager.updateCartQuantity(cart);
+                        notifyItemChanged(position);
+
+                    } else {
+                        listCartHolder.btnCartQuantity.setNumber(String.valueOf(oldValue));
+                        dlMaxNum = new Dialog(mContext);
+                        showPopupMaxNum();
+                    }
 
 //                    ((OrderActivity) mContext).recreate();
 //                    ((OrderActivity) mContext).overridePendingTransition(0, 0);
@@ -107,12 +133,7 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
 //                    mContext.startActivity(((OrderActivity) mContext).getIntent());
 
 //                    TextView txtTotalCartPrice = ((OrderActivity) mContext).findViewById(R.id.txtTotalCartPrice);
-                    if (newValue > oldValue) {
-                        txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(",", "")) + (int) ((cart.getPrice() * cart.getDiscount()) / 100))));
-                    } else if (newValue < oldValue) {
 
-                        txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(",", "")) - (int) ((cart.getPrice() * cart.getDiscount()) / 100))));
-                    }
 
                 }
             }
@@ -124,10 +145,11 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
             public void onClick(View v) {
                 DBManager dbManager = new DBManager(mContext);
                 dbManager.deleteCart(cart);
-                ((OrderActivity) mContext).recreate();
-                ((OrderActivity) mContext).overridePendingTransition(0, 0);
-//                ((OrderActivity) mContext).recreate();
-//                ((OrderActivity) mContext).overridePendingTransition(0, 0);
+                Intent intent = new Intent((OrderActivity) mContext, OrderActivity.class);
+                ((OrderActivity) mContext).startActivity(intent);
+                ((OrderActivity) mContext).finish();
+                ((OrderActivity) mContext).overridePendingTransition(0, 0); // this is impo
+//
 
 //                cartList.remove(position);
 //                notifyItemRemoved(position);
@@ -165,6 +187,20 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
     @Override
     public int getItemCount() {
         return cartList.size();
+    }
+
+    public void showPopupMaxNum() {
+        Button btnOK;
+        dlMaxNum.setContentView(R.layout.dialog_maxnum);
+        btnOK = dlMaxNum.findViewById(R.id.btnOK);
+        btnOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dlMaxNum.dismiss();
+            }
+        });
+        dlMaxNum.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dlMaxNum.show();
     }
 
 

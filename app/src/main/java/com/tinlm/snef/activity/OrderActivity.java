@@ -53,14 +53,6 @@ public class OrderActivity extends AppCompatActivity {
         navigateDashboard();
     }
 
-    @Override
-    public void onResume() {  // After a pause OR at startup
-        super.onResume();
-        init();
-
-    }
-
-
     public void init() {
 
         intent = getIntent();

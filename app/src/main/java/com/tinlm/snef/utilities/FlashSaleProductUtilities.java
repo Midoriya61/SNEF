@@ -30,6 +30,7 @@ public class FlashSaleProductUtilities {
     private static final String endDate = "endDate";
     private static final String imageSrc = "imageSrc";
     private static final String description = "description";
+    private static final String totalQuantity = "totalQuantity";
 
     // 6/17/2019 TinLM Create getHotFlashSaleProduct
     public List<FlashSaleProduct> getHotFlashSaleProduct() {
@@ -55,6 +56,9 @@ public class FlashSaleProductUtilities {
                 }
                 if (jsonObj.has(quantity)) {
                     flashSaleProduct.setQuantity(jsonObj.getInt(quantity));
+                }
+                if (jsonObj.has(totalQuantity)) {
+                    flashSaleProduct.setTotalQuantity(jsonObj.getInt(totalQuantity));
                 }
                 if (jsonObj.has(storeProductId)) {
                     flashSaleProduct.setStoreProductId(jsonObj.getInt(storeProductId));
@@ -281,6 +285,9 @@ public class FlashSaleProductUtilities {
 
             if (jsonObj.has(quantity)) {
                 fsp.setQuantity(jsonObj.getInt(quantity));
+            }
+            if (jsonObj.has(totalQuantity)) {
+                fsp.setTotalQuantity(jsonObj.getInt(totalQuantity));
             }
             if (jsonObj.has(storeProductId)) {
                 fsp.setStoreProductId(jsonObj.getInt(storeProductId));
