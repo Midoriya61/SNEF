@@ -20,8 +20,12 @@ import com.tinlm.snef.model.Categories;
 import com.tinlm.snef.service.CategoriesService;
 import com.tinlm.snef.utilities.ApiUtils;
 
+import java.io.File;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.Cache;
+import okhttp3.ConnectionPool;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,7 +44,10 @@ public class CategoriesHomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_categories_home, container, false);
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         rcListCategories = view.findViewById(R.id.rcListCategories);
-        categoriesService = ApiUtils.getCategoriesService();
+
+        Long cacheSize = Long.valueOf((256 * 1024));
+        Cache cache = new Cache(view.getContext().getCacheDir(), cacheSize);
+        categoriesService = ApiUtils.getCategoriesService(view.getContext(), cache);
 
         categoriesService.getAllCategories().enqueue(new Callback<List<Categories>>() {
             @Override

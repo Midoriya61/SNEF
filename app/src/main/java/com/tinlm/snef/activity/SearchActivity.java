@@ -23,6 +23,7 @@ import com.tinlm.snef.utilities.ApiUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Cache;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -86,7 +87,9 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         // get name of product
-        productService = ApiUtils.getProductService();
+        Long cacheSize = Long.valueOf((256 * 1024));
+        Cache cache = new Cache(getCacheDir(), cacheSize);
+        productService = ApiUtils.getProductService1(SearchActivity.this, cache);
         productService.getListNameProduct().enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {

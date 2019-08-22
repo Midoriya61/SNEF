@@ -243,7 +243,7 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
         int quantity = intent.getIntExtra(ConstainApp.QUANTITY, 0);
         if( totalQuanitity >= quantity ) {
             btnAddToCart.setText(getResources().getString(R.string.msg_product_sould_out) + "");
-            btnAddToCart.setClickable(false);
+            llAddToCard.setClickable(false);
             llAddToCard.setBackgroundColor(Color.GRAY);
             btnAddToCart.setTextColor(Color.WHITE);
         }
@@ -352,6 +352,9 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
                 int remaningQuantity = response.body();
                 if( remaningQuantity == 0 ) {
                     Toast.makeText(FlashSalesProductDetailActivity.this, getResources().getString(R.string.msg_product_sould_out), Toast.LENGTH_SHORT).show();
+                    llAddToCard.setBackgroundColor(Color.GRAY);
+                    btnAddToCart.setTextColor(Color.WHITE);
+                    llAddToCard.setClickable(false);
                 } else {
                     try {
                         Date currentTime = Calendar.getInstance().getTime();
@@ -361,7 +364,7 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
                         long milliseconds = date.getTime();
                         cv_countdownViewTest1.start(milliseconds - currentMillisecond);
                         if( milliseconds <= currentMillisecond ) {
-                            btnAddToCart.setClickable(false);
+                            llAddToCard.setClickable(false);
                             btnAddToCart.setText(getResources().getString(R.string.msg_end_sell));
                             llAddToCard.setBackgroundColor(Color.GRAY);
                             btnAddToCart.setTextColor(Color.WHITE);

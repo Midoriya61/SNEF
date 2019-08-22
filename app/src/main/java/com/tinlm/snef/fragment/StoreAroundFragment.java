@@ -23,17 +23,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tinlm.snef.R;
-import com.tinlm.snef.activity.AroundStoreActivity;
 import com.tinlm.snef.adapter.ListStoreAdapter;
 import com.tinlm.snef.algo.GeocodingLocation;
+import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.model.Store;
 import com.tinlm.snef.service.StoreService;
 import com.tinlm.snef.utilities.ApiUtils;
-import com.tinlm.snef.utilities.StoreUtilities;
 
 import java.util.Collections;
 import java.util.List;
 
+import okhttp3.Cache;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,7 +43,6 @@ import retrofit2.Response;
  * A simple {@link Fragment} subclass.
  */
 public class StoreAroundFragment extends Fragment {
-
 
     RecyclerView rcStoreAround;
     StoreService storeService;
@@ -60,39 +59,32 @@ public class StoreAroundFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_store_around, container, false);
         checkLocationPermission();
         getCurrentLocation();
-        storeService = ApiUtils.getStoreService();
-        rcStoreAround = view.findViewById(R.id.rcStoreAround);
-        StoreUtilities storeUtilities = new StoreUtilities();
-        storeService.getListStoreArround(locationStoreCurrent[0], locationStoreCurrent[1]).enqueue(new Callback<List<Store>>() {
-            @Override
-            public void onResponse(Call<List<Store>> call, Response<List<Store>> response) {
+            storeService = ApiUtils.getStoreService();
+            rcStoreAround = view.findViewById(R.id.rcStoreAround);
+            storeService.getListStoreArround(locationStoreCurrent[0], locationStoreCurrent[1]).enqueue(new Callback<List<Store>>() {
+                @Override
+                public void onResponse(Call<List<Store>> call, Response<List<Store>> response) {
 
-                List<Store> storeList = response.body();
-
-                for (int i = 0; i < storeList.size(); i++) {
-//
-//                    storeList.get(i).distanceBetween2Points(, locationStoreCurrent[1]);
-//            storeList.get(i).setDistance(i);
+                    List<Store> storeList = response.body();
+                    // Sort store by distance from phone to store
+                    Collections.sort(storeList);
+                    ListStoreAdapter listStoreAdapter = new ListStoreAdapter(storeList, StoreAroundFragment.this.getContext());
+                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(StoreAroundFragment.this.getContext(),
+                            LinearLayoutManager.HORIZONTAL, false);
+                    rcStoreAround.setItemAnimator(new DefaultItemAnimator());
+                    rcStoreAround.setLayoutManager(mLayoutManager);
+                    rcStoreAround.setAdapter(listStoreAdapter);
+                    rcStoreAround.addItemDecoration(new DividerItemDecoration(StoreAroundFragment.this.getContext(), 0));
+                    SnapHelper snapHelper = new PagerSnapHelper();
+                    snapHelper.attachToRecyclerView(rcStoreAround);
                 }
-                // Sort store by distance from phone to store
-                Collections.sort(storeList);
-                ListStoreAdapter listStoreAdapter = new ListStoreAdapter(storeList, StoreAroundFragment.this.getContext());
-                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(StoreAroundFragment.this.getContext(),
-                        LinearLayoutManager.HORIZONTAL, false);
-                rcStoreAround.setItemAnimator(new DefaultItemAnimator());
-                rcStoreAround.setLayoutManager(mLayoutManager);
-                rcStoreAround.setAdapter(listStoreAdapter);
-                rcStoreAround.addItemDecoration(new DividerItemDecoration(StoreAroundFragment.this.getContext(), 0));
-                SnapHelper snapHelper = new PagerSnapHelper();
-                snapHelper.attachToRecyclerView(rcStoreAround);
+                @Override
+                public void onFailure(Call<List<Store>> call, Throwable t) {
+                    Log.e("Error ASA", t.getMessage());
+                }
+            });
 
-            }
 
-            @Override
-            public void onFailure(Call<List<Store>> call, Throwable t) {
-                Log.e("Error ASA", t.getMessage());
-            }
-        });
         return view;
     }
 
@@ -122,8 +114,6 @@ public class StoreAroundFragment extends Fragment {
                         })
                         .create()
                         .show();
-
-
             } else {
                 // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(StoreAroundFragment.this.getActivity(),

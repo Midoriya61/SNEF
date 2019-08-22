@@ -20,6 +20,7 @@ import com.tinlm.snef.utilities.ApiUtils;
 
 import java.util.List;
 
+import okhttp3.Cache;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,6 +32,7 @@ import retrofit2.Response;
 public class FilterCategoriesFragment extends Fragment {
 
     RecyclerView rcFilterCategories;
+    CategoriesService categoriesService;
 
 
     @Override
@@ -38,7 +40,9 @@ public class FilterCategoriesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_filter_categories, container, false);
         rcFilterCategories = v.findViewById(R.id.rcFilterCategories);
-        CategoriesService categoriesService = ApiUtils.getCategoriesService();
+        Long cacheSize = Long.valueOf((256 * 1024));
+        Cache cache = new Cache(v.getContext().getCacheDir(), cacheSize);
+        categoriesService = ApiUtils.getCategoriesService(v.getContext(), cache);
         categoriesService.getAllCategories().enqueue(new Callback<List<Categories>>() {
             @Override
             public void onResponse(Call<List<Categories>> call, Response<List<Categories>> response) {

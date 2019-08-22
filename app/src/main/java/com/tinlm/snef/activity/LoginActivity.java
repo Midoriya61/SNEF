@@ -20,6 +20,9 @@ import com.tinlm.snef.utilities.CustomerUtilities;
 
 import org.w3c.dom.Text;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class LoginActivity extends AppCompatActivity {
 
     CardView formLoginButton;
@@ -35,9 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         init();
         String userIsLogn = getAccountLogin();
         if(userIsLogn != null) {
-            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-            startActivity(intent);
-            finish();
+            changeScreen();
         }
     }
     // setting layout for screen
@@ -90,10 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                             editor.putString(ConstainApp.GENDER, "Nữ");
                         }
                         editor.apply();
-                        Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                        startActivity(intent);
-                        finish();
-
+                        changeScreen();
                     }
                     } else {
                         errLogin.setText("");
@@ -117,5 +115,12 @@ public class LoginActivity extends AppCompatActivity {
     public void clickToRegister(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
+    }
+
+    private void changeScreen() {
+
+        Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
