@@ -3,6 +3,7 @@ package com.tinlm.snef.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.Display;
@@ -77,7 +78,8 @@ public class ListStoreAdapter extends RecyclerView.Adapter<ListStoreAdapter.List
         if (currentStore.getRatingPoint() == 0) {
             listStoreViewHolder.ratingPoint.setText(mContext.getResources().getString(R.string.msg_still_not_rating));
         } else {
-            listStoreViewHolder.ratingPoint.setText(mContext.getResources().getString(R.string.msg_rating) + ": " + currentStore.getRatingPoint()+ "/5");
+            listStoreViewHolder.ratingPoint.setText(mContext.getResources().getString(R.string.msg_rating)
+                    + ": " + (Math.floor(currentStore.getRatingPoint() * 100) / 100)+ "/5");
         }
         final String finalOpenHour = openHour;
         listStoreViewHolder.viewStore.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +90,11 @@ public class ListStoreAdapter extends RecyclerView.Adapter<ListStoreAdapter.List
                 intent.putExtra(ConstainApp.STOREAVATAR, currentStore.getAvatar());
                 String address = currentStore.getAddress();
                 intent.putExtra(ConstainApp.ADDRESS, address);
-                intent.putExtra(ConstainApp.RATINGPOINT, currentStore.getRatingPoint());
+//                Bundle bundle = new Bundle();
+                float ratingPoint = (float)(Math.floor(currentStore.getRatingPoint() * 100) / 100);
+//                bundle.putFloat(ConstainApp.RATINGPOINT, ratingPoint );
+                intent.putExtra(ConstainApp.RATINGPOINT, ratingPoint);
+
                 intent.putExtra(ConstainApp.STOREID, currentStore.getStoreId());
                 intent.putExtra(ConstainApp.OPENHOUR, finalOpenHour);
                 intent.putExtra(ConstainApp.STOREPHONE, currentStore.getPhone());

@@ -66,6 +66,7 @@ public class ConstainApp {
     public static final String LATITUDE = "LATITUDE";
     public static final String LONGITUDE = "LONGITUDE";
     public static final String STOREPHONE = "STOREPHONE";
+    public static final String BUNDLERATING = "BUNDLERATING";
 
 
     // Date time

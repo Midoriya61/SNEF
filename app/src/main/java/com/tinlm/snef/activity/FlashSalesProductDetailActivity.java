@@ -148,7 +148,8 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
                         intentStore.putExtra(ConstainApp.STOREAVATAR, store.getAvatar());
                         String address = store.getAddress();
                         intentStore.putExtra(ConstainApp.ADDRESS, address);
-                        intentStore.putExtra(ConstainApp.RATINGPOINT, store.getRatingPoint());
+                        float ratingPoint = (float)(Math.floor(store.getRatingPoint() * 100) / 100);
+                        intentStore.putExtra(ConstainApp.RATINGPOINT, ratingPoint);
                         intentStore.putExtra(ConstainApp.STOREID, store.getStoreId());
                         intentStore.putExtra(ConstainApp.LATITUDE, store.getLatitude());
                         intentStore.putExtra(ConstainApp.LONGITUDE, store.getLocationId());
@@ -342,6 +343,7 @@ public class FlashSalesProductDetailActivity extends AppCompatActivity {
                     Toast.makeText(FlashSalesProductDetailActivity.this, getResources().getString(R.string.msg_product_sould_out), Toast.LENGTH_SHORT).show();
                     llAddToCard.setBackgroundColor(Color.GRAY);
                     btnAddToCart.setTextColor(Color.WHITE);
+                    btnAddToCart.setText(getResources().getString(R.string.msg_product_sould_out));
                     llAddToCard.setClickable(false);
                 } else {
                     try {

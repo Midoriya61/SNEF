@@ -240,7 +240,8 @@ public class OrderHistoryActivity extends AppCompatActivity {
         intent.putExtra(ConstainApp.JS_STORENAME,store.getStoreName());
         intent.putExtra(ConstainApp.STOREID,store.getStoreId());
         intent.putExtra(ConstainApp.ADDRESS,store.getAddress());
-        intent.putExtra(ConstainApp.RATINGPOINT,store.getRatingPoint());
+        float ratingPoint = (float)store.getRatingPoint();
+        intent.putExtra(ConstainApp.RATINGPOINT,ratingPoint);
         intent.putExtra(ConstainApp.STOREAVATAR,store.getAvatar());
         intent.putExtra(ConstainApp.OPENHOUR,store.getOpenHour());
         intent.putExtra(ConstainApp.STOREPHONE,store.getPhone());
