@@ -235,7 +235,7 @@
                     android:id="@+id/txtDone"
                     android:onClick="clickToConfirm"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="right"
                     android:textColor="@color/redApp"
                     android:text="Xác Nhận"

@@ -1,6 +1,7 @@
 package com.tinlm.snef.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -14,14 +15,18 @@ import android.widget.TextView;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.squareup.picasso.Picasso;
 import com.tinlm.snef.R;
+import com.tinlm.snef.activity.FlashSalesProductDetailActivity;
 import com.tinlm.snef.activity.OrderActivity;
+import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.database.DBManager;
 import com.tinlm.snef.model.Cart;
 import com.tinlm.snef.model.FlashSaleProduct;
 import com.tinlm.snef.model.OrderDetail;
 import com.tinlm.snef.utilities.FlashSaleProductUtilities;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -70,7 +75,7 @@ public class ListOrderHistoryProductAdapter extends RecyclerView.Adapter<ListOrd
 //        String productOrderHistoryImage = listImageOrderHistory.get(orderDetail.getFlashSaleProductId());
 
         FlashSaleProductUtilities flashSaleProductUtilities = new FlashSaleProductUtilities();
-        FlashSaleProduct fsp = flashSaleProductUtilities.getFSPById(orderDetail.getFlashSaleProductId());
+        final FlashSaleProduct fsp = flashSaleProductUtilities.getFSPById(orderDetail.getFlashSaleProductId());
 
         Picasso.get().load(fsp.getImageSrc()).resize(500, 500).into(listOrderHistoryProductHolder.imgCartFood);
 
@@ -145,6 +150,28 @@ public class ListOrderHistoryProductAdapter extends RecyclerView.Adapter<ListOrd
 //        Timestamp timestamp = new Timestamp(flashSaleProduct.getEndDate().getTime() + 86399999);
 //        String countDownStart = countDownStart(timestamp + "");
 //        listCartHolder.txtDateExpired.setText(countDownStart + "");
+        listOrderHistoryProductHolder.imgCartFood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, FlashSalesProductDetailActivity.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra(ConstainApp.FLASHSALEPRODUCTID,fsp.getFlashSaleProductId());
+                intent.putExtra(ConstainApp.PRODUCTNAME,fsp.getProductName());
+                intent.putExtra(ConstainApp.DESCRIPTION,fsp.getDescription());
+                intent.putExtra(ConstainApp.DISCOUNT,fsp.getDiscount());
+                intent.putExtra(ConstainApp.STOREID,fsp.getStoreId());
+                intent.putExtra(ConstainApp.PRICE,fsp.getPrice());
+                intent.putExtra(ConstainApp.QUANTITY,fsp.getQuantity());
+                intent.putExtra(ConstainApp.TOTALQUANTITY,fsp.getTotalQuantity());
+                DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+//                String endDate = df.format(flashSaleProduct.getEndDate());
+                String endDate = fsp.getEndDate();
+                intent.putExtra(ConstainApp.ENDDATE,endDate);
+                intent.putExtra(ConstainApp.STOREPRODUCTID, fsp.getStoreProductId());
+
+                mContext.startActivity(intent);
+            }
+        });
 
     }
 

@@ -68,12 +68,13 @@ public class OrderHistoryActivity extends AppCompatActivity {
     TextView storeName;
     TextView storeAddress;
 
+    Store store;
     RatingBar ratingBar;
     Button btnSubmitRating;
     TextView txtRating;
     EditText editTextComment;
     CardView cvComment;
-    LinearLayout statusView;
+    LinearLayout statusView, storeLayout;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +101,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
         editTextComment = findViewById(R.id.editTextComment);
         cvComment = findViewById(R.id.cvComment);
         statusView = findViewById(R.id.statusView);
+        storeLayout = findViewById(R.id.storeLayout);
 
         final OrderUtilities orderUtilities = new OrderUtilities();
         final int orderId = intent.getIntExtra(ConstainApp.JS_ORDERID, 0);
@@ -138,7 +140,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
 
         //Set text for store info
         StoreUtilities storeUtilities = new StoreUtilities();
-        Store store = storeUtilities.getStoreById(order.getStoreId());
+        store = storeUtilities.getStoreById(order.getStoreId());
 
         storeName.setText(store.getStoreName());
         storeAddress.setText(store.getAddress());
@@ -191,6 +193,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
 //
 //            }
 //        });
+
     }
 
 
@@ -230,5 +233,17 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    public void clickToStore(View view) {
+        Intent intent = new Intent(this, StoreActivity.class);
+        intent.putExtra(ConstainApp.JS_STORENAME,store.getStoreName());
+        intent.putExtra(ConstainApp.STOREID,store.getStoreId());
+        intent.putExtra(ConstainApp.ADDRESS,store.getAddress());
+        intent.putExtra(ConstainApp.RATINGPOINT,store.getRatingPoint());
+        intent.putExtra(ConstainApp.STOREAVATAR,store.getAvatar());
+        intent.putExtra(ConstainApp.OPENHOUR,store.getOpenHour());
+        intent.putExtra(ConstainApp.STOREPHONE,store.getPhone());
+        startActivity(intent);
     }
 }
