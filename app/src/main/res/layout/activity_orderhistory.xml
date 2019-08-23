@@ -18,10 +18,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.08"
+            android:layout_height="wrap_content"
             android:background="@color/redApp"
             android:gravity="center_vertical"
+            android:padding="10dp"
             android:orientation="vertical">
 
             <TextView
@@ -31,14 +31,13 @@
                 android:layout_marginLeft="10dp"
                 android:text="Thông Tin Đơn Hàng"
                 android:textColor="@color/colorMain"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.92"
+            android:layout_height="wrap_content"
             android:fillViewport="true">
 
             <LinearLayout
@@ -330,9 +329,12 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/storeLayout"
+                    android:onClick="clickToStore"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
+
                     android:background="@color/colorMain">
 
                     <LinearLayout

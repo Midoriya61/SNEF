@@ -31,7 +31,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="Lịch Sử Đơn Hàng"
                 android:textColor="@color/colorMain"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:textStyle="bold" />
         </LinearLayout>
 

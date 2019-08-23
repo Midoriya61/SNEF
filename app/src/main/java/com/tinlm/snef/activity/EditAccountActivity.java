@@ -80,10 +80,14 @@ public class EditAccountActivity extends AppCompatActivity {
     public void clickToChangePassword(View view) {
         dlChangePwd = new Dialog(this);
         Button btnCancel, btnChange;
+        final EditText edtOldPassword, edtNewPassword, edtConfirmPassword;
 
         dlChangePwd.setContentView(R.layout.dialog_editpassword);
         btnCancel = dlChangePwd.findViewById(R.id.btnCancel);
         btnChange = dlChangePwd.findViewById(R.id.btnChange);
+        edtOldPassword = dlChangePwd.findViewById(R.id.edtOldPassword);
+        edtNewPassword = dlChangePwd.findViewById(R.id.edtNewPassword);
+        edtConfirmPassword = dlChangePwd.findViewById(R.id.edtConfirmPassword);
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override

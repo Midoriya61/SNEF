@@ -19,13 +19,17 @@ import android.widget.TextView;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.squareup.picasso.Picasso;
 import com.tinlm.snef.R;
+import com.tinlm.snef.activity.FlashSalesProductDetailActivity;
 import com.tinlm.snef.activity.OrderActivity;
+import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.database.DBManager;
 import com.tinlm.snef.model.Cart;
 import com.tinlm.snef.model.FlashSaleProduct;
 import com.tinlm.snef.utilities.FlashSaleProductUtilities;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCartHolder> {
@@ -70,7 +74,7 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
 
         //Get quantity and total quantity
         FlashSaleProductUtilities flashSaleProductUtilities = new FlashSaleProductUtilities();
-        FlashSaleProduct fsp = flashSaleProductUtilities.getFSPById(cart.getFspId());
+        final FlashSaleProduct fsp = flashSaleProductUtilities.getFSPById(cart.getFspId());
         final int quantity = fsp.getQuantity();
         final int totalQuantity = fsp.getTotalQuantity();
 
@@ -179,6 +183,29 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
 //        Timestamp timestamp = new Timestamp(flashSaleProduct.getEndDate().getTime() + 86399999);
 //        String countDownStart = countDownStart(timestamp + "");
 //        listCartHolder.txtDateExpired.setText(countDownStart + "");
+
+        listCartHolder.imgCartFood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, FlashSalesProductDetailActivity.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra(ConstainApp.FLASHSALEPRODUCTID,fsp.getFlashSaleProductId());
+                intent.putExtra(ConstainApp.PRODUCTNAME,fsp.getProductName());
+                intent.putExtra(ConstainApp.DESCRIPTION,fsp.getDescription());
+                intent.putExtra(ConstainApp.DISCOUNT,fsp.getDiscount());
+                intent.putExtra(ConstainApp.STOREID,fsp.getStoreId());
+                intent.putExtra(ConstainApp.PRICE,fsp.getPrice());
+                intent.putExtra(ConstainApp.QUANTITY,fsp.getQuantity());
+                intent.putExtra(ConstainApp.TOTALQUANTITY,fsp.getTotalQuantity());
+                DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+//                String endDate = df.format(flashSaleProduct.getEndDate());
+                String endDate = fsp.getEndDate();
+                intent.putExtra(ConstainApp.ENDDATE,endDate);
+                intent.putExtra(ConstainApp.STOREPRODUCTID, fsp.getStoreProductId());
+
+                mContext.startActivity(intent);
+            }
+        });
 
     }
 
