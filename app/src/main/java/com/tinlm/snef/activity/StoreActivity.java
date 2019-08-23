@@ -87,7 +87,7 @@ public class StoreActivity extends AppCompatActivity {
         if (ratingPoint == 0) {
             txtPRatingPoint.setText(getResources().getString(R.string.msg_still_not_rating));
         } else {
-            txtPRatingPoint.setText(intent.getStringExtra(ConstainApp.RATINGPOINT));
+            txtPRatingPoint.setText(intent.getStringExtra(ConstainApp.RATINGPOINT) + "/5");
         }
         WindowManager wm = (WindowManager)this.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();

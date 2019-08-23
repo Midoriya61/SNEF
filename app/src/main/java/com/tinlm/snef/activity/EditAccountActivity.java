@@ -12,10 +12,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.tinlm.snef.R;
 import com.tinlm.snef.constain.ConstainApp;
+import com.tinlm.snef.fragment.ChangePasswordDialog;
+import com.tinlm.snef.utilities.CustomerUtilities;
 
 import static android.view.View.GONE;
 
@@ -71,35 +74,44 @@ public class EditAccountActivity extends AppCompatActivity {
     }
 
     public void clickToConfirm(View view) {
-        edtPhone.setEnabled(false);
-        edtEmail.setEnabled(false);
-        txtDone.setVisibility(View.GONE);
-        txtChange.setVisibility(View.VISIBLE);
+        boolean checkConfirm = true;
+        if (!isValidEmailAddress(edtEmail.getText().toString()) && edtEmail.getText().toString().length() != 0) {
+            edtEmail.setError("Email không hợp lệ");
+            checkConfirm = false;
+        }
+        if (checkConfirm) {
+            edtPhone.setEnabled(false);
+            edtEmail.setEnabled(false);
+            txtDone.setVisibility(View.GONE);
+            txtChange.setVisibility(View.VISIBLE);
+            CustomerUtilities customerUtilities = new CustomerUtilities();
+            SharedPreferences sharedPreferences = getSharedPreferences(ConstainApp.login_Prefer, MODE_PRIVATE);
+            int accountId = sharedPreferences.getInt(ConstainApp.ACCOUNTID, 0);
+            boolean result = customerUtilities.update(accountId, edtPhone.getText().toString(), edtEmail.getText().toString());
+            if (result) {
+                Toast.makeText(EditAccountActivity.this, "Thay đổi thành công", Toast.LENGTH_SHORT).show();
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(ConstainApp.PHONE, edtPhone.getText().toString());
+                editor.putString(ConstainApp.EMAIL, edtEmail.getText().toString());
+                editor.apply();
+            }else {
+                Toast.makeText(EditAccountActivity.this, "Thay đổi thất bại", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+
     }
 
     public void clickToChangePassword(View view) {
-        dlChangePwd = new Dialog(this);
-        Button btnCancel, btnChange;
+        ChangePasswordDialog exampleDialog = new ChangePasswordDialog();
+        exampleDialog.show(getSupportFragmentManager(), "Đổi mật khẩu");
+    }
 
-        dlChangePwd.setContentView(R.layout.dialog_editpassword);
-        btnCancel = dlChangePwd.findViewById(R.id.btnCancel);
-        btnChange = dlChangePwd.findViewById(R.id.btnChange);
-
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dlChangePwd.dismiss();
-            }
-        });
-        dlChangePwd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dlChangePwd.show();
-
-        btnChange.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+    private boolean isValidEmailAddress(String email) {
+        String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
+        java.util.regex.Matcher m = p.matcher(email);
+        return m.matches();
     }
 
 

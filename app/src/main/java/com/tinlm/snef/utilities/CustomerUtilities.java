@@ -47,6 +47,9 @@ public class CustomerUtilities {
                 if (jsonObj.has(userName)) {
                     result.setUsername(jsonObj.getString(userName));
                 }
+                if (jsonObj.has(password)) {
+                    result.setPassword(jsonObj.getString(password));
+                }
                 if (jsonObj.has(firstName)) {
                     result.setFirstName(jsonObj.getString(firstName));
                 }
@@ -92,6 +95,54 @@ public class CustomerUtilities {
             }
         }catch (Exception e){
             Log.e("ErrorAddUser", e.getMessage());
+            return result;
+        }
+        return result;
+    }
+
+
+    public boolean update(int accountId, String phone, String address) {
+        boolean result = false;
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        String url = ConstainServer.BaseURL + ConstainServer.CustomerURL + ConstainServer.UpdateURL + accountId + "/" + phone
+                + "/" + address;
+        String respone = "";
+
+        try {
+            URL urll = new URL(url);
+            HttpGetRequest httpGetRequest = new HttpGetRequest();
+            HttpPushRequest httpPostRequest = new HttpPushRequest() ;
+            HttpURLConnection client = httpPostRequest.execute(urll).get();
+            respone = httpGetRequest.execute(client.getInputStream()).get();
+            if(respone.contains("true")){
+                result = true;
+            }
+        }catch (Exception e){
+            Log.e("ErrorUpdateUser", e.getMessage());
+            return result;
+        }
+        return result;
+    }
+
+    public boolean updatePassword(int accountId, String password) {
+        boolean result = false;
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        String url = ConstainServer.BaseURL + ConstainServer.CustomerURL + ConstainServer.UpdatePasswordURL + accountId + "/" + password;
+        String respone = "";
+
+        try {
+            URL urll = new URL(url);
+            HttpGetRequest httpGetRequest = new HttpGetRequest();
+            HttpPushRequest httpPostRequest = new HttpPushRequest();
+            HttpURLConnection client = httpPostRequest.execute(urll).get();
+            respone = httpGetRequest.execute(client.getInputStream()).get();
+            if(respone.contains("true")){
+                result = true;
+            }
+        }catch (Exception e){
+            Log.e("ErrorUpdatePassword", e.getMessage());
             return result;
         }
         return result;

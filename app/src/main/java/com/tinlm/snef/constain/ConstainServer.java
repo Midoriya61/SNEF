@@ -43,6 +43,8 @@ public class ConstainServer {
     public static final String CustomerURL = "customer/";
     public static final String LoginURL = "login/";
     public static final String CreateURL = "create/";
+    public static final String UpdateURL = "update/";
+    public static final String UpdatePasswordURL = "updatePassword/";
 
     //Order
     public static final String OrderURL = "order/";
