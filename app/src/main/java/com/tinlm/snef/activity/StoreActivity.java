@@ -22,17 +22,11 @@ import com.squareup.picasso.Picasso;
 import com.tinlm.snef.R;
 import com.tinlm.snef.adapter.FlashSaleProductAdapter;
 import com.tinlm.snef.constain.ConstainApp;
-import com.tinlm.snef.fragment.ListFSPFragment;
 import com.tinlm.snef.model.FlashSaleProduct;
-import com.tinlm.snef.service.AllService;
 import com.tinlm.snef.service.FlashSaleProductService;
 import com.tinlm.snef.utilities.ApiUtils;
-import com.tinlm.snef.utilities.OrderDetailUtilities;
-import com.tinlm.snef.utilities.StoreProductImageUtilities;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -57,7 +51,7 @@ public class StoreActivity extends AppCompatActivity {
     }
 
     private void createProduct() {
-        flashSaleProductService = AllService.getFlashSaleProductService();
+        flashSaleProductService = ApiUtils.getFlashSaleProductService();
 
         flashSaleProductService.getFSPByStoreId(intent.getIntExtra(ConstainApp.STOREID, 0)).enqueue(new Callback<List<FlashSaleProduct>>() {
             @Override

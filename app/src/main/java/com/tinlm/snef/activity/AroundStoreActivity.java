@@ -4,12 +4,8 @@ import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.location.Location;
 import android.location.LocationManager;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -31,25 +27,20 @@ import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.tinlm.snef.R;
 import com.tinlm.snef.adapter.ListStoreAdapter;
 import com.tinlm.snef.algo.GeocodingLocation;
 import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.database.DBManager;
-import com.tinlm.snef.fragment.StoreAroundFragment;
 import com.tinlm.snef.model.Store;
-import com.tinlm.snef.service.AllService;
 import com.tinlm.snef.service.StoreService;
 import com.tinlm.snef.utilities.ApiUtils;
-import com.tinlm.snef.utilities.LocationUtilities;
-import com.tinlm.snef.utilities.StoreUtilities;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
+import okhttp3.Cache;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -71,18 +62,12 @@ public class AroundStoreActivity extends AppCompatActivity implements AdapterVie
     private BottomNavigationView bottomNavigation;
     private TextView txtCartNumber;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_around_store);
-//        storeService = AllService.getStoreService();
         init();
         navigateDashboard();
-//        checkLocationPermission();
-//        getCurrentLocation();
-//        createListStoreAround();
     }
 
     private void init() {
@@ -113,6 +98,8 @@ public class AroundStoreActivity extends AppCompatActivity implements AdapterVie
 
         checkLocationPermission();
         getCurrentLocation();
+        Long cacheSize = Long.valueOf((1024 * 1024));
+        Cache cache = new Cache(getCacheDir(), cacheSize);
         storeService = ApiUtils.getStoreService();
         rcStoreAround = findViewById(R.id.rcStoreAround);
 //        StoreUtilities storeUtilities = new StoreUtilities();

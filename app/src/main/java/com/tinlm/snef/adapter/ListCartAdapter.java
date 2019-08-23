@@ -106,44 +106,31 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
         listCartHolder.btnCartQuantity.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
             @Override
             public void onValueChange(ElegantNumberButton view, int oldValue, int newValue) {
-
-
                 if (newValue != oldValue) {
-
                     if (newValue <= (quantity - totalQuantity)) {
                         if (newValue > oldValue) {
-                            txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(",", "")) + (int) ((cart.getPrice() * cart.getDiscount()) / 100))));
+                            txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(".", "")) + (int) ((cart.getPrice() * cart.getDiscount()) / 100))));
                         } else if (newValue < oldValue) {
-
-                            txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(",", "")) - (int) ((cart.getPrice() * cart.getDiscount()) / 100))));
+                            txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(".", "")) - (int) ((cart.getPrice() * cart.getDiscount()) / 100))));
                         }
-
                         cart.setQuantity(newValue);
                         DBManager dbManager = new DBManager(mContext);
                         dbManager.updateCartQuantity(cart);
                         notifyItemChanged(position);
-
                     } else {
                         listCartHolder.btnCartQuantity.setNumber(String.valueOf(oldValue));
                         dlMaxNum = new Dialog(mContext);
                         showPopupMaxNum();
                     }
-
 //                    ((OrderActivity) mContext).recreate();
 //                    ((OrderActivity) mContext).overridePendingTransition(0, 0);
 //                    ((OrderActivity) mContext).startActivity(((OrderActivity) mContext).getIntent());
 //                    ((OrderActivity) mContext).overridePendingTransition(0, 0);
-
 //                    mContext.startActivity(((OrderActivity) mContext).getIntent());
-
 //                    TextView txtTotalCartPrice = ((OrderActivity) mContext).findViewById(R.id.txtTotalCartPrice);
-
-
                 }
             }
         });
-
-
         listCartHolder.btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,8 +140,6 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
                 ((OrderActivity) mContext).startActivity(intent);
                 ((OrderActivity) mContext).finish();
                 ((OrderActivity) mContext).overridePendingTransition(0, 0); // this is impo
-//
-
 //                cartList.remove(position);
 //                notifyItemRemoved(position);
 

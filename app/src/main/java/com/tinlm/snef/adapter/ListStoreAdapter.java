@@ -60,7 +60,8 @@ public class ListStoreAdapter extends RecyclerView.Adapter<ListStoreAdapter.List
         if(currentStore.getOpenHour().equals(currentStore.getCloseHour())) {
             openHour = mContext.getResources().getString(R.string.Open24);
 
-        }else
+        }
+        else
             openHour = currentStore.getOpenHour() + " - " + currentStore.getCloseHour();
 
         listStoreViewHolder.storeAddress.setText(currentStore.getAddress());

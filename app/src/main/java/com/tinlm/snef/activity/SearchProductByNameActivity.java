@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,24 +17,15 @@ import com.tinlm.snef.R;
 import com.tinlm.snef.adapter.FlashSaleProductAdapter;
 import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.database.DBManager;
-import com.tinlm.snef.fragment.HotProductHomeFragment;
-import com.tinlm.snef.fragment.ListFSPFragment;
 import com.tinlm.snef.model.FlashSaleProduct;
-import com.tinlm.snef.service.AllService;
 import com.tinlm.snef.service.FlashSaleProductService;
 import com.tinlm.snef.utilities.ApiUtils;
-import com.tinlm.snef.utilities.OrderDetailUtilities;
-import com.tinlm.snef.utilities.StoreProductImageUtilities;
 
-import org.w3c.dom.Text;
-
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import okhttp3.Cache;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -79,7 +69,8 @@ public class SearchProductByNameActivity extends AppCompatActivity {
 
         txtSearchProduct.setText(intent.getStringExtra(ConstainApp.SEARCHPRODUCTNAME));
 
-        flashSaleProductService = AllService.getFlashSaleProductService();
+
+        flashSaleProductService = ApiUtils.getFlashSaleProductService();
 
         // set search when don;t choose categories
         final SharedPreferences sharedPreferencesSearch = getSharedPreferences(ConstainApp.CATEGORIESPREFER, MODE_PRIVATE);
@@ -94,7 +85,6 @@ public class SearchProductByNameActivity extends AppCompatActivity {
                 final List<FlashSaleProduct> flashSaleProducts = response.body();
                 final FlashSaleProductAdapter flashSaleProductAdapter = new FlashSaleProductAdapter(SearchProductByNameActivity.this
                         , flashSaleProducts, ConstainApp.SCSearchProductByNameActivity);
-
                 RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(SearchProductByNameActivity.this,2);
                 rcListProductByName.setItemAnimator(new DefaultItemAnimator());
                 rcListProductByName.setLayoutManager(mLayoutManager);
@@ -118,7 +108,6 @@ public class SearchProductByNameActivity extends AppCompatActivity {
                                         return  o1.compareTo(o2);
                                     }
                                 });
-
                                 flashSaleProductAdapter.updateSortList();
                                 imgIncre.setImageResource(R.drawable.inscrease_red);
                                 imgDecen.setImageResource(R.drawable.decent_black);
@@ -141,7 +130,6 @@ public class SearchProductByNameActivity extends AppCompatActivity {
                                 editor.apply();
                             }
                         }
-
                     }
                 });
             }

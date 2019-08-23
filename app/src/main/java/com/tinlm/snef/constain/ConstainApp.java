@@ -31,6 +31,16 @@ public class ConstainApp {
     public static final String SFSORTPRICE = "SORTPRICE";
     public static final String IMGPRICE = "IMGPRICE";
 
+    // Sharepreference caching data
+    public static final String APICACHING = "APICACHING";
+    public static final String TIMECACHINGHOTFSP30 = "TIMECACHINGHOTFSP30";
+    public static final String TIMECACHINGLISTFSP30 = "TIMECACHINGLISTFSP30";
+    public static final String TIMECACHINGFSPSEARCH30 = "TIMECACHINGFSPSEARCH30";
+    public static final String TIMECACHINGSTOREHOME30 = "TIMECACHINGSTOREHOME30";
+    public static final String TIMECACHINGSTORESCREEN30 = "TIMECACHINGSTORESCREEN30";
+    public static final String TIMECACHINGCATEGORIES1 = "TIMECACHINGCATEGORIES1";
+    public static final String TIMECACHINGPRODUCT1 = "TIMECACHINGPRODUCT1";
+
 
     // Categories filter preference
     public static final String CATEGORIESPREFER = "SFCATEGORIESPREFER";

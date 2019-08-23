@@ -98,6 +98,21 @@ public class DBManager extends SQLiteOpenHelper {
         return db.update(ConstainApp.JS_CART,values,ConstainApp.JS_FSPID +"=?",new String[] { String.valueOf(cart.getFspId())});
     }
 
+    public int getCateQuantity(int fspId) {
+        int quantity = 0;
+        // Select All Query
+        String selectQuery = "SELECT " + ConstainApp.JS_QUANTITY +
+                " FROM " + ConstainApp.JS_CART + " WHERE " + ConstainApp.JS_FSPID + "=" + fspId;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            quantity = cursor.getInt(cursor.getColumnIndex(ConstainApp.JS_QUANTITY));
+        }
+        cursor.close();
+        db.close();
+        return quantity;
+    }
+
     /*
      Getting All cart
       */
@@ -106,10 +121,8 @@ public class DBManager extends SQLiteOpenHelper {
         List<Cart> cartList = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + ConstainApp.JS_CART;
-
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-
         if (cursor.moveToFirst()) {
             do {
                 Cart cart = new Cart();
@@ -148,10 +161,8 @@ public class DBManager extends SQLiteOpenHelper {
         // Select All Query
         String selectQuery = "SELECT  " + ConstainApp.JS_STORENAME + ", COUNT("  + ConstainApp.JS_FSPID + ") as " + ConstainApp.JS_PCount +
                 " FROM " + ConstainApp.JS_CART + " GROUP BY " + ConstainApp.JS_STORENAME;
-
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-
         if (cursor.moveToFirst()) {
             do {
                 StoreOrderItem storeOrderItem = new StoreOrderItem();

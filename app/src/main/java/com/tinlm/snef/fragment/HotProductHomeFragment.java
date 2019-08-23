@@ -16,19 +16,14 @@ import com.tinlm.snef.R;
 import com.tinlm.snef.adapter.FlashSaleProductAdapter;
 import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.model.FlashSaleProduct;
-import com.tinlm.snef.service.AllService;
 import com.tinlm.snef.service.FlashSaleProductService;
-import com.tinlm.snef.service.StoreProductImageService;
 import com.tinlm.snef.utilities.ApiUtils;
-import com.tinlm.snef.utilities.FlashSaleProductUtilities;
-import com.tinlm.snef.utilities.OrderDetailUtilities;
-import com.tinlm.snef.utilities.StoreProductImageUtilities;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.Cache;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -51,7 +46,10 @@ public class HotProductHomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_hot_product_home, container, false);
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         rcListHost = view.findViewById(R.id.rcListHost);
-        flashSaleProductService = AllService.getFlashSaleProductService();
+
+        Long cacheSize = Long.valueOf((1024 * 1024));
+        Cache cache = new Cache(view.getContext().getCacheDir(), cacheSize);
+        flashSaleProductService = ApiUtils.getFlashSaleProductService30(view.getContext(), cache, ConstainApp.TIMECACHINGHOTFSP30);
 
 
         flashSaleProductService.getHotFlashSaleProduct().enqueue(new Callback<List<FlashSaleProduct>>() {
