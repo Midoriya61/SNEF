@@ -83,10 +83,11 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
 
 
         listCartHolder.txtCartFoodName.setText(cart.getProductName());
+        listCartHolder.txtCartFoodName.setSelected(true);
 
         listCartHolder.btnCartQuantity.setNumber(String.valueOf(cart.getQuantity()));
 
-        listCartHolder.txtCartPrice.setText(String.format("%,d", (int) ((cart.getPrice() * cart.getDiscount()) / 100)) + "");
+        listCartHolder.txtCartPrice.setText(String.format("%,d", (int) ((cart.getPrice() * (100-cart.getDiscount())) / 100)) + "");
 //
 
 //        btnChange.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
@@ -109,9 +110,9 @@ public class ListCartAdapter extends RecyclerView.Adapter<ListCartAdapter.ListCa
                 if (newValue != oldValue) {
                     if (newValue <= (quantity - totalQuantity)) {
                         if (newValue > oldValue) {
-                            txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(".", "")) + (int) ((cart.getPrice() * cart.getDiscount()) / 100))));
+                            txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(",", "")) + (int) ((cart.getPrice() * (100-cart.getDiscount())) / 100))));
                         } else if (newValue < oldValue) {
-                            txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(".", "")) - (int) ((cart.getPrice() * cart.getDiscount()) / 100))));
+                            txtTotalCartPrice.setText((String.format("%,d", Integer.parseInt(txtTotalCartPrice.getText().toString().replace(",", "")) - (int) ((cart.getPrice() * (100-cart.getDiscount())) / 100))));
                         }
                         cart.setQuantity(newValue);
                         DBManager dbManager = new DBManager(mContext);

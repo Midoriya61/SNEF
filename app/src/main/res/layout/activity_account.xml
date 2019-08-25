@@ -21,24 +21,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="20dp"
+            android:padding="30dp"
             android:weightSum="4"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:background="@drawable/shadow_all_corner"
             >
-            <ImageView
-                android:id="@+id/imgAvatar"
+            <android.support.v7.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                />
+                android:layout_gravity="center"
+
+                app:cardCornerRadius="20dp">
+
+                <ImageView
+                    android:id="@+id/imgAvatar"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop" />
+
+            </android.support.v7.widget.CardView>
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="20dp"
                 android:layout_weight="3">
                 <TextView
                     android:id="@+id/txtAccountName"
@@ -71,12 +80,16 @@
             <ImageView
                 android:src="@drawable/history"
                 android:layout_width="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/tvOrderHistory"
                 android:text="@string/msg_order_history"
                 android:layout_marginLeft="10dp"
-                android:textSize="16dp"
+                android:layout_gravity="center"
+                android:textSize="18dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -92,11 +105,15 @@
             <ImageView
                 android:src="@drawable/help"
                 android:layout_width="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:layout_height="wrap_content" />
             <TextView
                 android:text="@string/msg_help"
                 android:layout_marginLeft="10dp"
-                android:textSize="16dp"
+                android:textSize="18dp"
+                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -112,15 +129,19 @@
             <ImageView
                 android:src="@drawable/logout"
                 android:layout_width="25dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="20dp"
                 android:layout_height="18dp" />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="@string/msg_logout"
                 android:onClick="clickToLogOut"
-                android:textSize="16dp" />
+                android:layout_gravity="center"
+                android:textSize="18dp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -129,18 +150,18 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        >
+        android:orientation="horizontal">
+
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/bottomNavigation"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:background="@drawable/border_top"
+            android:layout_gravity="bottom"
+            android:background="@color/redApp"
             app:itemIconTint="@color/colorMain"
             app:itemTextColor="@color/colorMain"
             app:menu="@menu/bottom_nav_menu"
-            android:layout_gravity="bottom"
 
             />
 

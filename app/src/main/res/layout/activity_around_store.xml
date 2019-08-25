@@ -125,9 +125,9 @@
         android:id="@+id/centerHome"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/bottomNavigationView"
         android:layout_below="@+id/spinnerarea"
-        android:layout_alignBottom="@+id/bottomNavigationView"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="0dp"
         android:background="@color/grayLight"
         android:orientation="vertical">
 
@@ -180,11 +180,13 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_gravity="bottom"
-            android:background="@drawable/border_top"
+            android:background="@color/redApp"
             app:itemIconTint="@color/colorMain"
             app:itemTextColor="@color/colorMain"
             app:menu="@menu/bottom_nav_menu"
 
             />
+
+
     </LinearLayout>
 </RelativeLayout>

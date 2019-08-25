@@ -80,6 +80,7 @@ public class StoreActivity extends AppCompatActivity {
         intent = getIntent();
         storeName.setText(intent.getStringExtra(ConstainApp.JS_STORENAME));
         txtAddress.setText(intent.getStringExtra(ConstainApp.ADDRESS));
+        txtAddress.setSelected(true);
         txtAddress.setPaintFlags(txtAddress.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         txtOpenHour.setText(intent.getStringExtra(ConstainApp.OPENHOUR));
         txtPhone.setText(intent.getStringExtra(ConstainApp.STOREPHONE));

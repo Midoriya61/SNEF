@@ -69,7 +69,7 @@ public class PayPalActivity extends AppCompatActivity {
 
         for (int i = 0; i < cartList.size(); i++) {
 
-            totalAmount += (((cartList.get(i).getPrice() * cartList.get(i).getDiscount()) / 100) * cartList.get(i).getQuantity());
+            totalAmount += (((cartList.get(i).getPrice() * (100-cartList.get(i).getDiscount())) / 100) * cartList.get(i).getQuantity());
         }
 
         PayPalPayment payment = new PayPalPayment(new BigDecimal(totalAmount), "USD",
@@ -128,7 +128,7 @@ public class PayPalActivity extends AppCompatActivity {
                                     cartList.get(i).getFspId(),
                                     cartList.get(i).getQuantity(),
                                     cartList.get(i).getQuantity() *
-                                            ((cartList.get(i).getPrice() * cartList.get(i).getDiscount()) / 100));
+                                            ((cartList.get(i).getPrice() * (100-cartList.get(i).getDiscount())) / 100));
                         }
 
                         //Send user to Order History screen

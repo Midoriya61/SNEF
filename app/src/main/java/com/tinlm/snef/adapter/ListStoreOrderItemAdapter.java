@@ -17,6 +17,7 @@ import com.tinlm.snef.constain.ConstainApp;
 import com.tinlm.snef.database.DBManager;
 import com.tinlm.snef.model.Cart;
 import com.tinlm.snef.model.StoreOrderItem;
+
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -72,7 +73,7 @@ public class ListStoreOrderItemAdapter extends RecyclerView.Adapter<ListStoreOrd
 
         for (int i = 0; i < cartList.size(); i++) {
 
-            totalAmount += (((cartList.get(i).getPrice() * cartList.get(i).getDiscount()) / 100) * cartList.get(i).getQuantity());
+            totalAmount += (((cartList.get(i).getPrice() * (100 - cartList.get(i).getDiscount())) / 100) * cartList.get(i).getQuantity());
         }
         listStoreOrderItemHolder.txtTotalCartPrice.setText(String.valueOf(df.format(totalAmount)));
 

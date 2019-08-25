@@ -21,8 +21,8 @@
             android:layout_height="wrap_content"
             android:background="@color/redApp"
             android:gravity="center_vertical"
-            android:padding="10dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -56,14 +56,13 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
                         android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
                             >
 
                             <TextView
@@ -213,10 +212,10 @@
                                 android:id="@+id/txtConfirmCode"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
                                 android:gravity="center_horizontal"
                                 android:text="ABC123456"
-                              android:layout_marginTop="5dp"
-                                android:layout_marginBottom="5dp"
                                 android:textColor="@color/colorMain"
                                 android:textSize="25dp"
                                 android:textStyle="bold" />
@@ -250,8 +249,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
                             android:layout_marginTop="10dp"
+                            android:layout_marginRight="20dp"
                             android:background="@color/warmGray"
                             android:orientation="horizontal">
 
@@ -269,8 +268,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_marginTop="20dp"
                             android:layout_marginLeft="20dp"
+                            android:layout_marginTop="20dp"
                             android:layout_marginRight="20dp"
                             android:layout_marginBottom="15dp"
                             android:background="@color/warmGray"
@@ -289,8 +288,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="20dp"
-                                android:text="Tổng cộng"
                                 android:gravity="left"
+                                android:text="Tổng cộng"
                                 android:textSize="16dp" />
 
                             <LinearLayout
@@ -330,12 +329,12 @@
 
                 <LinearLayout
                     android:id="@+id/storeLayout"
-                    android:onClick="clickToStore"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
+                    android:background="@color/colorMain"
 
-                    android:background="@color/colorMain">
+                    android:onClick="clickToStore">
 
                     <LinearLayout
                         android:id="@+id/viewStore"
@@ -363,6 +362,7 @@
                                 android:id="@+id/storeAddress"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:singleLine="true"
                                 android:text="Lê Thị Hà " />
 
                             <LinearLayout
@@ -415,7 +415,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
-                        android:background="@drawable/shadow_all"
+
                         app:cardBackgroundColor="@color/colorMain">
 
                         <EditText
@@ -425,6 +425,7 @@
                             android:layout_margin="15dp"
                             android:background="@color/colorMain"
                             android:ems="10"
+                            android:singleLine="false"
                             android:hint="Nhập ý kiến của bạn..."
                             android:inputType="textNoSuggestions"
                             android:textSize="16dp"

@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/grayLight"
+
     android:layout_height="match_parent"
     tools:context=".activity.OrderActivity">
 
@@ -10,11 +12,29 @@
         android:id="@+id/centerHome"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-        android:layout_alignBottom="@+id/bottomNavigationView"
-        android:layout_marginBottom="64dp"
+        android:layout_above="@+id/bottomNavigationView"
+        android:layout_below="@+id/topBar"
         android:background="@color/grayLight"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/redApp"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="10dp"
+                android:text="Giỏ Hàng"
+                android:textColor="@color/colorMain"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/emptyCartLayout"
@@ -33,11 +53,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="50dp"
                 android:text="@string/msg_emptycart"
                 android:textSize="16dp"
-                android:layout_marginBottom="50dp"
                 android:textStyle="italic" />
 
             <Button
@@ -68,7 +88,6 @@
                 android:overScrollMode="never">
 
 
-
             </android.support.v7.widget.RecyclerView>
         </android.support.v4.widget.NestedScrollView>
 
@@ -87,10 +106,12 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_gravity="bottom"
-            android:background="@drawable/border_top"
+            android:background="@color/redApp"
             app:itemIconTint="@color/colorMain"
             app:itemTextColor="@color/colorMain"
-            app:menu="@menu/bottom_nav_menu" />
+            app:menu="@menu/bottom_nav_menu"
+
+            />
 
 
     </LinearLayout>

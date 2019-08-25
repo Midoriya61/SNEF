@@ -128,7 +128,6 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, FlashSalesProductDetailActivity.class);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra(ConstainApp.FLASHSALEPRODUCTID,flashSaleProduct.getFlashSaleProductId());
                 intent.putExtra(ConstainApp.PRODUCTNAME,flashSaleProduct.getProductName());
                 intent.putExtra(ConstainApp.DESCRIPTION,flashSaleProduct.getDescription());
@@ -142,7 +141,7 @@ public class FlashSaleProductAdapter extends RecyclerView.Adapter<FlashSaleProdu
                 String endDate = flashSaleProduct.getEndDate();
                 intent.putExtra(ConstainApp.ENDDATE,endDate);
                 intent.putExtra(ConstainApp.STOREPRODUCTID, flashSaleProduct.getStoreProductId());
-
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
                 mContext.startActivity(intent);
             }
         });
