@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.tinlm.snef.R;
 import com.tinlm.snef.constain.ConstainApp;
+import com.tinlm.snef.database.DBManager;
 
 /*
  *
@@ -87,14 +88,14 @@ public class AccountActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void clickToShowHistoryOrder(View view) {
-    }
 
     public void clickToLogOut(View view) {
             SharedPreferences sharedPreferences = getSharedPreferences(ConstainApp.login_Prefer, MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.clear();
             editor.apply();
+        DBManager dbManager = new DBManager(AccountActivity.this);
+        dbManager.deleteAllCart();
             Intent intent = new Intent(this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);

@@ -269,8 +269,10 @@ public class AroundStoreActivity extends AppCompatActivity implements AdapterVie
                 List<Store> storeList = response.body();
                 if(storeList.size() == 0) {
                     notifiYetData.setVisibility(View.VISIBLE);
+                    rcStoreAround.setVisibility(View.INVISIBLE);
                 } else {
                     notifiYetData.setVisibility(View.INVISIBLE);
+                    rcStoreAround.setVisibility(View.VISIBLE);
                     if( listStoreAdapter != null) {
                         listStoreAdapter.updateReceiptsList(storeList);
                     }  else {
@@ -290,6 +292,8 @@ public class AroundStoreActivity extends AppCompatActivity implements AdapterVie
             @Override
             public void onFailure(Call<List<Store>> call, Throwable t) {
                 Log.e("Error ASA", t.getMessage());
+                notifiYetData.setVisibility(View.VISIBLE);
+                rcStoreAround.setVisibility(View.INVISIBLE);
             }
         });
     }

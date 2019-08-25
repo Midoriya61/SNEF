@@ -84,11 +84,12 @@ public class StoreActivity extends AppCompatActivity {
         txtAddress.setPaintFlags(txtAddress.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         txtOpenHour.setText(intent.getStringExtra(ConstainApp.OPENHOUR));
         txtPhone.setText(intent.getStringExtra(ConstainApp.STOREPHONE));
-        float ratingPoint = intent.getFloatExtra(ConstainApp.RATINGPOINT, 0);
+//        Bundle bundle = intent.getBundleExtra(ConstainApp.BUNDLERATING);
+        float ratingPoint = intent.getFloatExtra(ConstainApp.RATINGPOINT,0);
         if (ratingPoint == 0) {
             txtPRatingPoint.setText(getResources().getString(R.string.msg_still_not_rating));
         } else {
-            txtPRatingPoint.setText(intent.getStringExtra(ConstainApp.RATINGPOINT) + "/5");
+            txtPRatingPoint.setText(ratingPoint + "/5");
         }
         WindowManager wm = (WindowManager)this.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();

@@ -151,7 +151,14 @@ public class DBManager extends SQLiteOpenHelper {
                 new String[] { String.valueOf(cart.getFspId()) });
         db.close();
     }
-
+    /*
+        Delete a cart by ID
+         */
+    public void deleteAllCart() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(ConstainApp.JS_CART,null,null);
+        db.close();
+    }
     /*
      Getting All cart group by store
       */

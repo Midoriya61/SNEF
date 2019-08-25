@@ -57,6 +57,7 @@
     <string name="msg_gender" translatable="false">Giới tính</string>
     <string name="msg_email" translatable="false">Email</string>
     <string name="msg_product_sould_out" translatable="false">Sản phẩm đã bán hết</string>
+    <string name="msg_product_max" translatable="false">Chỉ còn </string>
     <string name="msg_discount" translatable="false">Phần trăm giảm giá</string>
     <string name="msg_min_discount" translatable="false">Thấp nhất</string>
     <string name="msg_max_discount" translatable="false">Cao nhất</string>
